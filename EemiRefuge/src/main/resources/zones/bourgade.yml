@@ -1,0 +1,79 @@
+# Zone « La Bourgade » (acte 1) - genere par maps_refuge/_scripts/zb_yaml.py, ne pas editer a la main.
+# Monde prepare hors ligne : Mosslorn (1.20.1) reduit au quartier A, nettoye. Comptes : maps_refuge/bourgade/zone/rapport_process.json
+# Coordonnees = coordonnees de BLOC (le plugin ajoute 0.5 en x et z) ; y = bloc des pieds (le sol est en y - 1).
+# Yaw Minecraft : 0 = sud (+z), 90 = ouest, 180 = nord, -90 = est.
+name: "La Bourgade"
+world: refuge_bourgade
+act: 1
+credit: "Mosslorn par milkshake_mp3 (CurseForge)"
+bounds: {minX: -380, minZ: -350, maxX: -131, maxZ: -101}
+# bordure de monde a poser au bord exact du quartier : centre et taille
+border: {centerX: -255.0, centerZ: -225.0, size: 250}
+# rues et jardins en y 64-66 ; caves rares (y 40-60) ; toits et passerelle suspendue jusqu'a y 216.
+minY: 40
+maxY: 220
+groundY: 65
+arrivals:
+  - {x: -283, y: 66, z: -326, yaw: -15}   # bord nord
+  - {x: -314, y: 66, z: -105, yaw: -154}   # bord sud
+  - {x: -374, y: 66, z: -275, yaw: -67}   # bord ouest
+  - {x: -140, y: 66, z: -169, yaw: 116}   # bord est
+# Extraction : une seule vague de 8 zombies (premiere map, facile).
+extraction-vagues: 1
+extraction-zombies: 8
+extractions:
+  - {name: "Le carrefour du viaduc", x: -203, y: 65, z: -153, radius: 6, transport: camion}
+  - {name: "Le parking du parc", x: -367, y: 66, z: -151, radius: 6, transport: camion}
+  - {name: "La pelouse du parc", x: -318, y: 66, z: -223, radius: 6, transport: helicoptere}
+# points d'apparition de hordes : dans les rues, a 35 blocs ou plus des arrivees et hors de leur vue directe,
+# a 30 blocs ou plus des extractions, a 4 blocs ou plus de la bordure.
+hordes:
+  - {x: -340, y: 65, z: -167}
+  - {x: -182, y: 66, z: -334}
+  - {x: -166, y: 65, z: -145}
+  - {x: -376, y: 66, z: -317}
+  - {x: -274, y: 65, z: -271}
+  - {x: -174, y: 66, z: -237}
+  - {x: -251, y: 66, z: -170}
+  - {x: -374, y: 66, z: -238}
+  - {x: -374, y: 66, z: -106}
+  - {x: -316, y: 66, z: -314}
+# Zombies d'ambiance : pas de grille fixe. Regle : sur une colonne exterieure (ciel visible, feuillage permis),
+# sol plein entre y 62 et 70 avec 2 blocs libres au-dessus, dans la bordure, a plus de 24 blocs de tout joueur.
+# (mesure hors ligne : 19515 colonnes de rue reliees entre elles dans le quartier)
+ambient_spawns:
+  rule: exterieur_au_sol
+  minY: 62
+  maxY: 70
+  minPlayerDistance: 24
+containers:
+  file: zones/bourgade_containers.yml   # une ligne "x,y,z,type,piece" par conteneur (tous vides dans le monde livre)
+  total: 2870
+  # supports de fouille proposes ; distributeur/dropper/entonnoir sont des mecanismes du decor, vides aussi
+  supports: [tonneau, coffre, coffre_piege, four, fumoir, haut_fourneau, pupitre, feu_de_camp, cadre, porte_armure]
+  mecanismes: [distributeur, dropper, entonnoir]
+  par_type:
+    tonneau: 2339   # salon 1084, maison 888, cuisine 354, garage 8, salle_de_bain 5
+    four: 266   # cuisine 266
+    haut_fourneau: 80   # cuisine 80
+    pupitre: 41   # bureau 41
+    entonnoir: 37   # maison 32, cuisine 2, garage 2, salon 1
+    distributeur: 37   # salon 15, cuisine 13, maison 9
+    dropper: 34   # salon 16, cuisine 10, maison 8
+    porte_armure: 24   # maison 24
+    fumoir: 5   # cuisine 5
+    coffre_piege: 3   # salon 3
+    feu_de_camp: 2   # cuisine 2
+    coffre: 1   # cuisine 1
+    cadre: 1   # maison 1
+  par_piece:
+    salon: 1119
+    maison: 962
+    cuisine: 733
+    bureau: 41
+    garage: 10
+    salle_de_bain: 5
+  # piece devinee : table de butin de l'auteur (crate_kitchen/fridge -> cuisine, crate_bathroom -> salle_de_bain,
+  # crate_car -> garage) ; fours, fumoirs, hauts-fourneaux -> cuisine ; pupitres -> bureau ; sinon voisinage
+  # (lit -> chambre, caisse etiquetee a 5 blocs, four a 3 blocs -> cuisine, bibliotheque ou juke-box -> salon) ;
+  # sinon maison (crate_house de l'auteur).

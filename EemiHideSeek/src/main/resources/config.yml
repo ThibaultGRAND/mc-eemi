@@ -1,0 +1,101 @@
+# EemiHideSeek - Cache-cache d'EEMICRAFT (facon Prop Hunt / Hide and Seek d'Hypixel).
+# Les cacheurs sont invisibles et deguises en bloc : le deguisement suit le joueur, et s'il reste
+# immobile quelques secondes il devient un vrai bloc (aligne sur la grille) pour les autres joueurs.
+# Les chercheurs attendent aveugles pendant le temps de cachette, puis sont laches avec une epee.
+# Cacheur trouve = il devient chercheur (ou spectateur, voir found-becomes).
+# Si au moins un cacheur survit a la fin du temps, les cacheurs gagnent.
+
+# Monde du jeu : cree vide par le plugin s'il n'existe pas, la map est construite par le plugin
+# (au demarrage si elle manque ou si sa version change, et par /hideseek build).
+world: hideseek
+hub-world: lobby
+# Parties en meme temps : partie 1 = monde ci-dessus, parties 2..n = copies <world>_2, <world>_3...
+# faites depuis le modele <world>_modele (copie propre refaite au demarrage et apres /hideseek build).
+max-instances: 3
+
+# Joueurs : minimum pour lancer le decompte, maximum dans la salle d'attente.
+min-players: 3
+max-players: 20
+# Decompte avant la partie (secondes).
+countdown: 20
+# Un chercheur pour ce nombre de joueurs (minimum 1 chercheur, au moins 1 cacheur).
+players-per-seeker: 5
+# Niveau de Vitesse des chercheurs une fois laches (1.2.3) : ils courent plus vite que les cacheurs. 0 = aucun.
+seeker-speed: 2
+
+# Temps de cachette (chercheurs aveugles et immobiles), puis temps de recherche (secondes).
+hide-time: 30
+game-time: 300
+# Ecran de fin avant le retour en salle d'attente.
+end-time: 8
+
+# Immobilite necessaire pour devenir un bloc solide (secondes).
+solid-delay: 3.5
+# Changement de bloc : attente entre deux changements (secondes, pendant la recherche).
+change-cooldown: 3
+# Autoriser a copier n'importe quel bloc vise (false = seulement les blocs de la liste ci-dessous).
+allow-any-target: false
+
+# Coups des chercheurs : degats par coup (un cacheur a 20 PV), portee, attente entre deux coups.
+hit-damage: 5.0
+hit-range: 4.0
+hit-cooldown-ms: 400
+# Cacheur trouve : seeker (devient chercheur, comme Hypixel) ou spectator.
+found-becomes: seeker
+
+# Provocation (taunt) : son + particules, +1 point et le temps restant baisse de taunt-time-bonus secondes.
+taunt-cooldown: 15
+taunt-time-bonus: 5
+
+# Dernieres secondes : les cacheurs emettent des particules et un son toutes les reveal-interval secondes.
+final-reveal-time: 60
+reveal-interval: 10
+
+# Points de la map (x,y,z[,yaw,pitch]) - correspondent a la map construite par le plugin.
+waiting-spawn: 0.5,101,75.5,180,0
+seeker-room: 0.5,101,-74.5,0,0
+hider-spawn: 0.5,65,6.5,0,0
+seeker-spawn: 0.5,65,-6.5,180,0
+
+# Blocs autorises pour le deguisement (nom du materiau : nom affiche). Ils sont tous presents dans la map.
+blocks:
+  BARREL: Tonneau
+  BOOKSHELF: Bibliothèque
+  CRAFTING_TABLE: Table de craft
+  FURNACE: Four
+  SMOKER: Fumoir
+  BLAST_FURNACE: Haut fourneau
+  ANVIL: Enclume
+  HAY_BLOCK: Botte de foin
+  PUMPKIN: Citrouille
+  CARVED_PUMPKIN: Citrouille sculptée
+  JACK_O_LANTERN: Citrouille-lanterne
+  MELON: Pastèque
+  COMPOSTER: Composteur
+  CAULDRON: Chaudron
+  LANTERN: Lanterne
+  POTTED_RED_TULIP: Pot de fleur
+  POTTED_FERN: Pot de fougère
+  OAK_LEAVES: Feuilles de chêne
+  BIRCH_LEAVES: Feuilles de bouleau
+  AZALEA_LEAVES: Feuilles d'azalée
+  FLOWERING_AZALEA_LEAVES: Azalée en fleurs
+  OAK_LOG: Bûche de chêne
+  COBBLESTONE: Pierre
+  STONE_BRICKS: Pierres taillées
+  SPRUCE_PLANKS: Planches de sapin
+  BEEHIVE: Ruche
+  BEE_NEST: Nid d'abeilles
+  LOOM: Métier à tisser
+  CARTOGRAPHY_TABLE: Table de cartographie
+  FLETCHING_TABLE: Table d'archerie
+  SMITHING_TABLE: Table de forgeron
+  GRINDSTONE: Meule
+  STONECUTTER: Tailleur de pierre
+  LECTERN: Pupitre
+  JUKEBOX: Juke-box
+  NOTE_BLOCK: Bloc musical
+  IRON_BLOCK: Bloc de fer
+  COAL_BLOCK: Bloc de charbon
+  RED_WOOL: Laine rouge
+  WHITE_WOOL: Laine blanche

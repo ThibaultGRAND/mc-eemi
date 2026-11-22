@@ -1,0 +1,146 @@
+{
+  "credit": "EEMICRAFT - EemiCasino",
+  "textures": {
+    "chrome": "eemicraft:item/casino/machine/chrome",
+    "rouge": "eemicraft:item/casino/machine/rouge",
+    "particle": "eemicraft:item/casino/machine/chrome"
+  },
+  "elements": [
+    {
+      "from": [
+        7.5,
+        8,
+        7.5
+      ],
+      "to": [
+        8.5,
+        19,
+        8.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#chrome"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#chrome"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#chrome"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#chrome"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#chrome"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#chrome"
+        }
+      }
+    },
+    {
+      "from": [
+        6.3,
+        18.5,
+        6.3
+      ],
+      "to": [
+        9.7,
+        21.9,
+        9.7
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#rouge"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#rouge"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#rouge"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#rouge"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#rouge"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#rouge"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+Ordre de abysse_planche.png (12 par ligne, de gauche à droite) :
+1. charbon, minerai_cuivre, minerai_fer, minerai_etain, spore_lumineuse, minerai_argent, soufre, coeur_forgeron, os_mineur, glande_spores, coeur_contremaitre, coeur_reine
+2. poudre_cuivre, poudre_fer, poudre_etain, poudre_cuivre_lavee, poudre_fer_lavee, poudre_etain_lavee, lingot_cuivre, lingot_fer, lingot_etain, lingot_cuivre_pur, lingot_fer_pur, lingot_etain_pur
+3. bronze, acier, engrenage, bobine, poudre_argent, poudre_argent_lavee, lingot_argent_pur, combustible, circuit, infusion_glacee, plastron_refrigere, plaque_blindee
+4. moteur, noyau_spores, filtre, minerai_cobalt, cristal_resonant, coeur_cristal, poudre_cobalt, poudre_cobalt_lavee, lingot_cobalt_pur, lentille_cristal, bobine_resonante, plaque_cobalt
+5. elixir_silence, minerai_enderite, eclat_neant, essence_vide, coeur_neant, poudre_enderite, poudre_enderite_lavee, lingot_enderite_pur, matiere_noire, charge_vide, noyau_vide, plaque_neant
+6. serum_gravite, medaille_varenne, legumes, champignons, ration, ragout, soupe_spores, cafe, opt_vitesse, opt_economie, opt_rendement, cellule
+7. dynamite, m_generateur, m_concasseur, m_laveur, m_fonderie, m_raffinerie, m_alliageur, m_assembleur, m_entrepot, m_quai_expedition, m_quai_reception, m_serre
+8. m_cuisine, m_groupeur, m_separateur, m_trieur, m_table_foreuses, m_electrolyseur, m_generateur_thermique, m_foreuse_r, tete_forage, m_foreuse, m_etabli_precision, m_four_induction
+9. m_condenseur, m_reacteur, m_foreuse_3, m_foreuse_4, tete_forage_3, tete_forage_4, pioche_fer, pioche_bronze, pioche_acier, epee_pierre, epee_bronze, epee_acier
+10. casque_bronze, plastron_bronze, jambieres_bronze, bottes_bronze, casque_filtrant, plastron_acier, jambieres_acier, bottes_acier, epee_abyssale, pioche_abyssale, casque_abyssal, plastron_abyssal
+11. jambieres_abyssales, bottes_abyssales, lampe, masque, pioche_forge, pioche_cristal, epee_cristal, heaume_cristal, plastron_cristal, jambieres_cristal, bottes_cristal, lame_neant
+12. casque_neant, plastron_neant, jambieres_neant, bottes_neant, fusee, kit_reparation, menu, convoyeur, totem_garde, larme_soin, aimant, trefle
+13. boussole_retour, lampe_eternelle, page_carnet

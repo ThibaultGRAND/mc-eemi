@@ -1,0 +1,315 @@
+{
+ "type": "minecraft:chest",
+ "pools": [
+  {
+   "rolls": {
+    "type": "minecraft:uniform",
+    "min": 2,
+    "max": 4
+   },
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:iron_ingot",
+     "weight": 15,
+     "modifier": {
+      "type": "minecraft:set_count",
+      "count": {
+       "type": "minecraft:uniform",
+       "min": 3,
+       "max": 5
+      }
+     }
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:diamond",
+     "weight": 20,
+     "modifier": {
+      "type": "minecraft:set_count",
+      "count": {
+       "type": "minecraft:uniform",
+       "min": 2,
+       "max": 5
+      }
+     }
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:tipped_arrow",
+     "weight": 3,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:harming"
+      },
+      {
+       "type": "minecraft:set_count",
+       "count": {
+        "type": "minecraft:uniform",
+        "min": 6,
+        "max": 12
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:tipped_arrow",
+     "weight": 3,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:slowness"
+      },
+      {
+       "type": "minecraft:set_count",
+       "count": {
+        "type": "minecraft:uniform",
+        "min": 6,
+        "max": 12
+       }
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 1,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:protection": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 1,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:projectile_protection": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 1,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:sharpness": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:flame": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 1,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:power": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:fire_aspect": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:enchanted_book",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_enchantments",
+       "enchantments": {
+        "minecraft:infinity": 1
+       }
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:splash_potion",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:harming"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:splash_potion",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:poison"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:potion",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:swiftness"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:potion",
+     "weight": 1,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:strength"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:potion",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:fire_resistance"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:splash_potion",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:regeneration"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:splash_potion",
+     "weight": 2,
+     "modifier": [
+      {
+       "type": "minecraft:set_potion",
+       "id": "minecraft:healing"
+      },
+      {
+       "type": "set_count",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "type": "minecraft:item",
+     "name": "minecraft:ender_pearl",
+     "weight": 10,
+     "modifier": {
+      "type": "minecraft:set_count",
+      "count": {
+       "type": "minecraft:uniform",
+       "min": 1,
+       "max": 2
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

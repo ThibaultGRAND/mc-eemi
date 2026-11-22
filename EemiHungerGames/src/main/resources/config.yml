@@ -1,0 +1,170 @@
+# EemiHungerGames - Hunger Games d'EEMICRAFT sur les maps Survival Games de Quillmark.
+# Chacun pour soi, une seule vie : le dernier survivant gagne. Les joueurs partent de cages autour de la
+# corne d'abondance, les coffres de la map sont remplis a chaque partie avec les tables de loot de la map
+# (datapack eemihg installe par le plugin), une bordure se resserre puis un deathmatch empoisonne.
+# La map est tiree au hasard a chaque partie (jamais deux fois de suite la meme). Reglages = ceux des maps.
+
+hub-world: lobby
+
+# Parties en meme temps. Partie 1 = monde d'origine de la map, partie n = copie « monde_n » faite depuis
+# « monde_modele » (ex. hungergames_2, hg_altrac_3), supprimee quand elle ne sert plus (~210 Mo par copie).
+max-instances: 3
+# Dossier des datapacks du monde principal (relatif a la racine du serveur) : le plugin y installe eemihg.
+datapacks-folder: lobby/datapacks
+
+min-players: 2
+max-players: 24
+countdown: 30
+full-countdown: 10
+# Temps enfermes dans les cages avant le depart (secondes).
+cage-time: 15
+
+# Deroulement (secondes apres l'ouverture des cages).
+grace-period: 30
+border-delay: 300
+border-shrink-time: 600
+# Deathmatch quand la bordure est au minimum : Poison I puis Poison II, fin sans vainqueur a 0.
+deathmatch-time: 120
+poison-1-at: 90
+poison-2-at: 45
+# Reapprovisionnement des coffres de la corne (0 = jamais).
+restock-time: 600
+end-time: 10
+
+# Bordure acceleree quand il reste peu de survivants (jamais avant min-time s de jeu ni pendant la grace) :
+# a <= players vivants, elle atteint sa taille finale en time s ; a 2 vivants, en duel-time s. Vitesse
+# plafonnee a max-speed blocs/s de diametre (assez lent pour la fuir en marchant). Seulement si c'est plus
+# tot que prevu ; le deathmatch suit la fin du retrecissement.
+border-rush:
+  enabled: true
+  players: 4
+  time: 120
+  duel-time: 60
+  min-time: 120
+  max-speed: 4.0
+
+# Bonus de loot ajoute au loot de la map a la premiere ouverture de chaque coffre (et apres le
+# reapprovisionnement de la corne) : une pile de nourriture + 1 a 3 objets selon la qualite du coffre
+# (fleches, armes et armure en fer, pommes d'or, diamants rares). extra-rolls = objets en plus.
+bonus-loot:
+  enabled: true
+  food: true
+  extra-rolls: 0
+
+# Texte « Ouvert » / « Vide » au-dessus des coffres deja ouverts (retire quand le coffre est rempli a nouveau).
+chest-markers: true
+
+# Boussole : pointe vers le joueur vivant le plus proche.
+tracker-compass: true
+
+# Kits au choix (objet « Choisir un kit » pendant l'attente), ajoutes a l'inventaire a l'ouverture des cages.
+# items : « MATERIAL quantite », enchantements « MATERIAL:ENCHANT:NIVEAU[:ENCHANT:NIVEAU] quantite »,
+# potions « POTION:TYPE quantite » (SPLASH_POTION, LINGERING_POTION aussi). effects : « EFFET secondes niveau ».
+# permission (optionnelle) : kit utilisable seulement avec cette permission (deverrouillage EemiCore).
+default-kit: defaut
+kits:
+  defaut:
+    name: Défaut
+    icon: PAPER
+    description: [ "Aucun objet : tout se trouve", "dans les coffres." ]
+    items: [ ]
+  archer:
+    name: Archer
+    icon: BOW
+    description: [ "Un arc et 5 flèches." ]
+    items: [ "BOW 1", "ARROW 5" ]
+  chasseur:
+    name: Chasseur
+    icon: STONE_SWORD
+    description: [ "Une épée en pierre." ]
+    items: [ "STONE_SWORD 1" ]
+  cuisinier:
+    name: Cuisinier
+    icon: COOKED_BEEF
+    description: [ "16 steaks." ]
+    items: [ "COOKED_BEEF 16" ]
+  explorateur:
+    name: Explorateur
+    icon: LEATHER_BOOTS
+    description: [ "Bottes en cuir et Vitesse I", "pendant 60 s." ]
+    items: [ "LEATHER_BOOTS 1" ]
+    effects: [ "SPEED 60 1" ]
+  mineur:
+    name: Mineur
+    icon: IRON_PICKAXE
+    description: [ "Une pioche en fer et 16 pierres", "(on ne casse que les blocs posés)." ]
+    items: [ "IRON_PICKAXE 1", "COBBLESTONE 16" ]
+  soigneur:
+    name: Soigneur
+    icon: POTION
+    description: [ "2 potions de soin." ]
+    items: [ "POTION:healing 2" ]
+
+# Maps. loot = prefixe des tables du datapack eemihg (+ qualite du coffre), chests = fichier du jar.
+# spawn-type : platforms (cercle de plateformes autour de center) ou cages (points « spawns », pieds sur le bloc).
+maps:
+  desert:
+    name: Desolate Desert
+    world: hungergames
+    # lobby de la map, loin de l'arene : bordure autour pendant l'attente
+    lobby: 35531.5,60,35496.5,90,0
+    lobby-border-center: 35549,35496
+    lobby-border-size: 500
+    center: 0.5,69,0.5
+    border-center: 0,0
+    border-start-size: 1000
+    border-final-size: 40
+    spawn-type: platforms
+    platform-radius: 31
+    chests: chests_desert.yml
+    loot: desert/chests/base/
+    restock-loot: desert/chests/base/cornucopia_restock
+    events: desert
+  altrac:
+    name: Ruins of Altrac
+    world: hg_altrac
+    # lobby de la map, sous l'arene (dans la bordure de jeu)
+    lobby: -222.0,15.0625,70.0,0,6
+    center: -219.5,46,115.5
+    border-center: -219.5,115.5
+    border-start-size: 1000
+    border-final-size: 50
+    spawn-type: cages
+    # points de depart du datapack (marqueurs y 35 + montee de 11,5), dans son ordre
+    spawns:
+      - "-253.5,46.5,115.5,90.0"
+      - "-185.5,46.5,115.5,-90.0"
+      - "-219.5,46.5,149.5,0.0"
+      - "-219.5,46.5,81.5,180.0"
+      - "-243.5,46.5,139.5,90.0"
+      - "-195.5,46.5,91.5,180.0"
+      - "-243.5,46.5,91.5,90.0"
+      - "-195.5,46.5,139.5,-90.0"
+      - "-187.5,46.5,127.5,-90.0"
+      - "-251.5,46.5,103.5,90.0"
+      - "-207.5,46.5,83.5,180.0"
+      - "-231.5,46.5,147.5,0.0"
+      - "-231.5,46.5,83.5,180.0"
+      - "-251.5,46.5,127.5,90.0"
+      - "-187.5,46.5,103.5,-90.0"
+      - "-207.5,46.5,147.5,0.0"
+      - "-252.5,46.5,121.5,90.0"
+      - "-225.5,46.5,148.5,0.0"
+      - "-190.5,46.5,97.5,-90.0"
+      - "-237.5,46.5,86.5,180.0"
+      - "-248.5,46.5,133.5,90.0"
+      - "-213.5,46.5,148.5,0.0"
+      - "-186.5,46.5,121.5,-90.0"
+      - "-213.5,46.5,82.5,180.0"
+      - "-252.5,46.5,109.5,90.0"
+      - "-201.5,46.5,144.5,0.0"
+      - "-186.5,46.5,109.5,-90.0"
+      - "-225.5,46.5,82.5,180.0"
+      - "-237.5,46.5,144.5,0.0"
+      - "-190.5,46.5,133.5,-90.0"
+      - "-201.5,46.5,86.5,180.0"
+      - "-248.5,46.5,97.5,90.0"
+    chests: chests_altrac.yml
+    loot: altrac/chests/normal/
+    restock-loot: altrac/chests/normal/rare_chest
+    events: altrac

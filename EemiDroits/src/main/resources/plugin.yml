@@ -1,0 +1,25 @@
+name: EemiDroits
+version: ${project.version}
+main: fr.eemicraft.droits.EemiDroits
+api-version: '1.21'
+author: EEMICRAFT
+description: Droits des joueurs, mondes et jeux interdits, jeux en beta et en maintenance
+depend: [LuckPerms]
+softdepend: [EemiCore, PlaceholderAPI]
+commands:
+  droits:
+    description: Gestion des droits, des betas et des maintenances
+    usage: /droits [joueur|beta|jeu|jeux|monde|reload]
+    aliases: [gestion]
+permissions:
+  eemidroits.admin:
+    description: Ouvrir /droits et tout modifier
+    default: op
+    children:
+      eemidroits.bypass: true
+  eemidroits.bypass:
+    description: Entrer dans les jeux en maintenance et en beta
+    default: op
+  eemidroits.beta:
+    description: Tag Beta (acces aux jeux en beta)
+    default: false

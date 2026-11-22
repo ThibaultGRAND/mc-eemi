@@ -1,0 +1,17 @@
+# EemiNoms : nom affiché des joueurs (leur prénom) dans le chat et la liste des joueurs.
+# Le pseudo Minecraft ne change pas : il reste utilisé par les commandes, les jeux et les sauvegardes.
+# Dans le chat, passer la souris sur le nom montre le vrai pseudo.
+
+# Longueur et caractères autorisés (lettres avec accents, espace, tiret, apostrophe).
+longueur-min: 2
+longueur-max: 16
+caracteres: "^[\\p{L}][\\p{L} '\\-]*$"
+
+# Délai entre deux /rename d'un même joueur (en secondes). Les admins n'en ont pas.
+delai: 60
+
+# Mots refusés (casse et accents ignorés, recherche dans le nom).
+interdits: [admin, modo, moderateur, staff, owner, console, serveur, eemicraft]
+
+# Couleur du nom affiché (code &). Vide = couleur normale du chat.
+couleur: ""

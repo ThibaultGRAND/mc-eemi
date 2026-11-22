@@ -1,0 +1,17 @@
+name: EemiBlockParty
+version: ${project.version}
+main: fr.eemicraft.blockparty.EemiBlockParty
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Block Party d'EEMICRAFT (piste de danse, musique, regles Hypixel/Mineplex)
+
+commands:
+  blockparty:
+    description: Rejoindre ou gerer Block Party
+    aliases: [bparty]
+    usage: /blockparty <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+
+permissions:
+  eemiblockparty.admin:
+    description: Commandes admin de Block Party
+    default: op

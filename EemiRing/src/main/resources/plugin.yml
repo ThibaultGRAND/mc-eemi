@@ -1,0 +1,15 @@
+name: EemiRing
+version: ${project.version}
+main: fr.eemicraft.ring.EemiRing
+api-version: '1.21'
+description: Combat anime de deux mannequins sur le ring du lobby d'EEMICRAFT
+
+commands:
+  ring:
+    description: Gerer les combattants du ring
+    usage: /ring <reload|skin|pos|pause>
+
+permissions:
+  eemiring.admin:
+    description: Commandes admin du ring
+    default: op

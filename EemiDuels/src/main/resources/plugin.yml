@@ -1,0 +1,20 @@
+name: EemiDuels
+version: ${project.version}
+main: fr.eemicraft.duels.EemiDuels
+api-version: '1.21'
+softdepend: [EemiCombat]
+description: Duels 1v1 (classe / non classe, defis), arene FFA et classements, facon serveurs practice
+
+commands:
+  duel:
+    description: Menu des duels, defier un joueur, files, stats
+    usage: /duel [joueur [kit] | accept <joueur> | deny | queue <kit> [ranked] | leave | spectate | stats [joueur] | top <kit>]
+    aliases: [duels, pvp]
+  ffa:
+    description: Rejoindre ou quitter l'arene FFA
+    usage: /ffa [join|leave|spectate]
+
+permissions:
+  eemiduels.admin:
+    description: /duel build, reload, open
+    default: op

@@ -1,0 +1,17 @@
+name: EemiHideSeek
+version: ${project.version}
+main: fr.eemicraft.hideseek.EemiHideSeek
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Cache-cache d'EEMICRAFT (cacheurs deguises en blocs, regles Hypixel)
+
+commands:
+  hideseek:
+    description: Rejoindre ou gerer le cache-cache
+    aliases: [hns, cachecache]
+    usage: /hideseek <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+
+permissions:
+  eemihideseek.admin:
+    description: Commandes admin du cache-cache
+    default: op

@@ -1,0 +1,17 @@
+name: EemiBoatRace
+version: ${project.version}
+main: fr.eemicraft.boatrace.EemiBoatRace
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Course de bateaux sur glace d'EEMICRAFT (3 tours, points de controle, record du circuit)
+
+commands:
+  boatrace:
+    description: Rejoindre ou gerer la course de bateaux
+    aliases: [course, br]
+    usage: /boatrace <join|leave|spectate [joueur]|record|start [n]|stop [n]|build|reload|parties>
+
+permissions:
+  eemiboatrace.admin:
+    description: Commandes admin de la course de bateaux
+    default: op

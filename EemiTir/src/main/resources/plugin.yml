@@ -1,0 +1,14 @@
+name: EemiTir
+version: ${project.version}
+main: fr.eemicraft.tir.EemiTir
+api-version: '1.21'
+author: EEMICRAFT
+description: Stand de tir a l'arc du lobby
+softdepend: [PlaceholderAPI]
+commands:
+  tir:
+    description: Stand de tir du lobby
+    usage: /tir <top|zone|voir|info|reload|reset>
+permissions:
+  eemitir.admin:
+    default: op

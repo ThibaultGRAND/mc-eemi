@@ -1,0 +1,16 @@
+name: EemiMeubles
+version: ${project.version}
+main: fr.eemicraft.meubles.EemiMeubles
+api-version: '1.21'
+description: Meubles 3D de l'EEMI (poser, tourner, retirer, s'asseoir)
+
+commands:
+  meubles:
+    description: Catalogue des meubles (builders)
+    aliases: [meuble]
+    usage: /meubles [give <id>|liste]
+
+permissions:
+  eemimeubles.build:
+    description: Poser, tourner et retirer des meubles
+    default: op

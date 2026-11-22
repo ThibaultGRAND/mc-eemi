@@ -1,0 +1,176 @@
+# EemiNoel - le lobby d'EEMICRAFT en mode Noël.
+# Décor (/noel build) : le plugin ne pose des blocs QUE dans l'air ; chaque bloc touché est noté avec son état
+# d'origine dans placed.yml. /noel remove remet tout comme avant (chalet et sapin compris).
+# Sapin (/noel sapin) : debout au centre de la fontaine ; tout le volume autour est noté dans sapin.yml, la fontaine
+# est retirée et remplacée par un grand sapin. /noel sapin remove remet la fontaine à l'identique (eau en dernier).
+# Chalet (/noel maison) : chalet du Père Noël en épicéa autour du joueur, porte dans la direction où il regarde,
+# sapin décoré, cadeaux, traîneau ; le Père Noël s'y installe. /noel perenoel : déplace le Père Noël à la position
+# du joueur.
+# Ambiance (/noel on|off) : soirée (heure du client seulement), neige qui tombe, clochettes, bonhommes de neige,
+# Père Noël, titre à l'arrivée.
+
+world: lobby
+# Zone décorée (x/z minimum et maximum, y de recherche).
+area:
+  min-x: 630
+  max-x: 760
+  min-z: 600
+  max-z: 700
+  min-y: 40
+  max-y: 100
+# Pas de décor posé à moins de "keep-clear-radius" blocs de ces points (spawn, PNJ...), format "x z".
+keep-clear-radius: 3
+keep-clear:
+  - "722 650"
+  - "671.5 631.5"
+  - "679.5 633.5"
+  - "685.5 639.5"
+  - "693.5 641.6"
+  - "701.5 641.5"
+  - "709.5 641.4"
+  - "663.5 635.5"
+  - "659.4 645.4"
+  - "657.5 654.5"
+  - "657.5 663.5"
+  - "663.5 673.5"
+  - "671.5 673.5"
+  - "679.5 673.5"
+  - "685.5 667.5"
+  - "693.2 665.4"
+  - "701.6 665.5"
+  - "709.4 665.6"
+  - "730.5 650.5"
+# Probabilités (0 à 1) par emplacement possible.
+chance:
+  # sur l'herbe / la terre / la mousse (case d'air) : un seul tirage parmi ces 4, sinon couche de neige
+  gift: 0.008
+  candle: 0.015
+  holly: 0.02
+  tree: 0.003
+  # fine couche de neige (1 ou 2 couches) sur l'herbe / la terre / la mousse, et sur les feuilles (dessus des arbres)
+  snow-ground: 0.45
+  snow-leaves: 0.7
+  # lanterne suspendue sous un plafond (4 blocs d'air en dessous)
+  lantern: 0.03
+  # sucre d'orge (pilier rouge et blanc à crosse) sur l'herbe au bord d'une allée (blocs de la liste "allees")
+  candy-cane: 0.04
+  # bonhomme de neige en blocs (2 blocs de neige + citrouille sculptée + chapeau), sur l'herbe
+  snowman-block: 0.002
+  # tas de 3 à 6 cadeaux (certains empilés, ruban ou bougie dessus), sur l'herbe
+  gift-pile: 0.003
+  # guirlande sur les clôtures et murets : lanterne ou bougies sur un poteau (jamais deux voisins)
+  fence-light: 0.35
+  # bougies sur les toits (dessus des escaliers et dalles)
+  roof-candle: 0.08
+  # lanternes suspendues sous les avant-toits (escaliers et dalles, 2 blocs d'air dessous)
+  roof-lantern: 0.2
+  # lanternes suspendues sous les feuilles des arbres (2 blocs d'air dessous)
+  tree-lantern: 0.06
+  # couronne (feuilles + bougie rouge) au-dessus des portes
+  wreath: 1.0
+# Distance minimale (blocs) entre deux objets du même genre.
+espacement:
+  sucre-orge: 5
+  bonhomme: 10
+  tas-cadeaux: 6
+# Blocs considérés comme des allées (pour les sucres d'orge).
+allees: [dirt_path, gravel, cobblestone, mossy_cobblestone, stone_bricks, mossy_stone_bricks, cracked_stone_bricks,
+  polished_andesite, andesite, smooth_stone, stone, bricks, mud_bricks, packed_mud, polished_deepslate,
+  deepslate_bricks, sandstone, smooth_sandstone, tuff_bricks, polished_tuff]
+# Lanternes existantes -> lanternes en cuivre (flamme verte). Coupé par défaut : les lanternes restent telles quelles.
+replace-lanterns: false
+
+# Grand sapin à la place de la fontaine (/noel sapin, debout au centre de la fontaine).
+sapin:
+  # rayon (blocs) du cylindre noté puis vidé autour du joueur
+  rayon-fontaine: 7
+  # le volume noté va de (pieds + enregistrer-depuis) à (pieds + hauteur-volume)
+  enregistrer-depuis: -3
+  hauteur-volume: 30
+  # tout ce qui n'est pas de l'air est retiré à partir de (pieds + retirer-depuis) : -1 = le bloc sous les pieds compris,
+  # 0 = on garde le bloc sous les pieds ; en dessous, rien n'est touché
+  retirer-depuis: -1
+  # bloc posé sous les pieds, sur tout le disque, quand la couche sous les pieds a été retirée
+  sol: snow_block
+  # hauteur du sapin (sans l'étoile, max 25) et rayon de son étage le plus large (au plus rayon-fontaine - 1)
+  hauteur: 23
+  rayon: 6
+  # part des feuilles du pourtour remplacées par des boules de couleur
+  boules: 0.12
+  # nombre de cadeaux au pied
+  cadeaux: 14
+
+# Père Noël (position réglée par /noel maison ou /noel perenoel). Depuis la 1.2.0, le Père Noël du lobby est un
+# PNJ FancyNpcs géré à part (action : player_command noel cadeau) ; le villageois du plugin n'apparaît que si
+# villager vaut true.
+santa:
+  enabled: false
+  villager: false
+
+# Cadeau du Père Noël (/noel cadeau, lancé par le PNJ) : une fois par joueur et par saison, au lobby, ambiance
+# activée. Les joueurs qui l'ont ouvert sont notés dans cadeaux.yml sous la clé de la saison ; changer "saison"
+# (ex. noel2027) permet de rouvrir un cadeau à tout le monde. Pièces données par « eemi give <joueur> coins <n> ».
+cadeau:
+  saison: "noel2026"
+  pieces: 300
+
+# Ambiance
+night: true
+night-time: 13000
+particles: true
+snowmen: 6
+join-title: true
+bells:
+  min-seconds: 20
+  max-seconds: 45
+
+# Boutique EemiCore : /noel on remet ces cosmétiques en vente (jusqu'à jusqu-au, ou sans fin si la date est
+# passée) et affiche les titres équipés ; /noel off les retire de la boutique et cache ces titres (les joueurs
+# les gardent, ils reviennent au prochain on). Seule la config en mémoire d'EemiCore est modifiée, jamais son fichier.
+# Les ids sont ceux des titres de Noël d'EemiCore (section cosmetics de son config).
+boutique:
+  enabled: true
+  jusqu-au: "2027-01-02"
+  cosmetiques: [title_n_lutin, title_n_renne, title_n_pere, title_n_2026]
+# Musique : /noel music on = playlist de Noël au lobby (songs_noel.yml du jar copiée dans plugins/EemiMusique/songs.yml),
+# /noel music off = musique de base.
+
+# Traîneau du Père Noël (ambiance activée, au moins un joueur au lobby) : il traverse la zone "area" en ligne droite,
+# lâche des cadeaux qui tombent au sol et brillent ; passer dessus donne des pièces EemiCore. /noel traineau annonce puis lance un passage (/noel traineau maintenant : sans annonce).
+traineau:
+  enabled: true
+  # secondes entre deux passages (±20 % de hasard)
+  intervalle: 600
+  # altitude = sol-y + hauteur
+  sol-y: 51
+  hauteur: 25
+  # blocs par tick
+  vitesse: 0.5
+  # pseudo d'un compte pour le skin du Père Noël (mannequin) ; vide = Père Noël en blocs
+  skin: ""
+  cadeaux: 12
+  # secondes avant qu'un cadeau posé disparaisse
+  duree-cadeau: 60
+  pieces-min: 1
+  pieces-max: 2
+  # cadeaux qu'un même joueur peut ramasser par passage
+  max-par-joueur: 5
+  rayon-ramassage: 1.3
+  # secondes entre l'annonce dans le chat du lobby et le passage (0 = pas d'avance)
+  annonce-secondes: 10
+
+# Textes affichés aux joueurs (& ou § pour les couleurs). Absents = textes par défaut du plugin.
+# {secondes}, {cadeaux}, {pieces}, {s} / {sp} (pluriels) sont remplacés.
+messages:
+  prefixe: "§8[§aNoël§8] §7"
+  traineau-annonce: "§fLe Père Noël arrive au-dessus du lobby ! §7Ramasse ses cadeaux §8(dans {secondes} s)"
+  traineau-titre: "§c§lHo ho ho !"
+  traineau-sous-titre: "§fLe Père Noël passe au-dessus du lobby !"
+  traineau-fin: "§fLe Père Noël est reparti ! §7Tu as ramassé §e{cadeaux}§7 cadeau{s} (§6{pieces} pièce{sp}§7)."
+  traineau-fin-rien: "§fLe Père Noël est reparti. §7Tu n'as ramassé aucun cadeau cette fois : guette son prochain passage !"
+  cadeau-ouverture: "§fLe Père Noël te tend ton cadeau... §7il s'ouvre !"
+  cadeau-recu: "Le Père Noël t'offre §6{pieces} pièces§7, elles sont dans ton porte-monnaie. Joyeuses fêtes !"
+  cadeau-deja: "§fTu as déjà ouvert ton cadeau de Noël §7(§6{pieces} pièces§7 reçues). Reviens l'an prochain ! §c❤"
+  cadeau-deja-barre: "§7Cadeau déjà ouvert cette saison"
+  cadeau-hors-saison: "Le Père Noël n'est pas encore arrivé : reviens pendant les fêtes !"
+  cadeau-hors-lobby: "Le Père Noël distribue ses cadeaux au §flobby§7 !"

@@ -1,0 +1,12 @@
+location: lobby:671.5:52.9:673.5
+enabled: false
+display-range: 24
+update-range: 24
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '%eemi_cat_combat%'
+    height: 0.35
+  actions: {}

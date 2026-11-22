@@ -1,0 +1,152 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "skin": "eemicraft:item/sheep_skin",
+    "wool": "eemicraft:item/sheep_wool",
+    "particle": "eemicraft:item/sheep_wool"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        2,
+        0
+      ],
+      "to": [
+        14,
+        14,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2.0,
+            4.0,
+            3.5,
+            7.0
+          ],
+          "texture": "#skin"
+        },
+        "south": {
+          "uv": [
+            5.5,
+            4.0,
+            7.0,
+            7.0
+          ],
+          "texture": "#skin"
+        },
+        "west": {
+          "uv": [
+            0.0,
+            4.0,
+            2.0,
+            7.0
+          ],
+          "texture": "#skin"
+        },
+        "east": {
+          "uv": [
+            3.5,
+            4.0,
+            5.5,
+            7.0
+          ],
+          "texture": "#skin"
+        },
+        "up": {
+          "uv": [
+            2.0,
+            0.0,
+            3.5,
+            4.0
+          ],
+          "texture": "#skin"
+        },
+        "down": {
+          "uv": [
+            3.5,
+            0.0,
+            5.0,
+            4.0
+          ],
+          "texture": "#skin"
+        }
+      }
+    },
+    {
+      "from": [
+        0.8,
+        0.8,
+        2.8
+      ],
+      "to": [
+        15.2,
+        15.2,
+        17.2
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1.5,
+            3.0,
+            3.0,
+            6.0
+          ],
+          "texture": "#wool",
+          "tintindex": 0
+        },
+        "south": {
+          "uv": [
+            4.5,
+            3.0,
+            6.0,
+            6.0
+          ],
+          "texture": "#wool",
+          "tintindex": 0
+        },
+        "west": {
+          "uv": [
+            0.0,
+            3.0,
+            1.5,
+            6.0
+          ],
+          "texture": "#wool",
+          "tintindex": 0
+        },
+        "east": {
+          "uv": [
+            3.0,
+            3.0,
+            4.5,
+            6.0
+          ],
+          "texture": "#wool",
+          "tintindex": 0
+        },
+        "up": {
+          "uv": [
+            1.5,
+            0.0,
+            3.0,
+            3.0
+          ],
+          "texture": "#wool",
+          "tintindex": 0
+        },
+        "down": {
+          "uv": [
+            3.0,
+            0.0,
+            4.5,
+            3.0
+          ],
+          "texture": "#wool",
+          "tintindex": 0
+        }
+      }
+    }
+  ]
+}

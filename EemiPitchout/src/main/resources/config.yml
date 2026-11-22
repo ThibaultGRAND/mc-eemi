@@ -1,0 +1,82 @@
+# EemiPitchout - Pitchout d'EEMICRAFT (facon Funcraft / Epicube / Hypixel).
+# Chacun pour soi sur une plateforme flottante au-dessus du vide. Aucun degat : les coups ne font
+# que reculer. Baton de recul, arc a recul, perle de l'Ender. Tomber dans le vide = -1 vie,
+# reapparition sur la plateforme. A 0 vie : elimine (spectateur). Dernier en vie gagnant ; a la fin
+# du temps, celui (ou ceux) qui a le plus de vies gagne.
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: pitchout
+# Nombre maximal de parties en meme temps (2.1). Partie 1 = monde ci-dessus, parties 2..n = copies
+# <world>_2, <world>_3... du modele <world>_modele (copie propre de la partie 1).
+max-instances: 3
+# Monde du hub (retour par son point de spawn).
+hub-world: lobby
+# Heure fixe du monde (6000 = midi).
+time: 6000
+
+# ---------------------------------------------------------------- arenes (2.0)
+# Arenes reprises de la map « PitchOut 1.20-1.21 by Missid » (desert, jungle, glace), embarquees dans le
+# jar et posees par le plugin, centrees en x 0 z 0, leur sol en floor-y. Une arene au hasard apres
+# chaque partie (pas deux fois de suite). /pitchout map <id> impose la prochaine (admin).
+arenas: [desert, jungle, glace]
+floor-y: 100
+# Hauteur du sol de la salle d'attente (au-dessus de l'arene).
+lobby-y: 140
+# Tomber void-depth blocs sous le sol de l'arene (floor-y - void-depth) = -1 vie, ou toucher la lave.
+# 2.2 : 15 au lieu de 3, pour avoir le temps de lancer la perle de l'Ender en tombant.
+void-depth: 15
+
+# ---------------------------------------------------------------- partie
+min-players: 2
+max-players: 16
+# Decompte avant le debut (secondes), raccourci a full-countdown quand la partie est pleine.
+countdown: 20
+full-countdown: 10
+# Secondes d'immobilite au debut de la partie (3, 2, 1, GO).
+freeze-time: 3
+# Duree maximale de la partie (secondes). Ensuite : le plus de vies gagne (egalite possible).
+game-time: 600
+# Duree de l'ecran de fin avant le retour en salle d'attente (secondes).
+end-time: 8
+# Vies au depart, et maximum atteignable avec le bonus +1 vie.
+lives: 5
+max-lives: 7
+# Invulnerabilite apres une reapparition (secondes) : on ne peut pas etre repousse.
+respawn-protection: 3
+# Le dernier joueur qui t'a frappe dans ce delai (secondes) est credite du kill quand tu tombes.
+kill-credit-time: 10
+
+# ---------------------------------------------------------------- kit
+# Niveau de Recul du baton, de Frappe de l'arc.
+stick-knockback: 3
+bow-punch: 2
+# Perles de l'Ender : une rendue toutes les pearl-cooldown secondes tant qu'on en a moins de pearl-max.
+pearl-cooldown: 15
+pearl-max: 1
+
+# ---------------------------------------------------------------- bonus (objets flottants sur la plateforme)
+# Un bonus apparait toutes les bonus-interval secondes (au plus bonus-max en meme temps),
+# et disparait apres bonus-lifetime secondes s'il n'est pas ramasse.
+bonus-interval: 20
+bonus-max: 3
+bonus-lifetime: 30
+# Duree des effets (Vitesse II, Saut II, baton surpuissant), en secondes.
+bonus-effect-time: 10
+# Niveau de Recul du baton surpuissant.
+super-stick-knockback: 6
+# Chances relatives de chaque bonus (0 = jamais).
+# SPEED = Vitesse II, JUMP = Saut ameliore II, SUPER_STICK = baton surpuissant,
+# PEARL = perle supplementaire, LIFE = +1 vie (jusqu'a max-lives).
+bonus-weights:
+  SPEED: 30
+  JUMP: 30
+  SUPER_STICK: 20
+  PEARL: 15
+  LIFE: 5
+
+# Centre surélevé interdit (#86) : on ne peut ni monter ni perler au-dessus de min-height blocs du sol
+# dans ce rayon autour du centre de l'arène (arbre de la Jungle, butte du Glace). radius 0 = autorisé.
+middle-forbidden:
+  jungle: {radius: 9, min-height: 2}
+  glace: {radius: 5, min-height: 3}
+  desert: {radius: 0, min-height: 0}

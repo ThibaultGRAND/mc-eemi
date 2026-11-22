@@ -1,0 +1,17 @@
+name: EemiMurder
+version: ${project.version}
+main: fr.eemicraft.murder.EemiMurder
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Murder Mystery d'EEMICRAFT (lobby d'attente, plusieurs maps, or, arc du detective)
+
+commands:
+  murder:
+    description: Rejoindre le Murder Mystery
+    usage: /murder <join|leave|maps|spectate [joueur]>
+    aliases: [mm]
+
+permissions:
+  eemimurder.admin:
+    description: Commandes admin du Murder
+    default: op

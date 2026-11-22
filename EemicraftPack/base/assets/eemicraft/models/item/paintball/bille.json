@@ -1,0 +1,68 @@
+{
+  "credit": "EEMICRAFT - EemiPaintball",
+  "texture_size": [16, 16],
+  "textures": {
+    "bille": "eemicraft:item/paintball/bille_rouge",
+    "particle": "eemicraft:item/paintball/bille_rouge"
+  },
+  "elements": [
+    {
+      "from": [6.3, 6.3, 6.3],
+      "to": [9.7, 9.7, 9.7],
+      "faces": {
+        "north": {"uv": [0, 0, 3.4, 3.4], "texture": "#bille"},
+        "south": {"uv": [0, 0, 3.4, 3.4], "texture": "#bille"},
+        "east": {"uv": [0, 0, 3.4, 3.4], "texture": "#bille"},
+        "west": {"uv": [0, 0, 3.4, 3.4], "texture": "#bille"},
+        "up": {"uv": [0, 0, 3.4, 3.4], "texture": "#bille"},
+        "down": {"uv": [0, 0, 3.4, 3.4], "texture": "#bille"}
+      }
+    },
+    {
+      "from": [5.6, 6.9, 6.9],
+      "to": [10.4, 9.1, 9.1],
+      "faces": {
+        "north": {"uv": [3, 5, 7.8, 7.2], "texture": "#bille"},
+        "south": {"uv": [3, 5, 7.8, 7.2], "texture": "#bille"},
+        "east": {"uv": [3, 5, 5.2, 7.2], "texture": "#bille"},
+        "west": {"uv": [3, 5, 5.2, 7.2], "texture": "#bille"},
+        "up": {"uv": [3, 5, 7.8, 7.2], "texture": "#bille"},
+        "down": {"uv": [3, 5, 7.8, 7.2], "texture": "#bille"}
+      }
+    },
+    {
+      "from": [6.9, 5.6, 6.9],
+      "to": [9.1, 10.4, 9.1],
+      "faces": {
+        "north": {"uv": [6, 10, 8.2, 14.8], "texture": "#bille"},
+        "south": {"uv": [6, 10, 8.2, 14.8], "texture": "#bille"},
+        "east": {"uv": [6, 10, 8.2, 14.8], "texture": "#bille"},
+        "west": {"uv": [6, 10, 8.2, 14.8], "texture": "#bille"},
+        "up": {"uv": [6, 10, 8.2, 12.2], "texture": "#bille"},
+        "down": {"uv": [6, 10, 8.2, 12.2], "texture": "#bille"}
+      }
+    },
+    {
+      "from": [6.9, 6.9, 5.6],
+      "to": [9.1, 9.1, 10.4],
+      "faces": {
+        "north": {"uv": [9, 1, 11.2, 3.2], "texture": "#bille"},
+        "south": {"uv": [9, 1, 11.2, 3.2], "texture": "#bille"},
+        "east": {"uv": [9, 1, 13.8, 3.2], "texture": "#bille"},
+        "west": {"uv": [9, 1, 13.8, 3.2], "texture": "#bille"},
+        "up": {"uv": [9, 3.75, 11.2, 8.55], "texture": "#bille"},
+        "down": {"uv": [9, 3.75, 11.2, 8.55], "texture": "#bille"}
+      }
+    }
+  ],
+  "gui_light": "front",
+  "display": {
+    "thirdperson_righthand": {"rotation": [0, 0, 0], "translation": [0, 2, 1], "scale": [0.7, 0.7, 0.7]},
+    "thirdperson_lefthand": {"rotation": [0, 0, 0], "translation": [0, 2, 1], "scale": [0.7, 0.7, 0.7]},
+    "firstperson_righthand": {"rotation": [0, 0, 0], "translation": [0, 2, 0], "scale": [0.8, 0.8, 0.8]},
+    "firstperson_lefthand": {"rotation": [0, 0, 0], "translation": [0, 2, 0], "scale": [0.8, 0.8, 0.8]},
+    "gui": {"rotation": [30, 45, 0], "translation": [0, 0, 0], "scale": [2.2, 2.2, 2.2]},
+    "ground": {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [0.8, 0.8, 0.8]},
+    "fixed": {"rotation": [0, 0, 0], "translation": [0, 0, 0], "scale": [1.6, 1.6, 1.6]}
+  }
+}

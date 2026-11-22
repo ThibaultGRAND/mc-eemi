@@ -1,0 +1,70 @@
+# EemiBlockParty - Block Party d'EEMICRAFT (facon Hypixel / Mineplex).
+# Une piste de danse coloree au-dessus du vide. Pendant la musique on danse ; quand elle s'arrete,
+# une couleur est annoncee (bloc dans toute la barre, titre, barre de boss) : il faut etre dessus
+# avant la fin du temps, sinon le sol disparait sous les pieds. Le temps diminue a chaque manche.
+# Dernier survivant gagnant (ou tous ceux tombes a la meme derniere manche, ou tous les survivants
+# au bout de max-rounds manches).
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: blockparty
+# Nombre maximal de parties en meme temps (1.2). Partie 1 = monde ci-dessus, parties 2..n = copies
+# <world>_2, <world>_3... du modele <world>_modele (copie propre de la partie 1).
+max-instances: 3
+# Monde du hub (retour par son point de spawn).
+hub-world: lobby
+# Heure fixe du monde (6000 = midi).
+time: 6000
+
+# ---------------------------------------------------------------- arene (construite par le plugin)
+# Hauteur du sol de la piste. La piste est centree en x 0, z 0.
+floor-y: 100
+# Cote de la piste en blocs (nombre pair). 48 -> x et z de -24 a 23.
+floor-size: 48
+# Hauteur du sol de la salle d'attente (vitre au centre, au-dessus de la piste).
+lobby-y: 130
+# Un joueur dont les pieds passent sous floor-y - fall-depth est elimine.
+fall-depth: 3
+# Bloc de la piste : CONCRETE (beton), WOOL (laine) ou TERRACOTTA.
+floor-block: CONCRETE
+# Couleurs utilisees (noms de colorants Minecraft). Retirer une couleur la retire du jeu.
+colors: [WHITE, ORANGE, MAGENTA, LIGHT_BLUE, YELLOW, LIME, PINK, GRAY, LIGHT_GRAY, CYAN, PURPLE, BLUE, BROWN, GREEN, RED, BLACK]
+# Nombre de couleurs sur la piste : colors-min a la 1re manche, +1 toutes les 2 manches jusqu'a colors-max.
+colors-min: 10
+colors-max: 16
+
+# ---------------------------------------------------------------- partie
+min-players: 2
+max-players: 30
+# Decompte avant le debut (secondes), raccourci a full-countdown quand la partie est pleine.
+countdown: 20
+full-countdown: 10
+# Nombre maximal de manches : apres la derniere, tous les survivants gagnent.
+max-rounds: 25
+# Duree de la musique (phase de danse) en secondes, tiree au hasard entre les deux.
+dance-min: 5
+dance-max: 9
+# Temps pour rejoindre la couleur (secondes) : reaction-start a la 1re manche,
+# moins reaction-step a chaque manche, jamais sous reaction-min.
+reaction-start: 5.0
+reaction-step: 0.25
+reaction-min: 1.5
+# Temps (secondes) pendant lequel le sol reste ouvert avant la manche suivante.
+fall-time: 3
+# Duree de l'ecran de fin (feux d'artifice) avant le retour en salle d'attente.
+end-time: 8
+
+# ---------------------------------------------------------------- bonus (balise sur la piste)
+# Chance qu'un bonus apparaisse au debut d'une manche (0 a 1), a partir de la manche bonus-from-round.
+bonus-chance: 0.4
+bonus-from-round: 2
+# Duree des effets (secondes).
+bonus-effect-time: 10
+# Bonus possibles : SPEED (Vitesse II), JUMP (Saut II), ORACLE (voir la couleur avant tout le monde),
+# SAVIOR (Sauveur : une fois, teleporte sur la bonne couleur si tu n'y es pas quand le sol disparait).
+bonuses: [SPEED, JUMP, ORACLE, SAVIOR]
+
+# ---------------------------------------------------------------- musique
+# Volume de la melodie, de la basse et des percussions (0 a 1).
+music-volume: 0.9
+bass-volume: 0.5
+drums-volume: 0.45

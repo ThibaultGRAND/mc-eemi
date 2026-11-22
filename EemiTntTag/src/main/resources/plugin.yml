@@ -1,0 +1,17 @@
+name: EemiTntTag
+version: ${project.version}
+main: fr.eemicraft.tnttag.EemiTntTag
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: TNT Tag d'EEMICRAFT (patate chaude explosive, arene EEMI)
+
+commands:
+  tnttag:
+    description: Rejoindre ou gerer le TNT Tag
+    usage: /tnttag <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+    aliases: [tag]
+
+permissions:
+  eemitnttag.admin:
+    description: Commandes admin du TNT Tag
+    default: op

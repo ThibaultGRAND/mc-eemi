@@ -1,0 +1,222 @@
+# EemiWizards - TNT Wizards d'EEMICRAFT (d'apres les TNT Games d'Hypixel).
+# Rouge contre Bleu sur une ile de sorciers construite par le plugin. Chaque joueur choisit une
+# classe dans la salle d'attente (6 baguettes) : clic droit = sort principal (coute du mana),
+# clic gauche = sort secondaire (temps de recharge). Mana sur la barre d'XP.
+# 4 points de capture : un point tenu rapporte des points a son equipe chaque seconde, un kill
+# aussi. Premiere equipe a points-to-win gagne, sinon le plus de points a la fin du temps
+# (egalite possible). Mort = quelques secondes en spectateur puis retour a la base.
+# Aucun sort ne casse de bloc, ne touche les coequipiers ni n'agit hors des mondes du jeu :
+# les explosions et les eclairs sont des effets visuels, les degats sont calcules par le plugin.
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: tntwizards
+# Nombre maximal de parties en meme temps. Partie 1 = monde ci-dessus, parties 2..n = copies
+# <world>_2, <world>_3... du modele <world>_modele (copie propre de la partie 1).
+max-instances: 3
+hub-world: lobby
+# Heure fixe du monde (6000 = midi).
+time: 6000
+# Sol de l'ile (y) et sol de la salle d'attente (a cote de l'ile, en z 70). Changent au redemarrage
+# seulement (puis /tntwizards build).
+floor-y: 100
+lobby-y: 140
+
+# ---------------------------------------------------------------- partie
+min-players: 2
+max-players: 16
+# Decompte avant le debut (secondes), raccourci a full-countdown quand la partie est pleine.
+countdown: 20
+full-countdown: 10
+# Secondes dans la base (portes de verre fermees) avant l'ouverture.
+gate-time: 5
+# Duree maximale (secondes) : ensuite l'equipe qui a le plus de points gagne (egalite possible).
+game-time: 900
+# Points pour gagner, points par seconde pour chaque point de capture tenu, points par kill.
+points-to-win: 1000
+capture-points-per-second: 1
+kill-points: 5
+# Ecran de fin avant le retour en salle d'attente (secondes).
+end-time: 8
+# Mort : secondes en spectateur avant de reapparaitre a la base, puis secondes de protection.
+respawn-delay: 5
+respawn-protection: 2
+# Un kill est credite au dernier joueur qui a touche la victime dans ce delai (secondes)
+# (brulure, Wither, magie de la base...).
+kill-credit-time: 10
+# Degats de la melee (coup de poing / baguette), en demi-coeurs, avant l'armure.
+melee-damage: 2
+# Regeneration naturelle de la vie (1.1 : coupee, remplacee par la regeneration hors combat ci-dessous).
+natural-regen: false
+# Regeneration hors combat (1.1) : apres combat-regen-delay secondes sans coup donne ni recu (feu et Wither
+# comptent comme des coups recus), Regeneration de niveau combat-regen-level jusqu'au prochain combat.
+# combat-regen-level 0 = desactive.
+combat-regen-delay: 4
+combat-regen-level: 2
+# Degats par seconde a un ennemi dans la cour d'une base (anti-campement). 0 = rien.
+base-damage: 2
+# 1.3 : barriere des bases, un ennemi qui entre dans la cour (ou la porte) est renvoye devant la porte.
+base-barrier: true
+# 1.3 : objet « Changer de classe » (slot 9) utilisable seulement dans sa base pendant la partie.
+class-change-in-base: true
+# 1.3 : maps tirees au hasard a chaque partie (jamais deux fois de suite) : vallee (89 x 59, 4 points),
+# grande (129 x 85, 5 points). Admin : /tntwizards map <id> impose la prochaine.
+maps: [vallee, grande]
+
+# ---------------------------------------------------------------- points de capture
+# Rayon de la zone (le cercle de beton au sol fait 4 blocs).
+capture-radius: 4.5
+# Progression par seconde (sur 100) quand une equipe est majoritaire sur le point, + capture-speed-extra
+# par joueur de plus que l'autre equipe. Neutraliser un point adverse = de 100 a 0, puis de 0 a 100
+# pour le prendre. Point vide : la progression revient vers l'etat du proprietaire (capture-decay/s).
+capture-speed: 10
+capture-speed-extra: 5
+capture-decay: 4
+
+# ---------------------------------------------------------------- mana et sorts
+mana-max: 100
+# Mana regagne par seconde.
+mana-regen: 9
+# Delai minimal entre deux sorts principaux (secondes).
+primary-delay: 0.5
+# Classe des nouveaux joueurs (kinetique, glace, feu, wither, sang, tempete).
+default-class: kinetique
+
+# Valeurs des sorts. cost = mana du sort principal, cooldown = recharge du sort secondaire (s).
+# Degats en demi-coeurs (20 = vie complete), sans armure. Les degats de zone baissent jusqu'a la
+# moitie au bord du rayon. speed = blocs par tick des projectiles (1.1 : plus rapides), range = portee en blocs.
+classes:
+  kinetique:
+    # Orbe explosif : explose a l'impact et projette (le lanceur aussi, sans degat, s'il est dedans).
+    cost: 30
+    speed: 2.6
+    range: 40
+    radius: 3.5
+    damage: 7
+    knockback: 0.9
+    self-knockback: true
+    # Saut propulse.
+    cooldown: 7
+    leap-power: 1.5
+  glace:
+    # Rayon de glace : instantane, ralentit (niveau slow-level pendant slow-time s).
+    # 1.1 : 40 mana (2 tirs d'affilee puis un toutes les ~4,5 s), 3 degats.
+    cost: 40
+    range: 30
+    damage: 3
+    slow-level: 2
+    slow-time: 3
+    # Onde de gel autour du lanceur.
+    cooldown: 12
+    wave-radius: 5
+    wave-damage: 2
+    wave-slow-level: 3
+    wave-slow-time: 3
+  feu:
+    # Boule de feu : explose et enflamme (burn-time s).
+    cost: 25
+    speed: 2.6
+    range: 35
+    radius: 2.5
+    damage: 5
+    burn-time: 3
+    # Jet de flammes : cone devant le lanceur (demi-angle jet-angle degres).
+    cooldown: 9
+    jet-range: 7
+    jet-angle: 30
+    jet-damage: 3
+    jet-burn-time: 4
+  wither:
+    # Crane de wither (1.1, refait) : rapide, zone de touche elargie (hitbox, en blocs autour du joueur),
+    # inflige Wither (niveau wither-level pendant wither-time s) et rend lifesteal de vie au lanceur par cible.
+    cost: 20
+    speed: 3.0
+    range: 40
+    hitbox: 0.6
+    radius: 2.5
+    damage: 4
+    wither-time: 4
+    wither-level: 1
+    lifesteal: 1
+    # Sort secondaire : volee (volley-count cranes en eventail sur +/- volley-angle degres) ou aura
+    # (l'ancien sort de la 1.0 : aura-time s, une impulsion par seconde autour du lanceur).
+    secondary: volee
+    cooldown: 8
+    volley-count: 3
+    volley-angle: 12
+    aura-time: 5
+    aura-radius: 4.5
+    aura-damage: 2
+  sang:
+    # Rayon de sang : vole lifesteal de vie au lanceur.
+    cost: 25
+    range: 25
+    damage: 4
+    lifesteal: 1.5
+    # Soin de zone : equipe autour du lanceur (lui compris), + Regeneration I regen-time s (0 = aucune).
+    cooldown: 15
+    heal-radius: 6
+    heal-amount: 3
+    regen-time: 0
+  tempete:
+    # Eclair cible : la foudre (visuelle) tombe la ou on vise.
+    cost: 35
+    range: 35
+    radius: 2.5
+    damage: 6
+    # Bourrasque : repousse les ennemis proches.
+    cooldown: 10
+    gust-radius: 5
+    gust-power: 1.4
+    gust-damage: 2
+  toxique:
+    # Fiole acide : eclate a l'impact, degats + Poison poison-level pendant poison-time s.
+    cost: 25
+    speed: 2.4
+    range: 35
+    radius: 2.5
+    damage: 3
+    poison-time: 3
+    poison-level: 2
+    # Nuage toxique : pose aux pieds du lanceur, cloud-damage par seconde + Poison I.
+    cooldown: 12
+    cloud-radius: 4
+    cloud-time: 5
+    cloud-damage: 1.5
+  hydro:
+    # Jet d'eau : rayon instantane, degats + recul, eteint la cible.
+    cost: 25
+    range: 25
+    damage: 3
+    knockback: 0.9
+    # Vague : cone devant le lanceur (degats + recul), soigne et eteint les allies proches.
+    cooldown: 10
+    wave-range: 6
+    wave-angle: 40
+    wave-damage: 2
+    wave-power: 1.3
+    heal-radius: 5
+    heal-amount: 2
+  terre:
+    # Eclat de roche : projectile lent et lourd, Lenteur II slow-time s.
+    cost: 35
+    speed: 2.0
+    range: 30
+    radius: 1.8
+    damage: 6
+    slow-time: 2
+    # Seisme : ennemis au sol autour du lanceur projetes en l'air + Lenteur II.
+    cooldown: 12
+    quake-radius: 6
+    quake-damage: 3
+    quake-lift: 0.9
+    quake-slow-time: 2
+  arcane:
+    # Missile arcanique : petit projectile tres rapide et peu couteux.
+    cost: 15
+    speed: 3.4
+    range: 40
+    radius: 1.2
+    damage: 3.5
+    # Clignement : teleporte de blink-distance blocs devant soi (s'arrete avant un mur).
+    cooldown: 6
+    blink-distance: 8

@@ -1,0 +1,6 @@
+# Mondes ou les epees bloquent au clic droit (memes mondes que le modeset "old" d'OldCombatMechanics)
+worlds: [bw1, bw2, bw3, bw4, bw5, thetowers, sheepwars, ballsofsteel, duels]
+# Degats recus en bloquant = (degats + 1) x block-factor, avant l'armure. 1.8 (EntityPlayer.damageEntity) : 0.5
+block-factor: 0.5
+# Ecrit chaque coup bloque dans la console (verification)
+log-blocks: true

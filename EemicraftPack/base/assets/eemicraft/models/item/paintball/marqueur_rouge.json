@@ -1,0 +1,9 @@
+{
+  "parent": "eemicraft:item/paintball/marqueur",
+  "textures": {
+    "body": "eemicraft:item/paintball/body_rouge",
+    "accent": "eemicraft:item/paintball/accent_rouge",
+    "loader": "eemicraft:item/paintball/loader_rouge",
+    "particle": "eemicraft:item/paintball/body_rouge"
+  }
+}

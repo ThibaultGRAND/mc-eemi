@@ -1,0 +1,122 @@
+{
+ "textures": {
+  "p": "eemicraft:item/meubles/palette",
+  "particle": "eemicraft:item/meubles/palette",
+  "baie": "eemicraft:item/meubles/baie"
+ },
+ "elements": [
+  {
+   "from": [
+    1.0,
+    4.0,
+    0.0
+   ],
+   "to": [
+    15.0,
+    22.0,
+    7.0
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      10.25,
+      0.25,
+      10.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "east": {
+     "uv": [
+      10.25,
+      0.25,
+      10.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "south": {
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "texture": "#baie"
+    },
+    "west": {
+     "uv": [
+      10.25,
+      0.25,
+      10.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "up": {
+     "uv": [
+      10.25,
+      0.25,
+      10.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "down": {
+     "uv": [
+      10.25,
+      0.25,
+      10.75,
+      0.75
+     ],
+     "texture": "#p"
+    }
+   }
+  }
+ ],
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "scale": [
+    0.551,
+    0.551,
+    0.551
+   ]
+  },
+  "ground": {
+   "scale": [
+    0.3,
+    0.3,
+    0.3
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    75,
+    45,
+    0
+   ],
+   "scale": [
+    0.3,
+    0.3,
+    0.3
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    0,
+    45,
+    0
+   ],
+   "scale": [
+    0.35,
+    0.35,
+    0.35
+   ]
+  }
+ }
+}

@@ -1,0 +1,57 @@
+# EemiAdmin - outils admin d'EEMICRAFT
+
+# Vision nocturne pendant le vanish
+night-vision: true
+
+# Mondes ou un admin en vanish passe en mode spectateur (remis dans son mode precedent en sortant
+# du monde ou en quittant le vanish). Attention : LoupGarou ne filtre PAS les spectateurs au
+# lancement (voir lg-start-guard), c'est surtout utile pour traverser les murs sans rien toucher.
+spectator-in-worlds:
+  - lg
+
+# Commandes d'inscription refusees a un joueur en vanish (debut de commande, sans le /,
+# l'eventuel prefixe "plugin:" est ignore). "bingo join" bloque aussi "/bingo join duo".
+blocked-commands:
+  - murder join
+  - mm join
+  - tnttag join
+  - tag join
+  - towers join
+  - bingo join
+  - bingo solo
+  - bingo duo
+  - bingo quatuor
+  - eemingo join
+  - eemingo solo
+  - eemingo duo
+  - eemingo quatuor
+  - bw join
+  - bedwars join
+  - tr join
+  - tntrun join
+  - bw autojoin
+  - tntwars join
+  - tw join
+  - sheepwars join
+  - sw join
+  - buildbattle join
+  - buildbattle randomjoin
+  - bb join
+  - bb randomjoin
+  - ballsofsteel join
+  - bos join
+
+# LoupGarou compte au lancement TOUS les joueurs presents dans la region du monde lg, spectateurs
+# compris. Quand /lg start est tape (joueur ou console), les admins en vanish du monde lg sont
+# ecartes hors de la region (au-dessus de la hauteur max du monde) le temps de la commande,
+# puis ramenes a leur position au tick suivant.
+lg-start-guard:
+  enabled: true
+  world: lg
+  commands:
+    - lg start
+    - lg commencer
+    - loupgarou start
+    - loupgarou commencer
+    - werewolf start
+    - werewolf commencer

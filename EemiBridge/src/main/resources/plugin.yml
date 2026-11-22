@@ -1,0 +1,17 @@
+name: EemiBridge
+version: ${project.version}
+main: fr.eemicraft.bridge.EemiBridge
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: The Bridge d'EEMICRAFT (Rouge contre Bleu, sauter dans le but adverse, facon Hypixel)
+
+commands:
+  bridge:
+    description: Rejoindre ou gerer The Bridge
+    aliases: [tbridge]
+    usage: /bridge <join|leave|spectate|start|stop|build|reload>
+
+permissions:
+  eemibridge.admin:
+    description: Commandes admin de The Bridge
+    default: op

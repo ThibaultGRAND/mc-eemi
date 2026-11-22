@@ -1,0 +1,135 @@
+# Genere par gen_songs.py (ne pas modifier a la main : regenerer).
+songs:
+  canon:
+    name: "Canon en re - Johann Pachelbel"
+    tempo: 5
+    repeat: 1
+    tracks:
+      - instrument: flute
+        volume: 0.7
+        notes: "F#5:4 E5:4 D5:4 C#5:4 B4:4 A4:4 B4:4 C#5:4 D5:2 C#5:2 B4:2 A4:2 G4:2 F#4:2 G4:2 E4:2 D4:2 F#4:2 A4:2 G4:2 F#4:2 D4:2 F#4:2 E4:2 D4 F#4 A4 G4 F#4 D4 F#4 E4 D4 B3 D4 A4 G4 B4 A4 G4 F#4 D4 E4 C#5 D5 F#5 D5 A4 B4 G4 B4 A4 G4 F#4 G4 E4 F#5:4 E5:4 D5:4 C#5:4 B4:4 A4:4 B4:4 C#5:4 D5:2 C#5:2 B4:2 A4:2 G4:2 F#4:2 G4:2 E4:2 D4:2 F#4:2 A4:2 G4:2 F#4:2 D4:2 F#4:2 E4:2 D5:32"
+      - instrument: bass
+        volume: 0.8
+        notes: "D4:4 A3:4 B3:4 F#3:4 G3:4 D4:4 G3:4 A3:4"
+      - instrument: harp
+        volume: 0.45
+        notes: "D4 F#4 A4 F#4 | C#4 E4 A4 E4 | D4 F#4 B4 F#4 | C#4 F#4 A4 F#4 | D4 G4 B4 G4 | D4 F#4 A4 F#4 | D4 G4 B4 G4 | C#4 E4 A4 E4"
+      - instrument: bell
+        volume: 0.35
+        notes: "_:32 F#5:4 E5:4 D5:4 C#5:4 B4:4 A4:4 B4:4 C#5:4 D5:2 C#5:2 B4:2 A4:2 G4:2 F#4:2 G4:2 E4:2 D4:2 F#4:2 A4:2 G4:2 F#4:2 D4:2 F#4:2 E4:2 D4 F#4 A4 G4 F#4 D4 F#4 E4 D4 B3 D4 A4 G4 B4 A4 G4 F#4 D4 E4 C#5 D5 F#5 D5 A4 B4 G4 B4 A4 G4 F#4 G4 E4 F#5:4 E5:4 D5:4 C#5:4 B4:4 A4:4 B4:4 C#5:4 F#4:32"
+  gymnopedie:
+    name: "Gymnopedie n.1 - Erik Satie"
+    tempo: 13
+    repeat: 1
+    tracks:
+      - instrument: harp
+        volume: 0.7
+        notes: "_:12 | _ D#5 F#5 | E5 D#5 A#4 | G#4 A#4 B4 | F#4:3 | D#4:3 | D#4:3 | D#4:3 | _:3 | _ D#5 F#5 | E5 D#5 A#4 | G#4 A#4 B4 | F#4:3 | A#4:3 | D#5:3 | C#5:3 | C#5:3 | _ G#4 B4 | A#4 G#4 F#4 | D#4 F#4 G#4 | C#4:3 | D#4:3 | E4:3 | F#4:3 | B3:3 | _ D#5 F#5 | E5 D#5 A#4 | G#4 A#4 B4 | F#4:3 | D#4:3 | D#4:3 | D#4:6"
+      - instrument: bass
+        volume: 0.7
+        notes: "E4:3 B3:3"
+      - instrument: harp
+        volume: 0.3
+        notes: "_ G#4+B4+D#5:2 _ D#4+F#4+A#4:2"
+      - instrument: chime
+        volume: 0.15
+        notes: "_:5 B4 _:6"
+  prelude:
+    name: "Prelude en do - Jean-Sebastien Bach"
+    tempo: 3
+    repeat: 2
+    tracks:
+      - instrument: harp
+        volume: 0.7
+        notes: "G3 B3 D4 G4 B4 D4 G4 B4 G3 B3 D4 G4 B4 D4 G4 B4 | G3 A3 E4 A4 C5 E4 A4 C5 G3 A3 E4 A4 C5 E4 A4 C5 | F#3 A3 D4 A4 C5 D4 A4 C5 F#3 A3 D4 A4 C5 D4 A4 C5 | G3 B3 D4 G4 B4 D4 G4 B4 G3 B3 D4 G4 B4 D4 G4 B4 | G3 B3 E4 B4 E5 E4 B4 E5 G3 B3 E4 B4 E5 E4 B4 E5 | G3 A3 C#4 E4 A4 C#4 E4 A4 G3 A3 C#4 E4 A4 C#4 E4 A4 | F#3 A3 D4 A4 D5 D4 A4 D5 F#3 A3 D4 A4 D5 D4 A4 D5 | F#3 G3 B3 D4 G4 B3 D4 G4 F#3 G3 B3 D4 G4 B3 D4 G4 | A3 D4 F#4 C5 D5 F#4 C5 D5 A3 D4 F#4 C5 D5 F#4 C5 D5 | A3 D4 F#4 A4 D5 F#4 A4 D5 A3 D4 F#4 A4 D5 F#4 A4 D5"
+      - instrument: bass
+        volume: 0.6
+        notes: "G3:16 | G3:16 | F#3:16 | G3:16 | G3:16 | G3:16 | F#3:16 | F#3:16 | A3:16 | A3:16"
+      - instrument: bell
+        volume: 0.2
+        notes: "_:8 B4:8 | _:8 C5:8 | _:8 C5:8 | _:8 B4:8 | _:8 E5:8 | _:8 A4:8 | _:8 D5:8 | _:8 G4:8 | _:8 D5:8 | _:8 D5:8"
+  elise:
+    name: "Lettre a Elise - Ludwig van Beethoven"
+    tempo: 3
+    repeat: 2
+    tracks:
+      - instrument: harp
+        volume: 0.75
+        notes: "E5 D#5 E5 D#5 E5 B4 D5 C5 A4:2 _ C4 E4 A4 B4:2 _ E4 G#4 B4 C5:2 _ E4 E5 D#5 E5 D#5 E5 B4 D5 C5 A4:2 _ C4 E4 A4 B4:2 _ E4 C5 B4 A4:3 _ B4 C5 D5 E5:3 G4 F5 E5 D5:3 F4 E5 D5 C5:3 E4 D5 C5 B4:3 _ E4 E5 _:2 E5 E5 _:2 D#5 E5 _:2 D#5 E5 D#5 E5 D#5 E5 D#5 E5 B4 D5 C5 A4:2 _ C4 E4 A4 B4:2 _ E4 G#4 B4 C5:2 _ E4 E5 D#5 E5 D#5 E5 B4 D5 C5 A4:2 _ C4 E4 A4 B4:2 _ E4 C5 B4 A4:3 _"
+      - instrument: bass
+        volume: 0.6
+        notes: "_:8 A4:6 E4:6 A4:4 _:8 A4:6 E4:6 A4:4 C4:6 G3:6 A3:6 E4:6 _:16 _:8 A4:6 E4:6 A4:4 _:8 A4:6 E4:6 A4:4"
+  greensleeves:
+    name: "Greensleeves - air traditionnel anglais"
+    tempo: 5
+    repeat: 2
+    tracks:
+      - instrument: flute
+        volume: 0.7
+        notes: "A#4:4 C5:2 | D5:3 D#5:1 D5:2 | C5:4 A4:2 | F4:3 G4:1 A4:2 | A#4:4 G4:2 | G4:3 F#4:1 G4:2 | A4:4 F#4:2 | D4:4 G4:2 | A#4:4 C5:2 | D5:3 D#5:1 D5:2 | C5:4 A4:2 | F4:3 G4:1 A4:2 | A#4:3 A4:1 G4:2 | F#4:3 E4:1 F#4:2 | G4:6 | G4:4 G4:2 | F5:6 | F5:3 E5:1 D5:2 | C5:4 A4:2 | F4:3 G4:1 A4:2 | A#4:4 G4:2 | G4:3 F#4:1 G4:2 | A4:4 F#4:2 | D4:6 | F5:6 | F5:3 E5:1 D5:2 | C5:4 A4:2 | F4:3 G4:1 A4:2 | A#4:3 A4:1 G4:2 | F#4:3 E4:1 F#4:2 | G4:6 | G4:6"
+      - instrument: bass
+        volume: 0.6
+        notes: "G4:6 | A#4:6 | F4:6 | F4:6 | G4:6 | G4:6 | D4:6 | D4:6 | G4:6 | A#4:6 | F4:6 | F4:6 | G4:6 | D4:6 | G4:6 | G4:6 | A#4:6 | A#4:6 | F4:6 | F4:6 | G4:6 | G4:6 | D4:6 | D4:6 | A#4:6 | A#4:6 | F4:6 | F4:6 | G4:6 | D4:6 | G4:6 | G4:6"
+      - instrument: guitar
+        volume: 0.3
+        notes: "_:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F4+A#4+D5:2 F4+A#4+D5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F#4+A4+D5:2 F#4+A4+D5:2 | _:2 F#4+A4+D5:2 F#4+A4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F4+A#4+D5:2 F4+A#4+D5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F#4+A4+D5:2 F#4+A4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F4+A#4+D5:2 F4+A#4+D5:2 | _:2 F4+A#4+D5:2 F4+A#4+D5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F#4+A4+D5:2 F#4+A4+D5:2 | _:2 F#4+A4+D5:2 F#4+A4+D5:2 | _:2 F4+A#4+D5:2 F4+A#4+D5:2 | _:2 F4+A#4+D5:2 F4+A#4+D5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 F4+A4+C5:2 F4+A4+C5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 F#4+A4+D5:2 F#4+A4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2 | _:2 G4+A#4+D5:2 G4+A#4+D5:2"
+  matin:
+    name: "Au matin (Peer Gynt) - Edvard Grieg"
+    tempo: 4
+    repeat: 2
+    tracks:
+      - instrument: flute
+        volume: 0.7
+        notes: "G#4:2 E4 D#4 C#4 D#4 | E4:2 G#4 E4 D#4 C#4 | D#4 E4 D#4 E4 G#4 E4 | G#4 A4 E4 A4:3 | G#4:2 E4 D#4 C#4 D#4 | E4:2 G#4 E4 D#4 C#4 | D#4 E4 D#4 E4 G#4 E4 | G#4 A4 E4 A4 B4 C#5 | B4:2 G#4 F#4 E4 F#4 | G#4:2 B4 G#4 F#4 E4 | F#4 G#4 F#4 G#4 B4 G#4 | B4 C#5 G#4 C#5:3 | B4:2 G#4 F#4 E4 F#4 | G#4:2 E4 C#4 B3 C#4 | E4:6 | E4:6"
+      - instrument: bass
+        volume: 0.6
+        notes: "E4:6 | E4:6 | E4:6 | A3:6 | E4:6 | E4:6 | E4:6 | A3:6 | B3:6 | B3:6 | B3:6 | C#4:6 | B3:6 | A3:6 | E4:6 | E4:6"
+      - instrument: harp
+        volume: 0.35
+        notes: "E4 G#4 B4 G#4 B4 G#4 | E4 G#4 B4 G#4 B4 G#4 | E4 G#4 B4 G#4 B4 G#4 | E4 A4 C#5 A4 C#5 A4 | E4 G#4 B4 G#4 B4 G#4 | E4 G#4 B4 G#4 B4 G#4 | E4 G#4 B4 G#4 B4 G#4 | E4 A4 C#5 A4 C#5 A4 | D#4 F#4 B4 F#4 B4 F#4 | D#4 F#4 B4 F#4 B4 F#4 | D#4 F#4 B4 F#4 B4 F#4 | E4 G#4 C#5 G#4 C#5 G#4 | D#4 F#4 B4 F#4 B4 F#4 | E4 A4 C#5 A4 C#5 A4 | E4 G#4 B4 G#4 B4 G#4 | E4 G#4 B4 G#4 B4 G#4"
+      - instrument: chime
+        volume: 0.12
+        notes: "_:12 E5:12"
+  lobby:
+    name: "Lobby EEMICRAFT - composition originale"
+    tempo: 4
+    repeat: 2
+    tracks:
+      - instrument: bell
+        volume: 0.55
+        notes: "F#5:2 E5 D5 A4:2 D5:2 | E5:3 C#5 A4:4 | D5:2 F#5:2 E5 D5 B4:2 | D5:3 B4 A4:2 F#4:2 | F#5:2 E5 D5 A4:2 D5:2 | E5:2 F#5:2 E5 C#5 A4:2 | B4:2 D5:2 F#5:2 E5 D5 | D5:6 _:2 | B4:2 D5:2 F#5:4 | G4:2 B4:2 D5:4 | A4:2 D5:2 F#5:4 | A4:2 C#5:2 E5:4 | B4:2 D5:2 F#5:4 | G4:2 B4:2 D5:4 | F#4:2 A4:2 D5:2 F#5:2 | E5:6 _:2 | F#5:2 E5 D5 A4:2 D5:2 | E5:3 C#5 A4:4 | D5:2 F#5:2 E5 D5 B4:2 | D5:3 B4 A4:2 F#4:2 | F#5:2 E5 D5 A4:2 D5:2 | E5:2 F#5:2 E5 C#5 A4:2 | B4:2 D5:2 F#5:2 E5 D5 | D5:6 _:2"
+      - instrument: bass
+        volume: 0.75
+        notes: "D4 D4 D4 D4 D4 D4 D4 D4 | C#4 C#4 C#4 C#4 C#4 C#4 C#4 C#4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | C#4 C#4 C#4 C#4 C#4 C#4 C#4 C#4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | C#4 C#4 C#4 C#4 C#4 C#4 C#4 C#4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | C#4 C#4 C#4 C#4 C#4 C#4 C#4 C#4 | D4 D4 D4 D4 D4 D4 D4 D4 | C#4 C#4 C#4 C#4 C#4 C#4 C#4 C#4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4 | C#4 C#4 C#4 C#4 C#4 C#4 C#4 C#4 | D4 D4 D4 D4 D4 D4 D4 D4 | D4 D4 D4 D4 D4 D4 D4 D4"
+      - instrument: harp
+        volume: 0.35
+        notes: "D4 F#4 A4 F#4 D4 F#4 A4 F#4 | C#4 E4 A4 E4 C#4 E4 A4 E4 | D4 F#4 B4 F#4 D4 F#4 B4 F#4 | D4 G4 B4 G4 D4 G4 B4 G4 | D4 F#4 A4 F#4 D4 F#4 A4 F#4 | C#4 E4 A4 E4 C#4 E4 A4 E4 | D4 F#4 B4 F#4 D4 F#4 B4 F#4 | D4 G4 B4 G4 D4 G4 B4 G4 | D4 F#4 B4 F#4 D4 F#4 B4 F#4 | D4 G4 B4 G4 D4 G4 B4 G4 | D4 F#4 A4 F#4 D4 F#4 A4 F#4 | C#4 E4 A4 E4 C#4 E4 A4 E4 | D4 F#4 B4 F#4 D4 F#4 B4 F#4 | D4 G4 B4 G4 D4 G4 B4 G4 | D4 F#4 A4 F#4 D4 F#4 A4 F#4 | C#4 E4 A4 E4 C#4 E4 A4 E4 | D4 F#4 A4 F#4 D4 F#4 A4 F#4 | C#4 E4 A4 E4 C#4 E4 A4 E4 | D4 F#4 B4 F#4 D4 F#4 B4 F#4 | D4 G4 B4 G4 D4 G4 B4 G4 | D4 F#4 A4 F#4 D4 F#4 A4 F#4 | C#4 E4 A4 E4 C#4 E4 A4 E4 | D4 F#4 B4 F#4 D4 F#4 B4 F#4 | D4 G4 B4 G4 D4 G4 B4 G4"
+      - instrument: basedrum
+        volume: 0.5
+        notes: "C4:4 C4:4"
+      - instrument: snare
+        volume: 0.3
+        notes: "_:2 F#4:2 _:2 F#4:2"
+      - instrument: hat
+        volume: 0.18
+        notes: "C5 C5 C5 C5 C5 C5 C5 C5"
+  nuit:
+    name: "Nuit au lobby - composition originale"
+    tempo: 6
+    repeat: 2
+    tracks:
+      - instrument: chime
+        volume: 0.45
+        notes: "E5:4 C5:2 A4:2 | F5:4 E5:2 D5:2 | D5:3 B4 G4:4 | E5:6 _:2 | A4:2 C5:2 E5:4 | D5:2 F5:2 A4:4 | B4:2 D5:2 G4:2 B4:2 | C5:8 | _:8 | _:4 A4:2 C5:2 | D5:3 B4 G4:4 | E5:8 | A4:2 C5:2 E5:2 C5:2 | D5:2 A4:2 F4:2 A4:2 | B4:2 G4:2 D5:2 B4:2 | C5:8"
+      - instrument: bass
+        volume: 0.6
+        notes: "A3:6 A3:2 | D4:6 D4:2 | G3:6 G3:2 | C4:6 C4:2"
+      - instrument: harp
+        volume: 0.35
+        notes: "C4+E4+G4:3 C4+E4+G4:5 | F4+A4+C5:3 F4+A4+C5:5 | B3+D4+F#4:3 B3+D4+F#4:5 | E4+G4+B4:3 E4+G4+B4:5"
+      - instrument: basedrum
+        volume: 0.35
+        notes: "C4:3 C4:5"
+      - instrument: hat
+        volume: 0.12
+        notes: "_ C5 _ C5 _ C5 _ C5"

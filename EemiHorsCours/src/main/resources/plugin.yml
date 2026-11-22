@@ -1,0 +1,19 @@
+name: EemiHorsCours
+version: ${project.version}
+main: fr.eemicraft.horscours.EemiHorsCours
+api-version: '1.21'
+description: Hors Cours - campagne horreur facon Backrooms dans l'EEMI (version de test)
+
+commands:
+  horscours:
+    description: Rejoindre ou gerer Hors Cours
+    aliases: [hors]
+    usage: /horscours <join|leave|reset|niveau <0|1>|loic>
+
+permissions:
+  eemihorscours.play:
+    description: Jouer a Hors Cours (en test, reserve aux admins)
+    default: op
+  eemihorscours.admin:
+    description: Commandes admin de Hors Cours
+    default: op

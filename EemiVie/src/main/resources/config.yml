@@ -1,0 +1,57 @@
+# EemiVie : vie du lobby (passants qui se promenent, animaux decoratifs, s'asseoir sur les escaliers et dalles).
+# Tout ne se passe que dans ce monde.
+world: lobby
+
+# Points a eviter (PNJ FancyNpcs, invisibles pour le serveur) : "x z" ; personne ne s'arrete ni ne passe a moins de avoid-radius.
+avoid-radius: 1.6
+avoid:
+  - "671.5 631.5"
+  - "685.5 639.5"
+  - "685.5 667.5"
+  - "671.5 673.5"
+  - "657.5 663.5"
+  - "659.5 645.5"
+  - "663.5 635.5"
+  - "679.1 647.5"
+  - "730.5 649.5"
+  - "730.5 651.4"
+  - "693.5 641.5"
+  - "701.5 641.5"
+  - "709.5 641.5"
+  - "693.5 665.5"
+  - "701.5 665.5"
+  - "709.5 665.5"
+
+passants:
+  enabled: true
+  # Nombre de passants (repartis entre les centres de promenade).
+  count: 8
+  # Centres de promenade "x y z" : chaque passant se promene dans le rayon autour du sien.
+  anchors:
+    - "722 51 650"
+    - "690 50 652"
+    - "665 50 652"
+  radius: 22
+  # Vitesse en blocs par tick (0.09 = marche tranquille).
+  speed: 0.09
+  # Ne bougent que si un joueur est a moins de cette distance.
+  activation-range: 56
+  # Skins (pseudos Minecraft). Vide = skins par defaut de Minecraft.
+  skins: [Enosik, MaZd_, BanTeEs, Qorwinn, LivrePoche, LABaleineMC]
+  # Afficher le pseudo du skin au-dessus des passants.
+  show-names: false
+
+animaux:
+  enabled: true
+  # Zone fouillee une fois pour trouver toits, arbres et eau (resultat garde dans spots.yml, /vie scan pour refaire).
+  scan: {min-x: 590, max-x: 780, min-z: 580, max-z: 730, min-y: 40, max-y: 120}
+  # Un toit = bloc du dessus a cette hauteur ou plus (le sol de la place est en y 49-50).
+  roof-min-y: 56
+  # Ecart minimal entre deux animaux.
+  spacing: 7
+  cats: 6
+  parrots: 8
+  fish: 10
+
+assise:
+  enabled: true

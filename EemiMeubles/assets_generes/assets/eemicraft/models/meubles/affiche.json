@@ -1,0 +1,122 @@
+{
+ "textures": {
+  "p": "eemicraft:item/meubles/palette",
+  "particle": "eemicraft:item/meubles/palette",
+  "affiche": "eemicraft:item/meubles/affiche"
+ },
+ "elements": [
+  {
+   "from": [
+    3.0,
+    4.0,
+    0.0
+   ],
+   "to": [
+    13.0,
+    18.0,
+    1.0
+   ],
+   "faces": {
+    "north": {
+     "uv": [
+      0.25,
+      0.25,
+      0.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "east": {
+     "uv": [
+      0.25,
+      0.25,
+      0.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "south": {
+     "uv": [
+      0,
+      0,
+      16,
+      16
+     ],
+     "texture": "#affiche"
+    },
+    "west": {
+     "uv": [
+      0.25,
+      0.25,
+      0.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "up": {
+     "uv": [
+      0.25,
+      0.25,
+      0.75,
+      0.75
+     ],
+     "texture": "#p"
+    },
+    "down": {
+     "uv": [
+      0.25,
+      0.25,
+      0.75,
+      0.75
+     ],
+     "texture": "#p"
+    }
+   }
+  }
+ ],
+ "display": {
+  "gui": {
+   "rotation": [
+    30,
+    225,
+    0
+   ],
+   "scale": [
+    0.62,
+    0.62,
+    0.62
+   ]
+  },
+  "ground": {
+   "scale": [
+    0.3,
+    0.3,
+    0.3
+   ]
+  },
+  "thirdperson_righthand": {
+   "rotation": [
+    75,
+    45,
+    0
+   ],
+   "scale": [
+    0.3,
+    0.3,
+    0.3
+   ]
+  },
+  "firstperson_righthand": {
+   "rotation": [
+    0,
+    45,
+    0
+   ],
+   "scale": [
+    0.35,
+    0.35,
+    0.35
+   ]
+  }
+ }
+}

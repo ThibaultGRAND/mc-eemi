@@ -1,0 +1,55 @@
+name: EemiCore
+version: ${project.version}
+main: fr.eemicraft.core.EemiCore
+api-version: '1.21'
+softdepend: [PlaceholderAPI]
+# Active avant les jeux maison, pour recevoir leur premier statut
+loadbefore: [EemiMurder, EemiTntTag, EemiTowers, EemiBingo, EemiSheepWars, EemiTntWars, EemiBallsOfSteel, EemiDuels, EemiHungerGames, EemiSkyWars, EemiUHC, EemiBridge, EemiBlockParty, EemiHideSeek, EemiTonte]
+description: Coeur d'EEMICRAFT - registre des jeux, appels, groupes, niveaux, pieces, boutique, quetes, classements
+
+commands:
+  eemi:
+    description: Point d'entree des jeux, classements et administration EemiCore
+    usage: /eemi <join|spectate|appels|top|help|reload|give|maintenance> ...
+  party:
+    description: Groupes de joueurs
+    usage: /party <invite|accept|deny|leave|kick|disband|list|chat> ...
+    aliases: [groupe, p]
+  pc:
+    description: Message au groupe
+    usage: /pc <message>
+  jouer:
+    description: Rejoindre le jeu qui a le plus de joueurs en attente
+    usage: /jouer
+    aliases: [play]
+  profil:
+    description: Niveau, pieces et statistiques
+    usage: /profil [joueur]
+    aliases: [profile]
+  boutique:
+    description: Boutique de cosmetiques
+    usage: /boutique
+    aliases: [shop]
+  spectate:
+    description: Regarder la partie d'un joueur (ouvert a tous)
+    usage: /spectate <joueur>
+    aliases: [spec, regarder]
+  jeux:
+    description: Navigateur des mini-jeux (menu au style Refuge)
+    usage: /jeux [iles|survie|equipes|combat|tnt|ambiance]
+    aliases: [minijeux, navigateur]
+  quetes:
+    description: Quetes du jour
+    usage: /quetes
+    aliases: [quests]
+
+permissions:
+  eemicore.admin:
+    description: /eemi reload, /eemi give, status/reward depuis un joueur
+    default: op
+  eemicore.maintenance:
+    description: /eemi maintenance <jeu> on|off|list
+    default: op
+  eemicore.maintenance.bypass:
+    description: Entrer dans un jeu en maintenance (pour tester)
+    default: op

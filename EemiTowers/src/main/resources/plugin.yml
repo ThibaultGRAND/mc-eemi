@@ -1,0 +1,16 @@
+name: EemiTowers
+version: ${project.version}
+main: fr.eemicraft.towers.EemiTowers
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: The Towers d'EEMICRAFT (Rouge contre Bleu, sauter dans le bassin adverse)
+
+commands:
+  towers:
+    description: Rejoindre ou gerer The Towers
+    usage: /towers <join|leave|spectate [joueur]|start [n]|stop [n]|parties|reset|reload>
+
+permissions:
+  eemitowers.admin:
+    description: Commandes admin de The Towers
+    default: op

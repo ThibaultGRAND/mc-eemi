@@ -1,0 +1,16 @@
+name: EemiHalloween
+version: ${project.version}
+main: fr.eemicraft.halloween.EemiHalloween
+api-version: '1.21'
+softdepend: [EemiCore, EemiMusique]
+description: Lobby d'EEMICRAFT en mode Halloween (decor reversible + ambiance)
+
+commands:
+  halloween:
+    description: Decor et ambiance Halloween du lobby
+    usage: /halloween <build|maison|sorciere|remove|on|off|music on/off|status|reload>
+
+permissions:
+  eemihalloween.admin:
+    description: Gerer le mode Halloween
+    default: op

@@ -1,0 +1,17 @@
+name: EemiJumpLeague
+version: ${project.version}
+main: fr.eemicraft.jumpleague.EemiJumpLeague
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: JumpLeague d'EEMICRAFT (parcours en 10 modules puis deathmatch a 3 vies)
+
+commands:
+  jumpleague:
+    description: Rejoindre ou gerer JumpLeague
+    aliases: [jl]
+    usage: /jumpleague <join|leave|spectate [joueur]|start [n]|stop [n]|skip [n]|parties|build|reload>
+
+permissions:
+  eemijumpleague.admin:
+    description: Commandes admin de JumpLeague
+    default: op

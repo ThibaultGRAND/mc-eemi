@@ -1,0 +1,85 @@
+# EemiHalloween - le lobby d'EEMICRAFT en mode Halloween (version effrayante).
+# Decor (/halloween build) : le plugin ne pose des blocs QUE dans l'air (ou a la place d'herbes/fleurs), et
+# remplace les lanternes par des lanternes des ames ; chaque bloc touche est note avec son etat d'origine dans
+# placed.yml. /halloween remove remet tout comme avant (maison comprise).
+# Maison (/halloween maison) : maison en ruine + petit cimetiere autour du joueur, porte dans la direction ou
+# il regarde, sorciere a l'interieur. /halloween sorciere : deplace la sorciere a la position du joueur.
+# Ambiance (/halloween on|off) : nuit (heure du client seulement), cendres et fumee, chauves-souris, tonnerre
+# au hasard (eclair sans degats ni feu), sons inquietants, passages d'obscurite, titre a l'arrivee.
+
+world: lobby
+# Zone decoree (x/z minimum et maximum, y de recherche).
+area:
+  min-x: 630
+  max-x: 760
+  min-z: 600
+  max-z: 700
+  min-y: 40
+  max-y: 100
+# Pas de decor pose a moins de "keep-clear-radius" blocs de ces points (spawn, PNJ...), format "x z".
+keep-clear-radius: 3
+keep-clear:
+  - "722 650"
+  - "671.5 631.5"
+  - "679.5 633.5"
+  - "685.5 639.5"
+  - "693.5 641.6"
+  - "701.5 641.5"
+  - "709.5 641.4"
+  - "663.5 635.5"
+  - "659.4 645.4"
+  - "657.5 654.5"
+  - "657.5 663.5"
+  - "663.5 673.5"
+  - "671.5 673.5"
+  - "679.5 673.5"
+  - "685.5 667.5"
+  - "693.2 665.4"
+  - "701.6 665.5"
+  - "709.4 665.6"
+  - "730.5 650.5"
+# Probabilites (0 a 1) par emplacement possible.
+chance:
+  # sur l'herbe / la terre / la mousse (2 blocs d'air au-dessus) : un seul tirage parmi ces 4
+  pumpkin: 0.05
+  dead-bush: 0.06
+  skull: 0.012
+  candle: 0.02
+  # toiles d'araignee : coin de plafond (2 murs a angle droit), sous les feuilles, sous un plafond, contre un mur en hauteur
+  web-corner: 0.7
+  web-leaves: 0.2
+  web-ceiling: 0.08
+  web-wall: 0.04
+  # lanterne des ames suspendue sous un plafond (4 blocs d'air en dessous)
+  soul-lantern: 0.04
+# Lanternes existantes -> lanternes des ames ; torches -> torches des ames (bleues).
+replace-lanterns: true
+replace-torches: false
+
+# Sorciere (position reglee par /halloween maison ou /halloween sorciere)
+witch:
+  enabled: false
+
+# Ambiance
+night: true
+night-time: 18000
+particles: true
+bats: 25
+join-title: true
+thunder:
+  enabled: true
+  min-seconds: 30
+  max-seconds: 90
+scare:
+  min-seconds: 15
+  max-seconds: 35
+  darkness-chance: 0.15
+
+# Boutique EemiCore : /halloween on remet ces cosmetiques en vente (jusqu'a jusqu-au, ou sans fin si la date est
+# passee) et affiche les titres equipes ; /halloween off les retire de la boutique et cache ces titres (les joueurs
+# les gardent, ils reviennent au prochain on). Seule la config en memoire d'EemiCore est modifiee, jamais son fichier.
+boutique:
+  enabled: true
+  jusqu-au: ""
+  cosmetiques: [title_h_sorciere, title_h_vampire, title_h_zombie, title_h_2026]
+# Musique : /halloween music on = playlist Halloween au lobby, /halloween music off = musique de base.

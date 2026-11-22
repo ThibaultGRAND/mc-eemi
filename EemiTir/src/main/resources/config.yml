@@ -1,0 +1,33 @@
+# EemiTir : stand de tir a l'arc du lobby.
+# Les zones se reglent en jeu : /tir zone <tir|cibles|interdite> pos1 puis pos2 (position du joueur),
+# /tir voir pour afficher les bords en particules.
+world: lobby
+
+zones:
+  # Zone ou l'on recoit l'arc et ou la manche se joue (seuls les tirs partis d'ici comptent).
+  tir: {min: "0 0 0", max: "0 0 0"}
+  # Zone ou les cibles apparaissent (dans les cases d'air seulement).
+  cibles: {min: "0 0 0", max: "0 0 0"}
+  # Zone ou les joueurs ne peuvent pas entrer (vide = la zone des cibles agrandie de "marge-interdite").
+  interdite: {min: "0 0 0", max: "0 0 0"}
+marge-interdite: 1
+
+manche:
+  # Decompte avant le debut (secondes), duree d'une manche, pause avant la suivante si on reste dans la zone.
+  decompte: 3
+  duree: 45
+  pause: 5
+
+cibles:
+  # Nombre de cibles en meme temps, une nouvelle tentee toutes les "intervalle" ticks.
+  max: 4
+  intervalle: 15
+  # Ecart minimal entre deux cibles (blocs).
+  ecart: 2.5
+  types:
+    normale: {bloc: TARGET, points: 1, chance: 70, vie-min: 50, vie-max: 90}
+    doree: {bloc: GOLD_BLOCK, points: 3, chance: 15, vie-min: 25, vie-max: 40}
+    piege: {bloc: TNT, points: -2, chance: 15, vie-min: 50, vie-max: 80}
+
+# Nombre de lignes du classement (/tir top, %eemitir_top_<n>%).
+top: 10

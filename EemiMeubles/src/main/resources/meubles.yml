@@ -1,0 +1,452 @@
+# Genere par gen_meubles.py : ne pas modifier a la main.
+meubles:
+  pouf_bleu:
+    nom: "Pouf bleu"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.5
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,8,8"]
+  pouf_orange:
+    nom: "Pouf orange"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.5
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,8,8"]
+  banquette_bleue:
+    nom: "Banquette bleue"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.875
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,7,9"]
+  banquette_orange:
+    nom: "Banquette orange"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.875
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,7,9"]
+  fauteuil_jaune:
+    nom: "Fauteuil jaune"
+    categorie: couloir
+    echelle: 1
+    hauteur: 1.0
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,7,9"]
+  fauteuil_bleu:
+    nom: "Fauteuil bleu"
+    categorie: couloir
+    echelle: 1
+    hauteur: 1.0
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,7,9"]
+  table_basse:
+    nom: "Table basse ronde"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.5
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  tele_murale:
+    nom: "Télé murale"
+    categorie: couloir
+    echelle: 1
+    hauteur: 1.25
+    largeur: 2
+    mur: true
+    surface: false
+    cases: []
+    places: []
+  kakemono:
+    nom: "Kakémono eemi"
+    categorie: couloir
+    echelle: 2
+    hauteur: 1.938
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  panneau_sortie:
+    nom: "Panneau sortie"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.75
+    largeur: 1
+    mur: true
+    surface: false
+    cases: []
+    places: []
+  extincteur:
+    nom: "Extincteur"
+    categorie: couloir
+    echelle: 1
+    hauteur: 0.812
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: []
+  plante:
+    nom: "Plante en pot"
+    categorie: couloir
+    echelle: 1
+    hauteur: 1.062
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  affiche:
+    nom: "Affiche (QR / tri)"
+    categorie: couloir
+    echelle: 1
+    hauteur: 1.125
+    largeur: 1
+    mur: true
+    surface: false
+    cases: []
+    places: []
+  bureau:
+    nom: "Bureau noir (2 places)"
+    categorie: bureaux
+    echelle: 1
+    hauteur: 1.25
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,1", "1,0,1"]
+    places: []
+  chaise_bureau:
+    nom: "Chaise de bureau"
+    categorie: bureaux
+    echelle: 1
+    hauteur: 1.188
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,8,8"]
+  ecran_pc:
+    nom: "Écran d'ordinateur (sur un bureau)"
+    categorie: bureaux
+    echelle: 1
+    hauteur: 0.562
+    largeur: 1
+    mur: false
+    surface: true
+    cases: []
+    places: []
+  portable:
+    nom: "Ordinateur portable (sur une table)"
+    categorie: bureaux
+    echelle: 1
+    hauteur: 0.25
+    largeur: 1
+    mur: false
+    surface: true
+    cases: []
+    places: []
+  armoire_basse:
+    nom: "Meuble bas blanc"
+    categorie: bureaux
+    echelle: 1
+    hauteur: 0.812
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  portemanteau:
+    nom: "Portemanteau"
+    categorie: bureaux
+    echelle: 2
+    hauteur: 1.75
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  cartons:
+    nom: "Cartons"
+    categorie: bureaux
+    echelle: 1
+    hauteur: 0.969
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  machine_cafe:
+    nom: "Machine à café (sur un meuble)"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 0.438
+    largeur: 1
+    mur: false
+    surface: true
+    cases: []
+    places: []
+  table_cours:
+    nom: "Table de cours (2 places)"
+    categorie: salles
+    echelle: 1
+    hauteur: 0.812
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,1", "1,0,1"]
+    places: []
+  chaise_cours:
+    nom: "Chaise de cours"
+    categorie: salles
+    echelle: 1
+    hauteur: 1.0
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,8,8"]
+  ecran_pied:
+    nom: "Grand écran sur pied"
+    categorie: salles
+    echelle: 2
+    hauteur: 1.875
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,2", "1,0,2"]
+    places: []
+  table_reunion:
+    nom: "Table de réunion"
+    categorie: salles
+    echelle: 1
+    hauteur: 0.831
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,1", "1,0,1"]
+    places: []
+  tabouret_haut:
+    nom: "Chaise haute"
+    categorie: salles
+    echelle: 1
+    hauteur: 1.25
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,13,8"]
+  tableau_jaune:
+    nom: "Tableau jaune mobile"
+    categorie: salles
+    echelle: 2
+    hauteur: 1.875
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  table_haute:
+    nom: "Table haute ronde"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 1.125
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  table_cuisine:
+    nom: "Table en bois (2 places)"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 0.812
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,1", "1,0,1"]
+    places: []
+  chaise_blanche:
+    nom: "Chaise blanche"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 1.0
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,9,8"]
+  canape_orange:
+    nom: "Canapé orange"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 1.0
+    largeur: 2
+    mur: false
+    surface: false
+    cases: []
+    places: ["8,7,9", "24,7,9"]
+  frigo:
+    nom: "Frigo"
+    categorie: cuisine
+    echelle: 2
+    hauteur: 1.875
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  micro_ondes:
+    nom: "Micro-ondes (sur un meuble)"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 0.375
+    largeur: 1
+    mur: false
+    surface: true
+    cases: []
+    places: []
+  meuble_cuisine:
+    nom: "Meuble de cuisine noir"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 0.875
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  evier:
+    nom: "Évier"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 1.25
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  poubelles:
+    nom: "Poubelles de tri"
+    categorie: cuisine
+    echelle: 1
+    hauteur: 0.688
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  imprimante:
+    nom: "Grande imprimante"
+    categorie: reprographie
+    echelle: 1
+    hauteur: 1.25
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,1"]
+    places: []
+  baie_reseau:
+    nom: "Baie réseau murale"
+    categorie: reprographie
+    echelle: 1
+    hauteur: 1.375
+    largeur: 1
+    mur: true
+    surface: false
+    cases: []
+    places: []
+  horscours_etagere:
+    nom: "Étagère métallique"
+    categorie: horscours
+    echelle: 2
+    hauteur: 1.938
+    largeur: 1
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  horscours_armoire:
+    nom: "Vestiaire métallique"
+    categorie: horscours
+    echelle: 2
+    hauteur: 2.406
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  horscours_armoire_ouverte:
+    nom: "Vestiaire métallique (ouvert)"
+    categorie: horscours
+    echelle: 2
+    hauteur: 2.406
+    largeur: 2
+    mur: false
+    surface: false
+    cases: ["0,0,2"]
+    places: []
+  horscours_cadenas:
+    nom: "Cadenas (sur un vestiaire)"
+    categorie: horscours
+    echelle: 1
+    hauteur: 1.225
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: []
+  horscours_digicode:
+    nom: "Digicode (sur un vestiaire)"
+    categorie: horscours
+    echelle: 1
+    hauteur: 1.5
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: []
+  horscours_tableau_blanc:
+    nom: "Tableau blanc mural"
+    categorie: horscours
+    echelle: 1
+    hauteur: 1.375
+    largeur: 2
+    mur: true
+    surface: false
+    cases: []
+    places: []
+  horscours_mannequin:
+    nom: "Mannequin de bureau"
+    categorie: horscours
+    echelle: 2
+    hauteur: 1.938
+    largeur: 1
+    mur: false
+    surface: false
+    cases: []
+    places: []

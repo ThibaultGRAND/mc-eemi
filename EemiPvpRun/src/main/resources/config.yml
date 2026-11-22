@@ -1,0 +1,53 @@
+# EemiPvpRun - PVP Run d'EEMICRAFT (TNT Games d'Hypixel).
+# TNT Run avec PvP, chacun pour soi : le sol (sable, sable rouge, gravier, poudre de beton) pose sur de
+# la TNT disparait sous les pieds des joueurs. Epee en pierre (le combat 1.8 est celui d'OldCombatMechanics).
+# Pas de regeneration naturelle : un kill rend des coeurs. Mourir ou tomber sous le dernier etage =
+# elimine (spectateur). Dernier debout gagnant ; a la fin du temps, le plus de PV gagne (egalite possible).
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: pvprun
+# Nombre maximal de parties en meme temps. Partie 1 = monde ci-dessus, parties 2..n = copies
+# <world>_2, <world>_3... du modele <world>_modele (copie propre de la partie 1).
+max-instances: 3
+# Monde du hub (retour par son point de spawn).
+hub-world: lobby
+# Heure fixe du monde (6000 = midi).
+time: 6000
+
+# ---------------------------------------------------------------- arene
+# Etages centres en x 0 z 0 : le plus bas en floor-y, les autres floor-gap blocs au-dessus.
+# Changer ces valeurs : /pvprun build (reconstruit tout, refait le modele).
+floor-y: 100
+floor-gap: 10
+floors: 3
+# Hauteur du sol de la salle d'attente (au-dessus de l'arene).
+lobby-y: 140
+# Sous cette hauteur, un joueur est elimine (defaut : floor-y - 6).
+void-y: 94
+# Delai (ticks, 20 = 1 s) entre le passage d'un joueur et la disparition du bloc (et de la TNT dessous).
+block-delay: 10
+
+# ---------------------------------------------------------------- partie
+min-players: 2
+max-players: 16
+# Decompte avant le debut (secondes), raccourci a full-countdown quand la partie est pleine.
+countdown: 20
+full-countdown: 10
+# Secondes d'immobilite au debut de la partie (3, 2, 1, GO) : aucun bloc ne disparait, aucun coup.
+freeze-time: 3
+# Duree maximale de la partie (secondes). Ensuite : le plus de PV gagne (egalite possible).
+game-time: 600
+# Duree de l'ecran de fin avant le retour en salle d'attente (secondes).
+end-time: 8
+# PV rendus au tueur a chaque kill (6 = 3 coeurs).
+kill-heal: 6
+# Le dernier joueur qui t'a frappe dans ce delai (secondes) est credite du kill quand tu tombes.
+kill-credit-time: 10
+
+# ---------------------------------------------------------------- double saut
+double-jumps: 5
+# Delai entre deux doubles sauts (secondes).
+double-jump-cooldown: 4
+# Elan horizontal (dans la direction du regard) et vertical du double saut.
+double-jump-power: 1.1
+double-jump-height: 0.85

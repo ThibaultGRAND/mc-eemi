@@ -1,0 +1,38 @@
+# EemiTntWars - TNT Wars d'EEMICRAFT
+# Rouge (ouest) contre Bleu (est), separes par un canal d'eau qu'on ne peut pas traverser :
+# on construit des canons a TNT pour toucher l'autre camp. Chaque equipe a un stock de vies partage ;
+# quand il est vide, chaque mort elimine. La derniere equipe avec des joueurs en vie gagne.
+# La map est construite par le plugin dans un monde vide ("tntwars") : au demarrage du serveur,
+# apres chaque partie, et avec /tntwars build.
+
+world: tntwars
+hub-world: lobby
+
+# Geometrie : sol a center-y, canal de -canal-half a +canal-half en x, chaque camp va jusqu'a +-half-length.
+center-y: 100
+canal-half: 6
+half-length: 42
+half-width: 26
+# Salle d'attente au-dessus du centre.
+lobby-y: 140
+# Sous cette hauteur : mort (vide). Hauteur max de construction au-dessus du sol.
+void-y: 80
+build-height: 25
+
+# Parties en parallele (1.3) : partie 1 = monde "world", parties 2..N = copies tntwars_2, tntwars_3...
+# faites depuis le modele tntwars_modele (copie propre de la partie 1).
+max-instances: 3
+
+min-players: 2
+max-players: 16
+countdown: 30
+full-countdown: 10
+# Duree max (secondes) : a la fin, l'equipe avec le plus de vies (puis de joueurs en vie) gagne.
+game-time: 900
+end-time: 8
+
+# Vies partagees par equipe (une mort = une vie ; a 0, la mort elimine).
+team-lives: 15
+respawn-delay: 5
+# Toutes les N secondes : TNT, redstone, pierre et dalles remis au maximum.
+refill-interval: 10

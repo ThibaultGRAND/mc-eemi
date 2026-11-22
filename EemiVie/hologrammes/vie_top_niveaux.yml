@@ -1,0 +1,34 @@
+location: lobby:718.5:56.0:643.5
+enabled: false
+display-range: 32
+update-range: 32
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '&6&lMEILLEURS NIVEAUX'
+    height: 0.35
+  - content: '&7Joue pour monter au classement'
+    height: 0.28
+  - content: '%eemi_rank_level_1%'
+    height: 0.28
+  - content: '%eemi_rank_level_2%'
+    height: 0.28
+  - content: '%eemi_rank_level_3%'
+    height: 0.28
+  - content: '%eemi_rank_level_4%'
+    height: 0.28
+  - content: '%eemi_rank_level_5%'
+    height: 0.28
+  - content: '%eemi_rank_level_6%'
+    height: 0.28
+  - content: '%eemi_rank_level_7%'
+    height: 0.28
+  - content: '%eemi_rank_level_8%'
+    height: 0.28
+  - content: '%eemi_rank_level_9%'
+    height: 0.28
+  - content: '%eemi_rank_level_10%'
+    height: 0.28
+  actions: {}

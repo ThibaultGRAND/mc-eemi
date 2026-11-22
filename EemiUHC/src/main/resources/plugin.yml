@@ -1,0 +1,16 @@
+name: EemiUHC
+version: ${project.version}
+main: fr.eemicraft.uhc.EemiUHC
+api-version: '1.21'
+softdepend: [Multiverse-Core, Multiverse-Inventories]
+description: UHC Run d'EEMICRAFT (monde neuf a chaque partie, pas de regen naturelle, cut clean, Timber, Hastey Boys)
+
+commands:
+  uhc:
+    description: Rejoindre l'UHC
+    usage: /uhc <join solo|duo|trio | leave | files | spectate [joueur] | start <mode> | stop [n] | parties | reload>
+
+permissions:
+  eemiuhc.admin:
+    description: Commandes admin de l'UHC
+    default: op

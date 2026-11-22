@@ -1,0 +1,19 @@
+name: EemiAbysse
+version: ${project.version}
+main: fr.eemicraft.abysse.EemiAbysse
+api-version: '1.21'
+softdepend: [Multiverse-Core, WorldGuard]
+description: L'Abysse d'EEMICRAFT (strates, usine, bourse, metiers, quetes)
+
+commands:
+  abysse:
+    description: L'Abysse
+    aliases: [aby]
+    usage: /abysse [base|visiter|remonter|bourse|metiers|journal|carnets|eclats|payer|compagnie|quitter]
+  bourse:
+    description: Bourse de l'Abysse
+
+permissions:
+  eemiabysse.admin:
+    description: Commandes admin de l'Abysse
+    default: op

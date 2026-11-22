@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "eemicraft:item/abysse/m_entrepot_front",
+    "south": "eemicraft:item/abysse/m_entrepot_front",
+    "east": "eemicraft:item/abysse/m_entrepot_side",
+    "west": "eemicraft:item/abysse/m_entrepot_side",
+    "up": "eemicraft:item/abysse/m_entrepot_top",
+    "down": "eemicraft:item/abysse/m_entrepot_bottom",
+    "particle": "eemicraft:item/abysse/m_entrepot_side"
+  }
+}

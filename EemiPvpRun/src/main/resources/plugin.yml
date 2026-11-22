@@ -1,0 +1,17 @@
+name: EemiPvpRun
+version: ${project.version}
+main: fr.eemicraft.pvprun.EemiPvpRun
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: PVP Run d'EEMICRAFT (TNT Run avec PvP, facon TNT Games d'Hypixel)
+
+commands:
+  pvprun:
+    description: Rejoindre ou gerer le PVP Run
+    aliases: [prun]
+    usage: /pvprun <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+
+permissions:
+  eemipvprun.admin:
+    description: Commandes admin du PVP Run
+    default: op

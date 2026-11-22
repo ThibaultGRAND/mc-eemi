@@ -1,0 +1,180 @@
+# Playlist Noel, generee par gen_noel.py.
+songs:
+  douce_nuit:
+    name: "Douce nuit - Franz Xaver Gruber"
+    tempo: 4
+    repeat: 2
+    tracks:
+      - instrument: bell
+        volume: 0.55
+        notes: "G4:3 A4:1 G4:2 E4:6 | G4:3 A4:1 G4:2 E4:6 | D5:4 D5:2 B4:6 | C5:4 C5:2 G4:6 | A4:4 A4:2 C5:3 B4:1 A4:2 | G4:3 A4:1 G4:2 E4:6 | A4:4 A4:2 C5:3 B4:1 A4:2 | G4:3 A4:1 G4:2 E4:6 | D5:4 D5:2 F5:3 D5:1 B4:2 | C5:6 E5:6 | C5:3 G4:1 E4:2 G4:3 F4:1 D4:2 | C4:12"
+      - instrument: flute
+        volume: 0.25
+        notes: "G4:3 A4:1 G4:2 E4:6 | G4:3 A4:1 G4:2 E4:6 | D5:4 D5:2 B4:6 | C5:4 C5:2 G4:6 | A4:4 A4:2 C5:3 B4:1 A4:2 | G4:3 A4:1 G4:2 E4:6 | A4:4 A4:2 C5:3 B4:1 A4:2 | G4:3 A4:1 G4:2 E4:6 | D5:4 D5:2 F5:3 D5:1 B4:2 | C5:6 E5:6 | C5:3 G4:1 E4:2 G4:3 F4:1 D4:2 | C4:12"
+      - instrument: harp
+        volume: 0.35
+        notes: "C4:2 E4:2 G4:2 C4:2 E4:2 G4:2 | C4:2 E4:2 G4:2 C4:2 E4:2 G4:2 | G3:2 B3:2 D4:2 G3:2 B3:2 D4:2 | C4:2 E4:2 G4:2 C4:2 E4:2 G4:2 | A3:2 C4:2 F4:2 A3:2 C4:2 F4:2 | C4:2 E4:2 G4:2 C4:2 E4:2 G4:2 | A3:2 C4:2 F4:2 A3:2 C4:2 F4:2 | C4:2 E4:2 G4:2 C4:2 E4:2 G4:2 | G3:2 B3:2 D4:2 G3:2 B3:2 D4:2 | C4:2 E4:2 G4:2 C4:2 E4:2 G4:2 | C4:2 E4:2 G4:2 G3:2 B3:2 D4:2 | C4:2 E4:2 G4:2 C4:2 E4:2 G4:2"
+      - instrument: bass
+        volume: 0.5
+        notes: "C4:6 G3:6 | C4:6 G3:6 | G3:6 D4:6 | C4:6 G3:6 | F4:6 C4:6 | C4:6 G3:6 | F4:6 C4:6 | C4:6 G3:6 | G3:6 D4:6 | C4:6 G3:6 | C4:6 D4:6 | C4:6 G3:6"
+      - instrument: chime
+        volume: 0.12
+        notes: "C5:24 _:24"
+  jingle_bells:
+    name: "Jingle Bells - James Lord Pierpont"
+    tempo: 2
+    repeat: 2
+    tracks:
+      - instrument: bell
+        volume: 0.55
+        notes: "D4:2 B4:2 A4:2 G4:2 D4:6 D4:1 D4:1 | D4:2 B4:2 A4:2 G4:2 E4:8 | E4:2 C5:2 B4:2 A4:2 F#4:8 | D5:2 D5:2 C5:2 A4:2 B4:8 | D4:2 B4:2 A4:2 G4:2 D4:8 | D4:2 B4:2 A4:2 G4:2 E4:6 E4:2 | E4:2 C5:2 B4:2 A4:2 D5:2 D5:2 D5:2 D5:2 | E5:2 D5:2 C5:2 A4:2 G4:8 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | B4:2 A4:2 A4:2 B4:2 A4:4 D5:4 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | D5:2 D5:2 C5:2 A4:2 G4:8 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | B4:2 A4:2 A4:2 B4:2 A4:4 D5:4 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | D5:2 D5:2 C5:2 A4:2 G4:8"
+      - instrument: flute
+        volume: 0.3
+        notes: "D4:2 B4:2 A4:2 G4:2 D4:6 D4:1 D4:1 | D4:2 B4:2 A4:2 G4:2 E4:8 | E4:2 C5:2 B4:2 A4:2 F#4:8 | D5:2 D5:2 C5:2 A4:2 B4:8 | D4:2 B4:2 A4:2 G4:2 D4:8 | D4:2 B4:2 A4:2 G4:2 E4:6 E4:2 | E4:2 C5:2 B4:2 A4:2 D5:2 D5:2 D5:2 D5:2 | E5:2 D5:2 C5:2 A4:2 G4:8 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | B4:2 A4:2 A4:2 B4:2 A4:4 D5:4 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | D5:2 D5:2 C5:2 A4:2 G4:8 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | B4:2 A4:2 A4:2 B4:2 A4:4 D5:4 | B4:2 B4:2 B4:4 B4:2 B4:2 B4:4 | B4:2 D5:2 G4:3 A4:1 B4:8 | C5:2 C5:2 C5:3 C5:1 C5:2 B4:2 B4:2 B4:1 B4:1 | D5:2 D5:2 C5:2 A4:2 G4:8"
+      - instrument: bass
+        volume: 0.6
+        notes: "G3:4 _:4 D4:4 _:4 | G3:4 _:4 G3:4 _:4 | A3:4 _:4 A3:4 _:4 | D4:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | G3:4 _:4 G3:4 _:4 | A3:4 _:4 A3:4 _:4 | D4:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | C4:4 _:4 D4:4 _:4 | A3:4 _:4 A3:4 _:4 | G3:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | C4:4 _:4 D4:4 _:4 | D4:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | C4:4 _:4 D4:4 _:4 | A3:4 _:4 A3:4 _:4 | G3:4 _:4 D4:4 _:4 | G3:4 _:4 D4:4 _:4 | C4:4 _:4 D4:4 _:4 | D4:4 _:4 D4:4 _:4"
+      - instrument: guitar
+        volume: 0.35
+        notes: "_:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 C4+E4+G4:4 | _:4 A3+C4+E4:4 _:4 F#3+A3+D4:4 | _:4 F#3+A3+C4+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 C4+E4+G4:4 | _:4 A3+C4+E4:4 _:4 F#3+A3+D4:4 | _:4 F#3+A3+C4+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 C4+E4+G4:4 _:4 G3+B3+D4:4 | _:4 G3+A3+C#4+E4:4 _:4 F#3+A3+C4+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 C4+E4+G4:4 _:4 G3+B3+D4:4 | _:4 F#3+A3+C4+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 C4+E4+G4:4 _:4 G3+B3+D4:4 | _:4 G3+A3+C#4+E4:4 _:4 F#3+A3+C4+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 _:4 G3+B3+D4:4 | _:4 C4+E4+G4:4 _:4 G3+B3+D4:4 | _:4 F#3+A3+C4+D4:4 _:4 G3+B3+D4:4"
+      - instrument: basedrum
+        volume: 0.35
+        notes: "C4:8"
+      - instrument: snare
+        volume: 0.2
+        notes: "_:4 C4:4"
+      - instrument: hat
+        volume: 0.12
+        notes: "C5:2"
+  mon_beau_sapin:
+    name: "Mon beau sapin - trad."
+    tempo: 3
+    repeat: 3
+    tracks:
+      - instrument: flute
+        volume: 0.55
+        notes: "_:8 D4:4 | G4:3 G4:1 G4:6 A4:2 | B4:3 B4:1 B4:6 B4:2 | A4:2 B4:2 C5:4 F#4:4 | A4:4 G4:4 D5:2 D5:2 | B4:4 E5:3 D5:1 D5:2 C5:2 | C5:6 C5:2 C5:2 A4:2 | D5:3 C5:1 C5:2 B4:2 B4:2 D4:2 | G4:3 G4:1 G4:6 A4:2 | B4:3 B4:1 B4:6 B4:2 | A4:2 B4:2 C5:4 F#4:4 | A4:4 G4:8"
+      - instrument: bell
+        volume: 0.3
+        notes: "_:8 D4:4 | G4:3 G4:1 G4:6 A4:2 | B4:3 B4:1 B4:6 B4:2 | A4:2 B4:2 C5:4 F#4:4 | A4:4 G4:4 D5:2 D5:2 | B4:4 E5:3 D5:1 D5:2 C5:2 | C5:6 C5:2 C5:2 A4:2 | D5:3 C5:1 C5:2 B4:2 B4:2 D4:2 | G4:3 G4:1 G4:6 A4:2 | B4:3 B4:1 B4:6 B4:2 | A4:2 B4:2 C5:4 F#4:4 | A4:4 G4:8"
+      - instrument: bass
+        volume: 0.55
+        notes: "G3:4 _:4 _:4 | G3:4 _:4 _:4 | G3:4 _:4 _:4 | D4:4 _:4 _:4 | D4:4 _:4 _:4 | G3:4 _:4 _:4 | A3:4 _:4 _:4 | D4:4 _:4 _:4 | G3:4 _:4 _:4 | G3:4 _:4 _:4 | D4:4 _:4 _:4 | D4:4 _:4 _:4"
+      - instrument: harp
+        volume: 0.35
+        notes: "_:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 F#3+A3+C4+D4:4 F#3+A3+C4+D4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 C4+E4+G4:4 C4+E4+G4:4 | _:4 A3+C4+E4:4 A3+C4+E4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4 | _:4 F#3+A3+C4+D4:4 F#3+A3+C4+D4:4 | _:4 G3+B3+D4:4 G3+B3+D4:4"
+      - instrument: chime
+        volume: 0.12
+        notes: "D5:48"
+  we_wish:
+    name: "We Wish You a Merry Christmas - trad."
+    tempo: 4
+    repeat: 3
+    tracks:
+      - instrument: bell
+        volume: 0.55
+        notes: "G4:2 G4:1 A4:1 G4:1 F#4:1 | E4:2 E4:2 E4:2 | A4:2 A4:1 B4:1 A4:1 G4:1 | F#4:2 D4:2 D4:2 | B4:2 B4:1 C5:1 B4:1 A4:1 | G4:2 E4:2 D4:1 D4:1 | E4:2 A4:2 F#4:2 | G4:4 D4:2 | G4:2 G4:2 G4:2 | F#4:4 F#4:2 | G4:2 F#4:2 E4:2 | D4:4 A4:2 | B4:2 A4:2 G4:2 | D5:2 D4:2 D4:1 D4:1 | E4:2 A4:2 F#4:2 | G4:4 D4:2"
+      - instrument: flute
+        volume: 0.3
+        notes: "G4:2 G4:1 A4:1 G4:1 F#4:1 | E4:2 E4:2 E4:2 | A4:2 A4:1 B4:1 A4:1 G4:1 | F#4:2 D4:2 D4:2 | B4:2 B4:1 C5:1 B4:1 A4:1 | G4:2 E4:2 D4:1 D4:1 | E4:2 A4:2 F#4:2 | G4:4 D4:2 | G4:2 G4:2 G4:2 | F#4:4 F#4:2 | G4:2 F#4:2 E4:2 | D4:4 A4:2 | B4:2 A4:2 G4:2 | D5:2 D4:2 D4:1 D4:1 | E4:2 A4:2 F#4:2 | G4:4 D4:2"
+      - instrument: bass
+        volume: 0.55
+        notes: "G3:2 _:2 _:2 | C4:2 _:2 _:2 | A3:2 _:2 _:2 | D4:2 _:2 _:2 | B3:2 _:2 _:2 | E4:2 _:2 _:2 | C4:2 _:2 _:2 | G3:2 _:2 _:2 | G3:2 _:2 _:2 | D4:2 _:2 _:2 | A3:2 _:2 _:2 | D4:2 _:2 _:2 | G3:2 _:2 _:2 | D4:2 _:2 _:2 | C4:2 _:2 _:2 | G3:2 _:2 _:2"
+      - instrument: guitar
+        volume: 0.3
+        notes: "_:2 G3+B3+D4:2 G3+B3+D4:2 | _:2 C4+E4+G4:2 C4+E4+G4:2 | _:2 G3+A3+C#4+E4:2 G3+A3+C#4+E4:2 | _:2 F#3+A3+D4:2 F#3+A3+D4:2 | _:2 F#3+A3+B3+D#4:2 F#3+A3+B3+D#4:2 | _:2 G3+B3+E4:2 G3+B3+E4:2 | _:2 F#3+A3+D4:2 F#3+A3+D4:2 | _:2 G3+B3+D4:2 G3+B3+D4:2 | _:2 G3+B3+D4:2 G3+B3+D4:2 | _:2 F#3+A3+D4:2 F#3+A3+D4:2 | _:2 G3+A3+C#4+E4:2 G3+A3+C#4+E4:2 | _:2 F#3+A3+D4:2 F#3+A3+D4:2 | _:2 G3+B3+D4:2 G3+B3+D4:2 | _:2 F#3+A3+D4:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 F#3+A3+D4:2 | _:2 G3+B3+D4:2 G3+B3+D4:2"
+      - instrument: basedrum
+        volume: 0.3
+        notes: "C4:6"
+      - instrument: hat
+        volume: 0.1
+        notes: "_:2 C5:2 C5:2"
+  deck_the_halls:
+    name: "Deck the Halls - trad."
+    tempo: 4
+    repeat: 2
+    tracks:
+      - instrument: flute
+        volume: 0.55
+        notes: "C5:3 A#4:1 A4:2 G4:2 | F4:2 G4:2 A4:2 F4:2 | G4:1 A4:1 A#4:1 G4:1 A4:3 G4:1 | F4:2 E4:2 F4:4 | C5:3 A#4:1 A4:2 G4:2 | F4:2 G4:2 A4:2 F4:2 | G4:1 A4:1 A#4:1 G4:1 A4:3 G4:1 | F4:2 E4:2 F4:4 | G4:3 A4:1 A#4:2 G4:2 | A4:3 A#4:1 C5:2 G4:2 | A4:1 B4:1 C5:2 D5:1 E5:1 F5:2 | E5:2 D5:2 C5:4 | C5:3 A#4:1 A4:2 G4:2 | F4:2 G4:2 A4:2 F4:2 | D5:1 D5:1 D5:1 D5:1 C5:3 A#4:1 | A4:2 G4:2 F4:4"
+      - instrument: bell
+        volume: 0.3
+        notes: "C5:3 A#4:1 A4:2 G4:2 | F4:2 G4:2 A4:2 F4:2 | G4:1 A4:1 A#4:1 G4:1 A4:3 G4:1 | F4:2 E4:2 F4:4 | C5:3 A#4:1 A4:2 G4:2 | F4:2 G4:2 A4:2 F4:2 | G4:1 A4:1 A#4:1 G4:1 A4:3 G4:1 | F4:2 E4:2 F4:4 | G4:3 A4:1 A#4:2 G4:2 | A4:3 A#4:1 C5:2 G4:2 | A4:1 B4:1 C5:2 D5:1 E5:1 F5:2 | E5:2 D5:2 C5:4 | C5:3 A#4:1 A4:2 G4:2 | F4:2 G4:2 A4:2 F4:2 | D5:1 D5:1 D5:1 D5:1 C5:3 A#4:1 | A4:2 G4:2 F4:4"
+      - instrument: harp
+        volume: 0.35
+        notes: "A3:1 C4:1 F4:1 C4:1 G3:1 A#3:1 C4:1 A#3:1 | A3:1 C4:1 F4:1 C4:1 A3:1 C4:1 F4:1 C4:1 | G3:1 A#3:1 C4:1 A#3:1 A3:1 C4:1 F4:1 C4:1 | G3:1 A#3:1 C4:1 A#3:1 A3:1 C4:1 F4:1 C4:1 | A3:1 C4:1 F4:1 C4:1 G3:1 A#3:1 C4:1 A#3:1 | A3:1 C4:1 F4:1 C4:1 A3:1 C4:1 F4:1 C4:1 | G3:1 A#3:1 C4:1 A#3:1 A3:1 C4:1 F4:1 C4:1 | G3:1 A#3:1 C4:1 A#3:1 A3:1 C4:1 F4:1 C4:1 | G3:1 A#3:1 C4:1 A#3:1 G3:1 A#3:1 C4:1 A#3:1 | A3:1 C4:1 F4:1 C4:1 C4:1 E4:1 G4:1 E4:1 | A3:1 C4:1 F4:1 C4:1 A3:1 D4:1 F4:1 D4:1 | G3:1 B3:1 D4:1 B3:1 C4:1 E4:1 G4:1 E4:1 | A3:1 C4:1 F4:1 C4:1 G3:1 A#3:1 C4:1 A#3:1 | A3:1 C4:1 F4:1 C4:1 A3:1 C4:1 F4:1 C4:1 | A#3:1 D4:1 F4:1 D4:1 A3:1 C4:1 F4:1 C4:1 | G3:1 A#3:1 C4:1 A#3:1 A3:1 C4:1 F4:1 C4:1"
+      - instrument: bass
+        volume: 0.55
+        notes: "F4:2 _:2 G3:2 _:2 | F4:2 _:2 C4:2 _:2 | C4:2 _:2 C4:2 _:2 | C4:2 _:2 C4:2 _:2 | F4:2 _:2 G3:2 _:2 | F4:2 _:2 C4:2 _:2 | C4:2 _:2 C4:2 _:2 | C4:2 _:2 C4:2 _:2 | C4:2 _:2 G3:2 _:2 | F4:2 _:2 G3:2 _:2 | F4:2 _:2 A3:2 _:2 | G3:2 _:2 G3:2 _:2 | F4:2 _:2 G3:2 _:2 | F4:2 _:2 C4:2 _:2 | A#3:2 _:2 C4:2 _:2 | C4:2 _:2 C4:2 _:2"
+      - instrument: basedrum
+        volume: 0.3
+        notes: "C4:4"
+      - instrument: snare
+        volume: 0.18
+        notes: "_:2 C4:2"
+  joy_to_the_world:
+    name: "Joy to the World - Haendel et Lowell Mason"
+    tempo: 3
+    repeat: 3
+    tracks:
+      - instrument: bell
+        volume: 0.55
+        notes: "D5:4 C#5:3 B4:1 | A4:6 G4:2 | F#4:4 E4:4 | D4:6 A4:2 | B4:6 B4:2 | C#5:6 C#5:2 | D5:6 D5:2 | D5:2 C#5:2 B4:2 A4:2 | A4:3 G4:1 F#4:2 D5:2 | D5:2 C#5:2 B4:2 A4:2 | A4:3 G4:1 F#4:2 F#4:2 | F#4:2 F#4:2 F#4:2 F#4:1 G4:1 | A4:6 G4:1 F#4:1 | E4:2 E4:2 E4:2 E4:1 F#4:1 | G4:6 F#4:1 E4:1 | D4:2 D5:4 B4:2 | A4:3 G4:1 F#4:2 G4:2 | F#4:4 E4:4 | D4:8 | _:8"
+      - instrument: flute
+        volume: 0.3
+        notes: "D5:4 C#5:3 B4:1 | A4:6 G4:2 | F#4:4 E4:4 | D4:6 A4:2 | B4:6 B4:2 | C#5:6 C#5:2 | D5:6 D5:2 | D5:2 C#5:2 B4:2 A4:2 | A4:3 G4:1 F#4:2 D5:2 | D5:2 C#5:2 B4:2 A4:2 | A4:3 G4:1 F#4:2 F#4:2 | F#4:2 F#4:2 F#4:2 F#4:1 G4:1 | A4:6 G4:1 F#4:1 | E4:2 E4:2 E4:2 E4:1 F#4:1 | G4:6 F#4:1 E4:1 | D4:2 D5:4 B4:2 | A4:3 G4:1 F#4:2 G4:2 | F#4:4 E4:4 | D4:8 | _:8"
+      - instrument: bass
+        volume: 0.55
+        notes: "D4:4 A3:4 | D4:4 D4:4 | D4:4 E4:4 | D4:4 A3:4 | G3:4 D4:4 | A3:4 E4:4 | D4:4 A3:4 | D4:4 A3:4 | D4:4 A3:4 | D4:4 A3:4 | D4:4 A3:4 | D4:4 A3:4 | D4:4 A3:4 | A3:4 E4:4 | A3:4 E4:4 | D4:4 D4:4 | D4:4 E4:4 | D4:4 E4:4 | D4:4 A3:4 | D4:4 A3:4"
+      - instrument: guitar
+        volume: 0.3
+        notes: "_:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 G3+B3+D4:2 | _:2 F#3+A3+D4:2 _:2 A3+C#4+E4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 G3+B3+D4:2 _:2 G3+B3+D4:2 | _:2 A3+C#4+E4:2 _:2 A3+C#4+E4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 A3+C#4+E4:2 _:2 A3+C#4+E4:2 | _:2 G3+A3+C#4+E4:2 _:2 G3+A3+C#4+E4:2 | _:2 F#3+A3+D4:2 _:2 G3+B3+D4:2 | _:2 F#3+A3+D4:2 _:2 G3+A3+C#4+E4:2 | _:2 F#3+A3+D4:2 _:2 A3+C#4+E4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2 | _:2 F#3+A3+D4:2 _:2 F#3+A3+D4:2"
+      - instrument: basedrum
+        volume: 0.25
+        notes: "C4:8"
+      - instrument: chime
+        volume: 0.12
+        notes: "_:152 D5:8"
+  noel_lobby:
+    name: "Noel au lobby - composition originale"
+    tempo: 4
+    repeat: 3
+    tracks:
+      - instrument: chime
+        volume: 0.45
+        notes: "B4:1 D5:1 G4:1 D5:1 B4:2 A4:1 G4:1 | E4:2 G4:1 B4:1 E5:4 | E5:1 D5:1 C5:1 E5:1 G4:2 C5:2 | D5:2 A4:1 F#4:1 A4:4 | B4:1 D5:1 G4:1 D5:1 B4:2 A4:1 G4:1 | E5:2 F#5:1 E5:1 D5:2 B4:2 | C5:2 E5:2 D5:2 F#4:2 | G4:4 _:2 D5:2 | E5:1 D5:1 C5:2 E5:2 G4:2 | F#5:1 E5:1 D5:2 A4:2 F#4:2 | B4:1 D5:1 F#5:2 D5:2 B4:2 | E5:2 D5:1 B4:1 G4:4 | C5:1 E5:1 G4:1 C5:1 E5:2 D5:2 | D5:1 C5:1 A4:1 F#4:1 D4:2 F#4:2 | A4:2 C5:2 F#5:2 E5:1 F#5:1 | G4:2 D5:1 B4:1 G4:4"
+      - instrument: bell
+        volume: 0.4
+        notes: "B4:1 D5:1 G4:1 D5:1 B4:2 A4:1 G4:1 | E4:2 G4:1 B4:1 E5:4 | E5:1 D5:1 C5:1 E5:1 G4:2 C5:2 | D5:2 A4:1 F#4:1 A4:4 | B4:1 D5:1 G4:1 D5:1 B4:2 A4:1 G4:1 | E5:2 F#5:1 E5:1 D5:2 B4:2 | C5:2 E5:2 D5:2 F#4:2 | G4:4 _:2 D5:2 | E5:1 D5:1 C5:2 E5:2 G4:2 | F#5:1 E5:1 D5:2 A4:2 F#4:2 | B4:1 D5:1 F#5:2 D5:2 B4:2 | E5:2 D5:1 B4:1 G4:4 | C5:1 E5:1 G4:1 C5:1 E5:2 D5:2 | D5:1 C5:1 A4:1 F#4:1 D4:2 F#4:2 | A4:2 C5:2 F#5:2 E5:1 F#5:1 | G4:2 D5:1 B4:1 G4:4"
+      - instrument: bass
+        volume: 0.6
+        notes: "G3:2 D4:1 G3:1 G3:2 D4:1 G3:1 | E4:2 B3:1 E4:1 E4:2 B3:1 E4:1 | C4:2 G3:1 C4:1 C4:2 G3:1 C4:1 | D4:2 A3:1 D4:1 D4:2 A3:1 D4:1 | G3:2 D4:1 G3:1 G3:2 D4:1 G3:1 | E4:2 B3:1 E4:1 E4:2 B3:1 E4:1 | C4:2 G3:1 C4:1 D4:2 A3:1 D4:1 | G3:2 D4:1 G3:1 G3:2 D4:1 G3:1 | C4:2 G3:1 C4:1 C4:2 G3:1 C4:1 | D4:2 A3:1 D4:1 D4:2 A3:1 D4:1 | B3:2 F#3:1 B3:1 B3:2 F#3:1 B3:1 | E4:2 B3:1 E4:1 E4:2 B3:1 E4:1 | C4:2 G3:1 C4:1 C4:2 G3:1 C4:1 | D4:2 A3:1 D4:1 D4:2 A3:1 D4:1 | A3:2 E4:1 A3:1 D4:2 A3:1 D4:1 | G3:2 D4:1 G3:1 G3:2 D4:1 G3:1"
+      - instrument: harp
+        volume: 0.3
+        notes: "_:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 | _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 | _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 | _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 | _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 | _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 | _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 | _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 | _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 | _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 | _:1 F#3+B3+D4:1 _:1 F#3+B3+D4:1 _:1 F#3+B3+D4:1 _:1 F#3+B3+D4:1 | _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 _:1 G3+B3+E4:1 | _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 _:1 C4+E4+G4:1 | _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 | _:1 A3+C4+E4:1 _:1 A3+C4+E4:1 _:1 F#3+A3+D4:1 _:1 F#3+A3+D4:1 | _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1 _:1 G3+B3+D4:1"
+      - instrument: basedrum
+        volume: 0.35
+        notes: "C4:4"
+      - instrument: snare
+        volume: 0.18
+        notes: "_:2 C4:2"
+      - instrument: hat
+        volume: 0.1
+        notes: "_:1 C5:1"
+  flocons:
+    name: "Flocons - composition originale"
+    tempo: 4
+    repeat: 3
+    tracks:
+      - instrument: bell
+        volume: 0.55
+        notes: "F#5:2 E5:1 D5:1 A4:2 | B4:2 A4:1 B4:1 D5:2 | A4:4 F#4:2 | E4:2 A4:2 C#5:2 | D5:2 F#5:2 E5:1 D5:1 | D5:2 B4:2 F#4:2 | E5:3 C#5:1 A4:2 | D5:6 | B4:1 C#5:1 D5:2 B4:2 | A4:2 F#4:2 D4:2 | E4:1 F#4:1 G4:2 B4:2 | A4:4 C#5:2 | F#5:2 E5:1 D5:1 A4:2 | B4:2 D5:2 G4:2 | A4:2 E5:2 C#5:2 | D5:6"
+      - instrument: harp
+        volume: 0.35
+        notes: "F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1 | G3:1 B3:1 D4:1 G3:1 B3:1 D4:1 | F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1 | A3:1 C#4:1 E4:1 A3:1 C#4:1 E4:1 | F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1 | F#3:1 B3:1 D4:1 F#3:1 B3:1 D4:1 | A3:1 C#4:1 E4:1 A3:1 C#4:1 E4:1 | F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1 | G3:1 B3:1 D4:1 G3:1 B3:1 D4:1 | F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1 | G3:1 B3:1 E4:1 G3:1 B3:1 E4:1 | A3:1 C#4:1 E4:1 A3:1 C#4:1 E4:1 | F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1 | G3:1 B3:1 D4:1 G3:1 B3:1 D4:1 | A3:1 C#4:1 E4:1 A3:1 C#4:1 E4:1 | F#3:1 A3:1 D4:1 F#3:1 A3:1 D4:1"
+      - instrument: bass
+        volume: 0.5
+        notes: "D4:2 _:2 _:2 | G3:2 _:2 _:2 | D4:2 _:2 _:2 | A3:2 _:2 _:2 | D4:2 _:2 _:2 | B3:2 _:2 _:2 | A3:2 _:2 _:2 | D4:2 _:2 _:2 | G3:2 _:2 _:2 | D4:2 _:2 _:2 | E4:2 _:2 _:2 | A3:2 _:2 _:2 | D4:2 _:2 _:2 | G3:2 _:2 _:2 | A3:2 _:2 _:2 | D4:2 _:2 _:2"
+      - instrument: chime
+        volume: 0.15
+        notes: "D5:1 _:11 A4:1 _:11"

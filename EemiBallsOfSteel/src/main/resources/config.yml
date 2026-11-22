@@ -1,0 +1,59 @@
+# EemiBallsOfSteel - Balls of Steel d'EEMICRAFT, sur la map « Balls of Steel » (Planet Minecraft, 1.16.5).
+# Jusqu'a 4 equipes, chacune dans sa base. Des boules flottantes (glowstone, fer, pierre, bois, glace,
+# laine...) contiennent des minerais de diamant ; on les mine et on les depose sur la dalle de son equipe
+# au centre (1 diamant = 1 point). Un marchand au centre echange des diamants contre du materiel.
+# Pas de regeneration naturelle, PvP, on ne casse pas les bases ennemies mais on peut piller leurs coffres.
+# Toutes les coordonnees viennent de l'analyse de la map (blocs de commande d'origine supprimes).
+
+world: ballsofsteel
+hub-world: lobby
+# Salle d'attente : le lobby de la map.
+lobby: -35.5,50,-1.5,180,0
+
+min-players: 2
+max-players: 24
+countdown: 30
+full-countdown: 10
+# Duree de la partie (minutes) ; les scores sont caches apres hide-scores-after minutes (0 = jamais).
+game-minutes: 30
+hide-scores-after: 20
+end-time: 10
+
+# Arene : bordure du monde pendant la partie, sous void-y on meurt.
+arena-center: 1000.5,1000.5
+border-size: 226
+void-y: 40
+# Zone de jeu (au-dela : lobby, rien ne s'y modifie).
+arena: 889,0,889,1111,255,1111
+# Centre : boite autour de la plateforme ; seul le disque de rayon platform-radius (la plateforme de
+# quartz, le dome, le marchand, les dalles) est intouchable, autour on construit (ponts pour la rejoindre).
+center: 979,108,979,1021,150,1021
+platform-radius: 21.5
+merchant: 1000.5,130,1000.5
+
+# Equipes : spawn, dalle de depot (x1,y,z1,x2,y,z2), generateur de fleches, base (bbox protegee).
+teams:
+  rouge:
+    spawn: 904.5,128,904.5,-45,0
+    pad: 991,128,991,993,128,993
+    arrows: 901.5,128,901.5
+    base: 889,113,889,911,150,911
+  jaune:
+    spawn: 1096.5,128,904.5,45,0
+    pad: 1007,128,991,1009,128,993
+    arrows: 1099.5,128,901.5
+    base: 1089,113,889,1111,150,911
+  vert:
+    spawn: 1096.5,128,1096.5,135,0
+    pad: 1007,128,1007,1009,128,1009
+    arrows: 1099.5,128,1099.5
+    base: 1089,113,1089,1111,150,1111
+  bleu:
+    spawn: 904.5,128,1096.5,-135,0
+    pad: 991,128,1007,993,128,1009
+    arrows: 901.5,128,1099.5
+    base: 889,113,1089,911,150,1111
+
+# Parties en parallele : partie 1 = le monde d'origine, parties 2.. = copies ballsofsteel_2, ballsofsteel_3...
+# faites depuis le modele propre ballsofsteel_modele (copie de la partie 1 au demarrage). Absent = 3.
+max-instances: 3

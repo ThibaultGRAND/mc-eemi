@@ -1,0 +1,157 @@
+# EemiBingo - EEMINGO, le Bingo d'EEMICRAFT
+# Chaque partie se joue dans un monde neuf (graine aleatoire) nomme "bingo", supprime a la fin.
+# Jeu en EQUIPES. Le mode choisi fixe la taille des equipes : solo (1), duo (2), quatuor (4).
+# Une file par mode ; les inscrits attendent dans le lobby EEMINGO. La file qui atteint min-players
+# lance son decompte puis sa partie, meme si d'autres parties tournent (max-instances parties en meme temps).
+# Equipes formees automatiquement et equilibrees (au moins 2 equipes des 2 joueurs, 8 au maximum).
+
+world-name: bingo
+# Parties en meme temps : partie 1 dans le monde world-name, partie n dans world-name_n (bingo_2, bingo_3)
+max-instances: 3
+hub-world: lobby
+# Modes proposes (retirer un mode pour le desactiver).
+modes: [solo, duo, quatuor]
+# Joueurs minimum dans une file pour lancer le decompte, maximum par partie.
+min-players: 2
+max-players: 16
+# Lobby d'attente : monde vide cree avec Multiverse, salle construite par /bingo buildlobby autour de ce point.
+lobby-world: eemingo
+lobby-center:
+  x: 0
+  y: 100
+  z: 0
+# Taille de la bordure du monde de jeu (blocs de cote, centree sur le point de depart choisi).
+border: 400
+
+# Compte a rebours (secondes) une fois min-players atteint ; ramene a 10 s si la file atteint max-players.
+countdown: 30
+# Duree max (secondes) : sans ligne complete, l'equipe qui a le plus d'items gagne.
+game-time: 1200
+end-time: 10
+
+# Composition de la grille de 25 cases (le reste en moyen).
+easy-count: 8
+hard-count: 6
+
+# Reserves d'items (noms Bukkit). Chaque biome a ses items : desert, neige, jungle, marais, ocean...
+items:
+  easy:
+    - CRAFTING_TABLE
+    - STICK
+    - TORCH
+    - FURNACE
+    - CHEST
+    - STONE_PICKAXE
+    - STONE_SWORD
+    - STONE_AXE
+    - LADDER
+    - BOWL
+    - FLINT
+    - COAL
+    - CHARCOAL
+    - WHEAT_SEEDS
+    - DANDELION
+    - POPPY
+    - FEATHER
+    - EGG
+    - LEATHER
+    - ROTTEN_FLESH
+    - STRING
+    - OAK_SAPLING
+    - BIRCH_LOG
+    - SPRUCE_LOG
+    - OAK_BOAT
+    - COBBLESTONE_STAIRS
+    - STONE_BRICKS
+    - SAND
+    - GRAVEL
+    - OAK_DOOR
+    - OAK_FENCE
+    - WHITE_WOOL
+    - APPLE
+    - SUGAR_CANE
+  medium:
+    - IRON_INGOT
+    - IRON_PICKAXE
+    - BUCKET
+    - WATER_BUCKET
+    - SHIELD
+    - SHEARS
+    - BOOK
+    - BREAD
+    - BOW
+    - ARROW
+    - FISHING_ROD
+    - COD
+    - COOKED_BEEF
+    - COOKED_PORKCHOP
+    - COOKED_CHICKEN
+    - COOKED_MUTTON
+    - BAKED_POTATO
+    - CARROT
+    - BEETROOT
+    - PUMPKIN
+    - MELON_SLICE
+    - CACTUS
+    - GLASS
+    - CLAY_BALL
+    - BRICK
+    - SNOWBALL
+    - LILY_PAD
+    - SWEET_BERRIES
+    - KELP
+    - BAMBOO
+    - COCOA_BEANS
+    - GOLD_INGOT
+    - COPPER_INGOT
+    - REDSTONE
+    - LAPIS_LAZULI
+    - RED_MUSHROOM
+    - BROWN_MUSHROOM
+    - MUSHROOM_STEW
+    - BONE
+    - SPIDER_EYE
+    - INK_SAC
+    - PAPER
+    - PAINTING
+    - ITEM_FRAME
+    - CAMPFIRE
+    - LANTERN
+    - HAY_BLOCK
+    - WHITE_BED
+    - SMOKER
+    - COMPOSTER
+    - BARREL
+    - FLOWER_POT
+    - MILK_BUCKET
+    - TERRACOTTA
+    - SANDSTONE
+    - MOSSY_COBBLESTONE
+    - DEEPSLATE
+    - TUFF
+  hard:
+    - DIAMOND
+    - OBSIDIAN
+    - GOLDEN_APPLE
+    - CAKE
+    - COMPASS
+    - CLOCK
+    - MAP
+    - GUNPOWDER
+    - TNT
+    - SLIME_BALL
+    - LEAD
+    - LAVA_BUCKET
+    - COBWEB
+    - PUMPKIN_PIE
+    - GLOW_INK_SAC
+    - JUKEBOX
+    - IRON_CHESTPLATE
+    - GOLDEN_CARROT
+    - EMERALD
+    - AMETHYST_SHARD
+    - HONEYCOMB
+    - ENDER_PEARL
+    - BLAST_FURNACE
+    - RAIL
+    - BOOKSHELF

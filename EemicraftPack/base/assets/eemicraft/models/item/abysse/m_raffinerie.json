@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "eemicraft:item/abysse/m_raffinerie_front",
+    "south": "eemicraft:item/abysse/m_raffinerie_front",
+    "east": "eemicraft:item/abysse/m_raffinerie_side",
+    "west": "eemicraft:item/abysse/m_raffinerie_side",
+    "up": "eemicraft:item/abysse/m_raffinerie_top",
+    "down": "eemicraft:item/abysse/m_raffinerie_bottom",
+    "particle": "eemicraft:item/abysse/m_raffinerie_side"
+  }
+}

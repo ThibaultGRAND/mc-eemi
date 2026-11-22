@@ -1,0 +1,17 @@
+name: EemiSkyWars
+version: ${project.version}
+main: fr.eemicraft.skywars.EemiSkyWars
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: SkyWars d'EEMICRAFT (solo, multi-map, kits, regles Hypixel)
+
+commands:
+  skywars:
+    description: Rejoindre ou gerer SkyWars
+    aliases: [skw]
+    usage: /skywars <join|leave|spectate [joueur]|kit|start [n]|stop [n]|parties|reload|map|editmap|setcenter|addcage|scanchests>
+
+permissions:
+  eemiskywars.admin:
+    description: Commandes admin de SkyWars
+    default: op

@@ -1,0 +1,16 @@
+name: EemiMusique
+version: ${project.version}
+main: fr.eemicraft.musique.EemiMusique
+api-version: '1.21'
+description: Musique d'ambiance du lobby d'EEMICRAFT (blocs musicaux, plusieurs pistes)
+
+commands:
+  musique:
+    description: Couper/remettre la musique du lobby, passer au morceau suivant
+    aliases: [music]
+    usage: /musique [on|off|liste|info|suivant [morceau]|reload]
+
+permissions:
+  eemimusique.admin:
+    description: Recharger la config de la musique
+    default: op

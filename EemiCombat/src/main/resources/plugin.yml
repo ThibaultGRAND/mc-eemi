@@ -1,0 +1,16 @@
+name: EemiCombat
+version: ${project.version}
+main: fr.eemicraft.combat.EemiCombat
+api-version: '1.21'
+description: Combat 1.8 (degats, critiques, recul, armure, blocage a l'epee, regen) dans les mondes PvP d'EEMICRAFT
+
+commands:
+  combat:
+    description: Afficher le detail de chaque coup (debug)
+    usage: /combat debug|reload
+    permission: eemicombat.admin
+
+permissions:
+  eemicombat.admin:
+    description: Commande /combat debug
+    default: op

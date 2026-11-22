@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "eemicraft:item/abysse/m_concasseur_front",
+    "south": "eemicraft:item/abysse/m_concasseur_front",
+    "east": "eemicraft:item/abysse/m_concasseur_side",
+    "west": "eemicraft:item/abysse/m_concasseur_side",
+    "up": "eemicraft:item/abysse/m_concasseur_top",
+    "down": "eemicraft:item/abysse/m_concasseur_bottom",
+    "particle": "eemicraft:item/abysse/m_concasseur_side"
+  }
+}

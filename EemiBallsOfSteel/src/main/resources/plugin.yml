@@ -1,0 +1,17 @@
+name: EemiBallsOfSteel
+version: ${project.version}
+main: fr.eemicraft.ballsofsteel.EemiBallsOfSteel
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Balls of Steel d'EEMICRAFT (4 equipes, miner les boules de diamant, deposer au centre)
+
+commands:
+  ballsofsteel:
+    description: Rejoindre ou gerer Balls of Steel
+    aliases: [bos]
+    usage: /ballsofsteel <join|leave|spectate [joueur]|start [n]|stop [n]|reset [n]|reload|parties>
+
+permissions:
+  eemiballsofsteel.admin:
+    description: Commandes admin de Balls of Steel
+    default: op

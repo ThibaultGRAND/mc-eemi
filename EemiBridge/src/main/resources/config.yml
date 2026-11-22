@@ -1,0 +1,81 @@
+# EemiBridge - The Bridge d'EEMICRAFT (facon Hypixel Bridge)
+# Rouge (ouest, x negatif) contre Bleu (est, x positif). Deux iles reliees par un pont etroit
+# au-dessus du vide. Sauter dans le but (trou de portail de l'End) de l'equipe adverse = 1 point.
+# Apres chaque but, tout le monde repart de sa cage de verre (les blocs poses restent en place).
+# La mort ne fait que renvoyer a sa base avec le kit recharge. Premiere equipe a "goals-to-win"
+# gagne, sinon celle qui mene a la fin du temps (egalite possible).
+# Le monde vide "thebridge" est cree par le plugin s'il n'existe pas ; la map est construite au
+# demarrage, apres chaque partie et avec /bridge build.
+
+world: thebridge
+hub-world: lobby
+
+# --- Geometrie de la map (changer ces valeurs puis /bridge reload et /bridge build) ---
+# Hauteur du sol des iles et du pont.
+floor-y: 100
+# Centre des iles en x : -island-distance (Rouge) et +island-distance (Bleu), z = 0.
+island-distance: 30
+# Rayon moyen des iles (le bord est irregulier de +-1,5 bloc).
+island-radius: 12
+# Demi-largeur du pont central (0 = pont d'un bloc de large, 1 = 3 blocs).
+bridge-half-width: 0
+# Hauteur du mur plein sous le pont (blocs, ligne du haut comprise).
+bridge-depth: 10
+# Salle d'attente au-dessus du centre de la map (plancher a cette hauteur).
+lobby-y: 140
+# Hauteur du plancher des cages au-dessus du sol des iles.
+cage-height: 10
+
+# --- Limites de jeu ---
+# Sous cette hauteur : mort (vide), creditee au dernier joueur qui a frappe dans les 10 s.
+void-y: 84
+# Hauteurs minimale et maximale de construction.
+build-min-y: 88
+build-max-y: 108
+# Zone de construction : |x| <= build-half-length et |z| <= build-half-width.
+build-half-length: 46
+build-half-width: 20
+# Le pont et le mur plein dessous (hors iles) se cassent a la pioche, comme sur Hypixel.
+# Ce qui est casse est remis a l'identique a la fin de la partie. false = milieu incassable.
+breakable-middle: true
+# Rayon (horizontal) autour du but adverse ou l'on ne peut pas poser de blocs.
+# Le trou des deux buts et la colonne au-dessus sont toujours interdits.
+enemy-goal-radius: 5
+# Rayon (horizontal, en blocs) de la zone de depart protegee autour du point d'apparition de chaque
+# equipe (avant de l'ile de depart et cage comprises), pour les deux equipes : aucune pose de bloc.
+# -1 = automatique, jusqu'au bord avant de l'ile cote pont (8 avec la map de base).
+spawn-protection: -1
+
+# --- Partie ---
+min-players: 2
+max-players: 8
+# Decompte quand le minimum est atteint, et quand c'est plein.
+countdown: 20
+full-countdown: 10
+goals-to-win: 5
+# Duree max (secondes) : ensuite l'equipe qui mene gagne (egalite possible).
+game-time: 900
+# Duree en cage (secondes) au debut de chaque manche.
+cage-time: 5
+# Delai (secondes) avant de reapparaitre apres une mort (spectateur au-dessus de sa base).
+respawn-delay: 3
+# Pas de coups critiques (le bonus x critical-multiplier est retire des coups en tombant).
+no-critical-hits: true
+critical-multiplier: 1.5
+# Fin de partie (secondes) avant le retour a la salle d'attente.
+end-time: 8
+
+# --- Kit ---
+# Delai (secondes) avant de recuperer sa fleche quand on n'en a plus.
+arrow-cooldown: 3.5
+golden-apples: 8
+# Nombre de stacks de 64 terracotta de l'equipe.
+block-stacks: 2
+# Niveau d'Efficacite de la pioche en diamant.
+pickaxe-efficiency: 2
+
+# --- Parties en parallele ---
+# Nombre maximal de parties en meme temps. Partie 1 = monde "world", parties suivantes = copies
+# "<world>_2", "<world>_3"... faites depuis le modele propre "<world>_modele" (refait au demarrage
+# et apres /bridge build). Une copie est supprimee quand sa partie est finie (ou vide).
+max-instances: 3

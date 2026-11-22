@@ -1,0 +1,3 @@
+# Hauteur ajoutee a l assise (blocs) si les joueurs assis sont trop hauts ou trop bas.
+assise:
+  decalage: 0.0

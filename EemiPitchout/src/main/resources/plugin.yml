@@ -1,0 +1,17 @@
+name: EemiPitchout
+version: ${project.version}
+main: fr.eemicraft.pitchout.EemiPitchout
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Pitchout d'EEMICRAFT (FFA, baton de recul, 5 vies, ne tombe pas dans le vide)
+
+commands:
+  pitchout:
+    description: Rejoindre ou gerer Pitchout
+    aliases: [pitch]
+    usage: /pitchout <join|leave|spectate [joueur]|start [n]|stop [n]|parties|map|build|reload>
+
+permissions:
+  eemipitchout.admin:
+    description: Commandes admin de Pitchout
+    default: op

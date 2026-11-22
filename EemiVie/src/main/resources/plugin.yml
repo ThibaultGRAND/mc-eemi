@@ -1,0 +1,14 @@
+name: EemiVie
+version: ${project.version}
+main: fr.eemicraft.vie.EemiVie
+api-version: '1.21'
+author: EEMICRAFT
+description: Vie du lobby (passants, animaux, s'asseoir)
+commands:
+  vie:
+    description: Vie du lobby (admin)
+    usage: /vie <status|reload|scan|pause>
+    permission: eemivie.admin
+permissions:
+  eemivie.admin:
+    default: op

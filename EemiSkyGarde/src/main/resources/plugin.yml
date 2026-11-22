@@ -1,0 +1,14 @@
+name: EemiSkyGarde
+version: ${project.version}
+main: fr.eemicraft.skygarde.EemiSkyGarde
+api-version: '1.21'
+softdepend: [Multiverse-Inventories, BentoBox]
+description: Coffre-fort de l'inventaire du skyblock (sauvegarde en sortant, restauration en revenant)
+commands:
+  skygarde:
+    description: Sauvegardes de l'inventaire du skyblock
+    usage: /skygarde <liste|restaurer|sauver|reload> [joueur] [n]
+    permission: eemiskygarde.admin
+permissions:
+  eemiskygarde.admin:
+    default: op

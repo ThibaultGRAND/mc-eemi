@@ -1,0 +1,17 @@
+name: EemiWizards
+version: ${project.version}
+main: fr.eemicraft.wizards.EemiWizards
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: TNT Wizards d'EEMICRAFT (Rouge contre Bleu, baguettes magiques, points de capture)
+
+commands:
+  tntwizards:
+    description: Rejoindre ou gerer TNT Wizards
+    aliases: [wizards]
+    usage: /tntwizards <join|leave|spectate [joueur]|classe|start [n]|stop [n]|parties|build|reload>
+
+permissions:
+  eemiwizards.admin:
+    description: Commandes admin de TNT Wizards
+    default: op

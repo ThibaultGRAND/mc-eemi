@@ -1,0 +1,59 @@
+# EemiTowers - The Towers d'EEMICRAFT
+# Map : « The Towers Remastered » (CrossFace22, d'apres The Towers de Quijx), monde "thetowers".
+# Coordonnees relevees dans le datapack d'origine (non utilise : il agirait sur tout le serveur).
+
+world: thetowers
+hub-world: lobby
+# Lobby d'attente : la salle d'accueil de la map.
+lobby: '0.5,64,1024.5,180,0'
+
+# Parties en meme temps : 1 = monde d'origine, n >= 2 = copie <world>_n faite depuis <world>_modele.
+max-instances: 3
+min-players: 2
+max-players: 16
+countdown: 30
+full-countdown: 10
+points-to-win: 10
+game-time: 1500
+end-time: 8
+# Nombre de stacks de verre (couleur de l'equipe) donnes a chaque reapparition.
+block-stacks: 3
+kill-xp-levels: 4
+
+spawn:
+  rouge: '84.5,192,1152.5,90,0'
+  bleu: '-83.5,192,1152.5,-90,0'
+# Bassin de chaque equipe (au-dessus de son spawn) : l'equipe adverse marque en y sautant.
+pool:
+  rouge: '83,200,1151,85,202,1153'
+  bleu: '-85,200,1151,-83,202,1153'
+# Zones ou l'on ne peut pas construire (spawns et cadres des bassins).
+protected:
+  - '82,192,1150,86,194,1154'
+  - '82,199,1150,86,203,1154'
+  - '-86,192,1150,-82,194,1154'
+  - '-86,199,1150,-82,203,1154'
+# Zone de jeu (au-dela : mort) et hauteur du vide.
+area: '-103,0,1122,104,268,1182'
+void-y: 160
+
+# Generateurs des tours du centre : item,x,y,z (un objet toutes les generator-interval secondes).
+generator-interval: 5
+generators:
+  - 'lapis_lazuli,0,206,1166'
+  - 'iron_ingot,0,206,1138'
+
+# Remise a zero apres chaque partie : clone de la copie de sauvegarde incluse dans la map.
+reset:
+  forceload:
+    - '-103 1122 104 1182'
+    - '-13 36 194 96'
+  sections:
+    - 'clone -13 0 36 37 268 60 -103 0 1122 replace'
+    - 'clone 37 0 36 87 268 60 -53 0 1122 replace'
+    - 'clone 87 0 36 137 268 60 -3 0 1122 replace'
+    - 'clone 137 0 36 194 268 60 47 0 1122 replace'
+    - 'clone -13 0 60 37 268 96 -103 0 1146 replace'
+    - 'clone 37 0 60 87 268 96 -53 0 1146 replace'
+    - 'clone 87 0 60 137 268 96 -3 0 1146 replace'
+    - 'clone 137 0 60 194 268 96 47 0 1146 replace'

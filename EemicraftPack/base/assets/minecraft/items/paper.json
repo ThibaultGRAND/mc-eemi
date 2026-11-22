@@ -1,0 +1,503 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "entries": [
+      {
+        "threshold": 1001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/moustache"
+        }
+      },
+      {
+        "threshold": 1002,
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/paper"
+        }
+      },
+      {
+        "threshold": 2001,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_iles"
+        }
+      },
+      {
+        "threshold": 2002,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_survie"
+        }
+      },
+      {
+        "threshold": 2003,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_equipes"
+        }
+      },
+      {
+        "threshold": 2004,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_combat"
+        }
+      },
+      {
+        "threshold": 2005,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_tnt"
+        }
+      },
+      {
+        "threshold": 2006,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_ambiance"
+        }
+      },
+      {
+        "threshold": 2007,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/cat_casino"
+        }
+      },
+      {
+        "threshold": 2008,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/hasard"
+        }
+      },
+      {
+        "threshold": 2009,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/skyblock"
+        }
+      },
+      {
+        "threshold": 2010,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/abysse"
+        }
+      },
+      {
+        "threshold": 2011,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/oneblock"
+        }
+      },
+      {
+        "threshold": 2012,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/jump"
+        }
+      },
+      {
+        "threshold": 2013,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/uhc"
+        }
+      },
+      {
+        "threshold": 2014,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/speedrun"
+        }
+      },
+      {
+        "threshold": 2015,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/bingo"
+        }
+      },
+      {
+        "threshold": 2016,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/towers"
+        }
+      },
+      {
+        "threshold": 2017,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/thebridge"
+        }
+      },
+      {
+        "threshold": 2018,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/bedwars"
+        }
+      },
+      {
+        "threshold": 2019,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/ballsofsteel"
+        }
+      },
+      {
+        "threshold": 2020,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/sheepwars"
+        }
+      },
+      {
+        "threshold": 2021,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/paintball"
+        }
+      },
+      {
+        "threshold": 2022,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/skywars"
+        }
+      },
+      {
+        "threshold": 2023,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/hungergames"
+        }
+      },
+      {
+        "threshold": 2024,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/pvp"
+        }
+      },
+      {
+        "threshold": 2025,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/pitchout"
+        }
+      },
+      {
+        "threshold": 2026,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/jumpleague"
+        }
+      },
+      {
+        "threshold": 2027,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/tntrun"
+        }
+      },
+      {
+        "threshold": 2028,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/tnttag"
+        }
+      },
+      {
+        "threshold": 2029,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/bowspleef"
+        }
+      },
+      {
+        "threshold": 2030,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/pvprun"
+        }
+      },
+      {
+        "threshold": 2031,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/tntwars"
+        }
+      },
+      {
+        "threshold": 2032,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/tntwizards"
+        }
+      },
+      {
+        "threshold": 2033,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/horscours"
+        }
+      },
+      {
+        "threshold": 2034,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/murder"
+        }
+      },
+      {
+        "threshold": 2035,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/loupgarou"
+        }
+      },
+      {
+        "threshold": 2036,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/hideseek"
+        }
+      },
+      {
+        "threshold": 2037,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/blockparty"
+        }
+      },
+      {
+        "threshold": 2038,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/buildbattle"
+        }
+      },
+      {
+        "threshold": 2039,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/boatrace"
+        }
+      },
+      {
+        "threshold": 2040,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/deacoudre"
+        }
+      },
+      {
+        "threshold": 2041,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/elytra"
+        }
+      },
+      {
+        "threshold": 2042,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/soleil"
+        }
+      },
+      {
+        "threshold": 2043,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/infection"
+        }
+      },
+      {
+        "threshold": 2044,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/dropper"
+        }
+      },
+      {
+        "threshold": 2045,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/retour"
+        }
+      },
+      {
+        "threshold": 2046,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/fermer"
+        }
+      },
+      {
+        "threshold": 2047,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/suivant"
+        }
+      },
+      {
+        "threshold": 2048,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/info"
+        }
+      },
+      {
+        "threshold": 2049,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/pieces"
+        }
+      },
+      {
+        "threshold": 2050,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/boutique"
+        }
+      },
+      {
+        "threshold": 2051,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/quetes"
+        }
+      },
+      {
+        "threshold": 2052,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/joueurs"
+        }
+      },
+      {
+        "threshold": 2053,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/classement"
+        }
+      },
+      {
+        "threshold": 2054,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/inviter"
+        }
+      },
+      {
+        "threshold": 2055,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/quitter"
+        }
+      },
+      {
+        "threshold": 2056,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/groupe"
+        }
+      },
+      {
+        "threshold": 2057,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/regarder"
+        }
+      },
+      {
+        "threshold": 2058,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/aucun"
+        }
+      },
+      {
+        "threshold": 2059,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/trainee"
+        }
+      },
+      {
+        "threshold": 2060,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/chapeau"
+        }
+      },
+      {
+        "threshold": 2061,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/titre"
+        }
+      },
+      {
+        "threshold": 2062,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/arrivee"
+        }
+      },
+      {
+        "threshold": 2063,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/gadget"
+        }
+      },
+      {
+        "threshold": 2064,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/quete_ok"
+        }
+      },
+      {
+        "threshold": 2065,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/quete"
+        }
+      },
+      {
+        "threshold": 2066,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/horloge"
+        }
+      },
+      {
+        "threshold": 2067,
+        "model": {
+          "type": "minecraft:model",
+          "model": "eemicraft:item/lobby/hasard_de"
+        }
+      },
+      {
+        "threshold": 2068,
+        "model": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/paper"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "minecraft:item/paper"
+    }
+  }
+}

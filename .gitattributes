@@ -1,0 +1,5 @@
+CLAUDE.md merge=union
+*.md merge=union
+*.jar binary
+*.zip binary
+*.png binary

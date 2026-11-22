@@ -1,0 +1,26 @@
+location: lobby:700.5:55.0:652.5
+enabled: false
+display-range: 32
+update-range: 32
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '&a&lEN DIRECT'
+    height: 0.35
+  - content: '&7Ce qui vient de se passer sur le serveur'
+    height: 0.28
+  - content: '%eemi_feed_1%'
+    height: 0.28
+  - content: '%eemi_feed_2%'
+    height: 0.28
+  - content: '%eemi_feed_3%'
+    height: 0.28
+  - content: '%eemi_feed_4%'
+    height: 0.28
+  - content: '%eemi_feed_5%'
+    height: 0.28
+  - content: '%eemi_feed_6%'
+    height: 0.28
+  actions: {}

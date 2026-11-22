@@ -1,0 +1,38 @@
+  eemicraft:
+    lobbylocation: buildbattle,-5.5,65.0,9.5,180.0,0.0
+    startlocation: buildbattle,-5.5,65.0,9.5,180.0,0.0
+    endlocation: buildbattle,-5.5,65.0,9.5,180.0,0.0
+    spectatorlocation: buildbattle,-5.5,89.0,0.5,0.0,60.0
+    minimumplayers: 2
+    maximumplayers: 8
+    plotmembersize: 1
+    mapname: Jardins d'EEMICRAFT
+    world: buildbattle
+    gametype: classic
+    isdone: true
+    signs: {}
+    plots:
+      '0':
+        '1': buildbattle,-70.0,64.0,-40.0,0.0,0.0
+        '2': buildbattle,-46.0,94.0,-16.0,0.0,0.0
+      '1':
+        '1': buildbattle,-35.0,64.0,-40.0,0.0,0.0
+        '2': buildbattle,-11.0,94.0,-16.0,0.0,0.0
+      '2':
+        '1': buildbattle,0.0,64.0,-40.0,0.0,0.0
+        '2': buildbattle,24.0,94.0,-16.0,0.0,0.0
+      '3':
+        '1': buildbattle,35.0,64.0,-40.0,0.0,0.0
+        '2': buildbattle,59.0,94.0,-16.0,0.0,0.0
+      '4':
+        '1': buildbattle,-70.0,64.0,15.0,0.0,0.0
+        '2': buildbattle,-46.0,94.0,39.0,0.0,0.0
+      '5':
+        '1': buildbattle,-35.0,64.0,15.0,0.0,0.0
+        '2': buildbattle,-11.0,94.0,39.0,0.0,0.0
+      '6':
+        '1': buildbattle,0.0,64.0,15.0,0.0,0.0
+        '2': buildbattle,24.0,94.0,39.0,0.0,0.0
+      '7':
+        '1': buildbattle,35.0,64.0,15.0,0.0,0.0
+        '2': buildbattle,59.0,94.0,39.0,0.0,0.0

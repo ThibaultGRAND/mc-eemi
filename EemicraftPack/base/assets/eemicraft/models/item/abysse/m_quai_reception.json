@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "eemicraft:item/abysse/m_quai_reception_front",
+    "south": "eemicraft:item/abysse/m_quai_reception_front",
+    "east": "eemicraft:item/abysse/m_quai_reception_side",
+    "west": "eemicraft:item/abysse/m_quai_reception_side",
+    "up": "eemicraft:item/abysse/m_quai_reception_top",
+    "down": "eemicraft:item/abysse/m_quai_reception_bottom",
+    "particle": "eemicraft:item/abysse/m_quai_reception_side"
+  }
+}

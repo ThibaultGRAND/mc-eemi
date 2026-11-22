@@ -1,0 +1,6 @@
+name: EemiBlocage
+version: ${project.version}
+main: fr.eemicraft.blocage.EemiBlocage
+api-version: '1.21'
+softdepend: [OldCombatMechanics]
+description: Blocage a l'epee facon 1.8 (sans bouclier) dans les mondes PvP ; le reste du combat est fait par OldCombatMechanics

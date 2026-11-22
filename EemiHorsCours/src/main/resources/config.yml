@@ -1,0 +1,34 @@
+# Hors Cours - version de test (prologue + Le Couloir + Loic)
+hub-world: lobby
+max-players: 4
+
+# Lampe torche : duree d'une batterie pleine (minutes), niveau de lumiere (1-15)
+lamp:
+  battery-minutes: 4
+  light-level: 13
+  pile-recharge: 50
+  blind-without-lamp: true   # sans lampe allumee : cecite (marche meme luminosite au max / fullbright)
+
+# Labyrinthe du Couloir
+maze:
+  size: 11          # cellules par cote
+  fuses: 5
+  piles: 6
+  lit-cells: 0.22   # part des cellules avec un neon au plafond
+  mannequins: 7     # mannequins de bureau qui changent de place hors de vue
+  walls-min: 18     # une cloison glisse toutes les walls-min a walls-max secondes (hors de vue)
+  walls-max: 40
+
+# Loic
+loic:
+  spawn-delay: 20   # secondes apres l'arrivee du premier joueur
+  speed: 0.62       # blocs par 2 ticks (0.62 = 6,2 blocs/s, plus vite qu'un joueur qui sprinte : 5,6)
+  catch-up-speed: 0.8
+  view-cos: 0.6     # cos de l'angle de vue (0.6 = environ 53 degres)
+  view-distance: 48
+  yaw-offset: 180   # le modele est construit face au sud : 180 pour qu'il regarde ou il va
+
+# Ambiance sonore
+music:
+  enabled: true
+  volume: 0.5

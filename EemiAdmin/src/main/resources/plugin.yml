@@ -1,0 +1,37 @@
+name: EemiAdmin
+version: ${project.version}
+main: fr.eemicraft.admin.EemiAdmin
+api-version: '1.21'
+softdepend: [Multiverse-Core, LoupGarou]
+description: Outils admin d'EEMICRAFT (vanish, outils de vanish, teleportation discrete, invsee)
+
+commands:
+  vanish:
+    description: Basculer l'invisibilite admin ou lister les admins en vanish
+    usage: /vanish [list]
+    aliases: [v]
+    permission: eemiadmin.vanish
+  admintp:
+    description: Passer en vanish puis se teleporter vers un joueur
+    usage: /admintp <joueur>
+    aliases: [atp]
+    permission: eemiadmin.vanish
+
+  invsee:
+    description: Ouvrir (et modifier) l'inventaire d'un joueur
+    usage: /invsee <joueur>
+    aliases: [inv]
+    permission: eemiadmin.vanish
+  endersee:
+    description: Ouvrir (et modifier) le coffre de l'Ender d'un joueur
+    usage: /endersee <joueur>
+    aliases: [ec]
+    permission: eemiadmin.vanish
+
+permissions:
+  eemiadmin.vanish:
+    description: Utiliser /vanish, /vanish list et /admintp
+    default: op
+  eemiadmin.see:
+    description: Voir les admins en vanish
+    default: op

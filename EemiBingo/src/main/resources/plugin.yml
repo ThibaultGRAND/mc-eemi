@@ -1,0 +1,17 @@
+name: EemiBingo
+version: ${project.version}
+main: fr.eemicraft.bingo.EemiBingo
+api-version: '1.21'
+softdepend: [Multiverse-Core, Multiverse-Inventories]
+description: EEMINGO, le Bingo d'EEMICRAFT (grille 5x5, monde aleatoire a chaque partie, items bloques)
+
+commands:
+  bingo:
+    description: Rejoindre le Bingo ou voir la grille
+    usage: /bingo <join solo|duo|quatuor | leave | grille | files | spectate [joueur] | start <mode> | stop [n] | parties | reset | buildlobby>
+    aliases: [eemingo]
+
+permissions:
+  eemibingo.admin:
+    description: Commandes admin du Bingo
+    default: op

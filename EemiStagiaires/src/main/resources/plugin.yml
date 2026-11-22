@@ -1,0 +1,14 @@
+name: EemiStagiaires
+version: ${project.version}
+main: fr.eemicraft.stagiaires.EemiStagiaires
+api-version: '1.21'
+depend: [AxMinions, AuraSkills]
+description: Stockage de 9 cases des stagiaires (AxMinions) et XP AuraSkills au retrait
+commands:
+  stagiaires:
+    description: Administration des stagiaires
+    usage: /stagiaires reload
+    permission: eemistagiaires.admin
+permissions:
+  eemistagiaires.admin:
+    default: op

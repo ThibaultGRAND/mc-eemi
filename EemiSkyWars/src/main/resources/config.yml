@@ -1,0 +1,246 @@
+# EemiSkyWars - SkyWars d'EEMICRAFT (solo) multi-map (une map tiree au hasard a chaque partie).
+# Regles d'apres le SkyWars d'Hypixel : chaque joueur part de son ile (attente dans la cage de la map),
+# coffres d'ile / d'ilots / du centre (meilleur loot au centre), tous les blocs se cassent et se posent,
+# deux remplissages des coffres (le 2e ajoute des perles de l'Ender), puis « Doom » et fin a egalite.
+# Toute la map est remise en etat a la fin de chaque partie.
+
+hub-world: lobby
+
+# Parties en meme temps. Partie 1 = monde d'origine de la map, partie n = copie « monde_n » faite depuis
+# « monde_modele » (ex. skywars_2, sw_twister_3), supprimee quand elle ne sert plus.
+max-instances: 3
+
+min-players: 2
+countdown: 30
+full-countdown: 10
+# Temps sans degats de chute apres l'ouverture des cages (la cage est a ~11 blocs au-dessus de l'ile).
+no-fall-time: 6
+
+# Deroulement (secondes apres l'ouverture des cages) - comme Hypixel : remplissages, Doom, fin.
+refill-1: 300
+refill-2: 600
+doom: 900
+# Doom : duree du resserrement de la bordure (taille finale : doom-border-size de la map).
+doom-shrink-time: 180
+game-end: 1200
+end-time: 10
+
+# Aide a l'ajout de map (/skywars scanchests) : rayon du scan autour du centre, coffres a moins de
+# scan-center-radius du centre = « center », a moins de scan-island-radius d'une cage = « island », sinon « mid ».
+scan-radius: 150
+scan-center-radius: 20
+scan-island-radius: 15
+
+# Kits au choix (objet « Choisir un kit » pendant l'attente), ajoutes a l'inventaire a l'ouverture des cages.
+# items : « MATERIAL quantite », enchantements « MATERIAL:ENCHANT:NIVEAU[:ENCHANT:NIVEAU] quantite »,
+# potions « POTION:TYPE quantite » (SPLASH_POTION, LINGERING_POTION aussi). effects : « EFFET secondes niveau ».
+# permission (optionnelle) : kit utilisable seulement avec cette permission (deverrouillage EemiCore).
+default-kit: defaut
+kits:
+  defaut:
+    name: Défaut
+    icon: WOODEN_SWORD
+    description: [ "Une épée en bois pour commencer." ]
+    items: [ "WOODEN_SWORD 1" ]
+  archer:
+    name: Archer
+    icon: BOW
+    description: [ "Un arc et 8 flèches." ]
+    items: [ "BOW 1", "ARROW 8" ]
+  batisseur:
+    name: Bâtisseur
+    icon: OAK_PLANKS
+    description: [ "64 planches et une pioche en pierre", "pour filer vers le centre." ]
+    items: [ "OAK_PLANKS 64", "STONE_PICKAXE 1" ]
+  fermier:
+    name: Fermier
+    icon: EGG
+    description: [ "16 œufs et une pomme d'or." ]
+    items: [ "EGG 16", "GOLDEN_APPLE 1" ]
+  enchanteur:
+    name: Enchanteur
+    icon: EXPERIENCE_BOTTLE
+    description: [ "16 fioles d'expérience." ]
+    items: [ "EXPERIENCE_BOTTLE 16" ]
+  pyro:
+    name: Pyro
+    icon: FLINT_AND_STEEL
+    description: [ "Un briquet et un seau de lave." ]
+    items: [ "FLINT_AND_STEEL 1", "LAVA_BUCKET 1" ]
+  tank:
+    name: Tank
+    icon: LEATHER_CHESTPLATE
+    description: [ "Un plastron en cuir Protection I." ]
+    items: [ "LEATHER_CHESTPLATE:protection:1 1" ]
+
+# Maps (une tiree au hasard a chaque partie, jamais deux fois de suite la meme ; /skywars map <id> pour forcer).
+#   center : centre de la map (ile centrale) et point des spectateurs ; border-center x,z et border-size :
+#   bordure de la partie ; doom-border-size : taille finale au Doom ; void-y : on meurt en dessous.
+#   cages : « x,z » (plancher de verre en cage-floor-y) ou « x,y,z » (y = plancher de verre, comme /skywars addcage).
+#   chests : « x y z type » (island = ile de depart, mid = ilots, center = ile centrale).
+# Nouvelle map : /skywars editmap <id> [monde], /skywars setcenter, /skywars addcage (dans chaque cage),
+# /skywars scanchests [rayon] ; le plugin enregistre tout ici.
+maps:
+  sugarrush:
+    name: Sugar Rush
+    world: skywars
+    center: 0.5,147,162.5
+    border-center: 0,162
+    border-size: 260
+    doom-border-size: 24
+    void-y: 40
+    # Cages de la map : plancher de verre en y 111 (pieds en y 112), murs y 112-114, toit y 115.
+    cage-floor-y: 111
+    cages:
+    - "-70,161"
+    - "-64,135"
+    - "-64,187"
+    - "-50,209"
+    - "-48,111"
+    - "-26,97"
+    - "-26,225"
+    - "0,91"
+    - "0,231"
+    - "26,97"
+    - "26,225"
+    - "49,112"
+    - "49,210"
+    - "64,135"
+    - "64,187"
+    - "70,161"
+    chests:
+    - "-48 95 111 island"
+    - "-26 95 97 island"
+    - "-26 91 99 island"
+    - "-48 91 113 island"
+    - "-64 94 135 island"
+    - "-64 90 137 island"
+    - "-21 93 142 mid"
+    - "-7 92 129 mid"
+    - "-2 119 154 center"
+    - "-70 91 163 island"
+    - "-70 95 161 island"
+    - "-31 92 160 mid"
+    - "-11 104 163 center"
+    - "-1 119 168 center"
+    - "-2 93 160 center"
+    - "-16 92 164 mid"
+    - "-64 91 189 island"
+    - "-64 95 187 island"
+    - "-9 92 185 mid"
+    - "-50 95 209 island"
+    - "-50 91 211 island"
+    - "-26 95 225 island"
+    - "-26 91 227 island"
+    - "0 91 93 island"
+    - "0 95 91 island"
+    - "26 91 99 island"
+    - "26 95 97 island"
+    - "49 95 112 island"
+    - "49 91 114 island"
+    - "15 92 139 mid"
+    - "64 95 135 island"
+    - "64 91 137 island"
+    - "14 92 154 mid"
+    - "0 142 161 center"
+    - "7 92 175 center"
+    - "33 92 161 mid"
+    - "70 95 161 island"
+    - "70 91 163 island"
+    - "5 118 178 mid"
+    - "22 91 176 mid"
+    - "64 91 189 island"
+    - "64 95 187 island"
+    - "49 95 210 island"
+    - "49 91 212 island"
+    - "0 95 231 island"
+    - "0 91 233 island"
+    - "26 91 227 island"
+    - "26 95 225 island"
+  twister:
+    name: Twister
+    world: sw_twister
+    center: 0.5,113,160.5
+    border-center: 0,160
+    border-size: 130
+    doom-border-size: 24
+    void-y: 60
+    # cages construites par le plugin (plancher = sol de l'ile, y 102)
+    cages:
+    - "43,102,167"
+    - "37,102,183"
+    - "27,102,196"
+    - "11,102,202"
+    - "-7,102,203"
+    - "-23,102,197"
+    - "-36,102,187"
+    - "-42,102,171"
+    - "-43,102,153"
+    - "-36,102,136"
+    - "-27,102,124"
+    - "-11,102,118"
+    - "7,102,117"
+    - "23,102,123"
+    - "36,102,133"
+    - "42,102,149"
+    chests:
+    - "-24 100 124 island"
+    - "-27 107 121 island"
+    - "-26 100 124 island"
+    - "-10 100 118 island"
+    - "-8 100 118 island"
+    - "-11 107 115 island"
+    - "-36 100 136 island"
+    - "-36 100 134 island"
+    - "-45 107 153 island"
+    - "-42 100 152 island"
+    - "-42 100 150 island"
+    - "-45 107 171 island"
+    - "-42 100 168 island"
+    - "-42 100 170 island"
+    - "-36 100 186 island"
+    - "-36 100 184 island"
+    - "-26 100 196 island"
+    - "-23 107 199 island"
+    - "-24 100 196 island"
+    - "-7 107 205 island"
+    - "-8 100 202 island"
+    - "-10 100 202 island"
+    - "8 100 118 island"
+    - "10 100 118 island"
+    - "7 107 115 island"
+    - "24 100 124 island"
+    - "26 100 124 island"
+    - "23 107 121 island"
+    - "39 107 133 island"
+    - "36 100 134 island"
+    - "36 100 136 island"
+    - "45 107 149 island"
+    - "42 100 152 island"
+    - "42 100 150 island"
+    - "42 100 170 island"
+    - "45 107 167 island"
+    - "42 100 168 island"
+    - "39 107 183 island"
+    - "36 100 186 island"
+    - "36 100 184 island"
+    - "10 100 202 island"
+    - "8 100 202 island"
+    - "11 107 205 island"
+    - "27 107 199 island"
+    - "26 100 196 island"
+    - "24 100 196 island"
+    - "-18 172 157 mid"
+    - "-1 139 152 mid"
+    - "-7 104 172 mid"
+    - "6 104 148 mid"
+    - "2 161 151 mid"
+    - "3 172 169 mid"
+    - "4 138 171 mid"
+    - "3 172 168 mid"
+    - "8 141 161 mid"
+    - "16 104 161 mid"
+    - "-3 103 162 center"
+    - "1 102 158 center"
+    - "0 112 161 center"
+    - "3 103 162 center"

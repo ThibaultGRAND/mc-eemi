@@ -1,0 +1,7 @@
+{
+  "parent": "eemicraft:item/paintball/grenade",
+  "textures": {
+    "corps": "eemicraft:item/paintball/grenade_rouge",
+    "particle": "eemicraft:item/paintball/grenade_rouge"
+  }
+}

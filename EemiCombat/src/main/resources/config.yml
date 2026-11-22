@@ -1,0 +1,17 @@
+# Mondes ou le combat suit les regles de la 1.8 (BedWars, Towers, Sheep Wars, Balls of Steel, duels)
+worlds: [bw1, bw2, bw3, bw4, bw5, thetowers, sheepwars, ballsofsteel, duels]
+# Regeneration naturelle 1.8 (1 PV toutes les 4 s si la faim est a 9 cuisses ou plus) au lieu de la regen rapide moderne
+old-regen: true
+# Particules et son de critique quand le coup est critique en 1.8 mais pas en vanilla (critique en sprintant)
+crit-effects: true
+# Recul. 1.8 vanilla : horizontal 0.4, vertical 0.4, vertical-limit 0.4, extra 0.5 / 0.1, friction 2.
+# Valeurs "practice" (citees par OldCombatMechanics) : 0.35 / 0.35 / 0.4 / 0.425 / 0.085.
+# friction : la vitesse actuelle de la victime est divisee par ce nombre avant d'ajouter le recul.
+# /combat reload pour appliquer sans redemarrer.
+knockback:
+  horizontal: 0.35
+  vertical: 0.35
+  vertical-limit: 0.4
+  extra-horizontal: 0.425
+  extra-vertical: 0.085
+  friction: 2.0

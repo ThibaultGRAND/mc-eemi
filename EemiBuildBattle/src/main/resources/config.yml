@@ -1,0 +1,11 @@
+# EemiBuildBattle - complements pour Build Battle (Plugily Projects)
+# Pendant la construction, chaque joueur ne voit plus les autres joueurs de sa partie (ils reapparaissent
+# pour le vote). Un objet « Je suis pret » est donne pendant la construction : quand tous les joueurs
+# de la partie sont prets, le temps restant est ramene a ready-timer secondes.
+
+# Emplacement de l'objet dans la barre (0-8 ; le plugin Build Battle utilise deja le slot 8).
+ready-slot: 7
+# Temps restant (secondes) quand tout le monde est pret.
+ready-timer: 5
+# Cacher les autres joueurs pendant la construction.
+hide-players: true

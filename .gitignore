@@ -1,0 +1,11 @@
+target/
+target_*/
+*.class
+a_deposer/maps/
+maps/
+maps_refuge/
+*.zip
+!a_deposer/EemicraftPack.zip
+!EemicraftPack/publie/*.zip
+.claude/settings.local.json
+__pycache__/

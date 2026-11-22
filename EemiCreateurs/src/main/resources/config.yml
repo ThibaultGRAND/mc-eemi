@@ -1,0 +1,45 @@
+# Monde de l'arbre (le lobby)
+world: lobby
+# Les animations ne tournent que si un joueur est a moins de ce rayon (blocs) de l'arbre
+radius: 40
+# Temps entre deux animations d'un meme createur, en ticks (20 = 1 s), tire au hasard
+interval-min: 60
+interval-max: 160
+# Distance (blocs) de la petite course devant soi : attention au bord des branches
+run-distance: 1.2
+# Volume des petits sons (1.0 = normal)
+sound-volume: 0.4
+
+# Un createur par pseudo : skin et nom affiche = le pseudo. yaw = direction du regard au repos
+# (0 = sud, 90 = ouest, 180 = nord, -90 = est). /createurs pos <pseudo> en jeu pour le placer ici.
+createurs:
+  Enosik:
+    x: 6.19
+    y: 34.0
+    z: -99.44
+    yaw: -24.6
+  BanTeEs:
+    x: 3.19
+    y: 32.0
+    z: -94.66
+    yaw: -55.8
+  Qorwinn:
+    x: 11.4
+    y: 33.0
+    z: -99.16
+    yaw: -10.0
+  MaZd_:
+    x: 14.21
+    y: 29.0
+    z: -98.15
+    yaw: -4.1
+  LivrePoche:
+    x: 4.87
+    y: 26.0
+    z: -98.98
+    yaw: -44.2
+  LABaleineMC:
+    x: 8.33
+    y: 26.0
+    z: -95.62
+    yaw: -16.0

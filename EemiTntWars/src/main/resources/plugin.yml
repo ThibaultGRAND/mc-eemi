@@ -1,0 +1,17 @@
+name: EemiTntWars
+version: ${project.version}
+main: fr.eemicraft.tntwars.EemiTntWars
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: TNT Wars d'EEMICRAFT (Rouge contre Bleu, canons a TNT de part et d'autre d'un canal)
+
+commands:
+  tntwars:
+    description: Rejoindre ou gerer TNT Wars
+    aliases: [tw]
+    usage: /tntwars <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+
+permissions:
+  eemitntwars.admin:
+    description: Commandes admin de TNT Wars
+    default: op

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "eemicraft:item/casino/icone/num_30"
+  }
+}

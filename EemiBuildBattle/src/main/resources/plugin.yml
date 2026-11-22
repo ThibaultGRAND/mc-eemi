@@ -1,0 +1,6 @@
+name: EemiBuildBattle
+version: ${project.version}
+main: fr.eemicraft.buildbattle.EemiBuildBattle
+api-version: '1.21'
+depend: [BuildBattle]
+description: Complements EEMICRAFT pour Build Battle (Plugily) - joueurs caches pendant la construction, objet « Je suis pret »

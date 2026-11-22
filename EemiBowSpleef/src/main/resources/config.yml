@@ -1,0 +1,77 @@
+# EemiBowSpleef - Bow Spleef d'EEMICRAFT (TNT Games d'Hypixel).
+# Chacun pour soi sur un sol de blocs de TNT (3 etages) au-dessus du vide, sous un chapiteau de cirque.
+# Arc Infinite + Flamme : une fleche qui touche la TNT de l'arene la fait disparaitre (avec ses voisines).
+# Marcher sur la TNT ne fait rien. Aucun degat entre joueurs ; une fleche qui touche un joueur le repousse.
+# Tomber sous le dernier etage = elimine (spectateur). Dernier debout gagnant.
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: bowspleef
+# Nombre maximal de parties en meme temps. Partie 1 = monde ci-dessus, parties 2..n = copies
+# <world>_2, <world>_3... du modele <world>_modele (copie propre de la partie 1).
+max-instances: 3
+# Monde du hub (retour par son point de spawn).
+hub-world: lobby
+# Heure fixe du monde (6000 = midi ; l'arene est sous un chapiteau eclaire).
+time: 6000
+
+# ---------------------------------------------------------------- arene
+# L'arene est reconstruite au demarrage si l'une de ces valeurs a change (sinon seule la TNT est remise).
+# Rayon des disques de TNT (centres en x 0, z 0).
+radius: 18
+# Hauteur de l'etage du haut, nombre d'etages et ecart entre deux etages (100, 90, 80 par defaut).
+floor-y: 100
+floors: 3
+floor-gap: 10
+# Tomber death-margin blocs sous le dernier etage = elimine (75 par defaut).
+death-margin: 5
+# Hauteur du sol de la salle d'attente (au-dessus du chapiteau).
+lobby-y: 140
+# Un joueur en vie qui s'eloigne de plus de radius + boundary-margin blocs du centre est repousse vers l'arene
+# (le decor du chapiteau ne doit pas servir de refuge).
+boundary-margin: 6
+
+# ---------------------------------------------------------------- partie
+min-players: 2
+max-players: 16
+# Decompte avant le debut (secondes), raccourci a full-countdown quand la partie est pleine.
+countdown: 20
+full-countdown: 10
+# Secondes d'immobilite au debut de la partie (3, 2, 1, GO).
+freeze-time: 3
+# Duree maximale de la partie (secondes, 8 min). Ensuite : egalite entre les survivants.
+game-time: 480
+# Duree de l'ecran de fin avant le retour en salle d'attente (secondes).
+end-time: 8
+# Le dernier joueur qui t'a touche d'une fleche, ou qui a detruit la TNT sous tes pieds, dans ce delai
+# (secondes) est credite du kill quand tu tombes.
+kill-credit-time: 8
+
+# ---------------------------------------------------------------- fleches
+# Rayon de destruction autour du bloc touche (0 = seulement ce bloc), sur le meme etage.
+# break-shape : carre (rayon 1 = 3x3, 9 blocs), croix (rayon 1 = 5 blocs en +), rond (disque).
+break-radius: 1
+break-shape: carre
+# Recul d'une fleche qui touche un joueur (aucun degat) : horizontal, vertical.
+arrow-knockback: 0.6
+arrow-knockback-y: 0.3
+
+# ---------------------------------------------------------------- capacites
+# Triple tir (clic droit avec le baton de blaze) : le prochain tir part en 3 fleches en eventail.
+triple-cooldown: 10
+# Angle entre la fleche du milieu et chaque fleche laterale (degres).
+triple-angle: 12
+# Double saut (appuyer deux fois sur saut) : nombre par partie, elan horizontal, hauteur.
+double-jumps: 3
+double-jump-power: 0.8
+double-jump-height: 0.8
+
+# ---------------------------------------------------------------- mort subite
+# A partir de sudden-death-time secondes de jeu (3 min), des blocs de TNT au hasard disparaissent :
+# sudden-death-base blocs par seconde, +sudden-death-increase toutes les sudden-death-step secondes,
+# au plus sudden-death-max par seconde. Chaque bloc fume sudden-death-warning secondes avant de partir.
+sudden-death-time: 180
+sudden-death-base: 2
+sudden-death-step: 15
+sudden-death-increase: 1
+sudden-death-max: 30
+sudden-death-warning: 1

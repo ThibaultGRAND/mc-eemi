@@ -1,0 +1,146 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "": -8,
+        "": -169
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_selector.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_iles.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_survie.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_equipes.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_combat.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_tnt.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_ambiance.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_profile.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_players.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_toplevel.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_shop.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_shopcat.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_quests.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_party.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/lobby/bg_pinvite.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    }
+  ]
+}

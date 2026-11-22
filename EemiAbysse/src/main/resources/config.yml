@@ -1,0 +1,97 @@
+# L'Abysse - voir CONCEPTION.md dans le source
+
+# Eclats donnes a une nouvelle Compagnie
+start-money: 200
+# Membres max d'une Compagnie
+compagnie-max: 4
+# L'usine et les foreuses tournent encore ce nombre d'heures apres la deconnexion du dernier membre
+offline-hours: 12
+# Strate videe de ses joueurs : dechargee apres ce nombre de minutes
+strate-unload-minutes: 5
+# Secondes de lampe par charbon brule
+lampe-secondes-par-charbon: 90
+
+hub:
+  # Bordgouffre est construite par le plugin (mettre false si les builders la refont a la main)
+  build: true
+
+bourse:
+  # (anciennes cles plancher / demi-vie-heures : plus lues depuis la refonte de la bourse)
+  # le cours tend vers ce plancher (fois le prix de base) sans l'atteindre : la baisse ralentit en approchant
+  plancher-doux: 0.62
+  plafond: 3.0
+  # la pression des ventes est divisee par 2 en ce nombre d'heures
+  remontee-heures: 2.5
+  # pression ajoutee par unite vendue = 1 / (1 + normalisation x (joueurs actifs dans l'Abysse - 1))
+  normalisation: 0.5
+  # au-dela de pression-heure x elasticite ajoutee dans l'heure, chaque vente ne compte que pour au-dela
+  pression-heure: 0.5
+  au-dela: 0.25
+  # pression maximale (fois l'elasticite) : borne le temps de remontee
+  pression-max: 3.0
+  # acheter coute ce facteur fois le meilleur prix de vente possible (cours, base x gains, commande du jour)
+  achat: 1.25
+  # commandes du jour en meme temps
+  commandes: 2
+
+machines:
+  # objets par seconde dans une liaison d'entonnoirs
+  debit: 4
+  # objets par seconde sur une ligne de convoyeurs
+  debit-convoyeur: 8
+  # capacite de l'entrepot
+  entrepot: 2000
+  # machines qui fabriquent (et generateurs) : au plus N de chaque objet dans l'entree ; au-dela, l'objet attend
+  # en amont (sortie de la machine precedente, entonnoir, sac) au lieu de prendre la place des autres ingredients
+  input-cap: 64
+  # une foreuse extrait un minerai toutes les N secondes (avant le bonus d'Ingenieur)
+  foreuse-secondes: 20
+
+convoyeurs:
+  # prix de 16 convoyeurs chez Margaux
+  prix-16: 80
+
+minerais:
+  # un minerai casse dans une strate repousse apres ce nombre de secondes (plus ou moins 25 %)
+  regeneration-secondes: 180
+  # bloc pose en attendant (incassable de preference)
+  bloc-epuise: BEDROCK
+
+reset:
+  # les strates sont remises a neuf (monde supprime puis regenere) a ces heures
+  actif: true
+  horaires: ["12:00", "21:30"]
+  fuseau: Europe/Paris
+
+mobs:
+  max-par-strate: 70
+  max-par-joueur: 6
+  # 2.5.1 (#57) : tout est optionnel, les valeurs ci-dessous sont les defauts du code.
+  # PV d'un monstre par id (strate 4 : noye 72, archer_cristal 54, tourbillon 60 ; strate 5 : rodeur_neant 90, mite 35, tourelle 70)
+  # pv:
+  #   noye: 72
+  # armure des monstres par strate (3 : 8, 4 : 8, 5 : 10)
+  # armure:
+  #   '4': 8
+  # resistance au recul par strate (3 : 0.4, 4 : 0.4, 5 : 0.5)
+  # recul:
+  #   '4': 0.4
+  # monstres en plus de max-par-joueur autour d'un joueur, par strate (3 : 3, 4 : 2, 5 : 2)
+  # bonus-par-joueur:
+  #   '4': 2
+
+gardiens:
+  # sbires vivants invoques par un gardien en meme temps : max-sbires + sbires-par-joueur par joueur en plus dans l'antre,
+  # jamais plus de max-sbires-absolu (au-dela, le gardien n'invoque que la difference, ou rien)
+  max-sbires: 6
+  sbires-par-joueur: 2
+  max-sbires-absolu: 12
+
+carnets:
+  # chance (en %) qu'un campement abandonne contienne une page
+  chance: 40
+  # apres ce nombre de tonneaux ouverts sans page, le suivant en donne une (s'il reste des pages a trouver)
+  garantie: 3
+  # pendant une quete de pages : fleche vers le campement le plus proche a fouiller (rayon en blocs)
+  indice: true
+  indice-rayon: 160

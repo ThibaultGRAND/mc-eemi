@@ -1,0 +1,22 @@
+name: EemiRefuge
+version: ${project.version}
+main: fr.eemicraft.refuge.EemiRefuge
+api-version: '1.21'
+description: Dernier Refuge (mode zombie coop) - Refuge, expéditions, salle d'essai admin
+softdepend: [Multiverse-Core, EemiCore]
+
+commands:
+  refuge:
+    description: Dernier Refuge
+    usage: /refuge
+
+permissions:
+  eemirefuge.play:
+    description: Jouer à Dernier Refuge (Refuge, escouades, expéditions)
+    default: true
+  eemirefuge.essai:
+    description: Salle d'essai de Dernier Refuge (/refuge essai), sans les autres commandes admin
+    default: op
+  eemirefuge.admin:
+    description: Salle d'essai, expéditions et zones (commandes admin) de Dernier Refuge
+    default: op

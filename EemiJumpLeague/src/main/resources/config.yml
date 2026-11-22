@@ -1,0 +1,55 @@
+# EemiJumpLeague - JumpLeague d'EEMICRAFT (facon GommeHD).
+# 1) Parcours : chacun son couloir (12 couloirs identiques), 10 modules de plus en plus durs
+#    (3 faciles, 3 normaux, 3 difficiles, 1 ultra), un checkpoint a la fin de chaque module et un
+#    coffre de l'Ender par module (meilleur equipement dans les modules durs). Tomber = retour au
+#    dernier checkpoint. Finir le parcours = bottes en diamant ; le finir sans jamais tomber = casque
+#    en diamant en plus (ni l'un ni l'autre dans les coffres).
+# 2) Deathmatch : des que le temps est ecoule ou que le premier joueur a fini. On garde son equipement,
+#    3 vies chacun, le dernier en vie gagne. Si personne n'a gagne a 60 s de la fin, un phare s'allume
+#    sur l'un des 3 points de l'arene : a la fin, le joueur dans le cercle qui a le plus de kills gagne.
+# Le parcours est tire au hasard a chaque partie (nouvelle graine), le meme pour tous les couloirs.
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: jumpleague
+# Nombre maximal de parties en meme temps. Partie 1 = monde ci-dessus, parties 2..n = copies
+# <world>_2, <world>_3... du modele <world>_modele (copie propre de la partie 1).
+max-instances: 3
+# Monde du hub (retour par son point de spawn).
+hub-world: lobby
+# Heure fixe du monde (6000 = midi).
+time: 6000
+
+# Sol de l'arene du deathmatch (le parcours part de y 100 lui aussi).
+floor-y: 100
+# Sol de la salle d'attente.
+lobby-y: 170
+
+# ---------------------------------------------------------------- partie
+min-players: 2
+# 12 au plus (un couloir par joueur).
+max-players: 12
+# Decompte avant le debut (secondes), raccourci a full-countdown quand la partie est pleine.
+countdown: 20
+full-countdown: 10
+# Secondes d'immobilite au depart du parcours (3, 2, 1, GO).
+freeze-time: 3
+# Duree du parcours (secondes, 660 = 11 min).
+jump-time: 660
+# Secondes laissees aux autres apres le premier arrive avant le deathmatch (0 = tout de suite, comme
+# la regle d'origine).
+finish-grace: 0
+# Secondes d'immobilite au debut du deathmatch.
+deathmatch-freeze: 5
+# Duree du deathmatch (secondes).
+deathmatch-time: 300
+# Le phare s'allume quand il reste beacon-time secondes ; rayon du cercle (blocs).
+beacon-time: 60
+beacon-radius: 6
+# Vies au deathmatch.
+lives: 3
+# Invulnerabilite apres une reapparition au deathmatch (secondes).
+respawn-protection: 3
+# Le dernier joueur qui t'a frappe dans ce delai (secondes) est credite du kill si tu tombes de l'arene.
+kill-credit-time: 10
+# Duree de l'ecran de fin avant le retour en salle d'attente (secondes).
+end-time: 8

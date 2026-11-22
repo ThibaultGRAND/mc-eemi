@@ -1,0 +1,95 @@
+# EemiDroits : droits des joueurs, mondes et jeux interdits, jeux en bêta et en maintenance.
+# Les droits sont des permissions LuckPerms (globales) : ils sont reconnus par tous les plugins.
+# Les jeux sont lus dans plugins/EemiCore/config.yml (section games) à chaque /droits reload.
+
+# Monde du hub et position de renvoi quand un joueur se trouve dans un monde qui lui est interdit.
+# position-hub : "monde x y z [yaw pitch]" ; vide = spawn du monde-hub.
+monde-hub: lobby
+position-hub: "lobby 722.5 51 650.5"
+
+# Mondes qu'on ne peut jamais interdire (sinon le joueur n'aurait plus nulle part où aller).
+mondes-proteges: [lobby]
+
+# Annonce aux joueurs connectés quand un jeu passe en bêta ou rouvre (la maintenance est annoncée par EemiCore).
+annonces: true
+
+# Tag affiché par %eemidroits_tag% (à mettre dans le préfixe de TAB si on veut le voir dans la liste des joueurs).
+tag-beta: "&d[Bêta] "
+
+# Commande lancée par le joueur quand son entrée dans un monde de jeu est refusée alors que le jeu l'a déjà
+# inscrit (cas des PNJ et menus qui lancent le join sans passer par le chat). Absente = déduite du join
+# ("murder join" -> "murder leave"). "" = rien.
+sortie:
+  bedwars: "bw leave"
+
+# Jeux en plus de ceux d'EemiCore (même format : name, icon, join, join-aliases, spectate, worlds).
+jeux-supplementaires: {}
+
+# Droits proposés dans la fiche d'un joueur. Clic gauche = accorder / retirer, clic droit = refuser
+# explicitement / retirer. Un droit = une ou plusieurs permissions.
+droits:
+  vanish:
+    nom: "Vanish et outils d'admin"
+    icone: ENDER_EYE
+    description: "/vanish, /admintp, /invsee, /endersee"
+    permissions: [eemiadmin.vanish, eemiadmin.see]
+  maintenance:
+    nom: "Jeux en maintenance et en bêta"
+    icone: ANVIL
+    description: "Peut entrer dans tous les jeux, même fermés"
+    permissions: [eemidroits.bypass, eemicore.maintenance.bypass]
+  gestion:
+    nom: "Gérer les droits"
+    icone: COMPARATOR
+    description: "Accès à /droits"
+    permissions: [eemidroits.admin]
+  construire-lobby:
+    nom: "Construire au lobby"
+    icone: BRICKS
+    description: "Passe outre la protection WorldGuard du lobby"
+    permissions: [worldguard.region.bypass.lobby]
+  worldedit:
+    nom: "WorldEdit / FAWE"
+    icone: WOODEN_AXE
+    description: "Toutes les commandes //"
+    permissions: [worldedit.*]
+  gamemode:
+    nom: "Changer de mode de jeu"
+    icone: GRASS_BLOCK
+    description: "/gamemode"
+    permissions: [minecraft.command.gamemode]
+  teleport:
+    nom: "Se téléporter"
+    icone: ENDER_PEARL
+    description: "/tp"
+    permissions: [minecraft.command.teleport]
+  meubles:
+    nom: "Poser des meubles"
+    icone: OAK_STAIRS
+    description: "/meubles (EemiMeubles)"
+    permissions: [eemimeubles.build]
+  refuge:
+    nom: "Dernier Refuge (test)"
+    icone: ROTTEN_FLESH
+    description: "/refuge"
+    permissions: [eemirefuge.play]
+  horscours:
+    nom: "Hors Cours (test)"
+    icone: LANTERN
+    description: "/horscours join"
+    permissions: [eemihorscours.play]
+  tir:
+    nom: "Régler le stand de tir"
+    icone: TARGET
+    description: "/tir zone, /tir reset"
+    permissions: [eemitir.admin]
+  renommer:
+    nom: "Se renommer"
+    icone: NAME_TAG
+    description: "/rename <prénom> (nom affiché)"
+    permissions: [eeminoms.self]
+  renommer-admin:
+    nom: "Renommer les autres"
+    icone: WRITABLE_BOOK
+    description: "/rename <joueur> <nom>, /rename droit"
+    permissions: [eeminoms.admin]

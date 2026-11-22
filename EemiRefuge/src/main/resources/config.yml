@@ -1,0 +1,77 @@
+# Dernier Refuge : salle d'essai admin (monde refuge_essai) et expeditions (etape 1).
+
+# Pack de textures propre au mode, envoye a chaque joueur a la connexion EN PLUS du pack EEMICRAFT
+# (packs empiles, UUID fixe). Il n'est jamais retire au changement de monde.
+pack:
+  # A passer a true une fois RefugePack.zip publie a l URL ci-dessous (et le SHA-1 a jour).
+  enabled: false
+  url: "https://eemicraft.strator.gg/pack/RefugePack.zip"
+  sha1: "78643645fedf189d20984b8af8f4becfbf6a9e36"
+  # monde : charge seulement dans les mondes du mode (retire en sortant, peut retexturer des blocs) ;
+  # connexion : charge a la connexion, jamais retire.
+  mode: monde
+  # Prefixes des noms de mondes ou le pack est charge.
+  mondes: [refuge]
+  # Delai apres la connexion (ticks), pour passer apres le pack du serveur.
+  delay-ticks: 40
+
+essai:
+  # Heure fixe du monde d'essai (6000 = midi, 18000 = minuit).
+  time: 6000
+  # Passer les admins en survie en entrant (sinon les zombies ne les attaquent pas).
+  survival-on-enter: true
+
+# Expeditions (etape 1). Les zones sont dans plugins/EemiRefuge/zones/<id>.yml, le butin dans loot.yml.
+expeditions:
+  # Instances par zone : 1 = monde d'origine, 2..n = copies refaites a neuf depuis <monde>_modele.
+  max-instances: 3
+  # Temps en secondes depuis l'arrivee.
+  duree:
+    maree: 900              # la Maree monte (hordes de plus en plus frequentes)
+    horde-permanente: 1200
+    brume: 1500             # brume noire mortelle (degats croissants + Darkness)
+    brume-fatale: 120       # apres la brume : tous ceux qui restent meurent
+  hordes:
+    premiere: 240
+    intervalle: 300         # avant la Maree
+    maree-debut: 150        # intervalle au debut de la Maree...
+    maree-fin: 45           # ... et a 20 min
+    permanente: 12          # une petite vague toutes les N s pendant la horde permanente
+  zombies:
+    grace: 20               # pas de zombie les N premieres secondes
+    max-total: 80           # plafond de zombies dans une instance
+    despawn: 96             # retires au-dela de N blocs de tous les joueurs
+  extraction:
+    duree-min: 45
+    duree-max: 90
+    vague: 10               # ecart entre deux vagues pendant l'attente (s)
+    vagues: 1               # nombre de vagues par extraction (puis plus rien n'apparait autour du cercle)
+    zombies: 8              # zombies par vague (une zone peut surcharger : extraction-vagues / extraction-zombies)
+    accroupi: 3             # secondes accroupi dans le cercle pour allumer la fusee sans fusee
+  a-terre:
+    duree: 40
+    releve: 4               # secondes accroupi a cote pour relever
+    pv-releve: 0.3
+    max: 2                  # mises a terre survecues ; la suivante tue
+  fouille:
+    min-ticks: 20
+    max-ticks: 40
+  butin:
+    # Types de supports marques jamais remplis (mecanismes du decor, entites, supports sans menu).
+    types-ignores: [entonnoir, hopper, distributeur, dispenser, dropper, porte_armure, armor_stand, cadre, item_frame, feu_de_camp, campfire, pupitre, lectern]
+  xp:
+    kill: 2
+    releve: 5
+    minute: 1
+    extraction: 25
+    mort: 5
+  eemicore:
+    kills-max: 10           # recompenses EemiCore "kill" par joueur et par expedition
+
+# 0.2.2 : saignement des Coureurs (chance par coup, durée en secondes, 1 PV toutes les `intervalle` s).
+saignement:
+  chance: 0.35
+  chance-elite: 0.5
+  duree: 9
+  duree-elite: 12
+  intervalle: 3

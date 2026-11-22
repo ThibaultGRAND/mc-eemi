@@ -1,0 +1,86 @@
+# EemiBoatRace - course de bateaux sur glace d'EEMICRAFT.
+# Circuit ferme en glace bleue construit par le plugin. Chaque joueur part dans un bateau depuis la
+# grille de depart (cages ouvertes au feu vert). Il faut passer tous les points de controle dans
+# l'ordre pour valider un tour (pas de raccourci). Le premier a finir les tours gagne ; les autres
+# ont alors finish-grace secondes pour terminer. Touche F ou objet "Revenir" = retour au dernier
+# point de controle (aussi automatique hors piste, hors du bateau ou bloque).
+
+# Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
+world: boatrace
+# Monde du hub (retour par son point de spawn).
+hub-world: lobby
+# Heure fixe du monde (6000 = midi).
+time: 6000
+
+# ---------------------------------------------------------------- circuit
+# Circuits importes (mondes importes tels quels avec /mv import <monde> normal) :
+#   cosmic    Cosmic Cove (boat_cosmic), 3 tours
+#   adventure The Adventure (boat_adventure), 1 tour de ~3 400 blocs
+#   stadium   Mario Kart Stadium (boat_stadium), 3 tours
+# « circuit » = circuit de la partie 1 au demarrage ; procedural = seulement l'ancien circuit construit
+# par le plugin dans le monde « world » (reglages ci-dessous). Un circuit dont le monde manque est ignore.
+circuit: cosmic
+# Circuits utilises (absent = tous). Pris au redemarrage.
+circuits: [cosmic, adventure, stadium]
+# A la fin d'une course, la partie passe sur un autre circuit dont le monde est libre (joueurs emmenes).
+rotation: true
+
+# ---------------------------------------------------------------- circuit procedural (construit par le plugin)
+# Hauteur de la glace. La ligne d'arrivee est en x 0, z 0 (depart vers +x).
+floor-y: 100
+# Hauteur du sol de la salle d'attente (au-dessus de la ligne de depart).
+lobby-y: 140
+# Largeur de la piste en blocs.
+track-width: 7
+# Echelle du trace (1.4 = environ 840 blocs par tour). Changer l'echelle ou la largeur change de
+# record (un record par circuit) ; /boatrace build pour reconstruire.
+track-scale: 1.4
+# Marge de neige autour du trace.
+ground-margin: 16
+# Un drapeau tous les N blocs le long des murets.
+flag-every: 12
+# Chance d'un sapin par case de neige (loin de la piste).
+tree-chance: 0.006
+# Demi-longueur des tribunes de la ligne droite (x de -N a N).
+stands-half-length: 30
+
+# ---------------------------------------------------------------- course
+min-players: 2
+max-players: 12
+# Decompte en salle d'attente (secondes), raccourci a full-countdown quand la course est pleine.
+countdown: 20
+full-countdown: 10
+# Feux de depart : secondes dans les bateaux (cages fermees) avant le feu vert.
+start-lights: 5
+laps: 3
+# Points de controle par tour (la ligne d'arrivee est le dernier).
+checkpoints: 16
+# Distance (blocs) entre la ligne et la premiere rangee de la grille.
+grid-first: 4.5
+# Temps laisse aux autres quand le premier a fini (secondes).
+finish-grace: 30
+# Duree maximale de la course apres le feu vert (secondes).
+max-time: 600
+# Duree de l'ecran de fin avant le retour en salle d'attente.
+end-time: 10
+
+# ---------------------------------------------------------------- replacement automatique
+# Bloque : moins de stuck-min-distance blocs gagnes pendant stuck-seconds secondes (0 = jamais).
+stuck-seconds: 10
+stuck-min-distance: 3.0
+# Hors piste : bateau a plus de (largeur/2 + off-track-margin) blocs de la ligne mediane.
+off-track-margin: 2.5
+# Tombe : bateau plus bas que floor-y - fall-depth.
+fall-depth: 3
+# Delai minimal entre deux retours demandes (touche F / objet), en secondes.
+respawn-cooldown: 2.0
+
+# ---------------------------------------------------------------- bateaux
+# Types de bateaux donnes tour a tour aux joueurs (noms d'entites Minecraft).
+boat-types: [OAK_BOAT, SPRUCE_BOAT, BIRCH_BOAT, JUNGLE_BOAT, ACACIA_BOAT, DARK_OAK_BOAT, MANGROVE_BOAT, CHERRY_BOAT, PALE_OAK_BOAT, BAMBOO_RAFT]
+
+# ---------------------------------------------------------------- parties en parallele
+# Partie 1 = le monde du circuit (boat_cosmic, ou world pour le procedural), parties 2.. = copies
+# <monde>_2, <monde>_3... faites depuis le modele propre <monde>_modele (copie au demarrage et apres
+# /boatrace build). Absent = 3.
+max-instances: 3

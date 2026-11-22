@@ -1,0 +1,15 @@
+name: EemiCreateurs
+version: ${project.version}
+main: fr.eemicraft.createurs.EemiCreateurs
+api-version: '1.21'
+description: Les createurs d'EEMICRAFT animes sur l'arbre du lobby
+
+commands:
+  createurs:
+    description: Gerer les createurs de l'arbre
+    usage: /createurs <reload|pause|pos>
+
+permissions:
+  eemicreateurs.admin:
+    description: Commandes admin des createurs
+    default: op

@@ -1,0 +1,17 @@
+name: EemiBowSpleef
+version: ${project.version}
+main: fr.eemicraft.bowspleef.EemiBowSpleef
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Bow Spleef d'EEMICRAFT (TNT Games, arc Flamme, sol de TNT sur 3 etages, dernier debout gagne)
+
+commands:
+  bowspleef:
+    description: Rejoindre ou gerer le Bow Spleef
+    aliases: [bspleef]
+    usage: /bowspleef <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+
+permissions:
+  eemibowspleef.admin:
+    description: Commandes admin du Bow Spleef
+    default: op

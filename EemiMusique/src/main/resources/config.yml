@@ -1,0 +1,17 @@
+# EemiMusique - musique d'ambiance du lobby d'EEMICRAFT.
+# Les morceaux sont joues note par note avec les sons des blocs musicaux (aucun pack necessaire),
+# plusieurs pistes a la fois (melodie, accords, basse, batterie). Le joueur les entend avec le curseur
+# « Juke-box/Blocs musicaux » de ses options de son. Tous les joueurs du lobby entendent le meme morceau.
+# Morceaux : songs.yml du jar (genere par gen_songs.py : oeuvres du domaine public arrangees et
+# compositions originales). Pour les changer, poser un songs.yml dans le dossier du plugin puis /musique reload.
+
+# Mondes ou la musique joue (elle s'arrete des qu'on en sort).
+worlds: [lobby]
+# Volume general (0.0 a 1.0), multiplie par le volume de chaque piste.
+volume: 0.8
+# Silence entre deux morceaux (secondes).
+gap: 3
+# Melanger l'ordre des morceaux.
+shuffle: true
+# Afficher le titre dans la barre d'action au debut de chaque morceau.
+show-title: true

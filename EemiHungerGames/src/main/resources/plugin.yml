@@ -1,0 +1,17 @@
+name: EemiHungerGames
+version: ${project.version}
+main: fr.eemicraft.hungergames.EemiHungerGames
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Hunger Games d'EEMICRAFT sur la map Desolate Desert (chacun pour soi, dernier survivant)
+
+commands:
+  hungergames:
+    description: Rejoindre ou gerer les Hunger Games
+    aliases: [hg, sg]
+    usage: /hungergames <join|leave|spectate [joueur]|kit|start [n]|stop [n]|parties|reload|chests|map>
+
+permissions:
+  eemihungergames.admin:
+    description: Commandes admin des Hunger Games
+    default: op

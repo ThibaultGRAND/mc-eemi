@@ -1,0 +1,17 @@
+name: EemiTonte
+version: ${project.version}
+main: fr.eemicraft.tonte.EemiTonte
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Tonte Royale d'EEMICRAFT (Wool Games) - moutons, cisailles, toison et berger
+
+commands:
+  tonteroyale:
+    description: Rejoindre ou gerer la Tonte Royale
+    aliases: [tonte]
+    usage: /tonteroyale <join|leave|spectate|start|stop|build|reload>
+
+permissions:
+  eemitonte.admin:
+    description: Commandes admin de la Tonte Royale (start, stop, build, reload, join <joueur>)
+    default: op

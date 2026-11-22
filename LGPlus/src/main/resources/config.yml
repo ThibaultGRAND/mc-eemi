@@ -1,0 +1,21 @@
+# LGPlus - les dalles se gerent en jeu avec /lgdalle add|list|remove|clear
+dalles: {}
+
+# Monde du hub pour /lglobby (PNJ « retour »)
+hub-world: lobby
+
+# Papier « Passer a la suite » (slot 8) : part de joueurs vivants qui doivent voter (1.0 = tous)
+passer:
+  actif: true
+  ratio: 1.0
+
+chat:
+  # supprime les annonces repetitives de LoupGarou (rappels, minuteurs, listes de joueurs...)
+  filtre: true
+  # repare le texte mal encode du jar LoupGarou 1.0.0 (« Ã‚Â§... ») dans le chat, les titres et le scoreboard
+  reparer-accents: true
+  # filtre reseau des messages envoyes directement aux joueurs (instructions de nuit, titres hors jeu...)
+  filtre-paquets: true
+  filtre-messages-directs: true
+  # annonce « La voyante se reveille... » dans le chat (sinon barre d'action)
+  annonces-tours: false

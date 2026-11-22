@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "eemicraft:item/abysse/m_laveur_front",
+    "south": "eemicraft:item/abysse/m_laveur_front",
+    "east": "eemicraft:item/abysse/m_laveur_side",
+    "west": "eemicraft:item/abysse/m_laveur_side",
+    "up": "eemicraft:item/abysse/m_laveur_top",
+    "down": "eemicraft:item/abysse/m_laveur_bottom",
+    "particle": "eemicraft:item/abysse/m_laveur_side"
+  }
+}

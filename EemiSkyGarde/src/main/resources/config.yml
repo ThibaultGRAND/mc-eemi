@@ -1,0 +1,18 @@
+# EemiSkyGarde - coffre-fort de l'inventaire du skyblock.
+# En quittant ces mondes, l'inventaire complet est sauvegarde ; en y revenant, il est remis
+# tel qu'il etait (meme si un autre plugin l'a vide entre-temps).
+worlds: [bskyblock_world, bskyblock_world_nether, bskyblock_world_the_end, arene_boss]
+
+# Nombre de sauvegardes gardees par joueur (pour /skygarde restaurer).
+history: 10
+
+# Une commande tapee dans le skyblock fait une copie de l'inventaire juste avant d'etre executee.
+# Si l'inventaire est vide au depart du skyblock dans ce delai (ms), c'est cette copie qui est gardee
+# (cas d'un plugin qui vide l'inventaire avant de teleporter le joueur).
+command-window-ms: 3000
+
+# Delai (ticks) avant de remettre l'inventaire en arrivant au skyblock (apres les autres plugins).
+restore-delay: 3
+
+# Sauvegarde periodique des joueurs presents dans le skyblock (secondes, 0 = jamais).
+autosave: 60

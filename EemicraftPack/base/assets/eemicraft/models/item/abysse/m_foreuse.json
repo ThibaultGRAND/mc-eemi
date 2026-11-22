@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "eemicraft:item/abysse/m_foreuse_front",
+    "south": "eemicraft:item/abysse/m_foreuse_front",
+    "east": "eemicraft:item/abysse/m_foreuse_side",
+    "west": "eemicraft:item/abysse/m_foreuse_side",
+    "up": "eemicraft:item/abysse/m_foreuse_top",
+    "down": "eemicraft:item/abysse/m_foreuse_bottom",
+    "particle": "eemicraft:item/abysse/m_foreuse_side"
+  }
+}

@@ -1,0 +1,20 @@
+# Monde des duels (vide, cree par le plugin s'il n'existe pas) et monde du hub
+world: duels
+hub-world: lobby
+# Nombre d'arenes construites (une partie par arene a la fois)
+duel-arenas: 6
+sumo-arenas: 3
+# Duree max d'un duel (secondes), puis egalite
+max-duration: 600
+# Decompte avant le combat (secondes)
+countdown: 5
+# Elo de depart et facteur K (classe)
+start-elo: 1000
+elo-k: 32
+# Ecart d'Elo accepte au debut, puis elargi de elo-range-step par seconde d'attente
+elo-range: 100
+elo-range-step: 20
+# Boxing : nombre de coups pour gagner
+boxing-hits: 100
+# FFA : protection a l'apparition (secondes)
+ffa-protection: 3

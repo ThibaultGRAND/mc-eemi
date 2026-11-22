@@ -1,0 +1,19 @@
+name: EemiNoel
+version: ${project.version}
+main: fr.eemicraft.noel.EemiNoel
+api-version: '1.21'
+softdepend: [EemiCore, EemiMusique]
+description: Lobby d'EEMICRAFT en mode Noël (décor réversible + ambiance)
+
+commands:
+  noel:
+    description: Decor et ambiance de Noel du lobby
+    usage: /noel <build|sapin [remove]|maison|perenoel|remove|on|off|music on|off|traineau|cadeau|status|reload>
+
+permissions:
+  eeminoel.admin:
+    description: Gerer le mode Noel
+    default: op
+  eeminoel.cadeau:
+    description: Ouvrir le cadeau du Pere Noel (/noel cadeau)
+    default: true

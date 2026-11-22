@@ -1,0 +1,14 @@
+{
+  "pack": {
+    "description": "EEMICRAFT",
+    "pack_format": 88,
+    "min_format": [
+      84,
+      0
+    ],
+    "max_format": [
+      200,
+      0
+    ]
+  }
+}

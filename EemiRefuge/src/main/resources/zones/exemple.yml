@@ -1,0 +1,38 @@
+# Exemple de zone (désactivé). Copier en <id>.yml et passer actif à true.
+# Le lecteur accepte les clés françaises ou anglaises (nom/name, monde/world, acte/act, bornes/bounds...).
+# Coordonnées de BLOC : le plugin vise le centre du bloc (+0,5 en x et z). y = bloc des pieds.
+actif: false
+name: "Zone d'exemple"
+world: refuge_exemple
+act: 1
+joueurs-min: 1
+joueurs-max: 4
+bounds: {minX: -100, minZ: -100, maxX: 99, maxZ: 99}
+minY: 40
+maxY: 160
+# Facultatif : bordure du monde (sinon calculée sur les bornes).
+border: {centerX: 0.0, centerZ: 0.0, size: 200}
+arrivals:
+  - {x: 0, y: 65, z: -90, yaw: 0}
+  - {x: 0, y: 65, z: 90, yaw: 180}
+extractions:
+  - {name: "La gare", x: 80, y: 65, z: 0, radius: 6, transport: wagonnet}
+hordes:
+  - {x: -50, y: 65, z: 0}
+  - {x: 50, y: 65, z: 50, taille: 12}
+# Zombies d'ambiance (tout est facultatif).
+ambient_spawns:
+  rule: exterieur_au_sol   # colonne à ciel ouvert, sol entre minY et maxY
+  minY: 62
+  maxY: 70
+  minPlayerDistance: 24
+  max-par-joueur: 8
+  taille-horde: 8
+  elites: 0.04
+  types: {RODEUR: 60, COUREUR: 22, BRUTE: 6}
+# Heure fixe du monde (jour / nuit choisi par le chef).
+heure: {jour: 6000, nuit: 18000}
+# Supports de fouille : "x,y,z,type,piece" ici, ou dans exemple_containers.yml à côté (une ligne par support).
+conteneurs:
+  - "10,65,10,tonneau,cuisine"
+  - "12,65,10,coffre,garage"

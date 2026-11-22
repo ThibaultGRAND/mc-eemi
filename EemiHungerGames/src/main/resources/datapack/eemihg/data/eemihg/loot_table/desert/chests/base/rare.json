@@ -1,0 +1,84 @@
+{
+ "type": "minecraft:chest",
+ "pools": [
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:loot_table",
+     "weight": 100,
+     "value": "eemihg:desert/chests/base/materials/rare"
+    }
+   ]
+  },
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:loot_table",
+     "weight": 100,
+     "value": "eemihg:desert/chests/base/crafted/rare"
+    }
+   ]
+  },
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:item",
+     "weight": 100,
+     "name": "phantom_membrane",
+     "modifier": {
+      "type": "set_components",
+      "components": {
+       "custom_data": {
+        "LibraryKey": true
+       },
+       "item_name": {
+        "text": "Cle de la bibliotheque",
+        "color": "yellow",
+        "italic": false
+       },
+       "lore": [
+        {
+         "text": "Ouvre la porte de la bibliotheque (clic droit sur la vitre)",
+         "color": "gray",
+         "italic": false
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+     {
+      "type": "location_check",
+      "predicate": {
+       "position": {
+        "x": {
+         "min": -475,
+         "max": -269
+        },
+        "y": {
+         "min": 58,
+         "max": 100
+        },
+        "z": {
+         "min": -436,
+         "max": -199
+        }
+       },
+       "dimension": "minecraft:hungergames"
+      }
+     },
+     {
+      "type": "random_chance",
+      "chance": 0.05
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,69 @@
+# EemiTonte - Tonte Royale d'EEMICRAFT (famille Wool Games)
+# Chaque joueur est un mouton. Sa « toison » (couches de laine) sert de vies : un coup de cisailles
+# ennemi retire une couche et donne des blocs de laine au tondeur (seule ressource de construction).
+# Un mouton tondu (0 couche) est elimine au prochain coup ennemi. On regagne une couche en broutant
+# (accroupi sur un bloc d'herbe). Chute dans le vide = elimine. Derniere equipe en vie gagne.
+#
+# Le monde vide "world" est cree par le plugin s'il n'existe pas. La map (4 iles de depart aux coins,
+# ilots, grand pre central, salle d'attente) est construite par le plugin : au demarrage du serveur,
+# apres chaque partie, et avec /tonte build. Elle repart donc toujours a neuf (herbe broutee comprise).
+
+world: tonteroyale
+hub-world: lobby
+
+# Geometrie : sol des iles a center-y, salle d'attente a lobby-y (au-dessus du centre 0,0).
+center-y: 100
+lobby-y: 140
+# Sous cette hauteur : tombe dans le vide = elimine.
+void-y: 85
+
+# Joueurs et equipes (2 a 4 equipes : Rouge, Bleu, Vert, Jaune, equilibrees).
+min-players: 2
+max-players: 16
+# Taille d'equipe visee : le plugin choisit entre 2 et 4 equipes pour s'en approcher
+# (2 joueurs = 1 contre 1, 4 = 2 contre 2, 6 = 3 equipes de 2, 8 = 4 equipes de 2, 16 = 4 equipes de 4).
+team-size: 2
+countdown: 20
+# Decompte raccourci quand la partie est pleine.
+full-countdown: 10
+# Cages de depart (secondes).
+cage-time: 5
+# Duree max (secondes) : a la fin, l'equipe avec le plus de couches de laine (vivants) gagne.
+game-time: 900
+end-time: 8
+
+# Toison
+max-layers: 5
+# Blocs de laine gagnes par le tondeur pour chaque couche coupee.
+wool-per-layer: 4
+# Invulnerabilite apres une tonte (millisecondes).
+shear-cooldown-ms: 600
+# Recul d'un coup (horizontal, vertical).
+knockback: 0.45
+knockback-y: 0.32
+# Auto-tonte : accroupi + clic droit avec les cisailles = se couper une couche pour avoir de la laine
+# (sans ca, personne ne peut quitter son ile au debut). On garde au moins self-shear-min couches.
+self-shear: true
+self-shear-min: 1
+# Une fleche ennemie retire aussi une couche (sans donner de laine).
+arrow-shears: true
+
+# Brouter : accroupi sur un bloc d'herbe pendant graze-ticks (20 = 1 s) -> +1 couche, l'herbe devient terre.
+graze-ticks: 40
+
+# Kit : cisailles incassables, pain, arc optionnel (bow-arrows: 0 = pas d'arc).
+bread: 3
+bow-arrows: 4
+
+# Le Berger : un PNJ apparait toutes les berger-interval secondes sur un ilot au hasard (ou le pre central) ;
+# le premier qui le touche gagne un chien a sa couleur pendant dog-time secondes.
+berger-interval: 120
+dog-time: 30
+# Distance a laquelle le chien cherche un ennemi.
+dog-range: 16
+
+# --- Parties en parallele ---
+# Nombre maximal de parties en meme temps. Partie 1 = monde "world", parties suivantes = copies
+# "<world>_2", "<world>_3"... faites depuis le modele propre "<world>_modele" (refait au demarrage
+# et apres /tonte build). Une copie est supprimee quand sa partie est finie (ou vide).
+max-instances: 3

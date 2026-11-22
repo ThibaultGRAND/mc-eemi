@@ -1,0 +1,25 @@
+{
+ "type": "minecraft:chest",
+ "pools": [
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:loot_table",
+     "weight": 100,
+     "value": "eemihg:desert/chests/base/materials/check_corn_restock_restock"
+    }
+   ]
+  },
+  {
+   "rolls": 1,
+   "entries": [
+    {
+     "type": "minecraft:loot_table",
+     "weight": 100,
+     "value": "eemihg:desert/chests/base/crafted/check_corn_restock_restock"
+    }
+   ]
+  }
+ ]
+}

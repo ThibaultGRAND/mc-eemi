@@ -1,0 +1,28 @@
+name: LGPlus
+version: ${project.version}
+main: fr.fallen.lgplus.LGPlus
+api-version: '1.21'
+depend: [LoupGarou]
+description: Dalles, gel des joueurs, actions au clic, livre des roles, vote pour passer, /lgnext et /lglobby pour le plugin LoupGarou
+
+commands:
+  lgdalle:
+    description: Gerer les dalles (places des joueurs)
+    usage: /lgdalle <add|list|remove <n>|clear>
+    permission: lgplus.admin
+  lgdebug:
+    description: Diagnostic LGPlus
+    usage: /lgdebug [joueur]
+    permission: lgplus.admin
+  lgnext:
+    description: Passer immediatement a la phase suivante
+    usage: /lgnext
+    permission: lgplus.admin
+  lglobby:
+    description: Retourner au spawn du hub (hors partie en cours)
+    usage: /lglobby (console - lglobby <joueur>)
+
+permissions:
+  lgplus.admin:
+    description: Commandes admin de LGPlus
+    default: op

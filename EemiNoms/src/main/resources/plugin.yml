@@ -1,0 +1,25 @@
+name: EemiNoms
+version: ${project.version}
+main: fr.eemicraft.noms.EemiNoms
+api-version: '1.21'
+author: EEMICRAFT
+description: Nom affiche (prenom) des joueurs, /rename
+softdepend: [PlaceholderAPI, LuckPerms]
+commands:
+  rename:
+    description: Changer son nom affiche (son prenom)
+    usage: /rename <prenom> | reset
+    aliases: [prenom, surnom]
+  vraipseudo:
+    description: Retrouver le pseudo Minecraft derriere un nom affiche
+    usage: /vraipseudo <nom>
+    aliases: [realname]
+permissions:
+  eeminoms.self:
+    description: Se renommer avec /rename
+    default: false
+  eeminoms.admin:
+    description: Renommer les autres, donner le droit de se renommer, liste
+    default: op
+    children:
+      eeminoms.self: true

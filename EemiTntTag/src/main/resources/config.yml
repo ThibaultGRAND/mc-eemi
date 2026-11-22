@@ -1,0 +1,23 @@
+# EemiTntTag - TNT Tag d'EEMICRAFT
+# L'arene et le lobby d'attente se construisent avec /tnttag build (monde vide "tnttag").
+
+world: tnttag
+# Parties en meme temps : partie 1 = monde ci-dessus, parties 2..n = copies <world>_2, <world>_3...
+# faites depuis le modele <world>_modele (copie propre refaite au demarrage et apres /tnttag build).
+max-instances: 3
+# Centre du sol de l'arene et rayon (cercle). Arene prevue pour un rayon de 30.
+# Anneau sureleve a +6, plafond de barrieres a +16, lobby d'attente 30 blocs au-dessus du sol.
+center: 0,100,0
+radius: 30
+hub-world: lobby
+
+min-players: 3
+max-players: 20
+countdown: 30
+full-countdown: 10
+# Duree d'une manche (secondes), raccourcie de 3 s a chaque manche sans descendre sous min-round-time.
+round-time: 30
+min-round-time: 15
+# Pause entre deux manches, puis temps avant le retour au lobby a la fin.
+pause-time: 4
+end-time: 8

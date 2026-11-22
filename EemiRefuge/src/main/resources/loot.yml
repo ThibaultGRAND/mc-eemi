@@ -1,0 +1,243 @@
+# Dernier Refuge : tables de butin des expéditions (CONCEPTION 6.2).
+# Copié dans plugins/EemiRefuge/loot.yml au premier démarrage ; relu par /refuge expe reload.
+#
+# Chaque support marqué de la zone (x,y,z,type,piece) est vidé puis rempli au départ de l'expédition
+# avec la table de sa pièce. objet = id du Catalogue (bandage, conserve...) ou matériau vanilla (minecraft:bread).
+# rarete = commun | peu_commun | rare | epique | legendaire (par défaut : la couleur du Catalogue, sinon commun).
+# acte = acte minimal de la zone (la Bourgade est l'acte 2), acte-max = acte maximal.
+# Un id inconnu est ignoré (un seul avertissement dans la console) : les plans (plan_*) arriveront avec la progression.
+
+# Poids du cran de rareté tiré pour chaque case.
+raretes:
+  commun: 60
+  peu_commun: 26
+  rare: 10
+  epique: 3
+  legendaire: 1
+# La nuit, un cran de rareté en plus.
+nuit-bonus: 1
+# Part des cases tirées laissées vides (« déjà pillé »).
+vide: 0.4
+# Nombre de cases tirées par conteneur (avant le tirage du vide).
+objets-par-conteneur:
+  min: 2
+  max: 5
+# Nombre de cases tirées pour certains types de supports (étagère : 3 cases, pot : 1).
+# Les fours (four, fumoir, haut_fourneau) reçoivent au plus un objet, dans la case du résultat.
+tirages-par-type:
+  shelf: 3
+  decorated_pot: 1
+  chiseled_bookshelf: 2
+
+# Pièces sans table propre → table utilisée (sinon « defaut »).
+# Pièces de la Bourgade (zones/bourgade_containers.yml) : salon, maison, cuisine, bureau, garage, salle_de_bain.
+# Les noms crate_* sont ceux des caisses de la map Mosslorn.
+alias:
+  crate_house: maison
+  house: maison
+  chambre: maison
+  crate_kitchen: cuisine
+  kitchen: cuisine
+  crate_fridge: frigo
+  fridge: frigo
+  crate_bathroom: salle_de_bain
+  bathroom: salle_de_bain
+  crate_office: bureau
+  office: bureau
+  mairie: bureau
+  crate_car: voiture
+  car: voiture
+  crate_books: bibliotheque
+  books: bibliotheque
+  library: bibliotheque
+  crate_fish: cuisine
+  moss_megastructure: atelier
+  garage: atelier
+  workshop: atelier
+  police: gendarmerie
+  armurerie: gendarmerie
+  pharmacy: pharmacie
+  shop: boutique
+  magasin: boutique
+
+# Valeur estimée en Ferraille (affichée dans le bilan, rien n'est crédité : on vend au Refuge).
+valeurs:
+  ferraille: 1
+  conserve: 2
+  bandage: 3
+  piece_lame: 6
+  piece_ressort: 6
+  piece_canon: 12
+  piece_mecanisme: 12
+  balle_pistolet: 4
+  cartouche_tromblon: 6
+  balle_carabine: 8
+  couteau_lancer: 3
+  bouteille_incendiaire: 8
+  fusee_appat: 8
+  tnt_meche: 10
+  fleches: 1
+  epee_pierre: 8
+  epee_fer: 20
+  dague: 12
+  hache: 14
+  arc: 10
+  arbalete: 18
+  pistolet: 60
+  gold_nugget: 2
+  gold_ingot: 15
+  iron_ingot: 6
+  iron_nugget: 1
+  copper_ingot: 3
+  gunpowder: 3
+  clock: 20
+  compass: 12
+  spyglass: 15
+  emerald: 25
+  diamond: 40
+  leather: 2
+  string: 1
+  paper: 1
+  book: 3
+
+pieces:
+  defaut:
+    - {objet: ferraille, poids: 30, rarete: commun, min: 1, max: 4}
+    - {objet: conserve, poids: 15, rarete: commun}
+    - {objet: minecraft:bread, poids: 12, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:string, poids: 10, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:stick, poids: 8, rarete: commun, min: 1, max: 4}
+    - {objet: bandage, poids: 10, rarete: peu_commun}
+    - {objet: minecraft:iron_nugget, poids: 10, rarete: peu_commun, min: 1, max: 4}
+    - {objet: piece_ressort, poids: 4, rarete: peu_commun}
+    - {objet: piece_lame, poids: 3, rarete: rare}
+    - {objet: minecraft:gold_nugget, poids: 5, rarete: rare, min: 1, max: 3}
+    - {objet: fusee_appat, poids: 2, rarete: epique}
+  maison:
+    - {objet: conserve, poids: 20, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:bread, poids: 15, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:apple, poids: 12, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:string, poids: 8, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:paper, poids: 8, rarete: commun, min: 1, max: 4}
+    - {objet: minecraft:candle, poids: 6, rarete: commun}
+    - {objet: ferraille, poids: 15, rarete: commun, min: 1, max: 3}
+    - {objet: bandage, poids: 14, rarete: peu_commun}
+    - {objet: minecraft:leather, poids: 8, rarete: peu_commun, min: 1, max: 2}
+    - {objet: minecraft:clock, poids: 4, rarete: rare}
+    - {objet: minecraft:gold_nugget, poids: 6, rarete: rare, min: 1, max: 4}
+    - {objet: couteau_lancer, poids: 3, rarete: rare, min: 1, max: 2}
+    - {objet: minecraft:emerald, poids: 2, rarete: epique}
+    - {objet: minecraft:diamond, poids: 1, rarete: legendaire}
+  salon:
+    - {objet: minecraft:book, poids: 12, rarete: commun}
+    - {objet: minecraft:paper, poids: 10, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:candle, poids: 8, rarete: commun}
+    - {objet: conserve, poids: 10, rarete: commun}
+    - {objet: minecraft:string, poids: 6, rarete: commun, min: 1, max: 2}
+    - {objet: ferraille, poids: 10, rarete: commun, min: 1, max: 2}
+    - {objet: bandage, poids: 8, rarete: peu_commun}
+    - {objet: minecraft:clock, poids: 4, rarete: rare}
+    - {objet: minecraft:gold_nugget, poids: 6, rarete: peu_commun, min: 1, max: 3}
+    - {objet: minecraft:music_disc_cat, poids: 1, rarete: epique}
+    - {objet: minecraft:emerald, poids: 1, rarete: epique}
+  chambre:
+    - {objet: minecraft:paper, poids: 10, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:white_wool, poids: 8, rarete: commun}
+    - {objet: conserve, poids: 6, rarete: commun}
+    - {objet: bandage, poids: 10, rarete: peu_commun, min: 1, max: 2}
+    - {objet: minecraft:clock, poids: 5, rarete: rare}
+    - {objet: minecraft:gold_ingot, poids: 2, rarete: epique}
+  cuisine:
+    - {objet: conserve, poids: 25, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:bread, poids: 15, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:potato, poids: 10, rarete: commun, min: 1, max: 4}
+    - {objet: minecraft:carrot, poids: 10, rarete: commun, min: 1, max: 4}
+    - {objet: minecraft:bowl, poids: 6, rarete: commun}
+    - {objet: minecraft:glass_bottle, poids: 6, rarete: commun}
+    - {objet: minecraft:mushroom_stew, poids: 6, rarete: peu_commun}
+    - {objet: minecraft:cooked_beef, poids: 6, rarete: peu_commun, min: 1, max: 2}
+    - {objet: couteau_lancer, poids: 5, rarete: peu_commun, min: 1, max: 2}
+    - {objet: dague, poids: 1, rarete: rare}
+    - {objet: bouteille_incendiaire, poids: 2, rarete: rare}
+  frigo:
+    - {objet: conserve, poids: 15, rarete: commun}
+    - {objet: minecraft:cooked_chicken, poids: 10, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:apple, poids: 10, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:milk_bucket, poids: 4, rarete: peu_commun}
+    - {objet: minecraft:golden_apple, poids: 1, rarete: epique}
+  salle_de_bain:
+    - {objet: minecraft:paper, poids: 10, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:glass_bottle, poids: 10, rarete: commun}
+    - {objet: bandage, poids: 25, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:honey_bottle, poids: 5, rarete: peu_commun}
+    - {objet: minecraft:potion, poids: 2, rarete: rare}
+  pharmacie:
+    - {objet: bandage, poids: 40, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:glass_bottle, poids: 10, rarete: commun}
+    - {objet: minecraft:honey_bottle, poids: 8, rarete: peu_commun}
+    - {objet: minecraft:golden_apple, poids: 3, rarete: epique}
+  bureau:
+    - {objet: minecraft:paper, poids: 25, rarete: commun, min: 1, max: 5}
+    - {objet: minecraft:book, poids: 10, rarete: commun}
+    - {objet: ferraille, poids: 12, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:copper_ingot, poids: 8, rarete: peu_commun, min: 1, max: 2}
+    - {objet: minecraft:redstone, poids: 8, rarete: peu_commun, min: 1, max: 3}
+    - {objet: piece_ressort, poids: 6, rarete: peu_commun}
+    - {objet: minecraft:compass, poids: 3, rarete: rare}
+    - {objet: piece_mecanisme, poids: 2, rarete: rare, acte: 2}
+    - {objet: minecraft:spyglass, poids: 2, rarete: epique}
+    - {objet: minecraft:clock, poids: 2, rarete: rare}
+  bibliotheque:
+    - {objet: minecraft:book, poids: 20, rarete: commun}
+    - {objet: minecraft:writable_book, poids: 5, rarete: peu_commun}
+    - {objet: minecraft:enchanted_book, poids: 1, rarete: epique}
+  voiture:
+    - {objet: ferraille, poids: 25, rarete: commun, min: 2, max: 5}
+    - {objet: minecraft:iron_nugget, poids: 12, rarete: commun, min: 1, max: 5}
+    - {objet: minecraft:string, poids: 6, rarete: commun, min: 1, max: 3}
+    - {objet: piece_ressort, poids: 10, rarete: peu_commun}
+    - {objet: piece_lame, poids: 5, rarete: peu_commun}
+    - {objet: minecraft:leather, poids: 6, rarete: peu_commun}
+    - {objet: bouteille_incendiaire, poids: 3, rarete: rare}
+    - {objet: piece_canon, poids: 1, rarete: rare, acte: 2}
+    - {objet: tnt_meche, poids: 1, rarete: epique}
+  atelier:
+    - {objet: ferraille, poids: 30, rarete: commun, min: 2, max: 6}
+    - {objet: minecraft:iron_nugget, poids: 15, rarete: commun, min: 2, max: 6}
+    - {objet: minecraft:stick, poids: 10, rarete: commun, min: 2, max: 6}
+    - {objet: minecraft:oak_planks, poids: 8, rarete: commun, min: 2, max: 6}
+    - {objet: minecraft:iron_ingot, poids: 10, rarete: peu_commun, min: 1, max: 2}
+    - {objet: minecraft:copper_ingot, poids: 8, rarete: peu_commun, min: 1, max: 3}
+    - {objet: piece_lame, poids: 8, rarete: peu_commun}
+    - {objet: piece_ressort, poids: 8, rarete: peu_commun}
+    - {objet: hache, poids: 2, rarete: rare}
+    - {objet: epee_pierre, poids: 3, rarete: rare}
+    - {objet: piece_mecanisme, poids: 3, rarete: rare, acte: 2}
+    - {objet: piece_canon, poids: 2, rarete: rare, acte: 2}
+    - {objet: minecraft:gunpowder, poids: 3, rarete: rare, min: 1, max: 2, acte: 2}
+    - {objet: tnt_meche, poids: 1, rarete: epique}
+    - {objet: plan_epee_pierre, poids: 1, rarete: epique}
+  boutique:
+    - {objet: conserve, poids: 15, rarete: commun, min: 1, max: 3}
+    - {objet: minecraft:bread, poids: 10, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:candle, poids: 6, rarete: commun}
+    - {objet: bandage, poids: 10, rarete: peu_commun}
+    - {objet: minecraft:gold_nugget, poids: 8, rarete: peu_commun, min: 1, max: 4}
+    - {objet: minecraft:gold_ingot, poids: 3, rarete: rare}
+    - {objet: minecraft:clock, poids: 3, rarete: rare}
+    - {objet: fusee_appat, poids: 2, rarete: epique}
+    - {objet: minecraft:emerald, poids: 2, rarete: epique}
+  gendarmerie:
+    - {objet: ferraille, poids: 15, rarete: commun, min: 1, max: 3}
+    - {objet: bandage, poids: 15, rarete: commun, min: 1, max: 2}
+    - {objet: minecraft:arrow, poids: 12, rarete: commun, min: 2, max: 6}
+    - {objet: arc, poids: 4, rarete: peu_commun}
+    - {objet: casque_maille, poids: 4, rarete: peu_commun}
+    - {objet: plastron_cuir, poids: 4, rarete: peu_commun}
+    - {objet: epee_fer, poids: 3, rarete: rare}
+    - {objet: arbalete, poids: 2, rarete: rare}
+    - {objet: balle_pistolet, poids: 4, rarete: rare, min: 1, max: 3, acte: 2}
+    - {objet: piece_mecanisme, poids: 3, rarete: rare, acte: 2}
+    - {objet: tnt_meche, poids: 2, rarete: epique}
+    - {objet: plan_pistolet, poids: 1, rarete: epique, acte: 2}
+    - {objet: pistolet, poids: 1, rarete: legendaire, acte: 2}
