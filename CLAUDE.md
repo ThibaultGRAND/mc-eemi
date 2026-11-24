@@ -1505,6 +1505,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - `EemiJump/` 1.5.1 (absent du dépôt jusque-là).
   - `EemiPaintball/` 1.9.0 (absent du dépôt jusque-là).
   - `EemiReparer/` 1.0.0 (absent du dépôt jusque-là ; jamais installée).
+  - `EemiResto/` 1.0.1 (absent du dépôt jusque-là).
 
 ## Retour au salon d'attente en fin de partie
 

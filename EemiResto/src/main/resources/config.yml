@@ -1,0 +1,61 @@
+# EemiResto - Tycoon restaurant (carte #115). Toute cle absente prend la valeur par defaut du code.
+
+# Monde cree par le plugin (generateur vide). Ne PAS le mettre dans un groupe Multiverse-Inventories avec le lobby.
+world: resto
+# Mondes depuis lesquels /resto teleporte (vide = partout ; les admins passent toujours).
+join-from: [lobby]
+# Commande lancee par le joueur pour revenir au lobby.
+lobby-command: lobby
+# Nombre de parcelles (pair, 2 a 32). Change au redemarrage, et reconstruit toute la rue.
+parcels: 16
+# Graine du terrain autour de la rue.
+seed: 1137
+# Heure fixe du monde (6000 = midi).
+time: 6000
+# Pose des blocs : millisecondes par tick au maximum.
+build-ms-per-tick: 8
+
+# Pack de textures : false = objets vanilla ressemblants (pain, frites...), true = modeles eemicraft:resto/...
+# A passer a true SEULEMENT quand le pack qui contient assets/eemicraft/items/resto/ est publie.
+textures: false
+
+plates:
+  # Plats affiches au maximum par restaurant et sur tout le serveur (au-dela : vendus sans affichage, meme valeur).
+  max-per-resto: 40
+  max-total: 400
+  # Vitesse de base des tapis (blocs/s) ; x1,25 par tapis rapide.
+  speed: 1.2
+
+# Chance qu'un plat soit un plat secret legendaire (si ses conditions sont remplies), par plat pose.
+legendary-chance: 0.004
+
+economy:
+  # Premier achat = 25 s de revenu, puis x1,096 par achat (environ 3 h pour finir le premier restaurant).
+  base-wait: 25
+  growth: 1.096
+  # Gain par renaissance (+50 % de revenus) et hausse des prix par renaissance (+25 %).
+  rebirth-gain: 0.5
+  rebirth-price: 0.25
+
+offline:
+  # Revenus hors ligne : part du revenu theorique et plafond en heures.
+  factor: 0.4
+  max-hours: 6
+
+secrets:
+  # Saucisse de veau de Dylan : seulement entre ces heures (heure de Paris).
+  dylan-hours: [12, 14]
+  # Le p'tit wrap : apres ce nombre de plats vendus (a vie).
+  wrap-sold: 5000
+  # Prix du bouton secret de la cuisine (BK d'Esteban).
+  bk-price: 5000
+
+rewards:
+  # eemi reward <joueur> resto play toutes les N minutes passees dans le monde du resto.
+  play-minutes: 30
+  # Pieces EemiCore a chaque palier de chiffre d'affaires (a vie), une fois par palier.
+  milestones-earned: [10000, 1000000, 100000000, 10000000000, 1000000000000]
+  milestones-coins: [20, 30, 40, 50, 75]
+  # Pieces EemiCore a la decouverte d'un plat secret et a chaque renaissance (+ eemi reward ... resto win).
+  secret-coins: 25
+  rebirth-coins: 75

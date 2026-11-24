@@ -1,0 +1,17 @@
+name: EemiResto
+version: ${project.version}
+main: fr.eemicraft.resto.EemiResto
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Tycoon restaurant d'EEMICRAFT - droppers, tapis roulants, boutons d'achat, renaissances, plats secrets
+
+commands:
+  resto:
+    description: Aller a son restaurant et ouvrir le menu du tycoon
+    usage: '/resto [menu|aller|visiter <joueur>|top|collection|quitter]'
+    aliases: [tycoon, restaurant]
+
+permissions:
+  eemiresto.admin:
+    description: Commandes /resto admin
+    default: op
