@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "eemicraft:infection_zombie"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "eemicraft:infection_zombie"
+      }
+    ]
+  }
+}

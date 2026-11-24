@@ -1,0 +1,217 @@
+# EemiInfection - Infection (survivants contre zombies)
+# Au depart, 1 zombie pour 6 joueurs est enferme dans la crypte du cimetiere.
+# Les survivants choisissent leur arme et ont quelques secondes pour fuir dans la ville, puis les zombies sont laches.
+# Un zombie blesse au 1er coup et infecte au 2e. Les armes retirent des PV aux zombies : a 0, retour a la crypte.
+# Les survivants gagnent si au moins un tient jusqu'a la fin du temps.
+
+world: infection
+min-players: 3
+max-players: 20
+# Decompte (secondes) une fois le minimum atteint ; raccourci a 5 s si la partie est pleine
+countdown: 20
+# Temps de fuite (secondes) : zombies de depart aveugles et immobiles dans la crypte ; le choix de l'arme reste ouvert pendant la fuite
+flee-time: 30
+# Duree de la partie apres la fuite (secondes)
+game-time: 480
+# 1 zombie de depart pour N joueurs (au moins 1)
+zombie-ratio: 6
+# 2 zombies de depart a partir de N joueurs
+two-zombies-from: 8
+# Contour lumineux des survivants : always = toujours visibles (tout le monde les voit briller, l'API n'a pas de contour par joueur),
+# last-seconds = seulement pendant les glow-last-seconds dernieres secondes
+survivor-glow: always
+glow-last-seconds: 90
+# Contour lumineux de TOUS les zombies (de depart et infectes), en rouge. Survivants en vert (couleur des equipes)
+zombie-glow: true
+# true = les coeurs d'un zombie suivent ses PV (en proportion de zombie-health). Chaque baisse de vie fait pencher
+# la camera cote client (effet vanilla) : les baisses sont regroupees, au plus une toutes les zombie-hearts-interval ticks.
+# false = coeurs toujours pleins (PV seulement dans la barre d'action et sous le pseudo).
+zombie-hearts: true
+zombie-hearts-interval: 10
+# Textures du pack de ressources EEMICRAFT (1.5.0) : armes en 3D, grenade, caisse d'armes, machette, pouvoirs des zombies,
+# tenue complete des zombies et gilet tactique des survivants. A n'activer qu'une fois le pack contenant les fichiers
+# d'EemiInfection publie (sinon objets violet/noir). Relu par /infection reload (objets suivants donnes : prochaine partie).
+textures: false
+
+# Zombies : points de vie (les armes en retirent ; a 0, retour a la crypte)
+zombie-health: 20
+# Zombie a 0 PV : secondes a la crypte avant de ressortir
+respawn-delay: 3
+# Secondes ou un zombie qui ressort (ou vient d'etre infecte) ne peut pas etre blesse
+respawn-protection: 2
+# Survivants : nombre de coups de zombie pour etre infecte (le 1er blesse : ralentissement court)
+survivor-hits: 2
+# Blessure soignee apres N secondes sans etre touche
+wound-heal-seconds: 25
+# Ralentissement (ticks) apres une blessure
+wound-slow-ticks: 30
+# Delai minimum (ms) entre deux coups de zombie comptes sur un meme survivant
+hit-grace-ms: 800
+# Epee en bois des survivants : recul (horizontal, vertical), delai entre deux reculs (ms), degats (PV retires au zombie)
+sword-knockback: 1.1
+sword-knockback-y: 0.38
+sword-cooldown-ms: 450
+sword-damage: 2
+# Ecart minimum (blocs) entre deux survivants a la dispersion
+spread-distance: 10
+# Zombies : reapparition au hasard dans la ville (sortie de crypte, retour a la crypte), au sol,
+# a au moins N blocs de tout survivant. false = sortie fixe du cimetiere.
+zombie-random-spawn: true
+zombie-spawn-distance: 20
+
+# Kits des survivants (choisis dans le menu de l'etoile, avant la partie et pendant la fuite).
+# Chaque kit = son arme principale + epee + pistolet (munitions infinies) + grenades.
+kits:
+  default: assault
+  assault:
+    enabled: true
+    name: "&6&lAssaut"
+  pump:
+    enabled: true
+    name: "&c&lPompe"
+  sniper:
+    enabled: true
+    name: "&b&lSniper"
+  smg:
+    enabled: true
+    name: "&e&lMitraillette"
+
+# Armes (tir instantane, les murs arretent les balles, les survivants ne bloquent pas et ne sont jamais touches).
+# damage = PV retires par balle (ou par plomb), headshot = multiplicateur a la tete, interval-ticks = ticks entre deux tirs,
+# auto = rafale en maintenant le clic droit, magazine = chargeur, reserve = munitions de reserve (-1 = infinies),
+# reload-ticks = duree du rechargement (touche F ou automatique a vide), range = portee (blocs), spread = dispersion,
+# knockback = recul sur le zombie (seulement si bullet-knockback: true), pierce = zombies traverses, self-recoil = recul du tireur.
+weapons:
+  # partie de la hauteur du corps a partir de laquelle un tir compte a la tete
+  head-ratio: 0.78
+  # false (defaut 1.6.0) : les balles font leurs degats sans recul ni animation de degat (le zombie n'est plus fige en rafale)
+  bullet-knockback: false
+  # fenetre (ticks) pendant laquelle le clic droit est considere comme maintenu (le client repete toutes les 4 ticks)
+  hold-window-ticks: 6
+  # un chargeur de reserve rendu a l'arme principale toutes les N secondes (0 = jamais)
+  ammo-regen-seconds: 30
+  assault:
+    damage: 3.0
+    headshot: 1.5
+    interval-ticks: 3
+    auto: true
+    magazine: 30
+    reserve: 150
+    reload-ticks: 40
+    range: 40
+    spread: 0.025
+    knockback: 0.12
+  pump:
+    damage: 2.5
+    pellets: 8
+    headshot: 1.5
+    interval-ticks: 18
+    auto: false
+    magazine: 6
+    reserve: 36
+    reload-ticks: 50
+    range: 14
+    spread: 0.11
+    knockback: 1.2
+    self-recoil: 0.35
+  sniper:
+    damage: 14.0
+    headshot: 2.0
+    interval-ticks: 30
+    auto: false
+    magazine: 5
+    reserve: 25
+    reload-ticks: 60
+    range: 90
+    spread: 0.0
+    knockback: 0.45
+    pierce: 3
+    self-recoil: 0.2
+  smg:
+    damage: 2.0
+    headshot: 1.5
+    interval-ticks: 2
+    auto: true
+    magazine: 40
+    reserve: 200
+    reload-ticks: 40
+    range: 25
+    spread: 0.06
+    knockback: 0.06
+  pistol:
+    damage: 2.5
+    headshot: 1.5
+    interval-ticks: 6
+    auto: false
+    magazine: 12
+    reserve: -1
+    reload-ticks: 30
+    range: 30
+    spread: 0.02
+    knockback: 0.1
+
+# Grenades : 1 au depart, +1 toutes les 60 s, 2 au maximum ; explosion a l'impact ou apres fuse-seconds.
+# Degats degressifs (damage au centre, min-damage au bord), recul, aucun bloc casse, jamais de degats aux survivants.
+grenades:
+  start: 1
+  max: 2
+  regen-seconds: 60
+  fuse-seconds: 1.5
+  radius: 4
+  damage: 16
+  min-damage: 3
+  knockback: 1.3
+  throw-speed: 1.1
+
+# Pouvoirs des zombies (facon Left 4 Dead), contre les survivants perches sur les toits.
+abilities:
+  enabled: true
+  # Chaque nouveau zombie (de depart, infecte, nouvel alpha) choisit son pouvoir dans un menu ; un seul exemplaire
+  # de chaque pouvoir par partie (deja pris = grise). Au plus max-powered zombies a pouvoir (4 pouvoirs) ; les suivants sont classiques.
+  max-powered: 4
+  # Secondes pour choisir (menu ferme ou pas de choix = pouvoir libre au hasard ; l'etoile rouvre le menu)
+  choose-seconds: 10
+  # Bond (plume) : saut loin devant
+  leap-cooldown: 8
+  leap-power: 1.35
+  leap-up: 0.75
+  # Langue (laisse) : vise un survivant (les murs bloquent), il est tire d'un coup vers le zombie et ralenti (comportement d'origine).
+  # Rate = petite recharge (tongue-miss-cooldown). Vitesse horizontale = distance x tongue-pull, plafonnee a tongue-max-speed.
+  tongue-cooldown: 18
+  tongue-range: 24
+  tongue-miss-cooldown: 2
+  tongue-pull: 0.12
+  tongue-max-speed: 2.6
+  tongue-up: 0.42
+  tongue-slow-seconds: 1.5
+  # Crachat acide (boule de slime) : flaque a l'impact ; survivants dedans ralentis (Lenteur II), sans tir, repousses dehors chaque seconde
+  acid-cooldown: 25
+  acid-radius: 3
+  acid-duration: 6
+  acid-push: 0.7
+  acid-speed: 1.3
+  # Charge (baton de blaze, remplace l'Escalade en 1.6.0) : fonce tout droit sur charge-distance blocs en charge-seconds ;
+  # le premier survivant touche est projete et etourdi (tres lent, ne peut plus tirer) ; un mur arrete la charge.
+  charge-cooldown: 20
+  charge-distance: 10
+  charge-seconds: 0.8
+  charge-knockback: 1.4
+  charge-knockback-y: 0.5
+  charge-stun-seconds: 1.5
+
+# Ambiance : distance de vue du monde en chunks (brouillard ; 0 = ne pas toucher)
+fog-view-distance: 4
+# Particules de cendre autour de chaque joueur chaque seconde (0 = aucune)
+ash-particles: 18
+
+# Mondes depuis lesquels on peut rejoindre (vide = partout)
+join-from: [lobby]
+# Retour au hub en fin de partie
+hub:
+  world: lobby
+  x: 722.5
+  y: 51
+  z: 650.5
+  yaw: 90
+  pitch: 0
+eemicore-id: infection

@@ -1,0 +1,17 @@
+name: EemiInfection
+version: ${project.version}
+main: fr.eemicraft.infection.EemiInfection
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Infection - survivants contre zombies dans une ville abandonnee
+
+commands:
+  infection:
+    description: Infection (survivants contre zombies)
+    usage: /infection [join|leave|spectate]
+    aliases: [zombie]
+
+permissions:
+  eemiinfection.admin:
+    description: /infection start|stop|build|reload|info
+    default: op
