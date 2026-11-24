@@ -1,0 +1,15 @@
+name: EemiSpeedrun
+version: '${project.version}'
+main: fr.eemicraft.speedrun.EemiSpeedrun
+api-version: '1.21'
+description: Speedrun d'objets aleatoires (roulette d'objet ou de lettre) dans un monde de survie neuf.
+softdepend: [EemiCore]
+commands:
+  speedrun:
+    description: Speedrun d'objets (roulette d'objet ou de lettre)
+    usage: /speedrun <objet|lettre|leave|files|spectate>
+    aliases: [srun, roulette]
+permissions:
+  eemispeedrun.admin:
+    description: Lancer, arreter et recharger les parties
+    default: op

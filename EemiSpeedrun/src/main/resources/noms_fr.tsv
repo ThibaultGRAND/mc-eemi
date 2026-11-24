@@ -1,0 +1,1800 @@
+# Noms francais des objets (Minecraft 26.3, fichier fr_fr.json officiel de Mojang). Format : ID<TAB>Nom
+ABANDONED_CAMP_MAP	Carte de camp abandonné
+ACACIA_BOAT	Bateau en acacia
+ACACIA_CHEST_BOAT	Bateau de stockage en acacia
+AIR	Air
+ALLAY_SPAWN_EGG	Oeuf d'apparition d'Allay
+AMETHYST_SHARD	Éclat d'améthyste
+ANGLER_POTTERY_SHERD	Tesson de poterie de pêcheur
+APPLE	Pomme
+ARCHER_POTTERY_SHERD	Tesson de poterie d'archer
+ARMADILLO_SCUTE	Écaille de tatou
+ARMADILLO_SPAWN_EGG	Oeuf d'apparition de tatou
+ARMOR_STAND	Porte-armure
+ARMS_UP_POTTERY_SHERD	Tesson de poterie de figure
+ARROW	Flèche
+AXOLOTL_BUCKET	Axolotl dans un seau
+AXOLOTL_SPAWN_EGG	Oeuf d'apparition d'axolotl
+BAKED_POTATO	Pomme de terre cuite
+BAMBOO_CHEST_RAFT	Radeau de stockage en bambou
+BAMBOO_RAFT	Radeau en bambou
+BAT_SPAWN_EGG	Oeuf d'apparition de chauve-souris
+BEE_SPAWN_EGG	Oeuf d'apparition d'abeille
+BEEF	Boeuf cru
+BEETROOT	Betterave
+BEETROOT_SEEDS	Graines de betterave
+BEETROOT_SOUP	Soupe de betteraves
+BIRCH_BOAT	Bateau en bouleau
+BIRCH_CHEST_BOAT	Bateau de stockage en bouleau
+BLACK_BUNDLE	Sac noir
+BLACK_CUSHION	Coussin noir
+BLACK_DYE	Teinture noire
+BLACK_HARNESS	Harnais noir
+BLADE_POTTERY_SHERD	Tesson de poterie de lame
+BLAZE_POWDER	Poudre de Blaze
+BLAZE_ROD	Bâton de Blaze
+BLAZE_SPAWN_EGG	Oeuf d'apparition de Blaze
+BLUE_BUNDLE	Sac bleu
+BLUE_CUSHION	Coussin bleu
+BLUE_DYE	Teinture bleue
+BLUE_EGG	Oeuf bleu
+BLUE_HARNESS	Harnais bleu
+BOGGED_SPAWN_EGG	Oeuf d'apparition d'embourbé
+BOLT_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+BONE	Os
+BONE_MEAL	Poudre d'os
+BOOK	Livre
+BORDURE_INDENTED_BANNER_PATTERN	Motif de bordure cannelée pour bannière
+BOW	Arc
+BOWL	Bol
+BREAD	Pain
+BREEZE_ROD	Bâton de Breeze
+BREEZE_SPAWN_EGG	Oeuf d'apparition de Breeze
+BREWER_POTTERY_SHERD	Tesson de poterie d'alchimiste
+BRICK	Brique
+BROWN_BUNDLE	Sac marron
+BROWN_CUSHION	Coussin marron
+BROWN_DYE	Teinture marron
+BROWN_EGG	Oeuf brun
+BROWN_HARNESS	Harnais marron
+BRUSH	Pinceau
+BUCKET	Seau
+BUNDLE	Sac
+BURIED_ANCIENT_CITY_MAP	Carte d'ancienne cité souterraine
+BURIED_MINESHAFT_MAP	Carte de puits de mine souterrain
+BURIED_TREASURE_MAP	Carte au trésor
+BURIED_TRIAL_CHAMBERS_MAP	Carte de chambres des épreuves souterraines
+BURN_POTTERY_SHERD	Tesson de poterie de feu
+CAMEL_HUSK_SPAWN_EGG	Oeuf d'apparition de dromadaire momifié
+CAMEL_SPAWN_EGG	Oeuf d'apparition de dromadaire
+CARROT	Carotte
+CARROT_ON_A_STICK	Carotte sur un bâton
+CAT_SPAWN_EGG	Oeuf d'apparition de chat
+CAVE_SPIDER_SPAWN_EGG	Oeuf d'apparition d'araignée venimeuse
+CHAINMAIL_BOOTS	Bottes de mailles
+CHAINMAIL_CHESTPLATE	Cotte de mailles
+CHAINMAIL_HELMET	Casque de mailles
+CHAINMAIL_LEGGINGS	Jambières de mailles
+CHARCOAL	Charbon de bois
+CHERRY_BOAT	Bateau en cerisier
+CHERRY_CHEST_BOAT	Bateau de stockage en cerisier
+CHEST_MINECART	Wagonnet de stockage
+CHICKEN	Poulet cru
+CHICKEN_SPAWN_EGG	Oeuf d'apparition de poule
+CHORUS_FRUIT	Chorus
+CLAY_BALL	Motte d'argile
+CLOCK	Montre
+COAL	Charbon
+COAST_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+COCOA_BEANS	Fèves de cacao
+COD	Morue crue
+COD_BUCKET	Morue dans un seau
+COD_SPAWN_EGG	Oeuf d'apparition de morue
+COMMAND_BLOCK_MINECART	Wagonnet à bloc de commande
+COMPASS	Boussole
+COOKED_BEEF	Steak
+COOKED_CHICKEN	Poulet rôti
+COOKED_COD	Morue cuite
+COOKED_MUTTON	Mouton cuit
+COOKED_PORKCHOP	Côtelette de porc cuite
+COOKED_RABBIT	Lapin cuit
+COOKED_SALMON	Saumon cuit
+COOKIE	Cookie
+COPPER_AXE	Hache en cuivre
+COPPER_BOOTS	Bottes en cuivre
+COPPER_CHESTPLATE	Plastron en cuivre
+COPPER_GOLEM_SPAWN_EGG	Oeuf d'apparition de golem de cuivre
+COPPER_HELMET	Casque en cuivre
+COPPER_HOE	Houe en cuivre
+COPPER_HORSE_ARMOR	Armure en cuivre pour cheval
+COPPER_INGOT	Lingot de cuivre
+COPPER_LEGGINGS	Jambières en cuivre
+COPPER_NAUTILUS_ARMOR	Armure en cuivre pour nautile
+COPPER_NUGGET	Pépite de cuivre
+COPPER_PICKAXE	Pioche en cuivre
+COPPER_SHOVEL	Pelle en cuivre
+COPPER_SPEAR	Lance en cuivre
+COPPER_SWORD	Épée en cuivre
+COW_SPAWN_EGG	Oeuf d'apparition de vache
+CREAKING_SPAWN_EGG	Oeuf d'apparition de grinceur
+CREEPER_BANNER_PATTERN	Motif de bannière
+CREEPER_SPAWN_EGG	Oeuf d'apparition de Creeper
+CROSSBOW	Arbalète
+CYAN_BUNDLE	Sac cyan
+CYAN_CUSHION	Coussin cyan
+CYAN_DYE	Teinture cyan
+CYAN_HARNESS	Harnais cyan
+DANGER_POTTERY_SHERD	Tesson de poterie de danger
+DARK_OAK_BOAT	Bateau en chêne noir
+DARK_OAK_CHEST_BOAT	Bateau de stockage en chêne noir
+DEBUG_STICK	Bâton de débogage
+DESERT_PYRAMID_MAP	Carte de pyramide du désert
+DESERT_VILLAGE_MAP	Carte de village du désert
+DIAMOND	Diamant
+DIAMOND_AXE	Hache en diamant
+DIAMOND_BOOTS	Bottes en diamant
+DIAMOND_CHESTPLATE	Plastron en diamant
+DIAMOND_HELMET	Casque en diamant
+DIAMOND_HOE	Houe en diamant
+DIAMOND_HORSE_ARMOR	Armure en diamant pour cheval
+DIAMOND_LEGGINGS	Jambières en diamant
+DIAMOND_NAUTILUS_ARMOR	Armure en diamant pour nautile
+DIAMOND_PICKAXE	Pioche en diamant
+DIAMOND_SHOVEL	Pelle en diamant
+DIAMOND_SPEAR	Lance en diamant
+DIAMOND_SWORD	Épée en diamant
+DISC_FRAGMENT_5	Fragment de disque
+DOLPHIN_SPAWN_EGG	Oeuf d'apparition de dauphin
+DONKEY_SPAWN_EGG	Oeuf d'apparition d'âne
+DRAGON_BREATH	Souffle de dragon
+DRIED_KELP	Algue séchée
+DROWNED_SPAWN_EGG	Oeuf d'apparition de noyé
+DUNE_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+ECHO_SHARD	Éclat d'écho
+EGG	Oeuf
+ELDER_GUARDIAN_SPAWN_EGG	Oeuf d'apparition de grand gardien
+ELYTRA	Élytres
+EMERALD	Émeraude
+ENCHANTED_BOOK	Livre enchanté
+ENCHANTED_GOLDEN_APPLE	Pomme dorée enchantée
+END_CRYSTAL	Cristal de l'End
+ENDER_DRAGON_SPAWN_EGG	Oeuf d'apparition d'Ender Dragon
+ENDER_EYE	Oeil de l'Ender
+ENDER_PEARL	Perle de l'Ender
+ENDERMAN_SPAWN_EGG	Oeuf d'apparition d'Enderman
+ENDERMITE_SPAWN_EGG	Oeuf d'apparition d'Endermite
+EVOKER_SPAWN_EGG	Oeuf d'apparition d'évocateur
+EXPERIENCE_BOTTLE	Fiole d'expérience
+EXPLORER_POTTERY_SHERD	Tesson de poterie d'explorateur
+EYE_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+FEATHER	Plume
+FERMENTED_SPIDER_EYE	Oeil d'araignée fermenté
+FIELD_MASONED_BANNER_PATTERN	Motif de champ maçonné pour bannière
+FILLED_MAP	Carte
+FIRE_CHARGE	Charge de feu
+FIREWORK_ROCKET	Fusée de feu d'artifice
+FIREWORK_STAR	Étoile de feu d'artifice
+FISHING_ROD	Canne à pêche
+FLINT	Silex
+FLINT_AND_STEEL	Briquet
+FLOW_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+FLOW_BANNER_PATTERN	Motif de bannière
+FLOW_POTTERY_SHERD	Tesson de poterie de tourbillon
+FLOWER_BANNER_PATTERN	Motif de bannière
+FOX_SPAWN_EGG	Oeuf d'apparition de renard
+FRIEND_POTTERY_SHERD	Tesson de poterie d'ami
+FROG_SPAWN_EGG	Oeuf d'apparition de grenouille
+FURNACE_MINECART	Wagonnet motorisé
+GHAST_SPAWN_EGG	Oeuf d'apparition de Ghast
+GHAST_TEAR	Larme de Ghast
+GLASS_BOTTLE	Fiole
+GLISTERING_MELON_SLICE	Tranche de pastèque scintillante
+GLOBE_BANNER_PATTERN	Motif de bannière
+GLOW_BERRIES	Baies lumineuses
+GLOW_INK_SAC	Poche d'encre luisante
+GLOW_ITEM_FRAME	Cadre luisant
+GLOW_SQUID_SPAWN_EGG	Oeuf d'apparition de poulpe luisant
+GLOWSTONE_DUST	Poudre lumineuse
+GOAT_HORN	Corne de chèvre
+GOAT_SPAWN_EGG	Oeuf d'apparition de chèvre
+GOLD_INGOT	Lingot d'or
+GOLD_NUGGET	Pépite d'or
+GOLDEN_APPLE	Pomme dorée
+GOLDEN_AXE	Hache en or
+GOLDEN_BOOTS	Bottes en or
+GOLDEN_CARROT	Carotte dorée
+GOLDEN_CHESTPLATE	Plastron en or
+GOLDEN_HELMET	Casque en or
+GOLDEN_HOE	Houe en or
+GOLDEN_HORSE_ARMOR	Armure en or pour cheval
+GOLDEN_LEGGINGS	Jambières en or
+GOLDEN_NAUTILUS_ARMOR	Armure en or pour nautile
+GOLDEN_PICKAXE	Pioche en or
+GOLDEN_SHOVEL	Pelle en or
+GOLDEN_SPEAR	Lance en or
+GOLDEN_SWORD	Épée en or
+GRAY_BUNDLE	Sac gris
+GRAY_CUSHION	Coussin gris
+GRAY_DYE	Teinture grise
+GRAY_HARNESS	Harnais gris
+GREEN_BUNDLE	Sac vert
+GREEN_CUSHION	Coussin vert
+GREEN_DYE	Teinture verte
+GREEN_HARNESS	Harnais vert
+GUARDIAN_SPAWN_EGG	Oeuf d'apparition de gardien
+GUNPOWDER	Poudre à canon
+GUSTER_BANNER_PATTERN	Motif de bannière
+GUSTER_POTTERY_SHERD	Tesson de poterie de rafaleur
+HAPPY_GHAST_SPAWN_EGG	Oeuf d'apparition de Ghast joyeux
+HEART_OF_THE_SEA	Coeur de la mer
+HEART_POTTERY_SHERD	Tesson de poterie de coeur
+HEARTBREAK_POTTERY_SHERD	Tesson de poterie de coeur brisé
+HOGLIN_SPAWN_EGG	Oeuf d'apparition de Hoglin
+HONEY_BOTTLE	Fiole de miel
+HONEYCOMB	Rayon de miel
+HOPPER_MINECART	Wagonnet à entonnoir
+HORSE_SPAWN_EGG	Oeuf d'apparition de cheval
+HOST_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+HOWL_POTTERY_SHERD	Tesson de poterie de loup
+HUSK_SPAWN_EGG	Oeuf d'apparition de momifié
+INK_SAC	Poche d'encre
+IRON_AXE	Hache en fer
+IRON_BOOTS	Bottes en fer
+IRON_CHESTPLATE	Plastron en fer
+IRON_GOLEM_SPAWN_EGG	Oeuf d'apparition de golem de fer
+IRON_HELMET	Casque en fer
+IRON_HOE	Houe en fer
+IRON_HORSE_ARMOR	Armure en fer pour cheval
+IRON_INGOT	Lingot de fer
+IRON_LEGGINGS	Jambières en fer
+IRON_NAUTILUS_ARMOR	Armure en fer pour nautile
+IRON_NUGGET	Pépite de fer
+IRON_PICKAXE	Pioche en fer
+IRON_SHOVEL	Pelle en fer
+IRON_SPEAR	Lance en fer
+IRON_SWORD	Épée en fer
+ITEM_FRAME	Cadre
+JUNGLE_BOAT	Bateau en acajou
+JUNGLE_CHEST_BOAT	Bateau de stockage en acajou
+JUNGLE_PYRAMID_MAP	Carte de pyramide de la jungle
+KNOWLEDGE_BOOK	Livre des connaissances
+LAPIS_LAZULI	Lapis-lazuli
+LAVA_BUCKET	Seau de lave
+LEAD	Laisse
+LEATHER	Cuir
+LEATHER_BOOTS	Bottes en cuir
+LEATHER_CHESTPLATE	Tunique en cuir
+LEATHER_HELMET	Chapeau en cuir
+LEATHER_HORSE_ARMOR	Armure en cuir pour cheval
+LEATHER_LEGGINGS	Pantalon en cuir
+LIGHT_BLUE_BUNDLE	Sac bleu clair
+LIGHT_BLUE_CUSHION	Coussin bleu clair
+LIGHT_BLUE_DYE	Teinture bleu clair
+LIGHT_BLUE_HARNESS	Harnais bleu clair
+LIGHT_GRAY_BUNDLE	Sac gris clair
+LIGHT_GRAY_CUSHION	Coussin gris clair
+LIGHT_GRAY_DYE	Teinture gris clair
+LIGHT_GRAY_HARNESS	Harnais gris clair
+LIME_BUNDLE	Sac vert clair
+LIME_CUSHION	Coussin vert clair
+LIME_DYE	Teinture vert clair
+LIME_HARNESS	Harnais vert clair
+LINGERING_POTION	Potion persistante
+LLAMA_SPAWN_EGG	Oeuf d'apparition de lama
+MACE	Masse
+MAGENTA_BUNDLE	Sac magenta
+MAGENTA_CUSHION	Coussin magenta
+MAGENTA_DYE	Teinture magenta
+MAGENTA_HARNESS	Harnais magenta
+MAGMA_CREAM	Crème de magma
+MAGMA_CUBE_SPAWN_EGG	Oeuf d'apparition de cube de magma
+MANGROVE_BOAT	Bateau en palétuvier
+MANGROVE_CHEST_BOAT	Bateau de stockage en palétuvier
+MAP	Carte vierge
+MELON_SEEDS	Graines de pastèque
+MELON_SLICE	Tranche de pastèque
+MILK_BUCKET	Seau de lait
+MINECART	Wagonnet
+MINER_POTTERY_SHERD	Tesson de poterie de mineur
+MOJANG_BANNER_PATTERN	Motif de bannière
+MOOSHROOM_SPAWN_EGG	Oeuf d'apparition de Mooshroom
+MOURNER_POTTERY_SHERD	Tesson de poterie de pleureur
+MULE_SPAWN_EGG	Oeuf d'apparition de mule
+MUSHROOM_STEW	Soupe de champignons
+MUSIC_DISC_5	Disque
+MUSIC_DISC_11	Disque
+MUSIC_DISC_13	Disque
+MUSIC_DISC_BLOCKS	Disque
+MUSIC_DISC_BOUNCE	Disque
+MUSIC_DISC_CAT	Disque
+MUSIC_DISC_CHIRP	Disque
+MUSIC_DISC_CREATOR	Disque
+MUSIC_DISC_CREATOR_MUSIC_BOX	Disque
+MUSIC_DISC_FAR	Disque
+MUSIC_DISC_LAVA_CHICKEN	Disque
+MUSIC_DISC_MALL	Disque
+MUSIC_DISC_MELLOHI	Disque
+MUSIC_DISC_OTHERSIDE	Disque
+MUSIC_DISC_PIGSTEP	Disque
+MUSIC_DISC_PRECIPICE	Disque
+MUSIC_DISC_RELIC	Disque
+MUSIC_DISC_STAL	Disque
+MUSIC_DISC_STRAD	Disque
+MUSIC_DISC_TEARS	Disque
+MUSIC_DISC_WAIT	Disque
+MUSIC_DISC_WARD	Disque
+MUTTON	Mouton cru
+NAME_TAG	Étiquette
+NAUTILUS_SHELL	Coquille de nautile
+NAUTILUS_SPAWN_EGG	Oeuf d'apparition de nautile
+NETHER_BRICK	Brique du Nether
+NETHER_STAR	Étoile du Nether
+NETHERITE_AXE	Hache en netherite
+NETHERITE_BOOTS	Bottes en netherite
+NETHERITE_CHESTPLATE	Plastron en netherite
+NETHERITE_HELMET	Casque en netherite
+NETHERITE_HOE	Houe en netherite
+NETHERITE_HORSE_ARMOR	Armure en netherite pour cheval
+NETHERITE_INGOT	Lingot de netherite
+NETHERITE_LEGGINGS	Jambières en netherite
+NETHERITE_NAUTILUS_ARMOR	Armure en netherite pour nautile
+NETHERITE_PICKAXE	Pioche en netherite
+NETHERITE_SCRAP	Fragments de netherite
+NETHERITE_SHOVEL	Pelle en netherite
+NETHERITE_SPEAR	Lance en netherite
+NETHERITE_SWORD	Épée en netherite
+NETHERITE_UPGRADE_SMITHING_TEMPLATE	Modèle de forge
+OAK_BOAT	Bateau en chêne
+OAK_CHEST_BOAT	Bateau de stockage en chêne
+OCEAN_MONUMENT_MAP	Carte de monument océanique
+OCELOT_SPAWN_EGG	Oeuf d'apparition d'ocelot
+OMINOUS_BOTTLE	Fiole funeste
+OMINOUS_TRIAL_KEY	Clé des épreuves funeste
+ORANGE_BUNDLE	Sac orange
+ORANGE_CUSHION	Coussin orange
+ORANGE_DYE	Teinture orange
+ORANGE_HARNESS	Harnais orange
+PAINTING	Tableau
+PALE_OAK_BOAT	Bateau en chêne pâle
+PALE_OAK_CHEST_BOAT	Bateau de stockage en chêne pâle
+PANDA_SPAWN_EGG	Oeuf d'apparition de panda
+PAPER	Papier
+PARCHED_SPAWN_EGG	Oeuf d'apparition de desséché
+PARROT_SPAWN_EGG	Oeuf d'apparition de perroquet
+PHANTOM_MEMBRANE	Membrane de Phantom
+PHANTOM_SPAWN_EGG	Oeuf d'apparition de Phantom
+PIG_SPAWN_EGG	Oeuf d'apparition de cochon
+PIGLIN_BANNER_PATTERN	Motif de bannière
+PIGLIN_BRUTE_SPAWN_EGG	Oeuf d'apparition de Piglin barbare
+PIGLIN_SPAWN_EGG	Oeuf d'apparition de Piglin
+PILLAGER_SPAWN_EGG	Oeuf d'apparition de pillard
+PINK_BUNDLE	Sac rose
+PINK_CUSHION	Coussin rose
+PINK_DYE	Teinture rose
+PINK_HARNESS	Harnais rose
+PITCHER_POD	Gousse de planturne
+PLAINS_VILLAGE_MAP	Carte de village des plaines
+PLENTY_POTTERY_SHERD	Tesson de poterie de richesse
+POISONOUS_POTATO	Pomme de terre empoisonnée
+POLAR_BEAR_SPAWN_EGG	Oeuf d'apparition d'ours blanc
+POPLAR_BOAT	Bateau en peuplier
+POPLAR_CHEST_BOAT	Bateau de stockage en peuplier
+POPPED_CHORUS_FRUIT	Chorus éclaté
+PORKCHOP	Côtelette de porc crue
+POTATO	Pomme de terre
+POTION	Potion
+POWDER_SNOW_BUCKET	Seau de neige poudreuse
+PRISMARINE_CRYSTALS	Cristaux de prismarine
+PRISMARINE_SHARD	Éclat de prismarine
+PRIZE_POTTERY_SHERD	Tesson de poterie de joyau
+PUFFERFISH	Poisson-globe
+PUFFERFISH_BUCKET	Poisson-globe dans un seau
+PUFFERFISH_SPAWN_EGG	Oeuf d'apparition de poisson-globe
+PUMPKIN_PIE	Tarte à la citrouille
+PUMPKIN_SEEDS	Graines de citrouille
+PURPLE_BUNDLE	Sac violet
+PURPLE_CUSHION	Coussin violet
+PURPLE_DYE	Teinture violette
+PURPLE_HARNESS	Harnais violet
+QUARTZ	Quartz du Nether
+RABBIT	Lapin cru
+RABBIT_FOOT	Patte de lapin
+RABBIT_HIDE	Peau de lapin
+RABBIT_SPAWN_EGG	Oeuf d'apparition de lapin
+RABBIT_STEW	Ragoût de lapin
+RAISER_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+RAVAGER_SPAWN_EGG	Oeuf d'apparition de ravageur
+RAW_COPPER	Cuivre brut
+RAW_GOLD	Or brut
+RAW_IRON	Fer brut
+RECOVERY_COMPASS	Boussole de récupération
+RED_BUNDLE	Sac rouge
+RED_CUSHION	Coussin rouge
+RED_DYE	Teinture rouge
+RED_HARNESS	Harnais rouge
+REDSTONE	Poudre de redstone
+RESIN_BRICK	Brique de résine
+RIB_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+ROTTEN_FLESH	Chair putréfiée
+SADDLE	Selle
+SALMON	Saumon cru
+SALMON_BUCKET	Saumon dans un seau
+SALMON_SPAWN_EGG	Oeuf d'apparition de saumon
+SAVANNA_VILLAGE_MAP	Carte de village de la savane
+SCRAPE_POTTERY_SHERD	Tesson de poterie de hache
+SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+SHEAF_POTTERY_SHERD	Tesson de poterie d'épis
+SHEARS	Cisailles
+SHEEP_SPAWN_EGG	Oeuf d'apparition de mouton
+SHELTER_POTTERY_SHERD	Tesson de poterie d'abri
+SHIELD	Bouclier
+SHULKER_SHELL	Carapace de Shulker
+SHULKER_SPAWN_EGG	Oeuf d'apparition de Shulker
+SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+SILVERFISH_SPAWN_EGG	Oeuf d'apparition de poisson d'argent
+SKELETON_HORSE_SPAWN_EGG	Oeuf d'apparition de cheval-squelette
+SKELETON_SPAWN_EGG	Oeuf d'apparition de squelette
+SKULL_BANNER_PATTERN	Motif de bannière
+SKULL_POTTERY_SHERD	Tesson de poterie de crâne
+SLIME_BALL	Boule de slime
+SLIME_SPAWN_EGG	Oeuf d'apparition de Slime
+SNIFFER_SPAWN_EGG	Oeuf d'apparition de renifleur
+SNORT_POTTERY_SHERD	Tesson de poterie de renifleur
+SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+SNOW_GOLEM_SPAWN_EGG	Oeuf d'apparition de golem de neige
+SNOWBALL	Boule de neige
+SNOWY_VILLAGE_MAP	Carte de village des neiges
+SPECTRAL_ARROW	Flèche spectrale
+SPIDER_EYE	Oeil d'araignée
+SPIDER_SPAWN_EGG	Oeuf d'apparition d'araignée
+SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+SPLASH_POTION	Potion jetable
+SPRUCE_BOAT	Bateau en sapin
+SPRUCE_CHEST_BOAT	Bateau de stockage en sapin
+SPYGLASS	Longue-vue
+SQUID_SPAWN_EGG	Oeuf d'apparition de poulpe
+STICK	Bâton
+STONE_AXE	Hache en pierre
+STONE_HOE	Houe en pierre
+STONE_PICKAXE	Pioche en pierre
+STONE_SHOVEL	Pelle en pierre
+STONE_SPEAR	Lance en pierre
+STONE_SWORD	Épée en pierre
+STRAY_SPAWN_EGG	Oeuf d'apparition de vagabond
+STRIDER_SPAWN_EGG	Oeuf d'apparition d'arpenteur
+STRING	Ficelle
+SUGAR	Sucre
+SULFUR_CUBE_BUCKET	Cube de soufre dans un seau
+SULFUR_CUBE_SPAWN_EGG	Oeuf d'apparition de cube de soufre
+SUSPICIOUS_STEW	Soupe suspecte
+SWAMP_HUT_MAP	Carte de cabane des marais
+SWEET_BERRIES	Baies sucrées
+TADPOLE_BUCKET	Têtard dans un seau
+TADPOLE_SPAWN_EGG	Oeuf d'apparition de têtard
+TAIGA_VILLAGE_MAP	Carte de village de la taïga
+TIDE_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+TIPPED_ARROW	Flèche à effet
+TNT_MINECART	Wagonnet à TNT
+TORCHFLOWER_SEEDS	Graines de torche-fleur
+TOTEM_OF_UNDYING	Totem d'immortalité
+TRADER_LLAMA_SPAWN_EGG	Oeuf d'apparition de lama de marchand
+TRIAL_KEY	Clé des épreuves
+TRIDENT	Trident
+TROPICAL_FISH	Poisson tropical
+TROPICAL_FISH_BUCKET	Poisson tropical dans un seau
+TROPICAL_FISH_SPAWN_EGG	Oeuf d'apparition de poisson tropical
+TURTLE_HELMET	Carapace de tortue
+TURTLE_SCUTE	Écaille de tortue
+TURTLE_SPAWN_EGG	Oeuf d'apparition de tortue
+VEX_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+VEX_SPAWN_EGG	Oeuf d'apparition de Vex
+VILLAGER_SPAWN_EGG	Oeuf d'apparition de villageois
+VINDICATOR_SPAWN_EGG	Oeuf d'apparition de vindicateur
+WANDERING_TRADER_SPAWN_EGG	Oeuf d'apparition de marchand ambulant
+WARD_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+WARDEN_SPAWN_EGG	Oeuf d'apparition de Warden
+WARM_OCEAN_RUINS_MAP	Carte de ruines océaniques chaudes
+WARPED_FUNGUS_ON_A_STICK	Champignon biscornu sur un bâton
+WATER_BUCKET	Seau d'eau
+WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+WHEAT_SEEDS	Graines de blé
+WHITE_BUNDLE	Sac blanc
+WHITE_CUSHION	Coussin blanc
+WHITE_DYE	Teinture blanche
+WHITE_HARNESS	Harnais blanc
+WILD_ARMOR_TRIM_SMITHING_TEMPLATE	Modèle de forge
+WIND_CHARGE	Charge de vent
+WITCH_SPAWN_EGG	Oeuf d'apparition de sorcière
+WITHER_SKELETON_SPAWN_EGG	Oeuf d'apparition de Wither squelette
+WITHER_SPAWN_EGG	Oeuf d'apparition de Wither
+WOLF_ARMOR	Armure pour loup
+WOLF_SPAWN_EGG	Oeuf d'apparition de loup
+WOODEN_AXE	Hache en bois
+WOODEN_HOE	Houe en bois
+WOODEN_PICKAXE	Pioche en bois
+WOODEN_SHOVEL	Pelle en bois
+WOODEN_SPEAR	Lance en bois
+WOODEN_SWORD	Épée en bois
+WOODLAND_MANSION_MAP	Carte de manoir des bois
+WRITABLE_BOOK	Livre et plume
+WRITTEN_BOOK	Livre écrit
+YELLOW_BUNDLE	Sac jaune
+YELLOW_CUSHION	Coussin jaune
+YELLOW_DYE	Teinture jaune
+YELLOW_HARNESS	Harnais jaune
+ZOGLIN_SPAWN_EGG	Oeuf d'apparition de Zoglin
+ZOMBIE_HORSE_SPAWN_EGG	Oeuf d'apparition de cheval-zombie
+ZOMBIE_NAUTILUS_SPAWN_EGG	Oeuf d'apparition de nautile-zombie
+ZOMBIE_SPAWN_EGG	Oeuf d'apparition de zombie
+ZOMBIE_VILLAGER_SPAWN_EGG	Oeuf d'apparition de zombie-villageois
+ZOMBIFIED_PIGLIN_SPAWN_EGG	Oeuf d'apparition de Piglin zombifié
+ACACIA_BUTTON	Bouton en acacia
+ACACIA_DOOR	Porte en acacia
+ACACIA_FENCE	Barrière en acacia
+ACACIA_FENCE_GATE	Portillon en acacia
+ACACIA_HANGING_SIGN	Pancarte suspendue en acacia
+ACACIA_LEAVES	Feuilles d'acacia
+ACACIA_LOG	Bûche d'acacia
+ACACIA_PLANKS	Planches d'acacia
+ACACIA_PRESSURE_PLATE	Plaque de pression en acacia
+ACACIA_SAPLING	Pousse d'acacia
+ACACIA_SHELF	Étagère en acacia
+ACACIA_SIGN	Pancarte en acacia
+ACACIA_SLAB	Dalle en acacia
+ACACIA_STAIRS	Escalier en acacia
+ACACIA_TRAPDOOR	Trappe en acacia
+ACACIA_WALL_HANGING_SIGN	Pancarte suspendue murale en acacia
+ACACIA_WALL_SIGN	Pancarte murale en acacia
+ACACIA_WOOD	Bois d'acacia
+ACTIVATOR_RAIL	Rails déclencheurs
+ALLIUM	Allium
+AMETHYST_BLOCK	Bloc d'améthyste
+AMETHYST_CLUSTER	Amas d'améthyste
+ANCIENT_DEBRIS	Débris antiques
+ANDESITE	Andésite
+ANDESITE_SLAB	Dalle d'andésite
+ANDESITE_STAIRS	Escalier en andésite
+ANDESITE_WALL	Muret d'andésite
+ANVIL	Enclume
+ATTACHED_MELON_STEM	Tige de pastèque attachée
+ATTACHED_PUMPKIN_STEM	Tige de citrouille attachée
+AZALEA	Azalée
+AZALEA_LEAVES	Feuilles d'azalée
+AZURE_BLUET	Houstonie bleue
+BAMBOO	Bambou
+BAMBOO_BLOCK	Bloc de bambou
+BAMBOO_BUTTON	Bouton en bambou
+BAMBOO_DOOR	Porte en bambou
+BAMBOO_FENCE	Barrière en bambou
+BAMBOO_FENCE_GATE	Portillon en bambou
+BAMBOO_HANGING_SIGN	Pancarte suspendue en bambou
+BAMBOO_MOSAIC	Mosaïque de bambou
+BAMBOO_MOSAIC_SLAB	Dalle de mosaïque de bambou
+BAMBOO_MOSAIC_STAIRS	Escalier en mosaïque de bambou
+BAMBOO_PLANKS	Planches de bambou
+BAMBOO_PRESSURE_PLATE	Plaque de pression en bambou
+BAMBOO_SAPLING	Pousse de bambou
+BAMBOO_SHELF	Étagère en bambou
+BAMBOO_SIGN	Pancarte en bambou
+BAMBOO_SLAB	Dalle en bambou
+BAMBOO_STAIRS	Escalier en bambou
+BAMBOO_TRAPDOOR	Trappe en bambou
+BAMBOO_WALL_HANGING_SIGN	Pancarte suspendue murale en bambou
+BAMBOO_WALL_SIGN	Pancarte murale en bambou
+BARREL	Tonneau
+BARRIER	Barrière invisible
+BASALT	Basalte
+BEACON	Balise
+BEDROCK	Bedrock
+BEE_NEST	Nid d'abeilles
+BEEHIVE	Ruche
+BEETROOTS	Betteraves
+BELL	Cloche
+BIG_DRIPLEAF	Grande foliogoutte
+BIG_DRIPLEAF_STEM	Tige de grande foliogoutte
+BIRCH_BUTTON	Bouton en bouleau
+BIRCH_DOOR	Porte en bouleau
+BIRCH_FENCE	Barrière en bouleau
+BIRCH_FENCE_GATE	Portillon en bouleau
+BIRCH_HANGING_SIGN	Pancarte suspendue en bouleau
+BIRCH_LEAVES	Feuilles de bouleau
+BIRCH_LOG	Bûche de bouleau
+BIRCH_PLANKS	Planches de bouleau
+BIRCH_PRESSURE_PLATE	Plaque de pression en bouleau
+BIRCH_SAPLING	Pousse de bouleau
+BIRCH_SHELF	Étagère en bouleau
+BIRCH_SIGN	Pancarte en bouleau
+BIRCH_SLAB	Dalle en bouleau
+BIRCH_STAIRS	Escalier en bouleau
+BIRCH_TRAPDOOR	Trappe en bouleau
+BIRCH_WALL_HANGING_SIGN	Pancarte suspendue murale en bouleau
+BIRCH_WALL_SIGN	Pancarte murale en bouleau
+BIRCH_WOOD	Bois de bouleau
+BLACK_BANNER	Bannière noire
+BLACK_BED	Lit noir
+BLACK_CANDLE	Bougie noire
+BLACK_CANDLE_CAKE	Gâteau à bougie noire
+BLACK_CARPET	Tapis noir
+BLACK_CONCRETE	Béton noir
+BLACK_CONCRETE_POWDER	Béton noir en poudre
+BLACK_CONCRETE_SLAB	Dalle de béton noir
+BLACK_CONCRETE_STAIRS	Escalier en béton noir
+BLACK_GLAZED_TERRACOTTA	Terre cuite émaillée noire
+BLACK_SHULKER_BOX	Boîte de Shulker noire
+BLACK_STAINED_GLASS	Verre noir
+BLACK_STAINED_GLASS_PANE	Vitre noire
+BLACK_TERRACOTTA	Terre cuite noire
+BLACK_WOOL	Laine noire
+BLACK_WOOL_SLAB	Dalle de laine noire
+BLACK_WOOL_STAIRS	Escalier en laine noire
+BLACKSTONE	Roche noire
+BLACKSTONE_SLAB	Dalle de roche noire
+BLACKSTONE_STAIRS	Escalier en roche noire
+BLACKSTONE_WALL	Muret de roche noire
+BLAST_FURNACE	Haut fourneau
+BLUE_BANNER	Bannière bleue
+BLUE_BED	Lit bleu
+BLUE_CANDLE	Bougie bleue
+BLUE_CANDLE_CAKE	Gâteau à bougie bleue
+BLUE_CARPET	Tapis bleu
+BLUE_CONCRETE	Béton bleu
+BLUE_CONCRETE_POWDER	Béton bleu en poudre
+BLUE_CONCRETE_SLAB	Dalle de béton bleu
+BLUE_CONCRETE_STAIRS	Escalier en béton bleu
+BLUE_GLAZED_TERRACOTTA	Terre cuite émaillée bleue
+BLUE_ICE	Glace bleue
+BLUE_ORCHID	Orchidée bleue
+BLUE_SHULKER_BOX	Boîte de Shulker bleue
+BLUE_STAINED_GLASS	Verre bleu
+BLUE_STAINED_GLASS_PANE	Vitre bleue
+BLUE_TERRACOTTA	Terre cuite bleue
+BLUE_WOOL	Laine bleue
+BLUE_WOOL_SLAB	Dalle de laine bleue
+BLUE_WOOL_STAIRS	Escalier en laine bleue
+BONE_BLOCK	Bloc d'os
+BOOKSHELF	Bibliothèque
+BRAIN_CORAL	Corail cerveau
+BRAIN_CORAL_BLOCK	Bloc de corail cerveau
+BRAIN_CORAL_FAN	Gorgone de corail cerveau
+BRAIN_CORAL_WALL_FAN	Gorgone de corail cerveau murale
+BREWING_STAND	Alambic
+BRICK_SLAB	Dalle de briques
+BRICK_STAIRS	Escalier en briques
+BRICK_WALL	Muret de briques
+BRICKS	Briques
+BROWN_BANNER	Bannière marron
+BROWN_BED	Lit marron
+BROWN_CANDLE	Bougie marron
+BROWN_CANDLE_CAKE	Gâteau à bougie marron
+BROWN_CARPET	Tapis marron
+BROWN_CONCRETE	Béton marron
+BROWN_CONCRETE_POWDER	Béton marron en poudre
+BROWN_CONCRETE_SLAB	Dalle de béton marron
+BROWN_CONCRETE_STAIRS	Escalier en béton marron
+BROWN_GLAZED_TERRACOTTA	Terre cuite émaillée marron
+BROWN_MUSHROOM	Champignon brun
+BROWN_MUSHROOM_BLOCK	Bloc de champignon brun
+BROWN_SHULKER_BOX	Boîte de Shulker marron
+BROWN_STAINED_GLASS	Verre marron
+BROWN_STAINED_GLASS_PANE	Vitre marron
+BROWN_TERRACOTTA	Terre cuite marron
+BROWN_WOOL	Laine marron
+BROWN_WOOL_SLAB	Dalle de laine marron
+BROWN_WOOL_STAIRS	Escalier en laine marron
+BUBBLE_COLUMN	Colonne de bulles
+BUBBLE_CORAL	Corail bulles
+BUBBLE_CORAL_BLOCK	Bloc de corail bulles
+BUBBLE_CORAL_FAN	Gorgone de corail bulles
+BUBBLE_CORAL_WALL_FAN	Gorgone de corail bulles murale
+BUDDING_AMETHYST	Druse d'améthyste
+BUSH	Buisson
+CACTUS	Cactus
+CACTUS_FLOWER	Fleur de cactus
+CAKE	Gâteau
+CALCITE	Calcite
+CALIBRATED_SCULK_SENSOR	Capteur sculk calibré
+CAMPFIRE	Feu de camp
+CANDLE	Bougie
+CANDLE_CAKE	Gâteau à bougie
+CARROTS	Carottes
+CARTOGRAPHY_TABLE	Table de cartographie
+CARVED_PUMPKIN	Citrouille sculptée
+CAULDRON	Chaudron
+CAVE_AIR	Air de caverne
+CAVE_VINES	Lianes des cavernes
+CAVE_VINES_PLANT	Plante de lianes des cavernes
+CHAIN_COMMAND_BLOCK	Bloc de commande en chaîne
+CHERRY_BUTTON	Bouton en cerisier
+CHERRY_DOOR	Porte en cerisier
+CHERRY_FENCE	Barrière en cerisier
+CHERRY_FENCE_GATE	Portillon en cerisier
+CHERRY_HANGING_SIGN	Pancarte suspendue en cerisier
+CHERRY_LEAVES	Feuilles de cerisier
+CHERRY_LOG	Bûche de cerisier
+CHERRY_PLANKS	Planches de cerisier
+CHERRY_PRESSURE_PLATE	Plaque de pression en cerisier
+CHERRY_SAPLING	Pousse de cerisier
+CHERRY_SHELF	Étagère en cerisier
+CHERRY_SIGN	Pancarte en cerisier
+CHERRY_SLAB	Dalle en cerisier
+CHERRY_STAIRS	Escalier en cerisier
+CHERRY_TRAPDOOR	Trappe en cerisier
+CHERRY_WALL_HANGING_SIGN	Pancarte suspendue murale en cerisier
+CHERRY_WALL_SIGN	Pancarte murale en cerisier
+CHERRY_WOOD	Bois de cerisier
+CHEST	Coffre
+CHIPPED_ANVIL	Enclume ébréchée
+CHISELED_BOOKSHELF	Bibliothèque sculptée
+CHISELED_CINNABAR	Cinabre sculpté
+CHISELED_COPPER	Cuivre sculpté
+CHISELED_DEEPSLATE	Ardoise des abîmes sculptée
+CHISELED_NETHER_BRICKS	Briques du Nether sculptées
+CHISELED_POLISHED_BLACKSTONE	Pierre noire sculptée
+CHISELED_QUARTZ_BLOCK	Bloc de quartz sculpté
+CHISELED_RED_SANDSTONE	Grès rouge sculpté
+CHISELED_RESIN_BRICKS	Briques de résine sculptées
+CHISELED_SANDSTONE	Grès sculpté
+CHISELED_STONE_BRICKS	Pierre sculptée
+CHISELED_SULFUR	Soufre sculpté
+CHISELED_TUFF	Tuf sculpté
+CHISELED_TUFF_BRICKS	Tuf taillé sculpté
+CHORUS_FLOWER	Fleur de chorus
+CHORUS_PLANT	Plante de chorus
+CINNABAR	Cinabre
+CINNABAR_BRICK_SLAB	Dalle de cinabre taillé
+CINNABAR_BRICK_STAIRS	Escalier en cinabre taillé
+CINNABAR_BRICK_WALL	Muret de cinabre taillé
+CINNABAR_BRICKS	Cinabre taillé
+CINNABAR_SLAB	Dalle de cinabre
+CINNABAR_STAIRS	Escalier en cinabre
+CINNABAR_WALL	Muret de cinabre
+CLAY	Argile
+CLOSED_EYEBLOSSOM	Oeilchidée fermée
+COAL_BLOCK	Bloc de charbon
+COAL_ORE	Minerai de charbon
+COARSE_DIRT	Terre stérile
+COBBLED_DEEPSLATE	Pierres des abîmes
+COBBLED_DEEPSLATE_SLAB	Dalle de pierres des abîmes
+COBBLED_DEEPSLATE_STAIRS	Escalier en pierres des abîmes
+COBBLED_DEEPSLATE_WALL	Muret de pierres des abîmes
+COBBLESTONE	Pierres
+COBBLESTONE_SLAB	Dalle de pierres
+COBBLESTONE_STAIRS	Escalier en pierre
+COBBLESTONE_WALL	Muret de pierres
+COBWEB	Toile d'araignée
+COCOA	Cacao
+COMMAND_BLOCK	Bloc de commande
+COMPARATOR	Comparateur de redstone
+COMPOSTER	Composteur
+CONDUIT	Conduit
+COPPER_BARS	Barreaux de cuivre
+COPPER_BLOCK	Bloc de cuivre
+COPPER_BULB	Ampoule en cuivre
+COPPER_CHAIN	Chaîne en cuivre
+COPPER_CHEST	Coffre en cuivre
+COPPER_DOOR	Porte en cuivre
+COPPER_GOLEM_STATUE	Statue de golem de cuivre
+COPPER_GRATE	Grille en cuivre
+COPPER_LANTERN	Lanterne en cuivre
+COPPER_ORE	Minerai de cuivre
+COPPER_TORCH	Torche de cuivre
+COPPER_TRAPDOOR	Trappe en cuivre
+COPPER_WALL_TORCH	Torche de cuivre murale
+CORNFLOWER	Bleuet
+CRACKED_DEEPSLATE_BRICKS	Ardoise des abîmes taillée craquelée
+CRACKED_DEEPSLATE_TILES	Ardoise des abîmes carrelée craquelée
+CRACKED_NETHER_BRICKS	Briques du Nether craquelées
+CRACKED_POLISHED_BLACKSTONE_BRICKS	Pierre noire taillée craquelée
+CRACKED_STONE_BRICKS	Pierre taillée craquelée
+CRAFTER	Fabricateur
+CRAFTING_TABLE	Établi
+CREAKING_HEART	Coeur de grinceur
+CREEPER_HEAD	Tête de Creeper
+CREEPER_WALL_HEAD	Tête de Creeper murale
+CRIMSON_BUTTON	Bouton carmin
+CRIMSON_DOOR	Porte carmin
+CRIMSON_FENCE	Barrière carmin
+CRIMSON_FENCE_GATE	Portillon carmin
+CRIMSON_FUNGUS	Champignon carmin
+CRIMSON_HANGING_SIGN	Pancarte suspendue carmin
+CRIMSON_HYPHAE	Hyphes carmin
+CRIMSON_NYLIUM	Nylium carmin
+CRIMSON_PLANKS	Planches carmin
+CRIMSON_PRESSURE_PLATE	Plaque de pression carmin
+CRIMSON_ROOTS	Racines carmin
+CRIMSON_SHELF	Étagère carmin
+CRIMSON_SIGN	Pancarte carmin
+CRIMSON_SLAB	Dalle carmin
+CRIMSON_STAIRS	Escalier carmin
+CRIMSON_STEM	Tige carmin
+CRIMSON_TRAPDOOR	Trappe carmin
+CRIMSON_WALL_HANGING_SIGN	Pancarte suspendue murale carmin
+CRIMSON_WALL_SIGN	Pancarte murale carmin
+CRYING_OBSIDIAN	Obsidienne pleureuse
+CUT_COPPER	Cuivre taillé
+CUT_COPPER_SLAB	Dalle de cuivre taillé
+CUT_COPPER_STAIRS	Escalier en cuivre taillé
+CUT_RED_SANDSTONE	Grès rouge taillé
+CUT_RED_SANDSTONE_SLAB	Dalle de grès rouge taillé
+CUT_SANDSTONE	Grès taillé
+CUT_SANDSTONE_SLAB	Dalle de grès taillé
+CYAN_BANNER	Bannière cyan
+CYAN_BED	Lit cyan
+CYAN_CANDLE	Bougie cyan
+CYAN_CANDLE_CAKE	Gâteau à bougie cyan
+CYAN_CARPET	Tapis cyan
+CYAN_CONCRETE	Béton cyan
+CYAN_CONCRETE_POWDER	Béton cyan en poudre
+CYAN_CONCRETE_SLAB	Dalle de béton cyan
+CYAN_CONCRETE_STAIRS	Escalier en béton cyan
+CYAN_GLAZED_TERRACOTTA	Terre cuite émaillée cyan
+CYAN_SHULKER_BOX	Boîte de Shulker cyan
+CYAN_STAINED_GLASS	Verre cyan
+CYAN_STAINED_GLASS_PANE	Vitre cyan
+CYAN_TERRACOTTA	Terre cuite cyan
+CYAN_WOOL	Laine cyan
+CYAN_WOOL_SLAB	Dalle de laine cyan
+CYAN_WOOL_STAIRS	Escalier en laine cyan
+DAMAGED_ANVIL	Enclume endommagée
+DANDELION	Pissenlit
+DARK_OAK_BUTTON	Bouton en chêne noir
+DARK_OAK_DOOR	Porte en chêne noir
+DARK_OAK_FENCE	Barrière en chêne noir
+DARK_OAK_FENCE_GATE	Portillon en chêne noir
+DARK_OAK_HANGING_SIGN	Pancarte suspendue en chêne noir
+DARK_OAK_LEAVES	Feuilles de chêne noir
+DARK_OAK_LOG	Bûche de chêne noir
+DARK_OAK_PLANKS	Planches de chêne noir
+DARK_OAK_PRESSURE_PLATE	Plaque de pression en chêne noir
+DARK_OAK_SAPLING	Pousse de chêne noir
+DARK_OAK_SHELF	Étagère en chêne noir
+DARK_OAK_SIGN	Pancarte en chêne noir
+DARK_OAK_SLAB	Dalle en chêne noir
+DARK_OAK_STAIRS	Escalier en chêne noir
+DARK_OAK_TRAPDOOR	Trappe en chêne noir
+DARK_OAK_WALL_HANGING_SIGN	Pancarte suspendue murale en chêne noir
+DARK_OAK_WALL_SIGN	Pancarte murale en chêne noir
+DARK_OAK_WOOD	Bois de chêne noir
+DARK_PRISMARINE	Prismarine sombre
+DARK_PRISMARINE_SLAB	Dalle de prismarine sombre
+DARK_PRISMARINE_STAIRS	Escalier en prismarine sombre
+DAYLIGHT_DETECTOR	Capteur de lumière
+DEAD_BRAIN_CORAL	Corail cerveau mort
+DEAD_BRAIN_CORAL_BLOCK	Bloc de corail cerveau mort
+DEAD_BRAIN_CORAL_FAN	Gorgone de corail cerveau morte
+DEAD_BRAIN_CORAL_WALL_FAN	Gorgone de corail cerveau morte murale
+DEAD_BUBBLE_CORAL	Corail bulles mort
+DEAD_BUBBLE_CORAL_BLOCK	Bloc de corail bulles mort
+DEAD_BUBBLE_CORAL_FAN	Gorgone de corail bulles morte
+DEAD_BUBBLE_CORAL_WALL_FAN	Gorgone de corail bulles morte murale
+DEAD_BUSH	Buisson mort
+DEAD_FIRE_CORAL	Corail de feu mort
+DEAD_FIRE_CORAL_BLOCK	Bloc de corail de feu mort
+DEAD_FIRE_CORAL_FAN	Gorgone de corail de feu morte
+DEAD_FIRE_CORAL_WALL_FAN	Gorgone de corail de feu morte murale
+DEAD_HORN_CORAL	Corail corné mort
+DEAD_HORN_CORAL_BLOCK	Bloc de corail corné mort
+DEAD_HORN_CORAL_FAN	Gorgone de corail corné morte
+DEAD_HORN_CORAL_WALL_FAN	Gorgone de corail corné morte murale
+DEAD_TUBE_CORAL	Corail tubulaire mort
+DEAD_TUBE_CORAL_BLOCK	Bloc de corail tubulaire mort
+DEAD_TUBE_CORAL_FAN	Gorgone de corail tubulaire morte
+DEAD_TUBE_CORAL_WALL_FAN	Gorgone de corail tubulaire morte murale
+DECORATED_POT	Vase décoré
+DEEPSLATE	Ardoise des abîmes
+DEEPSLATE_BRICK_SLAB	Dalle d'ardoise des abîmes taillée
+DEEPSLATE_BRICK_STAIRS	Escalier en ardoise des abîmes taillée
+DEEPSLATE_BRICK_WALL	Muret d'ardoise des abîmes taillée
+DEEPSLATE_BRICKS	Ardoise des abîmes taillée
+DEEPSLATE_COAL_ORE	Minerai de charbon des abîmes
+DEEPSLATE_COPPER_ORE	Minerai de cuivre des abîmes
+DEEPSLATE_DIAMOND_ORE	Minerai de diamant des abîmes
+DEEPSLATE_EMERALD_ORE	Minerai d'émeraude des abîmes
+DEEPSLATE_GOLD_ORE	Minerai d'or des abîmes
+DEEPSLATE_IRON_ORE	Minerai de fer des abîmes
+DEEPSLATE_LAPIS_ORE	Minerai de lapis-lazuli des abîmes
+DEEPSLATE_REDSTONE_ORE	Minerai de redstone des abîmes
+DEEPSLATE_TILE_SLAB	Dalle d'ardoise des abîmes carrelée
+DEEPSLATE_TILE_STAIRS	Escalier en ardoise des abîmes carrelée
+DEEPSLATE_TILE_WALL	Muret d'ardoise des abîmes carrelée
+DEEPSLATE_TILES	Ardoise des abîmes carrelée
+DETECTOR_RAIL	Rails détecteurs
+DIAMOND_BLOCK	Bloc de diamant
+DIAMOND_ORE	Minerai de diamant
+DIORITE	Diorite
+DIORITE_SLAB	Dalle de diorite
+DIORITE_STAIRS	Escalier en diorite
+DIORITE_WALL	Muret de diorite
+DIRT	Terre
+DIRT_PATH	Chemin de terre
+DISPENSER	Distributeur
+DRAGON_EGG	Oeuf de dragon
+DRAGON_HEAD	Tête de dragon
+DRAGON_WALL_HEAD	Tête de dragon murale
+DRIED_GHAST	Ghast desséché
+DRIED_KELP_BLOCK	Bloc d'algues séchées
+DRIPSTONE_BLOCK	Bloc de spéléothème
+DROPPER	Dropper
+EMERALD_BLOCK	Bloc d'émeraude
+EMERALD_ORE	Minerai d'émeraude
+ENCHANTING_TABLE	Table d'enchantement
+END_GATEWAY	Passerelle de l'End
+END_PORTAL	Portail de l'End
+END_PORTAL_FRAME	Cadre de portail de l'End
+END_ROD	Barre de l'End
+END_STONE	Pierre de l'End
+END_STONE_BRICK_SLAB	Dalle de pierre taillée de l'End
+END_STONE_BRICK_STAIRS	Escalier en pierre taillée de l'End
+END_STONE_BRICK_WALL	Muret de pierre taillée de l'End
+END_STONE_BRICKS	Pierre taillée de l'End
+ENDER_CHEST	Coffre de l'Ender
+EXPOSED_CHISELED_COPPER	Cuivre sculpté exposé
+EXPOSED_COPPER	Cuivre exposé
+EXPOSED_COPPER_BARS	Barreaux de cuivre exposé
+EXPOSED_COPPER_BULB	Ampoule en cuivre exposé
+EXPOSED_COPPER_CHAIN	Chaîne en cuivre exposé
+EXPOSED_COPPER_CHEST	Coffre en cuivre exposé
+EXPOSED_COPPER_DOOR	Porte en cuivre exposé
+EXPOSED_COPPER_GOLEM_STATUE	Statue de golem de cuivre exposé
+EXPOSED_COPPER_GRATE	Grille en cuivre exposé
+EXPOSED_COPPER_LANTERN	Lanterne en cuivre exposé
+EXPOSED_COPPER_TRAPDOOR	Trappe en cuivre exposé
+EXPOSED_CUT_COPPER	Cuivre taillé exposé
+EXPOSED_CUT_COPPER_SLAB	Dalle de cuivre taillé exposé
+EXPOSED_CUT_COPPER_STAIRS	Escalier en cuivre taillé exposé
+EXPOSED_LIGHTNING_ROD	Paratonnerre exposé
+FARMLAND	Terre labourée
+FERN	Fougère
+FIRE	Feu
+FIRE_CORAL	Corail de feu
+FIRE_CORAL_BLOCK	Bloc de corail de feu
+FIRE_CORAL_FAN	Gorgone de corail de feu
+FIRE_CORAL_WALL_FAN	Gorgone de corail de feu murale
+FIREFLY_BUSH	Buisson à lucioles
+FLETCHING_TABLE	Table d'archerie
+FLOWER_POT	Pot de fleurs
+FLOWERING_AZALEA	Azalée fleurie
+FLOWERING_AZALEA_LEAVES	Feuilles d'azalée fleurie
+FROGSPAWN	Oeufs de grenouille
+FROSTED_ICE	Glace givrée
+FURNACE	Fourneau
+GILDED_BLACKSTONE	Roche noire dorée
+GLASS	Verre
+GLASS_PANE	Vitre
+GLOW_LICHEN	Lichen lumineux
+GLOWSTONE	Pierre lumineuse
+GOLD_BLOCK	Bloc d'or
+GOLD_ORE	Minerai d'or
+GOLDEN_DANDELION	Pissenlit doré
+GRANITE	Granite
+GRANITE_SLAB	Dalle de granite
+GRANITE_STAIRS	Escalier en granite
+GRANITE_WALL	Muret de granite
+GRASS_BLOCK	Bloc d'herbe
+GRAVEL	Gravier
+GRAY_BANNER	Bannière grise
+GRAY_BED	Lit gris
+GRAY_CANDLE	Bougie grise
+GRAY_CANDLE_CAKE	Gâteau à bougie grise
+GRAY_CARPET	Tapis gris
+GRAY_CONCRETE	Béton gris
+GRAY_CONCRETE_POWDER	Béton gris en poudre
+GRAY_CONCRETE_SLAB	Dalle de béton gris
+GRAY_CONCRETE_STAIRS	Escalier en béton gris
+GRAY_GLAZED_TERRACOTTA	Terre cuite émaillée grise
+GRAY_SHULKER_BOX	Boîte de Shulker grise
+GRAY_STAINED_GLASS	Verre gris
+GRAY_STAINED_GLASS_PANE	Vitre grise
+GRAY_TERRACOTTA	Terre cuite grise
+GRAY_WOOL	Laine grise
+GRAY_WOOL_SLAB	Dalle de laine grise
+GRAY_WOOL_STAIRS	Escalier en laine grise
+GREEN_BANNER	Bannière verte
+GREEN_BED	Lit vert
+GREEN_CANDLE	Bougie verte
+GREEN_CANDLE_CAKE	Gâteau à bougie verte
+GREEN_CARPET	Tapis vert
+GREEN_CONCRETE	Béton vert
+GREEN_CONCRETE_POWDER	Béton vert en poudre
+GREEN_CONCRETE_SLAB	Dalle de béton vert
+GREEN_CONCRETE_STAIRS	Escalier en béton vert
+GREEN_GLAZED_TERRACOTTA	Terre cuite émaillée verte
+GREEN_SHULKER_BOX	Boîte de Shulker verte
+GREEN_STAINED_GLASS	Verre vert
+GREEN_STAINED_GLASS_PANE	Vitre verte
+GREEN_TERRACOTTA	Terre cuite verte
+GREEN_WOOL	Laine verte
+GREEN_WOOL_SLAB	Dalle de laine verte
+GREEN_WOOL_STAIRS	Escalier en laine verte
+GRINDSTONE	Meule
+HANGING_ROOTS	Racines suspendues
+HAY_BLOCK	Botte de paille
+HEAVY_CORE	Noyau lourd
+HEAVY_WEIGHTED_PRESSURE_PLATE	Plaque de pression pondérée lourde
+HONEY_BLOCK	Bloc de miel
+HONEYCOMB_BLOCK	Bloc de rayon de miel
+HOPPER	Entonnoir
+HORN_CORAL	Corail corné
+HORN_CORAL_BLOCK	Bloc de corail corné
+HORN_CORAL_FAN	Gorgone de corail corné
+HORN_CORAL_WALL_FAN	Gorgone de corail corné murale
+ICE	Glace
+INFESTED_CHISELED_STONE_BRICKS	Pierre sculptée infestée
+INFESTED_COBBLESTONE	Pierres infestées
+INFESTED_CRACKED_STONE_BRICKS	Pierre taillée craquelée infestée
+INFESTED_DEEPSLATE	Ardoise des abîmes infestée
+INFESTED_MOSSY_STONE_BRICKS	Pierre taillée moussue infestée
+INFESTED_STONE	Roche infestée
+INFESTED_STONE_BRICKS	Pierre taillée infestée
+IRON_BARS	Barreaux de fer
+IRON_BLOCK	Bloc de fer
+IRON_CHAIN	Chaîne en fer
+IRON_DOOR	Porte en fer
+IRON_ORE	Minerai de fer
+IRON_TRAPDOOR	Trappe en fer
+JACK_O_LANTERN	Citrouille-lanterne
+JIGSAW	Bloc de puzzle
+JUKEBOX	Jukebox
+JUNGLE_BUTTON	Bouton en acajou
+JUNGLE_DOOR	Porte en acajou
+JUNGLE_FENCE	Barrière en acajou
+JUNGLE_FENCE_GATE	Portillon en acajou
+JUNGLE_HANGING_SIGN	Pancarte suspendue en acajou
+JUNGLE_LEAVES	Feuilles d'acajou
+JUNGLE_LOG	Bûche d'acajou
+JUNGLE_PLANKS	Planches d'acajou
+JUNGLE_PRESSURE_PLATE	Plaque de pression en acajou
+JUNGLE_SAPLING	Pousse d'acajou
+JUNGLE_SHELF	Étagère en acajou
+JUNGLE_SIGN	Pancarte en acajou
+JUNGLE_SLAB	Dalle en acajou
+JUNGLE_STAIRS	Escalier en acajou
+JUNGLE_TRAPDOOR	Trappe en acajou
+JUNGLE_WALL_HANGING_SIGN	Pancarte suspendue murale en acajou
+JUNGLE_WALL_SIGN	Pancarte murale en acajou
+JUNGLE_WOOD	Bois d'acajou
+KELP	Algue
+KELP_PLANT	Tige d'algue
+LADDER	Échelle
+LANTERN	Lanterne
+LAPIS_BLOCK	Bloc de lapis-lazuli
+LAPIS_ORE	Minerai de lapis-lazuli
+LARGE_AMETHYST_BUD	Grand cristal d'améthyste
+LARGE_FERN	Grande fougère
+LAVA	Lave
+LAVA_CAULDRON	Chaudron de lave
+LEAF_LITTER	Tas de feuilles
+LECTERN	Pupitre
+LEVER	Levier
+LIGHT	Lumière
+LIGHT_BLUE_BANNER	Bannière bleu clair
+LIGHT_BLUE_BED	Lit bleu clair
+LIGHT_BLUE_CANDLE	Bougie bleu clair
+LIGHT_BLUE_CANDLE_CAKE	Gâteau à bougie bleu clair
+LIGHT_BLUE_CARPET	Tapis bleu clair
+LIGHT_BLUE_CONCRETE	Béton bleu clair
+LIGHT_BLUE_CONCRETE_POWDER	Béton bleu clair en poudre
+LIGHT_BLUE_CONCRETE_SLAB	Dalle de béton bleu clair
+LIGHT_BLUE_CONCRETE_STAIRS	Escalier en béton bleu clair
+LIGHT_BLUE_GLAZED_TERRACOTTA	Terre cuite émaillée bleu clair
+LIGHT_BLUE_SHULKER_BOX	Boîte de Shulker bleu clair
+LIGHT_BLUE_STAINED_GLASS	Verre bleu clair
+LIGHT_BLUE_STAINED_GLASS_PANE	Vitre bleu clair
+LIGHT_BLUE_TERRACOTTA	Terre cuite bleu clair
+LIGHT_BLUE_WOOL	Laine bleu clair
+LIGHT_BLUE_WOOL_SLAB	Dalle de laine bleu clair
+LIGHT_BLUE_WOOL_STAIRS	Escalier en laine bleu clair
+LIGHT_GRAY_BANNER	Bannière gris clair
+LIGHT_GRAY_BED	Lit gris clair
+LIGHT_GRAY_CANDLE	Bougie gris clair
+LIGHT_GRAY_CANDLE_CAKE	Gâteau à bougie gris clair
+LIGHT_GRAY_CARPET	Tapis gris clair
+LIGHT_GRAY_CONCRETE	Béton gris clair
+LIGHT_GRAY_CONCRETE_POWDER	Béton gris clair en poudre
+LIGHT_GRAY_CONCRETE_SLAB	Dalle de béton gris clair
+LIGHT_GRAY_CONCRETE_STAIRS	Escalier en béton gris clair
+LIGHT_GRAY_GLAZED_TERRACOTTA	Terre cuite émaillée gris clair
+LIGHT_GRAY_SHULKER_BOX	Boîte de Shulker gris clair
+LIGHT_GRAY_STAINED_GLASS	Verre gris clair
+LIGHT_GRAY_STAINED_GLASS_PANE	Vitre gris clair
+LIGHT_GRAY_TERRACOTTA	Terre cuite gris clair
+LIGHT_GRAY_WOOL	Laine gris clair
+LIGHT_GRAY_WOOL_SLAB	Dalle de laine gris clair
+LIGHT_GRAY_WOOL_STAIRS	Escalier en laine gris clair
+LIGHT_WEIGHTED_PRESSURE_PLATE	Plaque de pression pondérée légère
+LIGHTNING_ROD	Paratonnerre
+LILAC	Lilas
+LILY_OF_THE_VALLEY	Muguet
+LILY_PAD	Nénuphar
+LIME_BANNER	Bannière vert clair
+LIME_BED	Lit vert clair
+LIME_CANDLE	Bougie vert clair
+LIME_CANDLE_CAKE	Gâteau à bougie vert clair
+LIME_CARPET	Tapis vert clair
+LIME_CONCRETE	Béton vert clair
+LIME_CONCRETE_POWDER	Béton vert clair en poudre
+LIME_CONCRETE_SLAB	Dalle de béton vert clair
+LIME_CONCRETE_STAIRS	Escalier en béton vert clair
+LIME_GLAZED_TERRACOTTA	Terre cuite émaillée vert clair
+LIME_SHULKER_BOX	Boîte de Shulker vert clair
+LIME_STAINED_GLASS	Verre vert clair
+LIME_STAINED_GLASS_PANE	Vitre vert clair
+LIME_TERRACOTTA	Terre cuite vert clair
+LIME_WOOL	Laine vert clair
+LIME_WOOL_SLAB	Dalle de laine vert clair
+LIME_WOOL_STAIRS	Escalier en laine vert clair
+LODESTONE	Magnétite
+LOOM	Métier à tisser
+MAGENTA_BANNER	Bannière magenta
+MAGENTA_BED	Lit magenta
+MAGENTA_CANDLE	Bougie magenta
+MAGENTA_CANDLE_CAKE	Gâteau à bougie magenta
+MAGENTA_CARPET	Tapis magenta
+MAGENTA_CONCRETE	Béton magenta
+MAGENTA_CONCRETE_POWDER	Béton magenta en poudre
+MAGENTA_CONCRETE_SLAB	Dalle de béton magenta
+MAGENTA_CONCRETE_STAIRS	Escalier en béton magenta
+MAGENTA_GLAZED_TERRACOTTA	Terre cuite émaillée magenta
+MAGENTA_SHULKER_BOX	Boîte de Shulker magenta
+MAGENTA_STAINED_GLASS	Verre magenta
+MAGENTA_STAINED_GLASS_PANE	Vitre magenta
+MAGENTA_TERRACOTTA	Terre cuite magenta
+MAGENTA_WOOL	Laine magenta
+MAGENTA_WOOL_SLAB	Dalle de laine magenta
+MAGENTA_WOOL_STAIRS	Escalier en laine magenta
+MAGMA_BLOCK	Bloc de magma
+MANGROVE_BUTTON	Bouton en palétuvier
+MANGROVE_DOOR	Porte en palétuvier
+MANGROVE_FENCE	Barrière en palétuvier
+MANGROVE_FENCE_GATE	Portillon en palétuvier
+MANGROVE_HANGING_SIGN	Pancarte suspendue en palétuvier
+MANGROVE_LEAVES	Feuilles de palétuvier
+MANGROVE_LOG	Bûche de palétuvier
+MANGROVE_PLANKS	Planches de palétuvier
+MANGROVE_PRESSURE_PLATE	Plaque de pression en palétuvier
+MANGROVE_PROPAGULE	Propagule de palétuvier
+MANGROVE_ROOTS	Racines de palétuvier
+MANGROVE_SHELF	Étagère en palétuvier
+MANGROVE_SIGN	Pancarte en palétuvier
+MANGROVE_SLAB	Dalle en palétuvier
+MANGROVE_STAIRS	Escalier en palétuvier
+MANGROVE_TRAPDOOR	Trappe en palétuvier
+MANGROVE_WALL_HANGING_SIGN	Pancarte suspendue murale en palétuvier
+MANGROVE_WALL_SIGN	Pancarte murale en palétuvier
+MANGROVE_WOOD	Bois de palétuvier
+MEDIUM_AMETHYST_BUD	Cristal moyen d'améthyste
+MELON	Pastèque
+MELON_STEM	Tige de pastèque
+MOSS_BLOCK	Bloc de mousse
+MOSS_CARPET	Tapis de mousse
+MOSSY_COBBLESTONE	Pierres moussues
+MOSSY_COBBLESTONE_SLAB	Dalle de pierres moussues
+MOSSY_COBBLESTONE_STAIRS	Escalier en pierres moussues
+MOSSY_COBBLESTONE_WALL	Muret de pierres moussues
+MOSSY_STONE_BRICK_SLAB	Dalle de pierre taillée moussue
+MOSSY_STONE_BRICK_STAIRS	Escalier en pierre taillée moussue
+MOSSY_STONE_BRICK_WALL	Muret de pierre taillée moussue
+MOSSY_STONE_BRICKS	Pierre taillée moussue
+MOVING_PISTON	Bloc en mouvement
+MUD	Boue
+MUD_BRICK_SLAB	Dalle de briques de terre crue
+MUD_BRICK_STAIRS	Escalier en briques de terre crue
+MUD_BRICK_WALL	Muret de briques de terre crue
+MUD_BRICKS	Briques de terre crue
+MUDDY_MANGROVE_ROOTS	Racines de palétuvier boueuses
+MUSHROOM_STEM	Tige de champignon
+MYCELIUM	Mycélium
+NETHER_BRICK_FENCE	Barrière en briques du Nether
+NETHER_BRICK_SLAB	Dalle de briques du Nether
+NETHER_BRICK_STAIRS	Escalier en briques du Nether
+NETHER_BRICK_WALL	Muret de briques du Nether
+NETHER_BRICKS	Briques du Nether
+NETHER_GOLD_ORE	Minerai d'or du Nether
+NETHER_PORTAL	Portail du Nether
+NETHER_QUARTZ_ORE	Minerai de quartz du Nether
+NETHER_SPROUTS	Germes du Nether
+NETHER_WART	Verrues du Nether
+NETHER_WART_BLOCK	Bloc de verrues du Nether
+NETHERITE_BLOCK	Bloc de netherite
+NETHERRACK	Netherrack
+NOTE_BLOCK	Bloc musical
+OAK_BUTTON	Bouton en chêne
+OAK_DOOR	Porte en chêne
+OAK_FENCE	Barrière en chêne
+OAK_FENCE_GATE	Portillon en chêne
+OAK_HANGING_SIGN	Pancarte suspendue en chêne
+OAK_LEAVES	Feuilles de chêne
+OAK_LOG	Bûche de chêne
+OAK_PLANKS	Planches de chêne
+OAK_PRESSURE_PLATE	Plaque de pression en chêne
+OAK_SAPLING	Pousse de chêne
+OAK_SHELF	Étagère en chêne
+OAK_SIGN	Pancarte en chêne
+OAK_SLAB	Dalle en chêne
+OAK_STAIRS	Escalier en chêne
+OAK_TRAPDOOR	Trappe en chêne
+OAK_WALL_HANGING_SIGN	Pancarte suspendue murale en chêne
+OAK_WALL_SIGN	Pancarte murale en chêne
+OAK_WOOD	Bois de chêne
+OBSERVER	Observateur
+OBSIDIAN	Obsidienne
+OCHRE_FROGLIGHT	Grelampe ocrée
+OPEN_EYEBLOSSOM	Oeilchidée ouverte
+ORANGE_BANNER	Bannière orange
+ORANGE_BED	Lit orange
+ORANGE_CANDLE	Bougie orange
+ORANGE_CANDLE_CAKE	Gâteau à bougie orange
+ORANGE_CARPET	Tapis orange
+ORANGE_CONCRETE	Béton orange
+ORANGE_CONCRETE_POWDER	Béton orange en poudre
+ORANGE_CONCRETE_SLAB	Dalle de béton orange
+ORANGE_CONCRETE_STAIRS	Escalier en béton orange
+ORANGE_GLAZED_TERRACOTTA	Terre cuite émaillée orange
+ORANGE_POPLAR_LEAVES	Feuilles de peuplier orange
+ORANGE_SHULKER_BOX	Boîte de Shulker orange
+ORANGE_STAINED_GLASS	Verre orange
+ORANGE_STAINED_GLASS_PANE	Vitre orange
+ORANGE_TERRACOTTA	Terre cuite orange
+ORANGE_TULIP	Tulipe orange
+ORANGE_WOOL	Laine orange
+ORANGE_WOOL_SLAB	Dalle de laine orange
+ORANGE_WOOL_STAIRS	Escalier en laine orange
+OXEYE_DAISY	Marguerite
+OXIDIZED_CHISELED_COPPER	Cuivre sculpté oxydé
+OXIDIZED_COPPER	Cuivre oxydé
+OXIDIZED_COPPER_BARS	Barreaux de cuivre oxydé
+OXIDIZED_COPPER_BULB	Ampoule en cuivre oxydé
+OXIDIZED_COPPER_CHAIN	Chaîne en cuivre oxydé
+OXIDIZED_COPPER_CHEST	Coffre en cuivre oxydé
+OXIDIZED_COPPER_DOOR	Porte en cuivre oxydé
+OXIDIZED_COPPER_GOLEM_STATUE	Statue de golem de cuivre oxydé
+OXIDIZED_COPPER_GRATE	Grille en cuivre oxydé
+OXIDIZED_COPPER_LANTERN	Lanterne en cuivre oxydé
+OXIDIZED_COPPER_TRAPDOOR	Trappe en cuivre oxydé
+OXIDIZED_CUT_COPPER	Cuivre taillé oxydé
+OXIDIZED_CUT_COPPER_SLAB	Dalle de cuivre taillé oxydé
+OXIDIZED_CUT_COPPER_STAIRS	Escalier en cuivre taillé oxydé
+OXIDIZED_LIGHTNING_ROD	Paratonnerre oxydé
+PACKED_ICE	Glace compactée
+PACKED_MUD	Terre crue
+PALE_HANGING_MOSS	Mousse pâle suspendue
+PALE_MOSS_BLOCK	Bloc de mousse pâle
+PALE_MOSS_CARPET	Tapis de mousse pâle
+PALE_OAK_BUTTON	Bouton en chêne pâle
+PALE_OAK_DOOR	Porte en chêne pâle
+PALE_OAK_FENCE	Barrière en chêne pâle
+PALE_OAK_FENCE_GATE	Portillon en chêne pâle
+PALE_OAK_HANGING_SIGN	Pancarte suspendue en chêne pâle
+PALE_OAK_LEAVES	Feuilles de chêne pâle
+PALE_OAK_LOG	Bûche de chêne pâle
+PALE_OAK_PLANKS	Planches de chêne pâle
+PALE_OAK_PRESSURE_PLATE	Plaque de pression en chêne pâle
+PALE_OAK_SAPLING	Pousse de chêne pâle
+PALE_OAK_SHELF	Étagère en chêne pâle
+PALE_OAK_SIGN	Pancarte en chêne pâle
+PALE_OAK_SLAB	Dalle en chêne pâle
+PALE_OAK_STAIRS	Escalier en chêne pâle
+PALE_OAK_TRAPDOOR	Trappe en chêne pâle
+PALE_OAK_WALL_HANGING_SIGN	Pancarte suspendue murale en chêne pâle
+PALE_OAK_WALL_SIGN	Pancarte murale en chêne pâle
+PALE_OAK_WOOD	Bois de chêne pâle
+PEARLESCENT_FROGLIGHT	Grelampe nacrée
+PEONY	Pivoine
+PETRIFIED_OAK_SLAB	Dalle en chêne pétrifiée
+PIGLIN_HEAD	Tête de Piglin
+PIGLIN_WALL_HEAD	Tête de Piglin murale
+PINK_BANNER	Bannière rose
+PINK_BED	Lit rose
+PINK_CANDLE	Bougie rose
+PINK_CANDLE_CAKE	Gâteau à bougie rose
+PINK_CARPET	Tapis rose
+PINK_CONCRETE	Béton rose
+PINK_CONCRETE_POWDER	Béton rose en poudre
+PINK_CONCRETE_SLAB	Dalle de béton rose
+PINK_CONCRETE_STAIRS	Escalier en béton rose
+PINK_GLAZED_TERRACOTTA	Terre cuite émaillée rose
+PINK_PETALS	Pétales roses
+PINK_SHULKER_BOX	Boîte de Shulker rose
+PINK_STAINED_GLASS	Verre rose
+PINK_STAINED_GLASS_PANE	Vitre rose
+PINK_TERRACOTTA	Terre cuite rose
+PINK_TULIP	Tulipe rose
+PINK_WOOL	Laine rose
+PINK_WOOL_SLAB	Dalle de laine rose
+PINK_WOOL_STAIRS	Escalier en laine rose
+PISTON	Piston
+PISTON_HEAD	Tête de piston
+PITCHER_CROP	Plant de planturne
+PITCHER_PLANT	Planturne
+PLAYER_HEAD	Tête de joueur
+PLAYER_WALL_HEAD	Tête de joueur murale
+PODZOL	Podzol
+POINTED_DRIPSTONE	Spéléothème pointu
+POLISHED_ANDESITE	Andésite polie
+POLISHED_ANDESITE_SLAB	Dalle d'andésite polie
+POLISHED_ANDESITE_STAIRS	Escalier en andésite polie
+POLISHED_BASALT	Basalte poli
+POLISHED_BLACKSTONE	Pierre noire
+POLISHED_BLACKSTONE_BRICK_SLAB	Dalle de pierre noire taillée
+POLISHED_BLACKSTONE_BRICK_STAIRS	Escalier en pierre noire taillée
+POLISHED_BLACKSTONE_BRICK_WALL	Muret de pierre noire taillée
+POLISHED_BLACKSTONE_BRICKS	Pierre noire taillée
+POLISHED_BLACKSTONE_BUTTON	Bouton en pierre noire
+POLISHED_BLACKSTONE_PRESSURE_PLATE	Plaque de pression en pierre noire
+POLISHED_BLACKSTONE_SLAB	Dalle de pierre noire
+POLISHED_BLACKSTONE_STAIRS	Escalier en pierre noire
+POLISHED_BLACKSTONE_WALL	Muret de pierre noire
+POLISHED_CINNABAR	Cinabre poli
+POLISHED_CINNABAR_SLAB	Dalle de cinabre poli
+POLISHED_CINNABAR_STAIRS	Escalier en cinabre poli
+POLISHED_CINNABAR_WALL	Muret de cinabre poli
+POLISHED_DEEPSLATE	Ardoise des abîmes polie
+POLISHED_DEEPSLATE_SLAB	Dalle d'ardoise des abîmes polie
+POLISHED_DEEPSLATE_STAIRS	Escalier en ardoise des abîmes polie
+POLISHED_DEEPSLATE_WALL	Muret d'ardoise des abîmes polie
+POLISHED_DIORITE	Diorite polie
+POLISHED_DIORITE_SLAB	Dalle de diorite polie
+POLISHED_DIORITE_STAIRS	Escalier en diorite polie
+POLISHED_GRANITE	Granite poli
+POLISHED_GRANITE_SLAB	Dalle de granite poli
+POLISHED_GRANITE_STAIRS	Escalier en granite poli
+POLISHED_SULFUR	Soufre poli
+POLISHED_SULFUR_SLAB	Dalle de soufre poli
+POLISHED_SULFUR_STAIRS	Escalier en soufre poli
+POLISHED_SULFUR_WALL	Muret de soufre poli
+POLISHED_TUFF	Tuf poli
+POLISHED_TUFF_SLAB	Dalle de tuf poli
+POLISHED_TUFF_STAIRS	Escalier en tuf poli
+POLISHED_TUFF_WALL	Muret de tuf poli
+POPLAR_BUTTON	Bouton en peuplier
+POPLAR_DOOR	Porte en peuplier
+POPLAR_FENCE	Barrière en peuplier
+POPLAR_FENCE_GATE	Portillon en peuplier
+POPLAR_HANGING_SIGN	Pancarte suspendue en peuplier
+POPLAR_LOG	Bûche de peuplier
+POPLAR_PLANKS	Planches de peuplier
+POPLAR_PRESSURE_PLATE	Plaque de pression en peuplier
+POPLAR_SAPLING	Pousse de peuplier
+POPLAR_SHELF	Étagère en peuplier
+POPLAR_SIGN	Pancarte en peuplier
+POPLAR_SLAB	Dalle en peuplier
+POPLAR_STAIRS	Escalier en peuplier
+POPLAR_TRAPDOOR	Trappe en peuplier
+POPLAR_WALL_HANGING_SIGN	Pancarte suspendue murale en peuplier
+POPLAR_WALL_SIGN	Pancarte murale en peuplier
+POPLAR_WOOD	Bois de peuplier
+POPPY	Coquelicot
+POTATOES	Pommes de terre
+POTENT_SULFUR	Soufre concentré
+POTTED_ACACIA_SAPLING	Pousse d'acacia en pot
+POTTED_ALLIUM	Allium en pot
+POTTED_AZALEA_BUSH	Azalée en pot
+POTTED_AZURE_BLUET	Houstonie bleue en pot
+POTTED_BAMBOO	Bambou en pot
+POTTED_BIRCH_SAPLING	Pousse de bouleau en pot
+POTTED_BLUE_ORCHID	Orchidée bleue en pot
+POTTED_BROWN_MUSHROOM	Champignon brun en pot
+POTTED_CACTUS	Cactus en pot
+POTTED_CHERRY_SAPLING	Pousse de cerisier en pot
+POTTED_CLOSED_EYEBLOSSOM	Oeilchidée fermée en pot
+POTTED_CORNFLOWER	Bleuet en pot
+POTTED_CRIMSON_FUNGUS	Champignon carmin en pot
+POTTED_CRIMSON_ROOTS	Racines carmin en pot
+POTTED_DANDELION	Pissenlit en pot
+POTTED_DARK_OAK_SAPLING	Pousse de chêne noir en pot
+POTTED_DEAD_BUSH	Buisson mort en pot
+POTTED_FERN	Fougère en pot
+POTTED_FLOWERING_AZALEA_BUSH	Azalée fleurie en pot
+POTTED_GOLDEN_DANDELION	Pissenlit doré en pot
+POTTED_JUNGLE_SAPLING	Pousse d'acajou en pot
+POTTED_LILY_OF_THE_VALLEY	Muguet en pot
+POTTED_MANGROVE_PROPAGULE	Propagule de palétuvier en pot
+POTTED_OAK_SAPLING	Pousse de chêne en pot
+POTTED_OPEN_EYEBLOSSOM	Oeilchidée ouverte en pot
+POTTED_ORANGE_TULIP	Tulipe orange en pot
+POTTED_OXEYE_DAISY	Marguerite en pot
+POTTED_PALE_OAK_SAPLING	Pousse de chêne pâle en pot
+POTTED_PINK_TULIP	Tulipe rose en pot
+POTTED_POPLAR_SAPLING	Pousse de peuplier en pot
+POTTED_POPPY	Coquelicot en pot
+POTTED_RED_MUSHROOM	Champignon rouge en pot
+POTTED_RED_TULIP	Tulipe rouge en pot
+POTTED_SPRUCE_SAPLING	Pousse de sapin en pot
+POTTED_TORCHFLOWER	Torche-fleur en pot
+POTTED_WARPED_FUNGUS	Champignon biscornu en pot
+POTTED_WARPED_ROOTS	Racines biscornues en pot
+POTTED_WHITE_TULIP	Tulipe blanche en pot
+POTTED_WITHER_ROSE	Rose de Wither en pot
+POWDER_SNOW	Neige poudreuse
+POWDER_SNOW_CAULDRON	Chaudron de neige poudreuse
+POWERED_RAIL	Rails de propulsion
+PRISMARINE	Prismarine
+PRISMARINE_BRICK_SLAB	Dalle de briques de prismarine
+PRISMARINE_BRICK_STAIRS	Escalier en briques de prismarine
+PRISMARINE_BRICKS	Briques de prismarine
+PRISMARINE_SLAB	Dalle de prismarine
+PRISMARINE_STAIRS	Escalier en prismarine
+PRISMARINE_WALL	Muret de prismarine
+PUMPKIN	Citrouille
+PUMPKIN_STEM	Tige de citrouille
+PURPLE_BANNER	Bannière violette
+PURPLE_BED	Lit violet
+PURPLE_CANDLE	Bougie violette
+PURPLE_CANDLE_CAKE	Gâteau à bougie violette
+PURPLE_CARPET	Tapis violet
+PURPLE_CONCRETE	Béton violet
+PURPLE_CONCRETE_POWDER	Béton violet en poudre
+PURPLE_CONCRETE_SLAB	Dalle de béton violet
+PURPLE_CONCRETE_STAIRS	Escalier en béton violet
+PURPLE_GLAZED_TERRACOTTA	Terre cuite émaillée violette
+PURPLE_SHULKER_BOX	Boîte de Shulker violette
+PURPLE_STAINED_GLASS	Verre violet
+PURPLE_STAINED_GLASS_PANE	Vitre violette
+PURPLE_TERRACOTTA	Terre cuite violette
+PURPLE_WOOL	Laine violette
+PURPLE_WOOL_SLAB	Dalle de laine violette
+PURPLE_WOOL_STAIRS	Escalier en laine violette
+PURPUR_BLOCK	Bloc de purpur
+PURPUR_PILLAR	Pilier de purpur
+PURPUR_SLAB	Dalle de purpur
+PURPUR_STAIRS	Escalier en purpur
+QUARTZ_BLOCK	Bloc de quartz
+QUARTZ_BRICKS	Briques de quartz
+QUARTZ_PILLAR	Pilier de quartz
+QUARTZ_SLAB	Dalle de quartz
+QUARTZ_STAIRS	Escalier en quartz
+RAIL	Rails
+RAW_COPPER_BLOCK	Bloc de cuivre brut
+RAW_GOLD_BLOCK	Bloc d'or brut
+RAW_IRON_BLOCK	Bloc de fer brut
+RED_BANNER	Bannière rouge
+RED_BED	Lit rouge
+RED_CANDLE	Bougie rouge
+RED_CANDLE_CAKE	Gâteau à bougie rouge
+RED_CARPET	Tapis rouge
+RED_CONCRETE	Béton rouge
+RED_CONCRETE_POWDER	Béton rouge en poudre
+RED_CONCRETE_SLAB	Dalle de béton rouge
+RED_CONCRETE_STAIRS	Escalier en béton rouge
+RED_GLAZED_TERRACOTTA	Terre cuite émaillée rouge
+RED_MUSHROOM	Champignon rouge
+RED_MUSHROOM_BLOCK	Bloc de champignon rouge
+RED_NETHER_BRICK_SLAB	Dalle de briques rouges du Nether
+RED_NETHER_BRICK_STAIRS	Escalier en briques rouges du Nether
+RED_NETHER_BRICK_WALL	Muret de briques rouges du Nether
+RED_NETHER_BRICKS	Briques rouges du Nether
+RED_POPLAR_LEAVES	Feuilles de peuplier rouges
+RED_SAND	Sable rouge
+RED_SANDSTONE	Grès rouge
+RED_SANDSTONE_SLAB	Dalle de grès rouge
+RED_SANDSTONE_STAIRS	Escalier en grès rouge
+RED_SANDSTONE_WALL	Muret de grès rouge
+RED_SHRUB	Buisson rouge
+RED_SHULKER_BOX	Boîte de Shulker rouge
+RED_STAINED_GLASS	Verre rouge
+RED_STAINED_GLASS_PANE	Vitre rouge
+RED_TERRACOTTA	Terre cuite rouge
+RED_TULIP	Tulipe rouge
+RED_WOOL	Laine rouge
+RED_WOOL_SLAB	Dalle de laine rouge
+RED_WOOL_STAIRS	Escalier en laine rouge
+REDSTONE_BLOCK	Bloc de redstone
+REDSTONE_LAMP	Lampe à redstone
+REDSTONE_ORE	Minerai de redstone
+REDSTONE_TORCH	Torche de redstone
+REDSTONE_WALL_TORCH	Torche de redstone murale
+REDSTONE_WIRE	Câble de redstone
+REINFORCED_DEEPSLATE	Ardoise des abîmes renforcée
+REPEATER	Répéteur de redstone
+REPEATING_COMMAND_BLOCK	Bloc de commande à répétition
+RESIN_BLOCK	Bloc de résine
+RESIN_BRICK_SLAB	Dalle de briques de résine
+RESIN_BRICK_STAIRS	Escalier en briques de résine
+RESIN_BRICK_WALL	Muret de briques de résine
+RESIN_BRICKS	Briques de résine
+RESIN_CLUMP	Amas de résine
+RESPAWN_ANCHOR	Ancre de réapparition
+ROOTED_DIRT	Terre racineuse
+ROSE_BUSH	Rosier
+SAND	Sable
+SANDSTONE	Grès
+SANDSTONE_SLAB	Dalle de grès
+SANDSTONE_STAIRS	Escalier en grès
+SANDSTONE_WALL	Muret de grès
+SCAFFOLDING	Échafaudage
+SCULK	Sculk
+SCULK_CATALYST	Catalyseur de sculk
+SCULK_SENSOR	Capteur sculk
+SCULK_SHRIEKER	Hurleur sculk
+SCULK_VEIN	Veine de sculk
+SEA_LANTERN	Lanterne aquatique
+SEA_PICKLE	Cornichon de mer
+SEAGRASS	Herbe aquatique
+SHELF_MUSHROOM	Polypore
+SHORT_DRY_GRASS	Herbes courtes sèches
+SHORT_GRASS	Herbes courtes
+SHROOMLIGHT	Champilampe
+SHULKER_BOX	Boîte de Shulker
+SKELETON_SKULL	Crâne de squelette
+SKELETON_WALL_SKULL	Crâne de squelette mural
+SLIME_BLOCK	Bloc de slime
+SMALL_AMETHYST_BUD	Petit cristal d'améthyste
+SMALL_DRIPLEAF	Petite foliogoutte
+SMITHING_TABLE	Table de forge
+SMOKER	Fumoir
+SMOOTH_BASALT	Basalte lisse
+SMOOTH_QUARTZ	Bloc de quartz lisse
+SMOOTH_QUARTZ_SLAB	Dalle de quartz lisse
+SMOOTH_QUARTZ_STAIRS	Escalier en quartz lisse
+SMOOTH_RED_SANDSTONE	Grès rouge lisse
+SMOOTH_RED_SANDSTONE_SLAB	Dalle de grès rouge lisse
+SMOOTH_RED_SANDSTONE_STAIRS	Escalier en grès rouge lisse
+SMOOTH_SANDSTONE	Grès lisse
+SMOOTH_SANDSTONE_SLAB	Dalle de grès lisse
+SMOOTH_SANDSTONE_STAIRS	Escalier en grès lisse
+SMOOTH_STONE	Roche lisse
+SMOOTH_STONE_SLAB	Dalle de roche lisse
+SNIFFER_EGG	Oeuf de renifleur
+SNOW	Neige
+SNOW_BLOCK	Bloc de neige
+SOUL_CAMPFIRE	Feu de camp des âmes
+SOUL_FIRE	Feu des âmes
+SOUL_LANTERN	Lanterne des âmes
+SOUL_SAND	Sable des âmes
+SOUL_SOIL	Terre des âmes
+SOUL_TORCH	Torche des âmes
+SOUL_WALL_TORCH	Torche des âmes murale
+SPAWNER	Générateur de créatures
+SPONGE	Éponge
+SPORE_BLOSSOM	Fleur sporifère
+SPRUCE_BUTTON	Bouton en sapin
+SPRUCE_DOOR	Porte en sapin
+SPRUCE_FENCE	Barrière en sapin
+SPRUCE_FENCE_GATE	Portillon en sapin
+SPRUCE_HANGING_SIGN	Pancarte suspendue en sapin
+SPRUCE_LEAVES	Feuilles de sapin
+SPRUCE_LOG	Bûche de sapin
+SPRUCE_PLANKS	Planches de sapin
+SPRUCE_PRESSURE_PLATE	Plaque de pression en sapin
+SPRUCE_SAPLING	Pousse de sapin
+SPRUCE_SHELF	Étagère en sapin
+SPRUCE_SIGN	Pancarte en sapin
+SPRUCE_SLAB	Dalle en sapin
+SPRUCE_STAIRS	Escalier en sapin
+SPRUCE_TRAPDOOR	Trappe en sapin
+SPRUCE_WALL_HANGING_SIGN	Pancarte suspendue murale en sapin
+SPRUCE_WALL_SIGN	Pancarte murale en sapin
+SPRUCE_WOOD	Bois de sapin
+STICKY_PISTON	Piston collant
+STONE	Roche
+STONE_BRICK_SLAB	Dalle de pierre taillée
+STONE_BRICK_STAIRS	Escalier en pierre taillée
+STONE_BRICK_WALL	Muret de pierre taillée
+STONE_BRICKS	Pierre taillée
+STONE_BUTTON	Bouton en pierre
+STONE_PRESSURE_PLATE	Plaque de pression en pierre
+STONE_SLAB	Dalle de roche
+STONE_STAIRS	Escalier en roche
+STONECUTTER	Tailleur de pierre
+STRAW_BED	Lit de paille
+STRIPPED_ACACIA_LOG	Bûche d'acacia écorcée
+STRIPPED_ACACIA_WOOD	Bois d'acacia écorcé
+STRIPPED_BAMBOO_BLOCK	Bloc de bambou écorcé
+STRIPPED_BIRCH_LOG	Bûche de bouleau écorcée
+STRIPPED_BIRCH_WOOD	Bois de bouleau écorcé
+STRIPPED_CHERRY_LOG	Bûche de cerisier écorcée
+STRIPPED_CHERRY_WOOD	Bois de cerisier écorcé
+STRIPPED_CRIMSON_HYPHAE	Hyphes carmin dénudées
+STRIPPED_CRIMSON_STEM	Tige carmin dénudée
+STRIPPED_DARK_OAK_LOG	Bûche de chêne noir écorcée
+STRIPPED_DARK_OAK_WOOD	Bois de chêne noir écorcé
+STRIPPED_JUNGLE_LOG	Bûche d'acajou écorcée
+STRIPPED_JUNGLE_WOOD	Bois d'acajou écorcé
+STRIPPED_MANGROVE_LOG	Bûche de palétuvier écorcée
+STRIPPED_MANGROVE_WOOD	Bois de palétuvier écorcé
+STRIPPED_OAK_LOG	Bûche de chêne écorcée
+STRIPPED_OAK_WOOD	Bois de chêne écorcé
+STRIPPED_PALE_OAK_LOG	Bûche de chêne pâle écorcée
+STRIPPED_PALE_OAK_WOOD	Bois de chêne pâle écorcé
+STRIPPED_POPLAR_LOG	Bûche de peuplier écorcée
+STRIPPED_POPLAR_WOOD	Bois de peuplier écorcé
+STRIPPED_SPRUCE_LOG	Bûche de sapin écorcée
+STRIPPED_SPRUCE_WOOD	Bois de sapin écorcé
+STRIPPED_WARPED_HYPHAE	Hyphes biscornues dénudées
+STRIPPED_WARPED_STEM	Tige biscornue dénudée
+STRUCTURE_BLOCK	Bloc de structure
+STRUCTURE_VOID	Vide de structure
+SUGAR_CANE	Canne à sucre
+SULFUR	Soufre
+SULFUR_BRICK_SLAB	Dalle de soufre taillé
+SULFUR_BRICK_STAIRS	Escalier en soufre taillé
+SULFUR_BRICK_WALL	Muret de soufre taillé
+SULFUR_BRICKS	Soufre taillé
+SULFUR_SLAB	Dalle de soufre
+SULFUR_SPIKE	Pointe de soufre
+SULFUR_STAIRS	Escalier en soufre
+SULFUR_WALL	Muret de soufre
+SUNFLOWER	Tournesol
+SUSPICIOUS_GRAVEL	Gravier suspect
+SUSPICIOUS_SAND	Sable suspect
+SWEET_BERRY_BUSH	Buisson à baies sucrées
+TALL_DRY_GRASS	Hautes herbes sèches
+TALL_GRASS	Hautes herbes
+TALL_SEAGRASS	Hautes herbes aquatiques
+TARGET	Cible
+TERRACOTTA	Terre cuite
+TEST_BLOCK	Bloc de test
+TEST_INSTANCE_BLOCK	Bloc d'instance de test
+TINTED_GLASS	Verre teinté
+TNT	TNT
+TORCH	Torche
+TORCHFLOWER	Torche-fleur
+TORCHFLOWER_CROP	Plant de torche-fleur
+TRAPPED_CHEST	Coffre piégé
+TRIAL_SPAWNER	Générateur des épreuves
+TRIPWIRE	Fil de déclenchement
+TRIPWIRE_HOOK	Crochet
+TUBE_CORAL	Corail tubulaire
+TUBE_CORAL_BLOCK	Bloc de corail tubulaire
+TUBE_CORAL_FAN	Gorgone de corail tubulaire
+TUBE_CORAL_WALL_FAN	Gorgone de corail tubulaire murale
+TUFF	Tuf
+TUFF_BRICK_SLAB	Dalle de tuf taillé
+TUFF_BRICK_STAIRS	Escalier en tuf taillé
+TUFF_BRICK_WALL	Muret de tuf taillé
+TUFF_BRICKS	Tuf taillé
+TUFF_SLAB	Dalle de tuf
+TUFF_STAIRS	Escalier en tuf
+TUFF_WALL	Muret de tuf
+TURTLE_EGG	Oeuf de tortue
+TWISTING_VINES	Lianes tortueuses
+TWISTING_VINES_PLANT	Plante de lianes tortueuses
+VAULT	Coffre-fort
+VERDANT_FROGLIGHT	Grelampe verdoyante
+VINE	Lianes
+VOID_AIR	Air du vide
+WALL_TORCH	Torche murale
+WARPED_BUTTON	Bouton biscornu
+WARPED_DOOR	Porte biscornue
+WARPED_FENCE	Barrière biscornue
+WARPED_FENCE_GATE	Portillon biscornu
+WARPED_FUNGUS	Champignon biscornu
+WARPED_HANGING_SIGN	Pancarte suspendue biscornue
+WARPED_HYPHAE	Hyphes biscornues
+WARPED_NYLIUM	Nylium biscornu
+WARPED_PLANKS	Planches biscornues
+WARPED_PRESSURE_PLATE	Plaque de pression biscornue
+WARPED_ROOTS	Racines biscornues
+WARPED_SHELF	Étagère biscornue
+WARPED_SIGN	Pancarte biscornue
+WARPED_SLAB	Dalle biscornue
+WARPED_STAIRS	Escalier biscornu
+WARPED_STEM	Tige biscornue
+WARPED_TRAPDOOR	Trappe biscornue
+WARPED_WALL_HANGING_SIGN	Pancarte suspendue murale biscornue
+WARPED_WALL_SIGN	Pancarte murale biscornue
+WARPED_WART_BLOCK	Bloc de verrues biscornues
+WATER	Eau
+WATER_CAULDRON	Chaudron d'eau
+WAXED_CHISELED_COPPER	Cuivre sculpté ciré
+WAXED_COPPER_BARS	Barreaux de cuivre ciré
+WAXED_COPPER_BLOCK	Bloc de cuivre ciré
+WAXED_COPPER_BULB	Ampoule en cuivre ciré
+WAXED_COPPER_CHAIN	Chaîne en cuivre ciré
+WAXED_COPPER_CHEST	Coffre en cuivre ciré
+WAXED_COPPER_DOOR	Porte en cuivre ciré
+WAXED_COPPER_GOLEM_STATUE	Statue de golem de cuivre ciré
+WAXED_COPPER_GRATE	Grille en cuivre ciré
+WAXED_COPPER_LANTERN	Lanterne en cuivre ciré
+WAXED_COPPER_TRAPDOOR	Trappe en cuivre ciré
+WAXED_CUT_COPPER	Cuivre taillé ciré
+WAXED_CUT_COPPER_SLAB	Dalle de cuivre taillé ciré
+WAXED_CUT_COPPER_STAIRS	Escalier en cuivre taillé ciré
+WAXED_EXPOSED_CHISELED_COPPER	Cuivre sculpté exposé ciré
+WAXED_EXPOSED_COPPER	Cuivre exposé ciré
+WAXED_EXPOSED_COPPER_BARS	Barreaux de cuivre exposé ciré
+WAXED_EXPOSED_COPPER_BULB	Ampoule en cuivre exposé ciré
+WAXED_EXPOSED_COPPER_CHAIN	Chaîne en cuivre exposé ciré
+WAXED_EXPOSED_COPPER_CHEST	Coffre en cuivre exposé ciré
+WAXED_EXPOSED_COPPER_DOOR	Porte en cuivre exposé ciré
+WAXED_EXPOSED_COPPER_GOLEM_STATUE	Statue de golem de cuivre exposé ciré
+WAXED_EXPOSED_COPPER_GRATE	Grille en cuivre exposé ciré
+WAXED_EXPOSED_COPPER_LANTERN	Lanterne en cuivre exposé ciré
+WAXED_EXPOSED_COPPER_TRAPDOOR	Trappe en cuivre exposé ciré
+WAXED_EXPOSED_CUT_COPPER	Cuivre taillé exposé ciré
+WAXED_EXPOSED_CUT_COPPER_SLAB	Dalle de cuivre taillé exposé ciré
+WAXED_EXPOSED_CUT_COPPER_STAIRS	Escalier en cuivre taillé exposé ciré
+WAXED_EXPOSED_LIGHTNING_ROD	Paratonnerre exposé ciré
+WAXED_LIGHTNING_ROD	Paratonnerre ciré
+WAXED_OXIDIZED_CHISELED_COPPER	Cuivre sculpté oxydé ciré
+WAXED_OXIDIZED_COPPER	Cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_BARS	Barreaux de cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_BULB	Ampoule en cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_CHAIN	Chaîne en cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_CHEST	Coffre en cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_DOOR	Porte en cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_GOLEM_STATUE	Statue de golem de cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_GRATE	Grille en cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_LANTERN	Lanterne en cuivre oxydé ciré
+WAXED_OXIDIZED_COPPER_TRAPDOOR	Trappe en cuivre oxydé ciré
+WAXED_OXIDIZED_CUT_COPPER	Cuivre taillé oxydé ciré
+WAXED_OXIDIZED_CUT_COPPER_SLAB	Dalle de cuivre taillé oxydé ciré
+WAXED_OXIDIZED_CUT_COPPER_STAIRS	Escalier en cuivre taillé oxydé ciré
+WAXED_OXIDIZED_LIGHTNING_ROD	Paratonnerre oxydé ciré
+WAXED_WEATHERED_CHISELED_COPPER	Cuivre sculpté érodé ciré
+WAXED_WEATHERED_COPPER	Cuivre érodé ciré
+WAXED_WEATHERED_COPPER_BARS	Barreaux de cuivre érodé ciré
+WAXED_WEATHERED_COPPER_BULB	Ampoule en cuivre érodé ciré
+WAXED_WEATHERED_COPPER_CHAIN	Chaîne en cuivre érodé ciré
+WAXED_WEATHERED_COPPER_CHEST	Coffre en cuivre érodé ciré
+WAXED_WEATHERED_COPPER_DOOR	Porte en cuivre érodé ciré
+WAXED_WEATHERED_COPPER_GOLEM_STATUE	Statue de golem de cuivre érodé ciré
+WAXED_WEATHERED_COPPER_GRATE	Grille en cuivre érodé ciré
+WAXED_WEATHERED_COPPER_LANTERN	Lanterne en cuivre érodé ciré
+WAXED_WEATHERED_COPPER_TRAPDOOR	Trappe en cuivre érodé ciré
+WAXED_WEATHERED_CUT_COPPER	Cuivre taillé érodé ciré
+WAXED_WEATHERED_CUT_COPPER_SLAB	Dalle de cuivre taillé érodé ciré
+WAXED_WEATHERED_CUT_COPPER_STAIRS	Escalier en cuivre taillé érodé ciré
+WAXED_WEATHERED_LIGHTNING_ROD	Paratonnerre érodé ciré
+WEATHERED_CHISELED_COPPER	Cuivre sculpté érodé
+WEATHERED_COPPER	Cuivre érodé
+WEATHERED_COPPER_BARS	Barreaux de cuivre érodé
+WEATHERED_COPPER_BULB	Ampoule en cuivre érodé
+WEATHERED_COPPER_CHAIN	Chaîne en cuivre érodé
+WEATHERED_COPPER_CHEST	Coffre en cuivre érodé
+WEATHERED_COPPER_DOOR	Porte en cuivre érodé
+WEATHERED_COPPER_GOLEM_STATUE	Statue de golem de cuivre érodé
+WEATHERED_COPPER_GRATE	Grille en cuivre érodé
+WEATHERED_COPPER_LANTERN	Lanterne en cuivre érodé
+WEATHERED_COPPER_TRAPDOOR	Trappe en cuivre érodé
+WEATHERED_CUT_COPPER	Cuivre taillé érodé
+WEATHERED_CUT_COPPER_SLAB	Dalle de cuivre taillé érodé
+WEATHERED_CUT_COPPER_STAIRS	Escalier en cuivre taillé érodé
+WEATHERED_LIGHTNING_ROD	Paratonnerre érodé
+WEEPING_VINES	Lianes pleureuses
+WEEPING_VINES_PLANT	Plante de lianes pleureuses
+WET_SPONGE	Éponge mouillée
+WHEAT	Blé
+WHITE_BANNER	Bannière blanche
+WHITE_BED	Lit blanc
+WHITE_CANDLE	Bougie blanche
+WHITE_CANDLE_CAKE	Gâteau à bougie blanche
+WHITE_CARPET	Tapis blanc
+WHITE_CONCRETE	Béton blanc
+WHITE_CONCRETE_POWDER	Béton blanc en poudre
+WHITE_CONCRETE_SLAB	Dalle de béton blanc
+WHITE_CONCRETE_STAIRS	Escalier en béton blanc
+WHITE_GLAZED_TERRACOTTA	Terre cuite émaillée blanche
+WHITE_SHULKER_BOX	Boîte de Shulker blanche
+WHITE_STAINED_GLASS	Verre blanc
+WHITE_STAINED_GLASS_PANE	Vitre blanche
+WHITE_TERRACOTTA	Terre cuite blanche
+WHITE_TULIP	Tulipe blanche
+WHITE_WOOL	Laine blanche
+WHITE_WOOL_SLAB	Dalle de laine blanche
+WHITE_WOOL_STAIRS	Escalier en laine blanche
+WILDFLOWERS	Fleurs sauvages
+WITHER_ROSE	Rose de Wither
+WITHER_SKELETON_SKULL	Crâne de Wither squelette
+WITHER_SKELETON_WALL_SKULL	Crâne de Wither squelette mural
+YELLOW_BANNER	Bannière jaune
+YELLOW_BED	Lit jaune
+YELLOW_CANDLE	Bougie jaune
+YELLOW_CANDLE_CAKE	Gâteau à bougie jaune
+YELLOW_CARPET	Tapis jaune
+YELLOW_CONCRETE	Béton jaune
+YELLOW_CONCRETE_POWDER	Béton jaune en poudre
+YELLOW_CONCRETE_SLAB	Dalle de béton jaune
+YELLOW_CONCRETE_STAIRS	Escalier en béton jaune
+YELLOW_GLAZED_TERRACOTTA	Terre cuite émaillée jaune
+YELLOW_POPLAR_LEAVES	Feuilles de peuplier jaunes
+YELLOW_SHULKER_BOX	Boîte de Shulker jaune
+YELLOW_STAINED_GLASS	Verre jaune
+YELLOW_STAINED_GLASS_PANE	Vitre jaune
+YELLOW_TERRACOTTA	Terre cuite jaune
+YELLOW_WOOL	Laine jaune
+YELLOW_WOOL_SLAB	Dalle de laine jaune
+YELLOW_WOOL_STAIRS	Escalier en laine jaune
+ZOMBIE_HEAD	Tête de zombie
+ZOMBIE_WALL_HEAD	Tête de zombie murale

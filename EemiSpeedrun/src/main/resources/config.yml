@@ -1,0 +1,46 @@
+# EemiSpeedrun - speedrun d'objets aleatoires, dans un monde de survie neuf a chaque partie.
+# Deux modes : "objet" (la roulette tire un objet, le premier qui l'obtient marque)
+# et "lettre" (la roulette tire une lettre, le premier qui obtient un objet dont le nom
+# FRANCAIS commence par cette lettre marque). Les noms viennent du fichier officiel fr_fr.json
+# de Minecraft 26.3 (noms_fr.tsv dans le jar), donc la lettre ne depend pas de la langue du joueur.
+# Seuls comptent les objets obtenus APRES l'arret de la roulette (ce qu'on avait deja ne compte pas).
+
+# Joueurs par partie (une seule partie a la fois). Admin : /speedrun start <mode> marche des 1 joueur.
+min-players: 2
+max-players: 16
+# Decompte au lobby quand la file atteint min-players (secondes).
+countdown: 30
+
+# Manches : une roulette par manche. Par defaut UNE seule manche : le premier qui trouve gagne la partie.
+# (Avec plusieurs manches, le joueur qui a le plus de points a la fin gagne, egalite possible.)
+rounds: 1
+# Difficulte des objets tires a chaque manche (mode objet), dans l'ordre ; la derniere sert pour les suivantes.
+# Niveaux definis dans objets.yml du jar : facile, moyen, difficile.
+round-difficulty: [moyen]
+# Temps max d'une manche (secondes) : personne ne gagne si le temps est ecoule.
+round-time: 1200
+# Pause entre deux manches (secondes).
+pause-between-rounds: 6
+# Duree de l'animation de la roulette (ticks, 20 = 1 s).
+spin-ticks: 70
+
+# Mode lettre : une lettre n'est tiree que si au moins ce nombre d'objets de objets.yml commence par elle.
+letter-min-items: 3
+
+# Monde de jeu : cree a chaque partie (graine au hasard), supprime a la fin.
+world-name: speedrun
+border-size: 1000
+keep-inventory: true
+pvp: false
+
+# Retour en fin de partie (spawn DeluxeHub du lobby).
+hub:
+  world: lobby
+  x: 722.5
+  y: 51.0
+  z: 650.5
+  yaw: 90.0
+  pitch: 0.0
+
+# Identifiant du jeu dans EemiCore (statut des parties, pieces et XP).
+eemicore-id: speedrun
