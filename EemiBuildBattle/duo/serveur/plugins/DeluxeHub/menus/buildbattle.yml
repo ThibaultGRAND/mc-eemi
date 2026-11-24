@@ -1,0 +1,35 @@
+# Sous-menu Build Battle (solo / duo) - meme principe que l'ancien sous-menu Infection (27 cases).
+# A VERIFIER avant de poser : comparer les cles avec un menu existant du serveur (ambiance.yml) et les aligner
+# (material / slot / display_name / lore / actions). Fichier propose, jamais charge sur le serveur.
+slots: 27
+title: "&8Build Battle"
+items:
+  solo:
+    material: BRICKS
+    slot: 11
+    display_name: "&6&lBuild Battle &7- &eSolo"
+    lore:
+      - "&7Un theme, un terrain chacun,"
+      - "&7puis tout le monde vote."
+      - ""
+      - "&a> Clique pour jouer"
+    actions:
+      - "[COMMAND] eemi join buildbattle"
+  duo:
+    material: PINK_WOOL
+    slot: 15
+    display_name: "&d&lBuild Battle &7- &eDuo"
+    lore:
+      - "&7Deux joueurs par terrain, 8 equipes."
+      - "&7Pour jouer avec un ami : laine &bSelect Plot"
+      - "&7et choisissez le MEME terrain."
+      - ""
+      - "&a> Clique pour jouer"
+    actions:
+      - "[COMMAND] buildbattle join eemicraft_duo"
+  retour:
+    material: ARROW
+    slot: 22
+    display_name: "&7Retour"
+    actions:
+      - "[MENU] ambiance"

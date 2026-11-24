@@ -1486,7 +1486,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Sources en double entre les deux PC
 
-- Plugins faits sur le poste de Thibault et dont Esteban a une source décompilée (jar d'origine dans `_origine/`) : `EemiSheepWars/` (depuis 4.4.0), `EemiHideSeek/` (depuis 1.2.4), `EemiBuildBattle/` (depuis 1.0.0). Toujours deux sources pour EemiBoatRace et EemiCore. Prévenir l'autre avant d'y toucher ; partir de la plus haute version (pom + /plugins).
+- Plugins faits sur le poste de Thibault puis repris par Esteban depuis une source décompilée (jar d'origine dans `_origine/`) : `EemiSheepWars/` (depuis 4.4.0), `EemiHideSeek/` (depuis 1.2.4), `EemiBuildBattle/` (depuis 1.0.0). Depuis le 24/11/2026, le dépôt contient la source d'Esteban (versions installées) ; la source d'origine de Thibault reste dans l'historique git. EemiCore : la 1.9.0 du dépôt fait foi (Esteban n'avait qu'une 1.5.x décompilée). Prévenir l'autre avant d'y toucher ; partir de la plus haute version (pom + /plugins).
 - Zip d'échange du 06/11 : `a_deposer/pour-thibault-20261106.zip` (sources sans `target/`, jars des 12 plugins faits chez Esteban, CLAUDE.md, LISEZMOI.md) ; `.mcp.json` exclu (clé MineStrator).
 - Jeux sans source chez Esteban (au 17/11) : SkyWars, HG, Bridge, Towers, TNT Tag, TNT Wars, BoS, Pitchout, UHC, Bingo, Block Party, Wizards, PvP Run, JumpLeague, Bow Spleef, Duels ; EemiCore 1.8+ (seule une 1.5.x décompilée), EemiVie, EemiNoel.
 - Sources d'Esteban versées dans le dépôt le 24/11/2026 depuis son ancien dossier local (pom = version installée ; l'ancienne source du dépôt reste dans l'historique git) :
@@ -1494,6 +1494,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - `EemiBoatRace/` 2.4.0 (remplace la 2.2.0 ; il n'y a plus deux sources).
   - `EemiSheepWars/` 4.6.0 (base décompilée de la 4.4.0 de Thibault ; gen_maps.py, gen_steampunk.py et aperçus de Thibault gardés).
   - `EemiHideSeek/` 1.5.1 (base décompilée de la 1.2.4 de Thibault).
+  - `EemiBuildBattle/` 1.1.0 (base décompilée de la 1.0.0 de Thibault ; arena.yml, gen_arena.py et datapack `eemibb/` de Thibault gardés).
 
 ## Retour au salon d'attente en fin de partie
 

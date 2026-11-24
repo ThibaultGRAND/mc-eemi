@@ -1,0 +1,11 @@
+Commandes : build_duo 20005, walls_duo 576 ; boite (-84, 30, 246, 158, 83, 109)
+Plus grosse commande fill : 5512 blocs (limite par defaut 32768)
+Etats de bloc : 55, invalides : 0 []
+Blocs non relies a l'ile : 0 []
+Supports manquants : 0 []
+Trous dans les murs (y 65..110) : 0
+z min de l'arene duo : 246 (solo : z <= 79)
+Arrivee (-6, 65, 309) : sol=polished_andesite, pieds=None, tete=None
+Spectateur (-6, 89, 300) : None
+Types de blocs : 49 ; total 375549
+andesite 93736, tuff 63625, dirt 51560, stone 50959, deepslate 42436, smooth_quartz 36640, grass_block 11467, quartz_pillar 7110, barrier 4240, oak_leaves 2501, dirt_path 1324, stone_bricks 939, smooth_quartz_slab 832, polished_andesite 786, oxeye_daisy 418, red_concrete 416, light_blue_concrete 416, orange_concrete 416, blue_concrete 416, yellow_concrete 416, purple_concrete 416, lime_concrete 416, pink_concrete 416, cherry_leaves 372, polished_diorite 366, cornflower 293, allium 290, short_grass 241, dandelion 237, coarse_dirt 194, chiseled_quartz_block 193, azalea_leaves 168, birch_leaves 165, dark_prismarine 133, water 132, oak_log 131, smooth_stone 116, dark_oak_fence 96, mossy_stone_bricks 94, azure_bluet 83, lantern 65, birch_log 62, cherry_log 57, poppy 48, quartz_bricks 44, quartz_slab 44, spruce_stairs 16, sea_lantern 4, quartz_stairs 4

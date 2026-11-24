@@ -1,6 +1,7 @@
 # EemiBuildBattle - complements pour Build Battle (Plugily Projects)
 # Pendant la construction, chaque joueur ne voit plus les autres joueurs de sa partie (ils reapparaissent
-# pour le vote). Un objet « Je suis pret » est donne pendant la construction : quand tous les joueurs
+# pour le vote). En duo (arene avec plotmembersize 2), les coequipiers d'un meme terrain se voient.
+# Un objet "Je suis pret" est donne pendant la construction : quand tous les joueurs
 # de la partie sont prets, le temps restant est ramene a ready-timer secondes.
 
 # Emplacement de l'objet dans la barre (0-8 ; le plugin Build Battle utilise deja le slot 8).
@@ -9,3 +10,7 @@ ready-slot: 7
 ready-timer: 5
 # Cacher les autres joueurs pendant la construction.
 hide-players: true
+# En duo : les joueurs d'un meme terrain se voient entre eux pendant la construction.
+show-teammates: true
+# Equipes : un joueur reste sans terrain (defaut de Plugily 5.1.8 avec le selecteur du lobby) -> place sur le terrain incomplet le plus rempli.
+fix-orphans: true
