@@ -1,0 +1,17 @@
+name: EemiJump
+version: ${project.version}
+main: fr.eemicraft.jump.EemiJump
+api-version: '1.21'
+softdepend: [EemiCore, Multiverse-Core]
+description: Jump solo - plusieurs parcours (facile, moyen, difficile), progression sauvegardee
+
+commands:
+  jump:
+    description: Jump solo
+    usage: /jump [parcours|<id du parcours>|sanschute [parcours]|leave|niveau <n>|top [parcours] [sanschute]|stats [joueur]]
+    aliases: [parkour]
+
+permissions:
+  eemijump.admin:
+    description: /jump reload|set|info
+    default: op

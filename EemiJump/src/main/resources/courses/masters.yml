@@ -1,0 +1,192 @@
+# Parkour Masters (Nordic_Studios, CurseForge 1020454, fichier 5353095, monde 1.20.1 DataVersion 3465), licence MIT.
+# Genere par gen_masters.py. Couloir droit vers -z, x -4..0 : 101 plateformes de planches (y -60, 3 de profondeur),
+# une tous les 18 blocs (z = 8 - 18 n) ; plateforme 0 = depart, 100 = arrivee. La map d'origine a un second couloir
+# identique en x 6..10 (mode sans checkpoint) : inutile ici, chaque niveau est deja un point de controle.
+# point : [x, z, axe, debut, fin, yaw] ; axe z = plateforme centree sur z (+-1), de x debut a fin.
+name: "Parkour Masters"
+world: jump_masters
+author: Nordic_Studios
+credit: "Map Parkour Masters de Nordic_Studios, licence MIT"
+difficulty: moyen
+icon: bamboo
+description: "100 niveaux courts dans un long couloir|Slime, echelles, glace, lave, feu, neo..."
+floor-y: -59
+# Sous le couloir : le vide. Les blocs les plus bas du parcours (slime, terre des grandes feuilles, echelles) sont en y -64.
+fail-y: -64.5
+# Toucher ces blocs = retour a la plateforme : la lave et le feu tuaient dans la map d'origine.
+# La lave compte sur toute la boite du joueur. Les blocs de hazards-center (le feu) ne comptent que dans la colonne
+# centrale du joueur (bloc des pieds et bloc au-dessus) : on peut frôler les flammes sans les traverser.
+hazards: [lava, fire, soul_fire]
+hazards-center: [fire, soul_fire]
+# Mode « sans chute » : les 100 niveaux d'affilee, une chute = retour au niveau 1 (progression a part du mode normal).
+# Recompense donnee une seule fois (marqueur courses.masters.nofall.bonus), pas le finish-bonus normal.
+no-fall:
+  enabled: true
+  bonus:
+    enabled: true
+    version: 1
+    coins: 2000
+    xp: 2000
+    cosmetics: [title_j_masters_hc, trail_j_hc]
+    lines:
+      - "&a&lTitre exclusif : &4&lSans Faute &7(/boutique > Titres)"
+      - "&a&lTraînée exclusive : &eÉclats du totem &7(/boutique > Traînées)"
+    menu-lines:
+      - "&7+ titre &4&lSans Faute &7et traînée &eÉclats du totem"
+# Boite (sortie = retour) : murs en x -5 et 1, dessus des murs en y -53 (pieds a -53 ou plus haut = hors parcours).
+bounds: [-4, -70, -1794, 0, -54, 9]
+# Retouches de la map, appliquees une fois par version (data.yml patched.masters). Ligne : "x y z etat" ou boite "x1 y1 z1 x2 y2 z2 etat".
+# v1 (17/11/2026) : niveau 74 (de la plateforme z -1306 a z -1324) refait. L'original (5 demi-dalles d'1 bloc separees par
+# 2 feux, au-dessus du vide) etait quasi impossible. Nouvelle epreuve « Braises » : 4 plots de pierre noire en zigzag
+# (saut de 2, saut de 2 en montant d'1, diagonale, saut de 3 en descendant d'1, puis saut de 2 sur la plateforme),
+# braseros de feu des ames contre les murs, lanternes des ames sous les plots.
+patches:
+  version: 1
+  blocks:
+    # ancienne epreuve retiree (bande de netherrack, demi-dalles, feu)
+    - "-4 -60 -1322 0 -59 -1308 air"
+    # plot 1 : z -1310, x -2, pieds a -59
+    - "-2 -60 -1310 polished_blackstone_bricks"
+    - "-2 -61 -1310 iron_chain[axis=y]"
+    - "-2 -62 -1310 soul_lantern[hanging=true]"
+    # plot 2 : z -1313, x -3, monte d'1 (pieds a -58), socle en dessous
+    - "-3 -59 -1313 chiseled_polished_blackstone"
+    - "-3 -60 -1313 polished_blackstone"
+    - "-3 -61 -1313 polished_blackstone_wall"
+    # plot 3 : z -1316, x -1, meme hauteur (pieds a -58)
+    - "-1 -59 -1316 chiseled_polished_blackstone"
+    - "-1 -60 -1316 polished_blackstone"
+    - "-1 -61 -1316 polished_blackstone_wall"
+    # plot 4 : z -1320, x -2, redescend (pieds a -59)
+    - "-2 -60 -1320 polished_blackstone_bricks"
+    - "-2 -61 -1320 iron_chain[axis=y]"
+    - "-2 -62 -1320 soul_lantern[hanging=true]"
+    # braseros contre les murs, loin de la trajectoire (feu des ames sur sable des ames)
+    - "0 -60 -1312 soul_soil"
+    - "0 -59 -1312 soul_fire"
+    - "-4 -60 -1317 soul_soil"
+    - "-4 -59 -1317 soul_fire"
+# Recompense de fin propre a ce parcours (le titre « Maitre du Jump » reste a Overgrown).
+finish-bonus:
+  enabled: true
+  version: 1
+  coins: 600
+  xp: 800
+  cosmetics: [title_j_masters, trail_j_flammes]
+  lines:
+    - "&a&lTitre exclusif : &6&lParkour Master &7(/boutique > Titres)"
+    - "&a&lTraînée exclusive : &6Gouttes de lave &7(/boutique > Traînées)"
+checkpoints:
+  - [-2, 8, z, -4, 0, 180.0]
+  - [-2, -10, z, -4, 0, 180.0]
+  - [-2, -28, z, -4, 0, 180.0]
+  - [-2, -46, z, -4, 0, 180.0]
+  - [-2, -64, z, -4, 0, 180.0]
+  - [-2, -82, z, -4, 0, 180.0]
+  - [-2, -100, z, -4, 0, 180.0]
+  - [-2, -118, z, -4, 0, 180.0]
+  - [-2, -136, z, -4, 0, 180.0]
+  - [-2, -154, z, -4, 0, 180.0]
+  - [-2, -172, z, -4, 0, 180.0]
+  - [-2, -190, z, -4, 0, 180.0]
+  - [-2, -208, z, -4, 0, 180.0]
+  - [-2, -226, z, -4, 0, 180.0]
+  - [-2, -244, z, -4, 0, 180.0]
+  - [-2, -262, z, -4, 0, 180.0]
+  - [-2, -280, z, -4, 0, 180.0]
+  - [-2, -298, z, -4, 0, 180.0]
+  - [-2, -316, z, -4, 0, 180.0]
+  - [-2, -334, z, -4, 0, 180.0]
+  - [-2, -352, z, -4, 0, 180.0]
+  - [-2, -370, z, -4, 0, 180.0]
+  - [-2, -388, z, -4, 0, 180.0]
+  - [-2, -406, z, -4, 0, 180.0]
+  - [-2, -424, z, -4, 0, 180.0]
+  - [-2, -442, z, -4, 0, 180.0]
+  - [-2, -460, z, -4, 0, 180.0]
+  - [-2, -478, z, -4, 0, 180.0]
+  - [-2, -496, z, -4, 0, 180.0]
+  - [-2, -514, z, -4, 0, 180.0]
+  - [-2, -532, z, -4, 0, 180.0]
+  - [-2, -550, z, -4, 0, 180.0]
+  - [-2, -568, z, -4, 0, 180.0]
+  - [-2, -586, z, -4, 0, 180.0]
+  - [-2, -604, z, -4, 0, 180.0]
+  - [-2, -622, z, -4, 0, 180.0]
+  - [-2, -640, z, -4, 0, 180.0]
+  - [-2, -658, z, -4, 0, 180.0]
+  - [-2, -676, z, -4, 0, 180.0]
+  - [-2, -694, z, -4, 0, 180.0]
+  - [-2, -712, z, -4, 0, 180.0]
+  - [-2, -730, z, -4, 0, 180.0]
+  - [-2, -748, z, -4, 0, 180.0]
+  - [-2, -766, z, -4, 0, 180.0]
+  - [-2, -784, z, -4, 0, 180.0]
+  - [-2, -802, z, -4, 0, 180.0]
+  - [-2, -820, z, -4, 0, 180.0]
+  - [-2, -838, z, -4, 0, 180.0]
+  - [-2, -856, z, -4, 0, 180.0]
+  - [-2, -874, z, -4, 0, 180.0]
+  - [-2, -892, z, -4, 0, 180.0]
+  - [-2, -910, z, -4, 0, 180.0]
+  - [-2, -928, z, -4, 0, 180.0]
+  - [-2, -946, z, -4, 0, 180.0]
+  - [-2, -964, z, -4, 0, 180.0]
+  - [-2, -982, z, -4, 0, 180.0]
+  - [-2, -1000, z, -4, 0, 180.0]
+  - [-2, -1018, z, -4, 0, 180.0]
+  - [-2, -1036, z, -4, 0, 180.0]
+  - [-2, -1054, z, -4, 0, 180.0]
+  - [-2, -1072, z, -4, 0, 180.0]
+  - [-2, -1090, z, -4, 0, 180.0]
+  - [-2, -1108, z, -4, 0, 180.0]
+  - [-2, -1126, z, -4, 0, 180.0]
+  - [-2, -1144, z, -4, 0, 180.0]
+  - [-2, -1162, z, -4, 0, 180.0]
+  - [-2, -1180, z, -4, 0, 180.0]
+  - [-2, -1198, z, -4, 0, 180.0]
+  - [-2, -1216, z, -4, 0, 180.0]
+  - [-2, -1234, z, -4, 0, 180.0]
+  - [-2, -1252, z, -4, 0, 180.0]
+  - [-2, -1270, z, -4, 0, 180.0]
+  - [-2, -1288, z, -4, 0, 180.0]
+  - [-2, -1306, z, -4, 0, 180.0]
+  - [-2, -1324, z, -4, 0, 180.0]
+  - [-2, -1342, z, -4, 0, 180.0]
+  - [-2, -1360, z, -4, 0, 180.0]
+  - [-2, -1378, z, -4, 0, 180.0]
+  - [-2, -1396, z, -4, 0, 180.0]
+  - [-2, -1414, z, -4, 0, 180.0]
+  - [-2, -1432, z, -4, 0, 180.0]
+  - [-2, -1450, z, -4, 0, 180.0]
+  - [-2, -1468, z, -4, 0, 180.0]
+  - [-2, -1486, z, -4, 0, 180.0]
+  - [-2, -1504, z, -4, 0, 180.0]
+  - [-2, -1522, z, -4, 0, 180.0]
+  - [-2, -1540, z, -4, 0, 180.0]
+  - [-2, -1558, z, -4, 0, 180.0]
+  - [-2, -1576, z, -4, 0, 180.0]
+  - [-2, -1594, z, -4, 0, 180.0]
+  - [-2, -1612, z, -4, 0, 180.0]
+  - [-2, -1630, z, -4, 0, 180.0]
+  - [-2, -1648, z, -4, 0, 180.0]
+  - [-2, -1666, z, -4, 0, 180.0]
+  - [-2, -1684, z, -4, 0, 180.0]
+  - [-2, -1702, z, -4, 0, 180.0]
+  - [-2, -1720, z, -4, 0, 180.0]
+  - [-2, -1738, z, -4, 0, 180.0]
+  - [-2, -1756, z, -4, 0, 180.0]
+  - [-2, -1774, z, -4, 0, 180.0]
+  - [-2, -1792, z, -4, 0, 180.0]
+command-blocks:
+  - "-6 -58 -1792"
+  - "-2 -61 -1612"
+  - "-2 -61 -1432"
+  - "-2 -61 -1252"
+  - "-2 -61 -1072"
+  - "-2 -61 -892"
+  - "-2 -61 -712"
+  - "-2 -61 -532"
+  - "-2 -61 -352"
+  - "-2 -61 -172"
+  - "12 -58 -1792"

@@ -1,0 +1,33 @@
+# Balade tranquille : parcours FACILE genere par le plugin (Tranquille.java) dans le monde vide jump_tranquille,
+# cree et construit tout seul au premier demarrage (aucune map a deposer).
+# Une ile par etape (point de controle au centre, sur la dalle doree), 3 a 5 sauts faciles entre deux iles :
+# vide de 2 blocs au plus a plat, de 1 au plus en montee, jamais plus de 1 bloc de montee.
+# Tomber dans le lagon = retour a l'ile. Cinq ambiances : prairie, cerisiers, plage, automne, neige.
+name: "Balade tranquille"
+world: jump_tranquille
+author: EEMICRAFT
+generator: tranquille
+seed: 20261117
+steps: 50
+difficulty: facile
+icon: oak_sapling
+description: "Sauts faciles d'ile en ile au-dessus d'un lagon|Un point de controle sur chaque ile"
+# Rayon (en blocs) de la zone du point de controle autour du centre de l'ile.
+radius: 2
+# Recompense de fin propre a ce parcours (le titre « Maitre du Jump » reste a Overgrown).
+# Cosmetiques du config d'EemiCore (casino: true = jamais vendus). Monter version les redonne.
+finish-bonus:
+  enabled: true
+  version: 1
+  coins: 250
+  xp: 300
+  cosmetics: [title_j_marelle, trail_j_bulles]
+  lines:
+    - "&a&lTitre exclusif : &d&lChampion de la marelle &7(/boutique > Titres)"
+    - "&a&lTrainee exclusive : &bBulles de savon &7(/boutique > Trainees)"
+rewards:
+  every-levels: 10
+  coins: 3
+  xp: 15
+  finish-coins: 150
+  finish-xp: 300

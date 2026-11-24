@@ -1,0 +1,43 @@
+# EemiJump - jump solo sur une map toute faite, niveau par niveau, progression sauvegardee par joueur.
+# On reprend toujours au dernier niveau atteint. Une chute = retour a la plateforme du niveau.
+
+# Parcours charges (fichiers courses/<id>.yml). Le premier est celui par defaut.
+# Les parcours livres avec le plugin et absents de cette liste sont ajoutes tout seuls (sauf s'ils sont dans disabled-courses).
+# /jump ouvre le choix du parcours quand il y en a plusieurs ; la progression est gardee par parcours.
+courses: [overgrown, balade, masters]
+disabled-courses: []
+
+# Les joueurs du jump ne se voient pas entre eux au depart (objet pour changer).
+hide-players: true
+
+# Recompenses EemiCore pour un NOUVEAU record de niveau : tous les every-levels niveaux.
+rewards:
+  every-levels: 10
+  coins: 5
+  xp: 20
+  # Premiere fois qu'on finit tout le parcours (en plus de la victoire EemiCore).
+  finish-coins: 200
+  # Recompenses exclusives de fin de parcours, donnees aussi a ceux qui avaient deja fini (a leur connexion).
+  # Monter "version" les redonne a tous ceux qui ont fini. Les cosmetiques sont ceux du config d'EemiCore (casino: true = jamais vendus).
+  finish-bonus:
+    enabled: true
+    version: 1
+    coins: 1250
+    xp: 1500
+    cosmetics: [title_j_maitre, trail_j_jungle]
+    lines:
+      - '&a&lTitre exclusif : &2&lMaitre du Jump &7(/boutique > Titres)'
+      - '&a&lTrainee exclusive : &aFeuilles de jungle &7(/boutique > Trainees)'
+
+# Mondes depuis lesquels on peut entrer (vide = partout).
+join-from: [lobby]
+# Spawn du hub (retour par /jump leave ou l'objet Quitter).
+hub:
+  world: lobby
+  x: 722.5
+  y: 51
+  z: 650.5
+  yaw: 90
+  pitch: 0
+max-players: 50
+eemicore-id: jump
