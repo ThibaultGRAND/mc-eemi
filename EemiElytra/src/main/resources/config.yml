@@ -1,0 +1,45 @@
+# EemiElytra - Course en élytres
+# Départ groupé depuis une tour, anneaux à traverser dans l'ordre (verts = boost).
+# Crash (sol, mur, eau, trop bas, hors parcours) = retour au dernier anneau, 1 s immobile.
+
+world: elytra
+min-players: 2
+max-players: 12
+# Décompte (secondes) une fois le minimum atteint, puis réduit à countdown-full quand c'est plein
+countdown: 20
+countdown-full: 5
+# Durée maximale d'une course (secondes)
+max-time: 240
+# Temps laissé aux autres après l'arrivée du premier (secondes)
+finish-grace: 30
+# Fusées données au départ (0 à 3)
+fireworks: 0
+# Poussée au top départ (blocs par tick, vers l'avant)
+launch-push: 1.2
+# Vitesse donnée par un anneau boost (dans la direction du regard)
+boost-speed: 2.6
+# Poussée à la reprise après un crash
+respawn-push: 1.0
+# Pénalité d'immobilité après un crash (ticks, 20 = 1 s)
+respawn-penalty-ticks: 20
+# Crash si l'on descend plus de N blocs sous les deux anneaux qui encadrent le joueur
+fall-depth: 30
+# Crash si l'on s'éloigne de plus de N blocs du tronçon en cours
+max-distance: 90
+# Marge de détection autour du trou de l'anneau (blocs)
+ring-detect-bonus: 0.6
+# Parcours tirés au sort (jamais deux fois de suite) : canyon, archipel, grotte
+maps: [canyon, archipel, grotte]
+# Temps de construction des parcours par tick (ms), 5 max pendant une course
+build-ms-per-tick: 25
+# Mondes depuis lesquels on peut rejoindre (vide = partout)
+join-from: [lobby]
+# Retour au hub en fin de partie
+hub:
+  world: lobby
+  x: 722.5
+  y: 51
+  z: 650.5
+  yaw: 90
+  pitch: 0
+eemicore-id: elytra

@@ -1,0 +1,17 @@
+name: EemiElytra
+version: ${project.version}
+main: fr.eemicraft.elytra.EemiElytra
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Course en elytres - anneaux a traverser dans l'ordre sur des parcours construits par le plugin
+
+commands:
+  elytra:
+    description: Course en elytres
+    usage: /elytra [join|leave|spectate|record|map]
+    aliases: [courseelytre]
+
+permissions:
+  eemielytra.admin:
+    description: /elytra start|stop|build|map <id>|reload|info
+    default: op

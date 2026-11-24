@@ -1499,6 +1499,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - `EemiCasino/` 1.4.0 (absent du dépôt jusque-là).
   - `EemiDeACoudre/` 1.3.0 (absent du dépôt jusque-là).
   - `EemiDropper/` 1.3.0 (absent du dépôt jusque-là).
+  - `EemiElytra/` 1.1.0 (absent du dépôt jusque-là).
 
 ## Retour au salon d'attente en fin de partie
 
