@@ -1,0 +1,46 @@
+# EemiSpleef - Spleef a la pelle
+# Grand terrain de neige au-dessus d'une fosse de lave : on casse la neige sous les pieds des autres.
+# Tomber dans la fosse = elimine. Dernier debout gagne.
+
+world: spleef
+min-players: 2
+max-players: 16
+# Parties en meme temps (une arene par partie, cote a cote dans le monde)
+max-instances: 3
+# Ecart (blocs) entre deux arenes en x
+instance-spacing: 400
+# Decompte (secondes) des que le minimum est atteint, et quand la partie est pleine
+countdown: 30
+countdown-full: 10
+# Secondes au debut sans pouvoir casser (on se place)
+grace: 5
+# Duree avant la fonte (secondes) ; ensuite le terrain retrecit d'un anneau toutes les melt-interval secondes
+max-time: 300
+melt-interval: 3
+# Secondes entre la fin et le retour au lobby
+end-delay: 6
+
+# v2 (17/11/2026) : un seul grand terrain de neige plat de 37 x 25 qui remplit le stade (fixe, cles
+# "layers" et "radius" plus lues). Bloc du terrain = premier de la liste.
+layer-materials: [snow_block]
+
+# Boules de neige : une par bloc casse, elles cassent le bloc touche et poussent un peu les joueurs (aucun degat)
+snowballs:
+  enabled: true
+  per-break: 1
+  max: 16
+  break-blocks: true
+  knockback: 0.35
+
+# Bonus donne a chaque joueur en jeu toutes les "interval" secondes (au hasard parmi types : saut, vitesse, boules)
+bonus:
+  enabled: true
+  interval: 45
+  duration: 8
+  snowballs: 6
+  types: [saut, vitesse, boules]
+
+# Mondes depuis lesquels on peut rejoindre (vide = partout)
+join-from: [lobby]
+lobby-command: lobby
+eemicore-id: spleef

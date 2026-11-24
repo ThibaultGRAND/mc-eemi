@@ -1,0 +1,16 @@
+name: EemiSpleef
+version: ${project.version}
+main: fr.eemicraft.spleef.EemiSpleef
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Spleef a la pelle - casse la neige sous les pieds des autres, dernier debout gagne
+
+commands:
+  spleef:
+    description: Spleef
+    usage: '/spleef [join|leave|spectate]'
+
+permissions:
+  eemispleef.admin:
+    description: '/spleef start|stop|build|reload|parties'
+    default: op

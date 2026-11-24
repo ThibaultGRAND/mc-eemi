@@ -1508,6 +1508,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - `EemiResto/` 1.0.1 (absent du dépôt jusque-là).
   - `EemiSoleil/` 2.1.0 (absent du dépôt jusque-là).
   - `EemiSpeedrun/` 1.1.0 (absent du dépôt jusque-là).
+  - `EemiSpleef/` 1.2.0 (absent du dépôt jusque-là).
 
 ## Retour au salon d'attente en fin de partie
 
