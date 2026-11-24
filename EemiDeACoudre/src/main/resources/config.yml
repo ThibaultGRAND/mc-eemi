@@ -1,0 +1,24 @@
+# EemiDeACoudre - De a coudre
+# Chacun son tour, on saute du plongeoir dans la piscine.
+# Dans l'eau : un bloc a ta couleur remplace l'eau. Sur un bloc (ou a cote) : -1 vie.
+# Dans un trou d'eau entoure de 4 blocs : DE A COUDRE, +1 vie.
+
+world: deacoudre
+min-players: 2
+max-players: 16
+# Decompte (secondes) une fois le minimum atteint
+countdown: 20
+# Vies au depart (regle classique : 1)
+start-lives: 1
+# Vies maximum (bonus de de a coudre compris)
+max-lives: 5
+# Temps pour sauter (secondes), sinon -1 vie
+jump-time: 15
+# Rayon de la piscine (blocs) : 4 = environ 60 cases d'eau
+pool-radius: 4
+# Hauteur du plongeoir au-dessus de l'eau (15 a 80)
+board-height: 40
+# Mondes depuis lesquels on peut rejoindre (vide = partout)
+join-from: [lobby]
+lobby-command: lobby
+eemicore-id: deacoudre

@@ -1,0 +1,17 @@
+name: EemiDeACoudre
+version: ${project.version}
+main: fr.eemicraft.deacoudre.EemiDeACoudre
+api-version: '1.21'
+softdepend: [EemiCore]
+description: De a coudre - chacun son tour, on saute dans la piscine sans toucher les blocs
+
+commands:
+  deacoudre:
+    description: De a coudre
+    usage: /deacoudre [join|leave|spectate]
+    aliases: [dac]
+
+permissions:
+  eemideacoudre.admin:
+    description: /deacoudre start|stop|build|reload
+    default: op
