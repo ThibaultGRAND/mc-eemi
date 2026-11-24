@@ -9,7 +9,7 @@ commands:
   hideseek:
     description: Rejoindre ou gerer le cache-cache
     aliases: [hns, cachecache]
-    usage: /hideseek <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|reload>
+    usage: '/hideseek <join|leave|spectate [joueur]|start [n]|stop [n]|parties|map [id]|build [id]|reload>'
 
 permissions:
   eemihideseek.admin:

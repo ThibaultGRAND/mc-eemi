@@ -25,7 +25,7 @@ seeker-speed: 2
 
 # Temps de cachette (chercheurs aveugles et immobiles), puis temps de recherche (secondes).
 hide-time: 30
-game-time: 300
+game-time: 420
 # Ecran de fin avant le retour en salle d'attente.
 end-time: 8
 
@@ -43,6 +43,29 @@ hit-cooldown-ms: 400
 # Cacheur trouve : seeker (devient chercheur, comme Hypixel) ou spectator.
 found-becomes: seeker
 
+# Coeurs du chercheur (1.3.0) : il en a seeker-hearts une fois lache (max 10 = sa vie normale).
+# Taper un vrai bloc du decor (pas un cacheur) coute wrong-hit-cost coeur(s) ; trouver un cacheur en rend found-heal.
+# Pas de regeneration naturelle. A 0 coeur : seeker-respawn secondes dans la salle noire, puis retour avec tous ses coeurs.
+seeker-hearts: 10
+wrong-hit-cost: 1
+found-heal: 2
+seeker-respawn: 15
+# Seule l'epee du chercheur touche un cacheur ou coute un coeur (1.3.1) : main nue ou autre objet = rien.
+# Onde de choc (1.3.1, remplace la sonde) : clic droit avec la baguette de breeze, tous les cacheurs a
+# shockwave-radius blocs ou moins (meme derriere un mur) sont deloges (plus solides) et un peu repousses.
+shockwave-radius: 5.0
+shockwave-cooldown: 15
+# Radar : distance du cacheur le plus proche en mots, sans direction (Brulant < radar-burning < Chaud < radar-hot
+# < Tiede < radar-warm < Froid).
+radar-cooldown: 1
+radar-burning: 10.0
+radar-hot: 20.0
+radar-warm: 35.0
+# Bruits forces : chaque cacheur fait un petit bruit toutes les forced-sound-min a forced-sound-max secondes
+# pendant la recherche (pas pendant la cachette). forced-sound-min: 0 = desactive.
+forced-sound-min: 45
+forced-sound-max: 60
+
 # Provocation (taunt) : son + particules, +1 point et le temps restant baisse de taunt-time-bonus secondes.
 taunt-cooldown: 15
 taunt-time-bonus: 5
@@ -51,7 +74,17 @@ taunt-time-bonus: 5
 final-reveal-time: 60
 reveal-interval: 10
 
-# Points de la map (x,y,z[,yaw,pitch]) - correspondent a la map construite par le plugin.
+# Maps (1.5.0) : village (ci-dessous), port (Port de peche, zone de jeu x 352..433) et supermarche (x 800), toutes posees par
+# le plugin dans le meme monde. Une map est tiree au hasard a chaque partie, jamais deux fois de suite.
+# Liste des maps tirables (ids) ; vide = toutes. /hideseek map [id] (admin) impose la prochaine, /hideseek build [id].
+# (La map EEMI de la 1.4.0 n'existe plus : sa zone est videe par la construction du port.)
+maps: []
+# Les maps port et supermarche ont leur propre liste de deguisement (decor fait de ces blocs). Pour la remplacer :
+# map-blocks:
+#   port:
+#     BARREL: Tonneau
+
+# Points du village (x,y,z[,yaw,pitch]) - correspondent a la map construite par le plugin.
 waiting-spawn: 0.5,101,75.5,180,0
 seeker-room: 0.5,101,-74.5,0,0
 hider-spawn: 0.5,65,6.5,0,0

@@ -1493,6 +1493,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - `EemiMurder/` 1.13.0 (remplace la 1.6.0).
   - `EemiBoatRace/` 2.4.0 (remplace la 2.2.0 ; il n'y a plus deux sources).
   - `EemiSheepWars/` 4.6.0 (base décompilée de la 4.4.0 de Thibault ; gen_maps.py, gen_steampunk.py et aperçus de Thibault gardés).
+  - `EemiHideSeek/` 1.5.1 (base décompilée de la 1.2.4 de Thibault).
 
 ## Retour au salon d'attente en fin de partie
 
