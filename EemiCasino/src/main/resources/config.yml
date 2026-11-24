@@ -1,0 +1,87 @@
+# EemiCasino - casino d'EEMICRAFT
+# Monde "casino" cree par le plugin (vide), salle construite par le plugin.
+
+world: casino
+# Point d'arrivee dans le casino (x y z yaw pitch)
+spawn: [0.5, 101.0, 26.5, 180.0, 0.0]
+# Commande lancee par le joueur pour sortir du casino
+lobby-command: lobby
+# Mondes depuis lesquels /casino emmene au casino (vide = partout)
+join-from: [lobby]
+
+# Jetons : achetes avec les pieces d'EemiCore a la caisse, non reconvertibles.
+cashier:
+  packs:
+    - {coins: 50, chips: 500}
+    - {coins: 100, chips: 1000}
+    - {coins: 250, chips: 2600}
+    - {coins: 500, chips: 5500}
+    - {coins: 1000, chips: 12000}
+  welcome-chips: 1000
+  # Bonus du jour : base + par jour de serie (serie max), remis a zero si un jour est saute
+  daily-base: 200
+  daily-per-day: 100
+  daily-max-streak: 7
+
+# Mises proposees (jetons)
+bets: [10, 50, 100, 500, 1000, 5000, 10000]
+max-bet:
+  slots: 5000
+  blackjack: 10000
+  roulette: 10000
+  videopoker: 5000
+  roue: 5000
+  plinko: 5000
+
+# Modeles 3D du pack de textures EEMICRAFT : cylindre de roulette qui tourne, cartes posees sur les tables de
+# blackjack, grande roue, plinko, vraies cartes dans les menus. A activer SEULEMENT une fois le pack avec les
+# modeles du casino publie (sinon cubes violets et noirs), puis /casino admin reload.
+modeles-3d: false
+# Les entites d'affichage tournent les modeles d'un demi-tour : on le compense. Si les cartes apparaissent
+# a l'envers / de dos et que la bille ne tombe pas sur le numero annonce, passer a false puis /casino admin reload.
+modeles-flip: true
+
+plinko:
+  # 9 cases, de gauche a droite (8 rangees de picots). Retour moyen avec ces valeurs : 94,6 %.
+  # Ces valeurs sont aussi DESSINEES sur la planche du pack : si on les change, refaire la texture
+  # (pack_src/gen_casino_pack.py, PLINKO_MULT) et republier le pack, sinon la planche affiche d'autres chiffres.
+  multipliers: [5.6, 2.1, 1.1, 0.9, 0.5, 0.9, 1.1, 2.1, 5.6]
+  # Billes en l'air au plus par joueur
+  max-balls: 6
+
+# Gros gain annonce a tout le serveur a partir de (gain net)
+broadcast-min: 5000
+
+slots:
+  # Contribution au jackpot (pourcentage de chaque mise, au moins 1 jeton)
+  jackpot-percent: 3
+  jackpot-seed: 10000
+  # Mise a partir de laquelle le jackpot est gagne en entier (sinon au prorata)
+  jackpot-full-bet: 1000
+
+poker:
+  # Delai pour jouer (secondes) ; 2 delais depasses de suite = leve de table apres la main
+  action-time: 30
+  tables:
+    - {name: "Table classique", small: 10, big: 20, min-buy: 400, max-buy: 2000}
+    - {name: "Table high roller", small: 50, big: 100, min-buy: 2000, max-buy: 10000}
+
+# Boutique du casino : cosmetiques EemiCore reserves au casino (cosmetique "casino: true" dans le config d'EemiCore).
+# Achat = /eemi cosmetic <joueur> <id> lance par la console.
+shop:
+  title_c_flambeur: {name: "&6Titre Flambeur", icon: GOLD_NUGGET, price: 5000, lore: ["&8[&6Flambeur&8] devant ton pseudo"]}
+  title_c_bluffeur: {name: "&bTitre Bluffeur", icon: ENDER_EYE, price: 15000, lore: ["&8[&bBluffeur&8] devant ton pseudo"]}
+  title_c_highroller: {name: "&5&lTitre High Roller", icon: AMETHYST_SHARD, price: 50000, lore: ["&8[&5&lHigh Roller&8] devant ton pseudo"]}
+  title_c_roi: {name: "&6&lTitre Roi du casino", icon: GOLDEN_HELMET, price: 250000, lore: ["&8[&6&lRoi du casino&8] devant ton pseudo"]}
+  trail_c_or: {name: "&ePluie d'or", icon: GOLD_INGOT, price: 20000, lore: ["&7Trainee de particules au hub"]}
+  hat_c_or: {name: "&6Lingot geant", icon: GOLD_BLOCK, price: 30000, lore: ["&7Chapeau en bloc d'or au hub"]}
+  join_c_jackpot: {name: "&6Entree Jackpot", icon: BELL, price: 40000, lore: ["&7Message d'arrivee sur le serveur"]}
+
+# Skin du croupier (texture signee MineSkin, generee depuis le skin fourni)
+dealer:
+  name: "&6Croupier"
+  texture: "ewogICJ0aW1lc3RhbXAiIDogMTc5Mzk1MTQ4NTYwNywKICAicHJvZmlsZUlkIiA6ICJjOWZkZjFiMThhZGI0MGE3OTQwMzMyMTg3NThhZDJkMCIsCiAgInByb2ZpbGVOYW1lIiA6ICJfc3BhY2VfODAiLAogICJzaWduYXR1cmVSZXF1aXJlZCIgOiB0cnVlLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTQ1MzQyOWFkM2NjOGNkYzBmYzBjNjEyNGExYjRkNGIxMzA2ZjBhYjg5NDg5NzY5YzYwNWFhNmNlMGQ3YjY0YiIKICAgIH0KICB9Cn0="
+  signature: "dQu5r6TqPtVrntO3ZB3WyANoJNtDDjUZQsftwjXYvYa+dbVtZEQpNqrmPe4xyIvtAq8bS+/5A6dHnuHbO3h3vieaNr0XXdXr1jTjU8K6EYwrHep+ZaH7f1uOB2+f8I9+JAYjXYhSv64fM3VK5yCvRMj0aWA46dZyflj1rJLlR5UpgmqYsyddWX+yb7QzVbof1c82gqynLF7jiTr1p7eaUNvbOjAj5txMk293J4LOVyMXH1sdWYQP7ubh2U/Mg1T6xto37JITIUqZg+KrzisXZarvFjQ628F6WXVh9eeTRMj9HME+QaupxKs2wILeQVtyqfDujNqqxKwNmc9+z2h/cJgyXQlweAWrDb40jllsucGcnyjHbDm4fZmVrrEI/hbdzveA9jfe5gxlufjHFJ11pFCwSYDhg3EX9ST0+KIkqWj8FdgJ7wTvaHJEac6jxnpsFd5Es4vxarj+shwe0kx3mnTf0LPCE+xvu0Pr7MTEvcz7clB5/4unN6CO7hLiaAm7wYx/LjOHs9/8Cvp14x/0XkRdqBDpYawzgH1a2lETNUJch2c3QaIw6ivw43YKgFnP/QexyzlPCPpObXkBfTnWUr5dxHMsL8AURs+VFztyiz050RNOvg7Hr0PO2mnAOvte9+61OOlzUrD2gFXJ6yyo1CkMzKAZCi6YLC9gpwiaCAc="
+
+# Statut envoye a EemiCore (/eemi status) pour la boussole
+eemicore-id: casino

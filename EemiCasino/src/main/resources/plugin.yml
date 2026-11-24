@@ -1,0 +1,17 @@
+name: EemiCasino
+version: ${project.version}
+main: fr.eemicraft.casino.EemiCasino
+api-version: '1.21'
+softdepend: [PlaceholderAPI, EemiCore]
+description: Casino d'EEMICRAFT - machines a sous, blackjack, roulette, video poker, Texas Hold'em, jetons, jackpot
+
+commands:
+  casino:
+    description: Aller au casino et ouvrir son menu
+    usage: /casino [menu|caisse|boutique|bonus|top|gains|stats|quitter]
+    aliases: [jetons]
+
+permissions:
+  eemicasino.admin:
+    description: /casino admin ...
+    default: op

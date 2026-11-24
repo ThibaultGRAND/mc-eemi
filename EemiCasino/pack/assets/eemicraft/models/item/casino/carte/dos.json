@@ -1,0 +1,6 @@
+{
+  "parent": "eemicraft:item/casino/carte",
+  "textures": {
+    "face": "eemicraft:item/casino/carte/dos"
+  }
+}

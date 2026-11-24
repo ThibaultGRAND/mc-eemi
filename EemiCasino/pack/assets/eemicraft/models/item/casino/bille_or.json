@@ -1,0 +1,7 @@
+{
+  "parent": "eemicraft:item/paintball/bille",
+  "textures": {
+    "bille": "eemicraft:item/casino/bille_or",
+    "particle": "eemicraft:item/casino/bille_or"
+  }
+}

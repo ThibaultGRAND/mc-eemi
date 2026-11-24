@@ -1,0 +1,7 @@
+{
+  "parent": "eemicraft:item/casino/carte",
+  "textures": {
+    "face": "eemicraft:item/casino/carte/trefle_5",
+    "particle": "eemicraft:item/casino/carte/trefle_5"
+  }
+}

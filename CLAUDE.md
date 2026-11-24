@@ -1496,6 +1496,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - `EemiHideSeek/` 1.5.1 (base décompilée de la 1.2.4 de Thibault).
   - `EemiBuildBattle/` 1.1.0 (base décompilée de la 1.0.0 de Thibault ; arena.yml, gen_arena.py et datapack `eemibb/` de Thibault gardés).
   - `EemiBank/` 1.1.0 (absent du dépôt jusque-là).
+  - `EemiCasino/` 1.4.0 (absent du dépôt jusque-là).
 
 ## Retour au salon d'attente en fin de partie
 

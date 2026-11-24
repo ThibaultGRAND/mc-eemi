@@ -1,0 +1,41 @@
+{
+  "credit": "EEMICRAFT - EemiCasino",
+  "textures": {
+    "p": "eemicraft:item/casino/plinko",
+    "particle": "eemicraft:item/casino/plinko"
+  },
+  "elements": [
+    {
+      "from": [
+        1.6,
+        0,
+        7.96
+      ],
+      "to": [
+        14.4,
+        16,
+        8.04
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            1.6,
+            0,
+            14.4,
+            16
+          ],
+          "texture": "#p"
+        },
+        "north": {
+          "uv": [
+            1.6,
+            0,
+            14.4,
+            16
+          ],
+          "texture": "#p"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "credit": "EEMICRAFT - EemiCasino",
+  "textures": {
+    "roue": "eemicraft:item/casino/fortune",
+    "particle": "eemicraft:item/casino/fortune"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        7.96
+      ],
+      "to": [
+        16,
+        16,
+        8.04
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#roue"
+        },
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#roue"
+        }
+      }
+    },
+    {
+      "from": [
+        7.2,
+        7.2,
+        8.04
+      ],
+      "to": [
+        8.8,
+        8.8,
+        8.8
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            8.0,
+            0.1,
+            8.2,
+            0.3
+          ],
+          "texture": "#roue"
+        },
+        "east": {
+          "uv": [
+            8.0,
+            0.1,
+            8.2,
+            0.3
+          ],
+          "texture": "#roue"
+        },
+        "west": {
+          "uv": [
+            8.0,
+            0.1,
+            8.2,
+            0.3
+          ],
+          "texture": "#roue"
+        },
+        "up": {
+          "uv": [
+            8.0,
+            0.1,
+            8.2,
+            0.3
+          ],
+          "texture": "#roue"
+        },
+        "down": {
+          "uv": [
+            8.0,
+            0.1,
+            8.2,
+            0.3
+          ],
+          "texture": "#roue"
+        }
+      }
+    }
+  ]
+}

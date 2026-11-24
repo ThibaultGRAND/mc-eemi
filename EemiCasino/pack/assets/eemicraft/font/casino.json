@@ -1,0 +1,137 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "": -8,
+        "": -169
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_main.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_slots.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_blackjack.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_roulette.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_roulette_plein.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_videopoker.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_fortune.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_plinko.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_cashier.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_shop.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_top.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_pokerlist.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_poker_buyin.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "eemicraft:font/casino/bg_poker.png",
+      "ascent": 13,
+      "height": 256,
+      "chars": [
+        ""
+      ]
+    }
+  ]
+}
