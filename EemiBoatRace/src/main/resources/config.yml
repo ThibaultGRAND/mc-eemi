@@ -2,7 +2,7 @@
 # Circuit ferme en glace bleue construit par le plugin. Chaque joueur part dans un bateau depuis la
 # grille de depart (cages ouvertes au feu vert). Il faut passer tous les points de controle dans
 # l'ordre pour valider un tour (pas de raccourci). Le premier a finir les tours gagne ; les autres
-# ont alors finish-grace secondes pour terminer. Touche F ou objet "Revenir" = retour au dernier
+# terminent leur course (voir finish-grace et last-racer-grace). Touche F ou objet "Revenir" = retour au dernier
 # point de controle (aussi automatique hors piste, hors du bateau ou bloque).
 
 # Monde du jeu : cree par le plugin (monde vide) s'il n'existe pas.
@@ -57,8 +57,12 @@ laps: 3
 checkpoints: 16
 # Distance (blocs) entre la ligne et la premiere rangee de la grille.
 grid-first: 4.5
-# Temps laisse aux autres quand le premier a fini (secondes).
-finish-grace: 30
+# Temps laisse aux autres quand le premier a fini (secondes). 0 = aucun delai : chacun termine sa course
+# (la course s'arrete quand tout le monde a fini, ou au bout de max-time).
+finish-grace: 0
+# Quand il ne reste qu'UN pilote en course (les autres ont fini), il a ce temps pour terminer (0 = jamais de limite
+# avant max-time) : un pilote AFK ne bloque pas les autres.
+last-racer-grace: 60
 # Duree maximale de la course apres le feu vert (secondes).
 max-time: 600
 # Duree de l'ecran de fin avant le retour en salle d'attente.
@@ -84,3 +88,45 @@ boat-types: [OAK_BOAT, SPRUCE_BOAT, BIRCH_BOAT, JUNGLE_BOAT, ACACIA_BOAT, DARK_O
 # <monde>_2, <monde>_3... faites depuis le modele propre <monde>_modele (copie au demarrage et apres
 # /boatrace build). Absent = 3.
 max-instances: 3
+
+# ---------------------------------------------------------------- mode Mario Kart (2.3.0)
+# Boites ? sur le circuit : passer dedans donne un objet (roulette), clic droit ou Q pour l'utiliser.
+# Les objets sont tires selon la place : le premier a surtout des objets faibles, les derniers les forts.
+kart:
+  enabled: true
+  # Une rangee de boites tous les N blocs de circuit (entre min-boxes et max-boxes rangees).
+  box-spacing: 220
+  min-boxes: 3
+  max-boxes: 16
+  # Decalage lateral des boites d'une rangee (blocs, par rapport au milieu de la piste).
+  box-lateral: [-2.5, 0.0, 2.5]
+  box-scale: 2.5
+  # Secondes avant qu'une boite prise reapparaisse.
+  box-respawn: 3.0
+  # Duree de la roulette (secondes).
+  roulette: 1.5
+  # Durees des effets (secondes).
+  boost-time: 1.5
+  turbo-time: 10.0
+  star-time: 5.0
+  ink-time: 3.0
+  lightning-stun: 1.5
+  banana-stun: 1.25
+  snowball-stun: 1.25
+  banana-life: 60.0
+  # Vitesses (blocs par tick) : champignon, etoile, vitesse minimale du turbo, plafond.
+  boost-speed: 1.8
+  star-speed: 1.5
+  turbo-min-speed: 0.8
+  max-speed: 2.6
+  snowball-speed: 2.4
+  # Poids de tirage [premier, dernier] (interpoles selon la place ; l'eclair n'est jamais donne au 1er).
+  weights:
+    champignon: [30, 15]
+    banane: [35, 4]
+    neige: [25, 10]
+    encre: [5, 20]
+    # turbo maitrise retire du jeu (jamais tire, meme avec un poids)
+    turbo: [0, 0]
+    eclair: [0, 18]
+    etoile: [2, 12]

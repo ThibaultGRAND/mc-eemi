@@ -1491,6 +1491,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 - Jeux sans source chez Esteban (au 17/11) : SkyWars, HG, Bridge, Towers, TNT Tag, TNT Wars, BoS, Pitchout, UHC, Bingo, Block Party, Wizards, PvP Run, JumpLeague, Bow Spleef, Duels ; EemiCore 1.8+ (seule une 1.5.x décompilée), EemiVie, EemiNoel.
 - Sources d'Esteban versées dans le dépôt le 24/11/2026 depuis son ancien dossier local (pom = version installée ; l'ancienne source du dépôt reste dans l'historique git) :
   - `EemiMurder/` 1.13.0 (remplace la 1.6.0).
+  - `EemiBoatRace/` 2.4.0 (remplace la 2.2.0 ; il n'y a plus deux sources).
 
 ## Retour au salon d'attente en fin de partie
 

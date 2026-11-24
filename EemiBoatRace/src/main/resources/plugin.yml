@@ -1,14 +1,14 @@
 name: EemiBoatRace
-version: ${project.version}
+version: '${project.version}'
 main: fr.eemicraft.boatrace.EemiBoatRace
 api-version: '1.21'
 softdepend: [Multiverse-Core]
-description: Course de bateaux sur glace d'EEMICRAFT (3 tours, points de controle, record du circuit)
+description: Mario Barque, la course de bateaux facon Mario Kart d'EEMICRAFT (boites ?, objets, records)
 
 commands:
   boatrace:
-    description: Rejoindre ou gerer la course de bateaux
-    aliases: [course, br]
+    description: Rejoindre ou gerer Mario Barque
+    aliases: [course, br, mariobarque, kart]
     usage: /boatrace <join|leave|spectate [joueur]|record|start [n]|stop [n]|build|reload|parties>
 
 permissions:
