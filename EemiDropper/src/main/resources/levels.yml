@@ -1,0 +1,295 @@
+# EemiDropper - reserve de niveaux (releve hors ligne dans les fichiers des maps, 06/11/2026)
+#
+# Chaque niveau :
+#   world        : monde de la map (importe tel quel)
+#   name         : nom affiche
+#   difficulty   : 1 (facile) a 5 (tres dur) ; une partie tire ses niveaux au hasard puis les range par difficulte
+#   start        : [x, y, z, yaw, pitch] depart en haut du puits (sur la plateforme d'origine)
+#   bounds       : [x1, y1, z1, x2, y2, z2] boite du puits (murs compris) ; en sortir = echec
+#   finish       : liste de boites [x1, y1, z1, x2, y2, z2] de la zone d'arrivee au fond
+#   finish-blocks: blocs d'arrivee (dans la boite) ; eau par defaut. Les blocs « sur lesquels on se pose »
+#                  (slime_block, honey_block, hay_block) comptent sous les pieds, les autres dans le bloc des pieds.
+#   night-vision : vision nocturne pendant le niveau (niveaux sombres de la map d'origine)
+#   pumpkin      : citrouille sur la tete pendant le niveau (comme dans la map d'origine)
+#   enabled      : false pour retirer un niveau sans l'effacer
+#
+# worlds.<monde>.command-blocks : blocs de commande de la map d'origine. Ils sont deja retires des zips
+# prepares ; si un monde non nettoye est utilise, le plugin les remplace par de l'air au premier chargement.
+
+worlds:
+  dropper_dd1:
+    map: "Delightful Dropper (jwicker6_ et EdanEA, CurseForge 513428, 1.17.1)"
+    command-blocks: ["-1 9 10", "-1 9 8", "-3 9 10", "0 7 -1511", "40 4 -1512", "70 4 -1510", "108 4 -1511", "141 2 -1510", "143 3 -1511", "143 1 -1513", "143 4 -1511", "143 2 -1511", "145 1 -1511", "145 1 -1513", "145 1 -1514", "175 3 -1509", "206 3 -1508", "187 1 -1499", "248 4 -1485", "11 9 0", "4 9 8", "2 9 11", "2 9 13", "4 9 11", "2 9 15", "4 9 13", "4 9 15", "6 9 15"]
+  dropper_dd2:
+    map: "Delightful Dropper 2 (jwicker6_ et EdanEA, CurseForge 695728, 1.19.2)"
+    command-blocks: ["-2 60 -8", "-8 60 -6", "-8 60 -8", "2 60 -8", "0 60 -8", "10 60 -3", "4 60 -6", "2 60 -6", "4 60 -8", "2 60 5", "9 60 1", "27 99 5123", "27 99 5121", "27 99 5120", "19 102 5144", "33 105 5151", "33 105 5150", "23 143 5156", "33 105 5154", "33 105 5152", "15 98 5186", "15 98 5187", "15 98 5188", "15 98 5190", "23 98 5192", "23 98 5187", "21 98 5190", "23 98 5189", "21 98 5192", "21 98 5186", "17 98 5190", "19 98 5188", "21 98 5188", "19 98 5190", "18 98 5184", "17 98 5186", "20 98 5184", "17 98 5188", "21 98 5184", "19 98 5186", "19 102 5204", "30 99 5221", "31 99 5221", "28 99 5221", "17 98 5222", "21 101 5219", "32 99 5221", "21 103 5234", "17 103 5234", "19 103 5234", "20 103 5234", "34 103 5249", "4 102 5279", "18 198 5264", "17 198 5264", "27 99 5276", "27 99 5279", "27 99 5278", "27 99 5280", "20 100 5308", "20 100 5310", "25 103 5308", "20 100 5307", "20 100 5306", "26 100 5310", "23 100 5310", "26 100 5306", "26 100 5309", "26 100 5308", "23 100 5313", "23 100 5312", "19 201 10054", "19 201 10053", "11 100 5028", "11 100 5030", "11 100 5029", "11 100 5032", "19 103 5053", "27 100 5059", "25 100 5059", "23 100 5059", "24 100 5059", "34 103 5068", "11 99 5091", "9 99 5091", "12 99 5091", "13 99 5091", "27 99 5119", "19 102 5113", "19 104 5113", "2525 201 4994"]
+  dropper_dm3:
+    map: "Dropper Map! (Alloy119183, CurseForge 1037169, 1.21, en cours)"
+    command-blocks: ["14 -55 -475", "14 -55 -234", "8 -59 -3"]
+  # Ajoutes en 1.2.0 (17/11/2026). Zips prepares avec seulement les regions utiles, sans entites.
+  dropper_dc:
+    map: "Dropper Challenge (CurseForge 1668929, fichier 8738014, 1.21.1)"
+    command-blocks: ["-29 -59 -34", "-31 -59 -34", "-12 -60 -34", "33 -58 -56", "46 -58 -54", "32 -58 -56", "45 -58 -54", "54 -6 -35", "42 -6 -18", "42 -6 -23", "41 -6 -28", "84 -8 -18", "83 -8 -18", "84 -12 -23", "83 -12 -23", "83 -12 -28", "82 -12 -28", "159 -58 -23", "158 -58 -23", "9 -59 -7", "3 -60 -9", "43 -6 -3", "42 -6 -8", "42 -6 -13", "75 -6 -3", "74 -6 -3", "70 -16 -9", "70 -15 -8", "79 -11 -13", "78 -5 -8", "77 -5 -8", "80 -11 -13", "90 -60 -9", "88 -60 -8", "111 13 -3", "105 42 -7", "16 -58 7", "17 -58 7", "58 -6 3", "54 -6 11", "192 -58 19", "193 -58 19"]
+  dropper_jad:
+    map: "just another dropper (BatEagles, CurseForge 250963, fichier 2331553, 1.10.2)"
+    command-blocks: ["-160 52 -850", "-160 52 -852", "-160 52 -842", "-160 52 -840", "-160 52 -848", "-155 52 -830", "-156 52 -830", "-157 52 -830", "-156 52 -831", "-156 52 -826", "-156 52 -818", "-156 52 -810", "-156 52 -814", "-157 52 -802", "-156 52 -802", "-155 52 -802", "-156 52 -806", "-142 45 -801", "-142 45 -805", "-142 45 -803", "-142 45 -807", "-150 52 -799", "-149 58 -798", "-151 52 -792", "-149 58 -786", "-149 58 -792", "-150 52 -785", "-135 44 -793", "-133 44 -793", "-135 44 -795", "-136 52 -785", "-135 44 -789", "-143 58 -786", "-137 58 -792", "-136 52 -799", "-143 50 -792", "-135 52 -792", "-137 58 -786", "-143 52 -800", "-137 58 -798", "-143 58 -798", "-133 43 -789", "-133 53 -794", "-133 53 -796", "-133 53 -795", "-143 52 -784", "-119 3 -782", "-119 3 -780", "-118 3 -780", "-172 254 -751", "-168 254 -751"]
+    # panneaux « clic = commande » (tp @a, give...) : retires aussi
+    click-signs: ["-101 3 -877", "-100 3 -877", "-149 253 -840", "-151 253 -840", "-185 3 -802", "-184 3 -802", "-87 3 -806", "-88 3 -806", "-149 54 -795", "-146 54 -798", "-146 54 -786", "-149 54 -789", "-137 54 -795", "-140 54 -798", "-140 54 -786", "-137 54 -789", "-144 45 -798", "-142 45 -798", "-118 3 -785", "-117 3 -785", "-169 3 -754", "-168 3 -754", "-125 3 -756", "-126 3 -756", "-85 3 -707", "-84 3 -707"]
+
+levels:
+  # ---------------------------------------------------------------- Delightful Dropper (8 niveaux)
+  dd1_mine:
+    world: dropper_dd1
+    name: "La mine"
+    difficulty: 1
+    start: [0.5, 136, -1499.5, 180, 0]
+    bounds: [-10, 0, -1510, 10, 141, -1490]
+    finish:
+      - [-1, 3, -1502, 2, 5, -1498]
+  dd1_glowstone:
+    world: dropper_dd1
+    name: "Grotte de glowstone"
+    difficulty: 2
+    start: [39.5, 136, -1500.5, 180, 0]
+    bounds: [29, 0, -1511, 49, 141, -1491]
+    finish:
+      - [31, 2, -1509, 32, 2, -1508]
+  dd1_nuit:
+    world: dropper_dd1
+    name: "Nuit noire"
+    difficulty: 3
+    start: [70.5, 136, -1498.5, 180, 0]
+    bounds: [60, 0, -1509, 80, 141, -1489]
+    finish:
+      - [75, 2, -1505, 77, 2, -1503]
+  dd1_nuages:
+    world: dropper_dd1
+    name: "Au-dessus des nuages"
+    difficulty: 2
+    start: [108.5, 136, -1499.5, -90, 0]
+    bounds: [98, 0, -1510, 118, 141, -1490]
+    finish:
+      - [106, 2, -1496, 113, 2, -1494]
+  dd1_code:
+    world: dropper_dd1
+    name: "Le code"
+    difficulty: 3
+    start: [143.5, 186, -1498.5, 180, 0]
+    bounds: [133, 0, -1509, 153, 191, -1489]
+    finish:
+      - [142, 1, -1500, 144, 1, -1498]
+    night-vision: true
+  dd1_damier:
+    world: dropper_dd1
+    name: "Damier"
+    difficulty: 3
+    start: [175.5, 157, -1497.5, -90, 0]
+    bounds: [165, 0, -1508, 185, 162, -1488]
+    finish:
+      - [177, 1, -1499, 179, 1, -1497]
+    night-vision: true
+  dd1_arcenciel:
+    world: dropper_dd1
+    name: "Arc-en-ciel"
+    difficulty: 4
+    start: [206.5, 136, -1496.5, -90, 0]
+    bounds: [196, 0, -1507, 216, 141, -1487]
+    finish:
+      - [210, 2, -1502, 212, 2, -1500]
+  dd1_nether:
+    world: dropper_dd1
+    name: "Le Nether"
+    difficulty: 5
+    start: [248.5, 136, -1495.5, -90, 0]
+    bounds: [238, 0, -1506, 258, 141, -1486]
+    finish:
+      - [248, 2, -1496, 250, 2, -1493]
+
+  # ---------------------------------------------------------------- Delightful Dropper 2 (9 niveaux)
+  # Le niveau 6 d'origine (a l'envers, en levitation, avec un code a trouver) n'est pas repris.
+  # Cette map n'arrive pas toujours dans l'eau : on garde le bloc d'arrivee d'origine.
+  dd2_jungle:
+    world: dropper_dd2
+    name: "La jungle"
+    difficulty: 2
+    start: [19.5, 201, 5038.5, -90, 0]
+    bounds: [5, 99, 5024, 33, 206, 5052]
+    finish:
+      - [12, 101, 5027, 32, 118, 5042]
+    finish-blocks: [vine]
+  dd2_ocean:
+    world: dropper_dd2
+    name: "Fond marin"
+    difficulty: 4
+    start: [19.5, 201, 5068.5, -90, 0]
+    bounds: [5, 99, 5054, 33, 206, 5082]
+    finish:
+      - [21, 102, 5068, 21, 104, 5068]
+    finish-blocks: [cobweb]
+  dd2_noiretblanc:
+    world: dropper_dd2
+    name: "Noir et blanc"
+    difficulty: 2
+    start: [19.5, 201, 5098.5, -90, 0]
+    bounds: [5, 99, 5084, 33, 206, 5112]
+    finish:
+      - [22, 101, 5090, 23, 102, 5101]
+    finish-blocks: [slime_block]
+  dd2_enfer:
+    world: dropper_dd2
+    name: "L'enfer"
+    difficulty: 4
+    start: [19.5, 201, 5128.5, -90, 0]
+    bounds: [5, 99, 5114, 33, 206, 5142]
+    finish:
+      - [16, 101, 5123, 26, 115, 5137]
+    finish-blocks: [twisting_vines, twisting_vines_plant]
+  dd2_espace:
+    world: dropper_dd2
+    name: "L'espace"
+    difficulty: 3
+    start: [19.5, 201, 5158.5, -90, 0]
+    bounds: [5, 99, 5144, 33, 206, 5172]
+    finish:
+      - [13, 100, 5165, 16, 101, 5168]
+  dd2_hantee:
+    world: dropper_dd2
+    name: "Maison hantee"
+    difficulty: 4
+    start: [19.5, 201, 5219.5, 90, 0]
+    bounds: [5, 99, 5205, 33, 206, 5233]
+    finish:
+      - [8, 101, 5208, 29, 105, 5228]
+    finish-blocks: [cobweb]
+    pumpkin: true
+  dd2_ruche:
+    world: dropper_dd2
+    name: "La ruche"
+    difficulty: 3
+    start: [19.5, 201, 5249.5, 90, 0]
+    bounds: [5, 99, 5235, 33, 206, 5263]
+    finish:
+      - [9, 101, 5256, 13, 111, 5258]
+    finish-blocks: [honey_block]
+  dd2_route:
+    world: dropper_dd2
+    name: "Route verticale"
+    difficulty: 3
+    start: [19.5, 201, 5279.5, -90, 0]
+    bounds: [5, 99, 5265, 33, 206, 5293]
+    finish:
+      - [9, 100, 5274, 23, 113, 5285]
+    night-vision: true
+  dd2_village:
+    world: dropper_dd2
+    name: "Le village"
+    difficulty: 5
+    start: [19.5, 201, 5309.5, -90, 0]
+    bounds: [5, 99, 5295, 33, 206, 5323]
+    finish:
+      - [13, 101, 5319, 14, 102, 5320]
+    finish-blocks: [slime_block]
+
+  # ---------------------------------------------------------------- Dropper Map! (2 niveaux)
+  dm3_tube:
+    world: dropper_dm3
+    name: "Le tube"
+    difficulty: 1
+    start: [14.5, 102, -233.5, 180, 0]
+    bounds: [9, -56, -249, 19, 106, -232]
+    finish:
+      - [12, -54, -245, 16, -54, -241]
+  dm3_lignes:
+    world: dropper_dm3
+    name: "Lignes de danger"
+    difficulty: 2
+    start: [14.5, 101, -474.5, 180, 0]
+    bounds: [9, -56, -490, 19, 106, -473]
+    finish:
+      - [12, -54, -486, 16, -54, -482]
+
+  # ---------------------------------------------------------------- Dropper Challenge (6 niveaux, ajoutes en 1.2.0)
+  # Releve automatique (dropscan.py) : trou depuis le depart, puits = air ferme sous le trou, arrivee au fond.
+  # Le niveau 7 d'origine (portail de l'End a l'arrivee) n'est pas repris.
+  dc_laine:
+    world: dropper_dc
+    name: "Zigzag de laine"
+    difficulty: 3
+    start: [-30.5, 11, -47.5, 0, 0]
+    bounds: [-38, -61, -51, -23, 12, -32]
+    finish:
+      - [-31, -61, -40, -30, -61, -39]
+    finish-blocks: [slime_block]
+  dc_glowstone:
+    world: dropper_dc
+    name: "Puits de glowstone"
+    difficulty: 1
+    start: [18.5, 2, 7.5, 90, 0]
+    bounds: [0, -60, 0, 21, 4, 15]
+    finish:
+      - [3, -60, 3, 13, -60, 12]
+  dc_cerisier:
+    world: dropper_dc
+    name: "Jardin des cerisiers"
+    difficulty: 3
+    start: [56.5, -17, -50.5, 180, 0]
+    bounds: [47, -60, -64, 64, -14, -48]
+    finish:
+      - [55, -60, -57, 56, -60, -56]
+  dc_dimensions:
+    world: dropper_dc
+    name: "Les trois dimensions"
+    difficulty: 4
+    start: [14.5, 53, -54.5, -90, 0]
+    bounds: [12, -60, -65, 31, 54, -47]
+    finish:
+      - [18, -56, -62, 29, -56, -50]
+    finish-blocks: [slime_block]
+  dc_cabane:
+    world: dropper_dc
+    name: "La cabane"
+    difficulty: 2
+    start: [168.5, -12, -19.5, 180, 0]
+    bounds: [160, -60, -32, 175, -11, -17]
+    finish:
+      - [162, -59, -31, 174, -59, -20]
+    finish-blocks: [cobweb]
+  dc_ames:
+    world: dropper_dc
+    name: "Vallee des ames"
+    difficulty: 2
+    start: [184.5, -5, 18.5, 0, 0]
+    bounds: [176, -60, 16, 191, -4, 31]
+    finish:
+      - [177, -59, 17, 190, -56, 30]
+    finish-blocks: [cobweb]
+
+  # ---------------------------------------------------------------- just another dropper (3 niveaux, ajoutes en 1.2.0)
+  # Puits de 250 blocs. Niveaux 1 et 5 d'origine vides, 4 a l'elytre, 6 a barrieres invisibles : pas repris.
+  jad_richesse:
+    world: dropper_jad
+    name: "L'homme riche"
+    difficulty: 3
+    start: [-124.5, 253, -761.5, 0, 0]
+    bounds: [-133, 1, -770, -118, 256, -755]
+    finish:
+      - [-126, 2, -763, -125, 2, -762]
+    night-vision: true
+  jad_nether:
+    world: dropper_jad
+    name: "Chute au Nether"
+    difficulty: 3
+    start: [-87.5, 253, -812.5, 0, 0]
+    bounds: [-95, 1, -820, -80, 256, -805]
+    finish:
+      - [-88, 2, -813, -87, 2, -812]
+    night-vision: true
+  jad_fin:
+    world: dropper_jad
+    name: "La fin"
+    difficulty: 4
+    start: [-100.5, 254, -870.5, 0, 0]
+    bounds: [-108, 1, -878, -93, 257, -863]
+    finish:
+      - [-101, 2, -871, -100, 2, -870]
+    night-vision: true

@@ -1,0 +1,36 @@
+# EemiDropper - Dropper facon Hypixel
+# On saute dans un puits plein d'obstacles : il faut tomber dans la zone d'arrivee du fond
+# (eau, ou le bloc d'arrivee de la map d'origine : toile, slime, lianes, miel).
+# Toucher autre chose (se poser sur un bloc, lave, liane d'un mur) = retour au depart du niveau.
+# Une partie = 5 niveaux tires au hasard dans la reserve (levels.yml), du plus facile au plus dur.
+# Les niveaux sont dans levels.yml (dossier du plugin) : ils viennent de maps existantes,
+# importees chacune comme un monde (dropper_dd1, dropper_dd2, dropper_dm3).
+
+# Monde vide de la salle d'attente (cree par le plugin)
+world: dropper
+min-players: 2
+max-players: 16
+# Decompte (secondes) une fois le minimum atteint ; raccourci a 5 s si la partie est pleine
+countdown: 20
+# Nombre de niveaux par partie
+levels-per-game: 5
+# Temps maximum d'une partie (secondes), barre de boss
+max-time: 360
+# Joueurs immobiles au depart du niveau 1 (secondes) : tout le monde saute en meme temps
+start-freeze: 3
+# Un essai qui dure plus longtemps (secondes, depuis qu'on a quitte la plateforme) = echec
+attempt-time: 45
+# Si personne n'a fini les 5 niveaux au temps max : le premier du classement gagne quand meme
+# (s'il a fini au moins un niveau)
+win-without-finish: true
+# Mondes depuis lesquels on peut rejoindre (vide = partout)
+join-from: [lobby]
+# Spawn du hub (fin de partie, sortie)
+hub:
+  world: lobby
+  x: 722.5
+  y: 51
+  z: 650.5
+  yaw: 90
+  pitch: 0
+eemicore-id: dropper

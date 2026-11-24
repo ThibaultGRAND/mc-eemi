@@ -1,0 +1,17 @@
+name: EemiDropper
+version: ${project.version}
+main: fr.eemicraft.dropper.EemiDropper
+api-version: '1.21'
+softdepend: [EemiCore, Multiverse-Core]
+description: Dropper - 5 puits a la suite, on tombe dans l'eau sans rien toucher
+
+commands:
+  dropper:
+    description: Dropper
+    usage: /dropper [join|leave|spectate|niveaux|records]
+    aliases: [eemidropper]
+
+permissions:
+  eemidropper.admin:
+    description: /dropper start|stop|build|reload|info
+    default: op
