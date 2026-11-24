@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "eemicraft:squid_joueur_13"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "eemicraft:squid_joueur"
+      }
+    ]
+  }
+}

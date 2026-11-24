@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "eemicraft:squid_garde_carre"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "eemicraft:squid_garde"
+      }
+    ]
+  }
+}

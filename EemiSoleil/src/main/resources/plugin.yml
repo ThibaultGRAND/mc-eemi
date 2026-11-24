@@ -1,0 +1,17 @@
+name: EemiSoleil
+version: ${project.version}
+main: fr.eemicraft.soleil.EemiSoleil
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Squid Game - les epreuves de la saison 1 dans l'ordre, puis la finale du calamar en 1 contre 1
+
+commands:
+  soleil:
+    description: Squid Game
+    usage: /soleil [join|leave|spectate|programme]
+    aliases: [123soleil, squidgame, squid]
+
+permissions:
+  eemisoleil.admin:
+    description: /soleil start|test|passer|stop|build|reload|info
+    default: op
