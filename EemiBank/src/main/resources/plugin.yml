@@ -1,0 +1,16 @@
+name: EemiBank
+version: '${project.version}'
+main: fr.eemicraft.bank.EemiBank
+api-version: '1.21'
+description: Banque du skyblock (argent protege, interets) et perte de 50 % du portefeuille a la mort dans le vide.
+depend: [Vault]
+softdepend: [PlaceholderAPI]
+commands:
+  bank:
+    description: Ouvre ta banque.
+    usage: /bank [deposer|retirer <montant|tout|moitie>]
+    aliases: [banque]
+permissions:
+  eemibank.admin:
+    description: Voir et modifier la banque des joueurs, recharger.
+    default: op

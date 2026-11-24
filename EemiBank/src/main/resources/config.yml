@@ -1,0 +1,38 @@
+# EemiBank - deux monnaies au skyblock :
+#  - le portefeuille (l'argent de Vault / S-Economy, celui du bazar et de l'hotel des ventes),
+#    dont on perd une partie en mourant dans le vide ;
+#  - la banque, ou l'argent est a l'abri et rapporte de petits interets.
+# Texte sans accents, comme les autres plugins maison.
+
+# Mondes du skyblock : stuff garde et penalite sur le portefeuille a la mort.
+# Pas le OneBlock : on y perd son stuff normalement et il n'y a rien a acheter.
+worlds:
+  - bskyblock_world
+  - bskyblock_world_nether
+  - bskyblock_world_the_end
+
+death-penalty:
+  enabled: true
+  # Part du portefeuille perdue a la mort (en %).
+  percent: 50
+  # true = seulement une mort dans le vide ; false = toute mort dans ces mondes.
+  only-void: true
+
+# Mort dans ces mondes : on garde son inventaire et son XP (le stuff ne tombe pas).
+keep-inventory:
+  enabled: true
+  # false = seulement une mort dans le vide ; true = toute mort dans ces mondes.
+  all-deaths: false
+
+interest:
+  enabled: true
+  # Interets verses sur l'argent en banque (en %), une fois par periode.
+  percent: 2.0
+  # Duree d'une periode (heures, temps reel). Verse a la connexion ou en jeu des que la periode est passee.
+  # Une seule periode est versee a la fois (pas de cumul apres une longue absence).
+  every-hours: 24
+  # Plafond d'un versement (coins).
+  max-per-payout: 10000
+
+# Nom de la monnaie dans les messages.
+currency: coins
