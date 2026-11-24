@@ -1,0 +1,78 @@
+# EemiPaintball - Paintball, Rouge contre Bleu
+# Match a mort par equipe sur un terrain de speedball construit par le plugin.
+# Une bille adverse = eliminé. Premiere equipe a score-limit eliminations, sinon la plus haute a la fin du temps.
+
+world: paintball
+min-players: 2
+max-players: 16
+# Decompte (secondes) une fois le minimum atteint
+countdown: 20
+# Decompte raccourci (secondes) quand la partie est pleine
+full-countdown: 5
+# Eliminations pour gagner
+score-limit: 30
+# Duree du match (secondes)
+match-time: 360
+# Secondes en spectateur apres une elimination avant de reapparaitre
+respawn-delay: 3
+# Invincibilite apres la reapparition (secondes) ; tirer la coupe
+spawn-protection: 3
+
+# --- Marqueur
+# Billes par chargeur
+magazine: 20
+# Duree de la recharge (secondes)
+reload-time: 2.0
+# Delai minimum entre deux tirs (millisecondes) : 250 = 4 tirs par seconde
+fire-delay-ms: 250
+# Vitesse des billes (blocs par tick ; une boule de neige normale = 1.5)
+ball-speed: 2.6
+# Dispersion (0 = tir parfait)
+spread: 0.03
+# Duree de vie d'une bille (ticks) avant d'etre retiree
+ball-life: 60
+# Taches autour de l'impact : chance de peindre chaque case voisine (0 a 1)
+splat-chance: 0.45
+
+# --- Grenade de peinture
+# Grenades au debut de chaque vie
+grenades-per-life: 1
+# Delai avant l'explosion (ticks, 30 = 1,5 s)
+grenade-fuse: 30
+# Rayon de l'eclaboussure (blocs)
+grenade-radius: 3
+# Force du lancer
+grenade-throw: 0.95
+
+# Serie : toutes les N eliminations sans mourir, annonce + 1 grenade
+streak: 3
+
+# Joueur arrive en cours de match : recompenses EemiCore seulement s'il a joue au moins N secondes
+reward-min-seconds: 60
+
+# Pieces EemiCore par elimination (0 = aucune). Pas de recompense "kill" complete d'EemiCore
+# (3 pieces + 10 xp), trop genereuse avec le nombre d'eliminations d'un match.
+kill-coins: 1
+
+# Grande map « Stade de la foret » (collee par le plugin loin du terrain de speedball, x 1000).
+# Jouee seulement quand la partie compte au moins min-players joueurs (8 = 4 contre 4), sinon le terrain de speedball.
+big-map:
+  enabled: true
+  min-players: 8
+
+# Petites maps (jouees en dessous de big-map.min-players), tirees au hasard a chaque partie, jamais deux fois de suite,
+# posees au centre au lancement de la partie si ce n'est pas celle qui est deja la.
+# Vide = toutes : speedball, chantier, western, tournoi ("neige" retiree en 1.5.0, "scenario" remplacee par "tournoi" en 1.6.0 : ignorees si elles sont listees)
+small-maps: []
+
+# Mondes depuis lesquels on peut rejoindre (vide = partout)
+join-from: [lobby]
+# Spawn du hub (retour en fin de partie)
+hub:
+  world: lobby
+  x: 722.5
+  y: 51
+  z: 650.5
+  yaw: 90
+  pitch: 0
+eemicore-id: paintball

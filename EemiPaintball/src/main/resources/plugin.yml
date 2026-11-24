@@ -1,0 +1,17 @@
+name: EemiPaintball
+version: ${project.version}
+main: fr.eemicraft.paintball.EemiPaintball
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Paintball - Rouge contre Bleu sur un terrain de speedball
+
+commands:
+  paintball:
+    description: Paintball
+    usage: /paintball [join|leave|spectate]
+    aliases: [pb]
+
+permissions:
+  eemipaintball.admin:
+    description: /paintball start|stop|build|reload|info
+    default: op
