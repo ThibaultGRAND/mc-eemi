@@ -1,0 +1,14 @@
+name: EemiTresor
+version: '${project.version}'
+main: fr.eemicraft.tresor.EemiTresor
+api-version: '1.21'
+description: Coffre au tresor cache au hasard dans le lobby a intervalle regulier.
+softdepend: [EemiCore]
+commands:
+  tresor:
+    description: Coffre au tresor du lobby.
+    usage: /tresor [spawn|remove|info|reload]
+permissions:
+  eemitresor.admin:
+    description: Faire apparaitre / retirer le coffre, voir sa position.
+    default: op

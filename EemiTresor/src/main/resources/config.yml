@@ -1,0 +1,47 @@
+# EemiTresor - un coffre au tresor apparait au hasard dans le lobby, cache mais accessible.
+# Le premier qui l'ouvre gagne la recompense. Texte sans accents, comme les autres plugins maison.
+
+world: lobby
+# Zone de recherche : disque autour du centre du lobby (ile centree vers 663 650).
+center-x: 663
+center-z: 650
+radius: 130
+min-y: 40
+max-y: 120
+# Distance minimale au spawn DeluxeHub et aux points ci-dessous (trop visible sinon).
+spawn-x: 722
+spawn-z: 650
+min-distance-from-spawn: 20
+
+# Toutes les combien de minutes un coffre apparait (l'ancien, s'il n'a pas ete trouve, disparait).
+interval-minutes: 120
+# Premier coffre apres le demarrage (minutes).
+first-delay-minutes: 10
+# Il faut au moins ce nombre de joueurs dans le lobby pour qu'un coffre apparaisse (sinon on reessaie 5 min plus tard).
+min-players: 1
+# Indice (direction depuis le spawn) donne apres ce nombre de minutes si personne ne l'a trouve (0 = jamais).
+hint-after-minutes: 20
+
+# Cachette : le coffre doit avoir un toit (feuilles, plafond...) au-dessus de lui dans cette hauteur,
+# et etre relie a l'air libre par un chemin praticable de moins de "max-path" cases.
+cover-height: 12
+max-path: 60
+# Le coffre est pose SEULEMENT au sol : sur un de ces blocs naturels (jamais sur un toit ou un plancher).
+ground-blocks: [grass_block, dirt, coarse_dirt, rooted_dirt, podzol, mycelium, moss_block, dirt_path, sand, red_sand, gravel, clay, mud, snow_block]
+
+# Son quand un joueur s'approche du coffre (plus fort et plus aigu en se rapprochant).
+sound:
+  radius: 10
+  interval-ticks: 20
+
+# Recompense (commandes console, %player% = pseudo). EemiCore : xp et pieces du lobby.
+rewards:
+  - "eemi give %player% xp 300"
+  - "eemi give %player% coins 100"
+reward-text: "300 XP et 100 pieces"
+
+messages:
+  spawned: "&6&l[Tresor] &eUn coffre au tresor est apparu quelque part dans le lobby ! &7Le premier qui le trouve gagne &f%reward%&7."
+  hint: "&6&l[Tresor] &7Toujours pas trouve... Il serait plutot du cote &e%direction% &7du lobby."
+  found: "&6&l[Tresor] &e%player% &7a trouve le coffre au tresor et gagne &f%reward%&7 !"
+  expired: "&6&l[Tresor] &7Personne n'a trouve le coffre... il a disparu."
