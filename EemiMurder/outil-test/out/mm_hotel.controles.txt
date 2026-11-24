@@ -1,0 +1,2 @@
+vitre -28,67,-25 minecraft:glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 8,67,21 minecraft:glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien

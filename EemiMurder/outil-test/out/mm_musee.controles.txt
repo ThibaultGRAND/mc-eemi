@@ -1,0 +1,15 @@
+vitre 19,65,10 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 19,65,12 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 20,65,49 minecraft:glass_pane[north=true,east=true,south=true,west=false] : rangee de 5 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre 21,65,8 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 21,65,14 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 23,65,8 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 23,65,14 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 25,65,10 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 25,65,12 minecraft:red_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+trappe -24,73,-24 minecraft:dark_oak_trapdoor[facing=south,half=bottom,open=true] : panneau plaque contre minecraft:glass_pane[north=false,east=true,south=false,west=true] (cote north), en face : minecraft:air
+trappe -24,74,-24 minecraft:dark_oak_trapdoor[facing=south,half=bottom,open=true] : panneau plaque contre minecraft:glass_pane[north=false,east=true,south=false,west=true] (cote north), en face : minecraft:air
+info-adosse -22,67,-12 minecraft:sandstone_stairs[facing=east,half=bottom,shape=straight] contre minecraft:cut_sandstone / minecraft:gold_block
+info-adosse -21,67,-13 minecraft:sandstone_stairs[facing=south,half=bottom,shape=straight] contre minecraft:cut_sandstone / minecraft:gold_block
+info-adosse -21,67,-11 minecraft:sandstone_stairs[facing=north,half=bottom,shape=straight] contre minecraft:cut_sandstone / minecraft:gold_block
+info-adosse -20,67,-12 minecraft:sandstone_stairs[facing=west,half=bottom,shape=straight] contre minecraft:cut_sandstone / minecraft:gold_block

@@ -1,0 +1,3 @@
+vitre 29,60,-2 minecraft:glass_pane[north=false,east=false,south=true,west=false] : rangee de 3 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+info-fausse-porte 39,64,2 minecraft:iron_door[facing=north,half=lower,hinge=left,open=false]
+info-fausse-porte 47,64,-2 minecraft:iron_door[facing=south,half=lower,hinge=left,open=false]

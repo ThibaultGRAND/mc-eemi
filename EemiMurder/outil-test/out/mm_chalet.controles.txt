@@ -1,0 +1,6 @@
+vitre -22,66,-25 minecraft:glass_pane[north=false,east=true,south=true,west=false] : rangee de 3 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre -22,66,-23 minecraft:glass_pane[north=true,east=true,south=false,west=false] : rangee de 3 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre 8,66,-14 minecraft:glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 13,66,-14 minecraft:glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 18,66,-17 minecraft:glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 21,66,-17 minecraft:glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien

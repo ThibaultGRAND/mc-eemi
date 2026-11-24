@@ -1,0 +1,83 @@
+vitre -39,65,37 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -39,65,41 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -38,65,35 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -38,65,43 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -37,65,34 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -37,65,44 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -36,65,33 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -36,65,45 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -34,65,46 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -30,65,32 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -30,65,46 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -28,65,33 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -28,65,45 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -27,65,34 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -27,65,44 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -26,65,35 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -26,65,43 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -25,65,37 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -25,65,41 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -4,66,6 minecraft:white_stained_glass_pane[north=false,east=true,south=false,west=false] : rangee de 2 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre -4,66,10 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -3,66,5 minecraft:white_stained_glass_pane[north=false,east=true,south=true,west=false] : rangee de 2 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre -3,66,11 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre -2,66,4 minecraft:white_stained_glass_pane[north=false,east=false,south=true,west=false] : rangee de 2 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre -2,66,12 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 2,66,4 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 2,66,12 minecraft:white_stained_glass_pane[north=false,east=true,south=false,west=false] : rangee de 2 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre 3,66,5 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 3,66,11 minecraft:white_stained_glass_pane[north=false,east=true,south=true,west=false] : rangee de 2 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+vitre 4,66,6 minecraft:white_stained_glass_pane[north=false,east=false,south=false,west=false] : vitre isolee touchant rien
+vitre 4,66,10 minecraft:white_stained_glass_pane[north=false,east=false,south=true,west=false] : rangee de 2 vitre(s) qui ne tient a aucun mur (bouts : minecraft:air / minecraft:air)
+info-adosse -12,68,-28 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -12,68,-27 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -12,68,-23 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:red_wool
+info-adosse -12,68,-22 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -11,68,-30 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -11,68,-29 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -11,68,-21 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -11,68,-20 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -10,68,-32 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -10,68,-31 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -10,68,-19 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -10,68,-18 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -9,68,-33 minecraft:dark_oak_stairs[facing=west,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -9,68,-17 minecraft:red_nether_brick_stairs[facing=west,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -7,68,-35 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -7,68,-15 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -6,68,-35 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -6,68,-15 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -5,68,-36 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -5,68,-14 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -4,68,-36 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -4,68,-14 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -3,68,-37 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse -3,68,-13 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse -2,68,-37 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:red_wool
+info-adosse -2,68,-13 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 2,68,-37 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 2,68,-13 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:red_wool
+info-adosse 3,68,-37 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 3,68,-13 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 4,68,-36 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 4,68,-14 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 5,68,-36 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 5,68,-14 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 6,68,-35 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 6,68,-15 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 7,68,-35 minecraft:red_nether_brick_stairs[facing=north,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 7,68,-15 minecraft:red_nether_brick_stairs[facing=south,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 9,68,-33 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 9,68,-17 minecraft:dark_oak_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 10,68,-32 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 10,68,-31 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 10,68,-19 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 10,68,-18 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 11,68,-30 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 11,68,-29 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool
+info-adosse 11,68,-21 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 11,68,-20 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 12,68,-28 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 12,68,-27 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:red_wool
+info-adosse 12,68,-23 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:red_wool / minecraft:red_wool
+info-adosse 12,68,-22 minecraft:red_nether_brick_stairs[facing=east,half=bottom,shape=straight] contre minecraft:white_wool / minecraft:white_wool

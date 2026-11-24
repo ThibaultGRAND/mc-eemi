@@ -3,12 +3,12 @@ version: ${project.version}
 main: fr.eemicraft.murder.EemiMurder
 api-version: '1.21'
 softdepend: [Multiverse-Core]
-description: Murder Mystery d'EEMICRAFT (lobby d'attente, plusieurs maps, or, arc du detective)
+description: Murder Mystery d'EEMICRAFT (lobby d'attente, plusieurs maps dont le Manoir-bibliotheque, la Fete foraine, le Grand Musee, le Paquebot, le Grand Hotel et le Chalet de montagne construits par le plugin, or, arc du detective)
 
 commands:
   murder:
     description: Rejoindre le Murder Mystery
-    usage: /murder <join|leave|maps|spectate [joueur]>
+    usage: '/murder <join|leave|maps|spectate [joueur]> (admin - buildmap bibliotheque|fete|musee|paquebot|hotel|chalet)'
     aliases: [mm]
 
 permissions:

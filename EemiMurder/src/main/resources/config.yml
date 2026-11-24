@@ -15,6 +15,12 @@ countdown: 30
 full-countdown: 10
 # Duree d'une partie (secondes) : a la fin du temps, les innocents gagnent.
 game-time: 270
+# Petites maps (cle size: small d'une map ; le Grand Hotel et le Chalet de montagne en sont) : avec au plus small-map-max-players inscrits,
+# seules les petites maps sont tirees, au-dessus seulement les grandes (repli sur toutes s'il n'y en a aucune).
+# Les petites maps passent en alternance (jamais deux fois la meme de suite).
+small-map-max-players: 5
+# Duree d'une partie sur une petite map (secondes) ; absente = game-time.
+# small-map-game-time: 360
 # Le meurtrier recoit son epee apres ce delai.
 sword-delay: 10
 # Delai minimum entre deux kills du meurtrier au couteau (secondes) : pendant ce delai le coup ne fait rien.
