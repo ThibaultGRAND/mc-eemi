@@ -1,0 +1,3 @@
+# EemiReparer : a la connexion et a chaque arrivee dans un de ces mondes, un joueur en survie/aventure
+# qui n'est pas en vanish perd l'invulnerabilite qu'un autre plugin lui aurait laissee.
+hub-worlds: [lobby]

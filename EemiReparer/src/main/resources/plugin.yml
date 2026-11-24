@@ -1,0 +1,14 @@
+name: EemiReparer
+version: '${project.version}'
+main: fr.eemicraft.reparer.EemiReparer
+api-version: '26.3'
+softdepend: [EemiAdmin]
+description: Retire l'invulnerabilite laissee sur un joueur par un autre plugin.
+commands:
+  reparer:
+    description: Retire l'invulnerabilite d'un joueur
+    usage: /reparer <joueur>
+    permission: eemireparer.admin
+permissions:
+  eemireparer.admin:
+    default: op
