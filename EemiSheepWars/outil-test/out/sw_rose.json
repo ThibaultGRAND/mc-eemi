@@ -1,0 +1,260 @@
+{
+ "id": "rose",
+ "nom": "Désert rose",
+ "dims_fichier": [
+  68,
+  55,
+  103
+ ],
+ "blocs_total": 17010,
+ "types": 49,
+ "types_>=0.1%": 35,
+ "blocs_sur_x0": 0,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 318,
+ "blocs_bande_|x|<=5": 305,
+ "rouge": {
+  "blocs": 8341,
+  "x": [
+   -32,
+   -2
+  ],
+  "y": [
+   0,
+   34
+  ],
+  "z": [
+   -45,
+   39
+  ],
+  "longueur_x": 31,
+  "largeur_z": 85,
+  "bord_interieur_x": -2,
+  "surface_jouable_colonnes": 1518,
+  "cases_debout": 2168,
+  "niveaux_y_>=3%": [
+   10,
+   11,
+   12,
+   13,
+   14,
+   16,
+   17,
+   19,
+   20,
+   21,
+   22,
+   23
+  ],
+  "y_debout": [
+   1,
+   35
+  ]
+ },
+ "bleu": {
+  "blocs": 8351,
+  "x": [
+   1,
+   31
+  ],
+  "y": [
+   0,
+   34
+  ],
+  "z": [
+   -43,
+   41
+  ],
+  "longueur_x": 31,
+  "largeur_z": 85,
+  "bord_interieur_x": 1,
+  "surface_jouable_colonnes": 1519,
+  "cases_debout": 2171,
+  "niveaux_y_>=3%": [
+   10,
+   11,
+   12,
+   13,
+   14,
+   16,
+   17,
+   19,
+   20,
+   21,
+   22,
+   23
+  ],
+  "y_debout": [
+   1,
+   35
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 7.0,
+  "dist_3d_min_tous_blocs": 7.0,
+  "dist_horiz_min_blocs_solides": 7.0,
+  "largeur_x_min_par_rangee": 6,
+  "largeur_x_mediane": 16,
+  "rangees_face_a_face": 83
+ },
+ "hauteur_mort_rel": -3,
+ "laine_magique_rel": [
+  29,
+  31
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -24,
+    22,
+    0
+   ],
+   [
+    -24,
+    22,
+    -2
+   ],
+   [
+    -23,
+    21,
+    -4
+   ],
+   [
+    -22,
+    21,
+    -6
+   ],
+   [
+    -26,
+    21,
+    2
+   ],
+   [
+    -23,
+    22,
+    9
+   ]
+  ],
+  "bleu": [
+   [
+    21,
+    21,
+    1
+   ],
+   [
+    23,
+    22,
+    -2
+   ],
+   [
+    23,
+    22,
+    -4
+   ],
+   [
+    25,
+    21,
+    -6
+   ],
+   [
+    22,
+    22,
+    -13
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 4130,
+  "cases_dans_camp_adverse": 2066,
+  "avancee_max_x_signee": 31,
+  "exemple": [
+   [
+    1,
+    9,
+    -33
+   ],
+   [
+    1,
+    10,
+    -38
+   ],
+   [
+    1,
+    10,
+    -34
+   ]
+  ]
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 4130,
+  "cases_dans_camp_adverse": 2064,
+  "avancee_max_x_signee": 32,
+  "exemple": [
+   [
+    -32,
+    10,
+    22
+   ],
+   [
+    -32,
+    12,
+    16
+   ],
+   [
+    -32,
+    12,
+    21
+   ]
+  ]
+ },
+ "top_blocs": [
+  [
+   "pink_terracotta",
+   3441
+  ],
+  [
+   "white_terracotta",
+   3437
+  ],
+  [
+   "white_stained_glass",
+   3354
+  ],
+  [
+   "pink_stained_glass",
+   3353
+  ],
+  [
+   "snow_block",
+   525
+  ],
+  [
+   "light_blue_terracotta",
+   365
+  ],
+  [
+   "smooth_stone_slab",
+   320
+  ],
+  [
+   "brown_wool",
+   225
+  ],
+  [
+   "red_stained_glass",
+   206
+  ],
+  [
+   "blue_stained_glass",
+   206
+  ],
+  [
+   "polished_andesite",
+   176
+  ],
+  [
+   "skeleton_skull",
+   100
+  ]
+ ]
+}

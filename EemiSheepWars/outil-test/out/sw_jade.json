@@ -1,0 +1,287 @@
+{
+ "id": "jade",
+ "nom": "Temple de jade",
+ "dims_fichier": [
+  93,
+  52,
+  113
+ ],
+ "blocs_total": 37561,
+ "types": 25,
+ "types_>=0.1%": 20,
+ "blocs_sur_x0": 62,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 335,
+ "blocs_bande_|x|<=5": 335,
+ "rouge": {
+  "blocs": 18740,
+  "x": [
+   -46,
+   -1
+  ],
+  "y": [
+   6,
+   40
+  ],
+  "z": [
+   -52,
+   51
+  ],
+  "longueur_x": 46,
+  "largeur_z": 104,
+  "bord_interieur_x": -1,
+  "surface_jouable_colonnes": 2265,
+  "cases_debout": 3009,
+  "niveaux_y_>=3%": [
+   23,
+   24,
+   25,
+   26,
+   30,
+   32,
+   33,
+   34,
+   38
+  ],
+  "y_debout": [
+   23,
+   41
+  ]
+ },
+ "bleu": {
+  "blocs": 18759,
+  "x": [
+   1,
+   46
+  ],
+  "y": [
+   6,
+   40
+  ],
+  "z": [
+   -52,
+   51
+  ],
+  "longueur_x": 46,
+  "largeur_z": 104,
+  "bord_interieur_x": 1,
+  "surface_jouable_colonnes": 2265,
+  "cases_debout": 3009,
+  "niveaux_y_>=3%": [
+   23,
+   24,
+   25,
+   26,
+   30,
+   32,
+   33,
+   34,
+   38
+  ],
+  "y_debout": [
+   23,
+   41
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 2.0,
+  "dist_3d_min_tous_blocs": 2.0,
+  "dist_horiz_min_blocs_solides": 2.0,
+  "largeur_x_min_par_rangee": 1,
+  "largeur_x_mediane": 25,
+  "rangees_face_a_face": 104
+ },
+ "hauteur_mort_rel": -3,
+ "laine_magique_rel": [
+  30,
+  32
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -26,
+    22,
+    -1
+   ],
+   [
+    -26,
+    22,
+    1
+   ],
+   [
+    -26,
+    22,
+    -3
+   ],
+   [
+    -28,
+    22,
+    -1
+   ],
+   [
+    -24,
+    22,
+    -1
+   ],
+   [
+    -28,
+    22,
+    1
+   ],
+   [
+    -24,
+    22,
+    1
+   ],
+   [
+    -26,
+    22,
+    3
+   ],
+   [
+    -28,
+    22,
+    -3
+   ],
+   [
+    -24,
+    22,
+    -3
+   ],
+   [
+    -28,
+    22,
+    3
+   ],
+   [
+    -24,
+    22,
+    3
+   ]
+  ],
+  "bleu": [
+   [
+    26,
+    22,
+    -1
+   ],
+   [
+    26,
+    22,
+    1
+   ],
+   [
+    26,
+    22,
+    -3
+   ],
+   [
+    28,
+    22,
+    -1
+   ],
+   [
+    24,
+    22,
+    -1
+   ],
+   [
+    28,
+    22,
+    1
+   ],
+   [
+    24,
+    22,
+    1
+   ],
+   [
+    26,
+    22,
+    3
+   ],
+   [
+    28,
+    22,
+    -3
+   ],
+   [
+    24,
+    22,
+    -3
+   ],
+   [
+    28,
+    22,
+    3
+   ],
+   [
+    24,
+    22,
+    3
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 2541,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -7,
+  "exemple": []
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 2541,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -7,
+  "exemple": []
+ },
+ "top_blocs": [
+  [
+   "dirt",
+   11266
+  ],
+  [
+   "stone",
+   11171
+  ],
+  [
+   "grass_block",
+   3483
+  ],
+  [
+   "mossy_cobblestone",
+   3392
+  ],
+  [
+   "jungle_leaves",
+   2758
+  ],
+  [
+   "mossy_stone_bricks",
+   1712
+  ],
+  [
+   "prismarine_bricks",
+   960
+  ],
+  [
+   "prismarine",
+   927
+  ],
+  [
+   "dark_prismarine",
+   887
+  ],
+  [
+   "jungle_log",
+   266
+  ],
+  [
+   "short_grass",
+   132
+  ],
+  [
+   "red_terracotta",
+   130
+  ]
+ ]
+}

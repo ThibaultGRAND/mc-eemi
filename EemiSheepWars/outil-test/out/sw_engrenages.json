@@ -1,0 +1,323 @@
+{
+ "id": "engrenages",
+ "nom": "Cité des engrenages",
+ "dims_fichier": [
+  113,
+  64,
+  113
+ ],
+ "blocs_total": 95206,
+ "types": 53,
+ "types_>=0.1%": 37,
+ "blocs_sur_x0": 266,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 1672,
+ "blocs_bande_|x|<=5": 2300,
+ "rouge": {
+  "blocs": 47470,
+  "x": [
+   -55,
+   -1
+  ],
+  "y": [
+   7,
+   61
+  ],
+  "z": [
+   -54,
+   52
+  ],
+  "longueur_x": 55,
+  "largeur_z": 107,
+  "bord_interieur_x": -1,
+  "surface_jouable_colonnes": 3693,
+  "cases_debout": 5764,
+  "niveaux_y_>=3%": [
+   24,
+   25,
+   27,
+   28,
+   29,
+   32,
+   33,
+   42,
+   43,
+   44,
+   45
+  ],
+  "y_debout": [
+   24,
+   62
+  ]
+ },
+ "bleu": {
+  "blocs": 47470,
+  "x": [
+   1,
+   55
+  ],
+  "y": [
+   7,
+   61
+  ],
+  "z": [
+   -54,
+   52
+  ],
+  "longueur_x": 55,
+  "largeur_z": 107,
+  "bord_interieur_x": 1,
+  "surface_jouable_colonnes": 3693,
+  "cases_debout": 5764,
+  "niveaux_y_>=3%": [
+   24,
+   25,
+   27,
+   28,
+   29,
+   32,
+   33,
+   42,
+   43,
+   44,
+   45
+  ],
+  "y_debout": [
+   24,
+   62
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 2.0,
+  "dist_3d_min_tous_blocs": 2.0,
+  "dist_horiz_min_blocs_solides": 2.0,
+  "largeur_x_min_par_rangee": 1,
+  "largeur_x_mediane": 15,
+  "rangees_face_a_face": 107
+ },
+ "hauteur_mort_rel": -3,
+ "laine_magique_rel": [
+  34,
+  36
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -26,
+    26,
+    -1
+   ],
+   [
+    -26,
+    26,
+    1
+   ],
+   [
+    -26,
+    26,
+    -3
+   ],
+   [
+    -28,
+    26,
+    -1
+   ],
+   [
+    -24,
+    26,
+    -1
+   ],
+   [
+    -28,
+    26,
+    1
+   ],
+   [
+    -24,
+    26,
+    1
+   ],
+   [
+    -26,
+    26,
+    3
+   ],
+   [
+    -28,
+    26,
+    -3
+   ],
+   [
+    -24,
+    26,
+    -3
+   ],
+   [
+    -28,
+    26,
+    3
+   ],
+   [
+    -24,
+    26,
+    3
+   ]
+  ],
+  "bleu": [
+   [
+    26,
+    26,
+    -1
+   ],
+   [
+    26,
+    26,
+    1
+   ],
+   [
+    26,
+    26,
+    -3
+   ],
+   [
+    28,
+    26,
+    -1
+   ],
+   [
+    24,
+    26,
+    -1
+   ],
+   [
+    28,
+    26,
+    1
+   ],
+   [
+    24,
+    26,
+    1
+   ],
+   [
+    26,
+    26,
+    3
+   ],
+   [
+    28,
+    26,
+    -3
+   ],
+   [
+    24,
+    26,
+    -3
+   ],
+   [
+    28,
+    26,
+    3
+   ],
+   [
+    24,
+    26,
+    3
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 9234,
+  "cases_dans_camp_adverse": 4611,
+  "avancee_max_x_signee": 55,
+  "exemple": [
+   [
+    1,
+    28,
+    -7
+   ],
+   [
+    1,
+    28,
+    -6
+   ],
+   [
+    1,
+    28,
+    -5
+   ]
+  ]
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 9234,
+  "cases_dans_camp_adverse": 4611,
+  "avancee_max_x_signee": 55,
+  "exemple": [
+   [
+    -55,
+    29,
+    -14
+   ],
+   [
+    -55,
+    29,
+    -13
+   ],
+   [
+    -55,
+    29,
+    10
+   ]
+  ]
+ },
+ "top_blocs": [
+  [
+   "stone",
+   39569
+  ],
+  [
+   "andesite",
+   11942
+  ],
+  [
+   "cobblestone",
+   11740
+  ],
+  [
+   "stone_bricks",
+   7160
+  ],
+  [
+   "bricks",
+   2994
+  ],
+  [
+   "spruce_planks",
+   2327
+  ],
+  [
+   "coal_ore",
+   2304
+  ],
+  [
+   "brown_wool",
+   1866
+  ],
+  [
+   "orange_terracotta",
+   1510
+  ],
+  [
+   "glass_pane",
+   1328
+  ],
+  [
+   "dark_oak_log",
+   1288
+  ],
+  [
+   "iron_ore",
+   1180
+  ]
+ ]
+}

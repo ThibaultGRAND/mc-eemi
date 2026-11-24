@@ -14,8 +14,13 @@ center-y: 100
 lobby-y: 140
 
 # Maps tirees au hasard apres chaque partie (jamais deux fois de suite). Absente ou vide = toutes.
-# rose (Desert rose), vert (Iles vertes), vaisseau, glacier (Pics geles), jade (Temple de jade), engrenages (Cite des engrenages). /sheepwars map <id> impose la prochaine.
-maps: [rose, vert, vaisseau]
+# rose (Desert rose), vert (Iles vertes), vaisseau, pirates (Port pirate), ruines (Ruines antiques), spatiale (Base spatiale).
+# Encore dans le jar mais retirees du tirage (15/11/2026) : glacier (Pics geles), jade (Temple de jade), engrenages (Cite des engrenages).
+# /sheepwars map <id> impose la prochaine.
+maps: [rose, vert, vaisseau, pirates, ruines, spatiale]
+# Maps ou l'on peut passer a pied dans le camp adverse (maps 1.8 d'origine). Sur les autres, seul le mouton
+# d'abordage fait traverser la ligne du milieu.
+free-crossing-maps: [rose, vert, vaisseau]
 
 # Parties en parallele (4.1) : partie 1 = monde "world", parties 2..N = copies sheepwars_2, sheepwars_3...
 # faites depuis le modele sheepwars_modele (copie propre de la partie 1). Chaque partie tire sa map.

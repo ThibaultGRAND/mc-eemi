@@ -1,0 +1,17 @@
+name: EemiSheepWars
+version: 4.4.0
+main: fr.eemicraft.sheepwars.EemiSheepWars
+api-version: '1.21'
+softdepend: [Multiverse-Core]
+description: Sheep Wars d'EEMICRAFT (Rouge contre Bleu, lancer des moutons sur l'ile adverse)
+
+commands:
+  sheepwars:
+    description: Rejoindre ou gerer Sheep Wars
+    aliases: [sw]
+    usage: /sheepwars <join|leave|spectate [joueur]|start [n]|stop [n]|parties|build|map|reload>
+
+permissions:
+  eemisheepwars.admin:
+    description: Commandes admin de Sheep Wars
+    default: op

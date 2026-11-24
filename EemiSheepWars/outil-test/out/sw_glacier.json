@@ -1,0 +1,289 @@
+{
+ "id": "glacier",
+ "nom": "Pics gelés",
+ "dims_fichier": [
+  93,
+  52,
+  113
+ ],
+ "blocs_total": 38951,
+ "types": 20,
+ "types_>=0.1%": 17,
+ "blocs_sur_x0": 88,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 399,
+ "blocs_bande_|x|<=5": 399,
+ "rouge": {
+  "blocs": 19422,
+  "x": [
+   -45,
+   -1
+  ],
+  "y": [
+   6,
+   37
+  ],
+  "z": [
+   -51,
+   51
+  ],
+  "longueur_x": 45,
+  "largeur_z": 103,
+  "bord_interieur_x": -1,
+  "surface_jouable_colonnes": 2338,
+  "cases_debout": 3060,
+  "niveaux_y_>=3%": [
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32
+  ],
+  "y_debout": [
+   23,
+   38
+  ]
+ },
+ "bleu": {
+  "blocs": 19441,
+  "x": [
+   1,
+   45
+  ],
+  "y": [
+   6,
+   37
+  ],
+  "z": [
+   -51,
+   51
+  ],
+  "longueur_x": 45,
+  "largeur_z": 103,
+  "bord_interieur_x": 1,
+  "surface_jouable_colonnes": 2338,
+  "cases_debout": 3060,
+  "niveaux_y_>=3%": [
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32
+  ],
+  "y_debout": [
+   23,
+   38
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 2.0,
+  "dist_3d_min_tous_blocs": 2.0,
+  "dist_horiz_min_blocs_solides": 2.0,
+  "largeur_x_min_par_rangee": 1,
+  "largeur_x_mediane": 23,
+  "rangees_face_a_face": 103
+ },
+ "hauteur_mort_rel": -3,
+ "laine_magique_rel": [
+  30,
+  32
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -26,
+    22,
+    -1
+   ],
+   [
+    -26,
+    22,
+    1
+   ],
+   [
+    -26,
+    22,
+    -3
+   ],
+   [
+    -28,
+    22,
+    -1
+   ],
+   [
+    -24,
+    22,
+    -1
+   ],
+   [
+    -28,
+    22,
+    1
+   ],
+   [
+    -24,
+    22,
+    1
+   ],
+   [
+    -26,
+    22,
+    3
+   ],
+   [
+    -28,
+    22,
+    -3
+   ],
+   [
+    -24,
+    22,
+    -3
+   ],
+   [
+    -28,
+    22,
+    3
+   ],
+   [
+    -24,
+    22,
+    3
+   ]
+  ],
+  "bleu": [
+   [
+    26,
+    22,
+    -1
+   ],
+   [
+    26,
+    22,
+    1
+   ],
+   [
+    26,
+    22,
+    -3
+   ],
+   [
+    28,
+    22,
+    -1
+   ],
+   [
+    24,
+    22,
+    -1
+   ],
+   [
+    28,
+    22,
+    1
+   ],
+   [
+    24,
+    22,
+    1
+   ],
+   [
+    26,
+    22,
+    3
+   ],
+   [
+    28,
+    22,
+    -3
+   ],
+   [
+    24,
+    22,
+    -3
+   ],
+   [
+    28,
+    22,
+    3
+   ],
+   [
+    24,
+    22,
+    3
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 2443,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -6,
+  "exemple": []
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 2443,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -6,
+  "exemple": []
+ },
+ "top_blocs": [
+  [
+   "dirt",
+   11166
+  ],
+  [
+   "stone",
+   10997
+  ],
+  [
+   "spruce_leaves",
+   4302
+  ],
+  [
+   "snow_block",
+   3457
+  ],
+  [
+   "packed_ice",
+   3166
+  ],
+  [
+   "andesite",
+   2063
+  ],
+  [
+   "stone_bricks",
+   900
+  ],
+  [
+   "coal_ore",
+   662
+  ],
+  [
+   "spruce_planks",
+   596
+  ],
+  [
+   "cracked_stone_bricks",
+   368
+  ],
+  [
+   "spruce_log",
+   358
+  ],
+  [
+   "spruce_stairs",
+   252
+  ]
+ ]
+}

@@ -1,0 +1,289 @@
+{
+ "id": "pirates",
+ "nom": "Port pirate",
+ "dims_fichier": [
+  83,
+  34,
+  87
+ ],
+ "blocs_total": 49541,
+ "types": 88,
+ "types_>=0.1%": 46,
+ "blocs_sur_x0": 0,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 0,
+ "blocs_bande_|x|<=5": 0,
+ "rouge": {
+  "blocs": 8551,
+  "x": [
+   -41,
+   -9
+  ],
+  "y": [
+   8,
+   33
+  ],
+  "z": [
+   -43,
+   43
+  ],
+  "longueur_x": 33,
+  "largeur_z": 87,
+  "bord_interieur_x": -9,
+  "surface_jouable_colonnes": 1626,
+  "cases_debout": 2142,
+  "niveaux_y_>=3%": [
+   9,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   19,
+   20,
+   21
+  ],
+  "y_debout": [
+   9,
+   34
+  ]
+ },
+ "bleu": {
+  "blocs": 8544,
+  "x": [
+   9,
+   41
+  ],
+  "y": [
+   8,
+   33
+  ],
+  "z": [
+   -43,
+   43
+  ],
+  "longueur_x": 33,
+  "largeur_z": 87,
+  "bord_interieur_x": 9,
+  "surface_jouable_colonnes": 1626,
+  "cases_debout": 2142,
+  "niveaux_y_>=3%": [
+   9,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   19,
+   20,
+   21
+  ],
+  "y_debout": [
+   9,
+   34
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 18.0,
+  "dist_3d_min_tous_blocs": 18.0,
+  "dist_horiz_min_blocs_solides": 18.0,
+  "largeur_x_min_par_rangee": 17,
+  "largeur_x_mediane": 21,
+  "rangees_face_a_face": 80
+ },
+ "hauteur_mort_rel": 8,
+ "laine_magique_rel": [
+  16,
+  18
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -20,
+    11,
+    -3
+   ],
+   [
+    -20,
+    11,
+    -1
+   ],
+   [
+    -20,
+    11,
+    1
+   ],
+   [
+    -20,
+    11,
+    3
+   ],
+   [
+    -22,
+    11,
+    -3
+   ],
+   [
+    -22,
+    11,
+    -1
+   ],
+   [
+    -22,
+    11,
+    1
+   ],
+   [
+    -22,
+    11,
+    3
+   ],
+   [
+    -24,
+    11,
+    -3
+   ],
+   [
+    -24,
+    11,
+    -1
+   ],
+   [
+    -24,
+    11,
+    1
+   ],
+   [
+    -24,
+    11,
+    3
+   ]
+  ],
+  "bleu": [
+   [
+    20,
+    11,
+    -3
+   ],
+   [
+    20,
+    11,
+    -1
+   ],
+   [
+    20,
+    11,
+    1
+   ],
+   [
+    20,
+    11,
+    3
+   ],
+   [
+    22,
+    11,
+    -3
+   ],
+   [
+    22,
+    11,
+    -1
+   ],
+   [
+    22,
+    11,
+    1
+   ],
+   [
+    22,
+    11,
+    3
+   ],
+   [
+    24,
+    11,
+    -3
+   ],
+   [
+    24,
+    11,
+    -1
+   ],
+   [
+    24,
+    11,
+    1
+   ],
+   [
+    24,
+    11,
+    3
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 2552,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -9,
+  "exemple": []
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 2552,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -9,
+  "exemple": []
+ },
+ "top_blocs": [
+  [
+   "stone",
+   19679
+  ],
+  [
+   "water",
+   6220
+  ],
+  [
+   "andesite",
+   4472
+  ],
+  [
+   "spruce_planks",
+   2426
+  ],
+  [
+   "sand",
+   2391
+  ],
+  [
+   "gravel",
+   1674
+  ],
+  [
+   "stone_bricks",
+   1426
+  ],
+  [
+   "dark_oak_planks",
+   1188
+  ],
+  [
+   "dirt",
+   1144
+  ],
+  [
+   "clay",
+   862
+  ],
+  [
+   "mossy_stone_bricks",
+   640
+  ],
+  [
+   "coarse_dirt",
+   604
+  ]
+ ]
+}

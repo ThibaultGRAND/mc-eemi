@@ -1,0 +1,294 @@
+{
+ "id": "ruines",
+ "nom": "Ruines antiques",
+ "dims_fichier": [
+  67,
+  38,
+  84
+ ],
+ "blocs_total": 25200,
+ "types": 66,
+ "types_>=0.1%": 42,
+ "blocs_sur_x0": 0,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 86,
+ "blocs_bande_|x|<=5": 0,
+ "rouge": {
+  "blocs": 12613,
+  "x": [
+   -33,
+   -7
+  ],
+  "y": [
+   0,
+   37
+  ],
+  "z": [
+   -43,
+   40
+  ],
+  "longueur_x": 27,
+  "largeur_z": 84,
+  "bord_interieur_x": -7,
+  "surface_jouable_colonnes": 1558,
+  "cases_debout": 2005,
+  "niveaux_y_>=3%": [
+   14,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   26,
+   27,
+   28
+  ],
+  "y_debout": [
+   14,
+   38
+  ]
+ },
+ "bleu": {
+  "blocs": 12587,
+  "x": [
+   7,
+   33
+  ],
+  "y": [
+   0,
+   37
+  ],
+  "z": [
+   -43,
+   40
+  ],
+  "longueur_x": 27,
+  "largeur_z": 84,
+  "bord_interieur_x": 7,
+  "surface_jouable_colonnes": 1558,
+  "cases_debout": 2006,
+  "niveaux_y_>=3%": [
+   14,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   26,
+   27,
+   28
+  ],
+  "y_debout": [
+   14,
+   38
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 14.0,
+  "dist_3d_min_tous_blocs": 14.0,
+  "dist_horiz_min_blocs_solides": 14.0,
+  "largeur_x_min_par_rangee": 13,
+  "largeur_x_mediane": 19,
+  "rangees_face_a_face": 83
+ },
+ "hauteur_mort_rel": -3,
+ "laine_magique_rel": [
+  24,
+  26
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -20,
+    18,
+    -3
+   ],
+   [
+    -20,
+    18,
+    -1
+   ],
+   [
+    -20,
+    18,
+    1
+   ],
+   [
+    -20,
+    18,
+    3
+   ],
+   [
+    -22,
+    18,
+    -3
+   ],
+   [
+    -22,
+    18,
+    -1
+   ],
+   [
+    -22,
+    18,
+    1
+   ],
+   [
+    -22,
+    18,
+    3
+   ],
+   [
+    -24,
+    18,
+    -3
+   ],
+   [
+    -24,
+    18,
+    -1
+   ],
+   [
+    -24,
+    18,
+    1
+   ],
+   [
+    -24,
+    18,
+    3
+   ]
+  ],
+  "bleu": [
+   [
+    20,
+    18,
+    -3
+   ],
+   [
+    20,
+    18,
+    -1
+   ],
+   [
+    20,
+    18,
+    1
+   ],
+   [
+    20,
+    18,
+    3
+   ],
+   [
+    22,
+    18,
+    -3
+   ],
+   [
+    22,
+    18,
+    -1
+   ],
+   [
+    22,
+    18,
+    1
+   ],
+   [
+    22,
+    18,
+    3
+   ],
+   [
+    24,
+    18,
+    -3
+   ],
+   [
+    24,
+    18,
+    -1
+   ],
+   [
+    24,
+    18,
+    1
+   ],
+   [
+    24,
+    18,
+    3
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 1928,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -7,
+  "exemple": []
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 1929,
+  "cases_dans_camp_adverse": 0,
+  "avancee_max_x_signee": -7,
+  "exemple": []
+ },
+ "top_blocs": [
+  [
+   "stone",
+   7088
+  ],
+  [
+   "dirt",
+   3820
+  ],
+  [
+   "andesite",
+   2402
+  ],
+  [
+   "stone_bricks",
+   2130
+  ],
+  [
+   "grass_block",
+   1122
+  ],
+  [
+   "smooth_quartz",
+   1080
+  ],
+  [
+   "stone_brick_stairs",
+   996
+  ],
+  [
+   "coarse_dirt",
+   586
+  ],
+  [
+   "calcite",
+   546
+  ],
+  [
+   "mossy_stone_bricks",
+   432
+  ],
+  [
+   "hanging_roots",
+   394
+  ],
+  [
+   "smooth_stone",
+   368
+  ]
+ ]
+}

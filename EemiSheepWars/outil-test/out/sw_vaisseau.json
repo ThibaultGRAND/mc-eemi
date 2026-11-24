@@ -1,0 +1,316 @@
+{
+ "id": "vaisseau",
+ "nom": "Vaisseau",
+ "dims_fichier": [
+  83,
+  67,
+  103
+ ],
+ "blocs_total": 58907,
+ "types": 53,
+ "types_>=0.1%": 26,
+ "blocs_sur_x0": 45,
+ "blocs_zone_centrale_|x|<=8_|z|<=9": 569,
+ "blocs_bande_|x|<=5": 642,
+ "rouge": {
+  "blocs": 8626,
+  "x": [
+   -32,
+   -1
+  ],
+  "y": [
+   7,
+   57
+  ],
+  "z": [
+   -13,
+   34
+  ],
+  "longueur_x": 32,
+  "largeur_z": 48,
+  "bord_interieur_x": -1,
+  "surface_jouable_colonnes": 1221,
+  "cases_debout": 1914,
+  "niveaux_y_>=3%": [
+   17,
+   25,
+   26,
+   29,
+   31,
+   36,
+   40
+  ],
+  "y_debout": [
+   8,
+   58
+  ]
+ },
+ "bleu": {
+  "blocs": 9327,
+  "x": [
+   1,
+   37
+  ],
+  "y": [
+   7,
+   58
+  ],
+  "z": [
+   -14,
+   33
+  ],
+  "longueur_x": 37,
+  "largeur_z": 48,
+  "bord_interieur_x": 1,
+  "surface_jouable_colonnes": 1398,
+  "cases_debout": 2147,
+  "niveaux_y_>=3%": [
+   17,
+   25,
+   26,
+   29,
+   31,
+   35,
+   36,
+   40
+  ],
+  "y_debout": [
+   8,
+   59
+  ]
+ },
+ "vide": {
+  "dist_horiz_min_tous_blocs": 2.0,
+  "dist_3d_min_tous_blocs": 2.0,
+  "dist_horiz_min_blocs_solides": 2.0,
+  "largeur_x_min_par_rangee": 1,
+  "largeur_x_mediane": 9,
+  "rangees_face_a_face": 47
+ },
+ "hauteur_mort_rel": 7,
+ "laine_magique_rel": [
+  37,
+  39
+ ],
+ "apparitions": {
+  "rouge": [
+   [
+    -27,
+    30,
+    0
+   ],
+   [
+    -25,
+    30,
+    0
+   ],
+   [
+    -26,
+    30,
+    2
+   ],
+   [
+    -27,
+    30,
+    -2
+   ],
+   [
+    -24,
+    30,
+    2
+   ],
+   [
+    -27,
+    30,
+    -4
+   ],
+   [
+    -23,
+    30,
+    0
+   ],
+   [
+    -24,
+    28,
+    21
+   ],
+   [
+    -26,
+    28,
+    22
+   ],
+   [
+    -22,
+    28,
+    21
+   ],
+   [
+    -24,
+    28,
+    23
+   ],
+   [
+    -22,
+    28,
+    23
+   ]
+  ],
+  "bleu": [
+   [
+    25,
+    24,
+    0
+   ],
+   [
+    25,
+    24,
+    2
+   ],
+   [
+    23,
+    24,
+    -1
+   ],
+   [
+    23,
+    24,
+    1
+   ],
+   [
+    27,
+    24,
+    1
+   ],
+   [
+    24,
+    24,
+    4
+   ],
+   [
+    23,
+    24,
+    -3
+   ],
+   [
+    26,
+    24,
+    4
+   ],
+   [
+    22,
+    24,
+    3
+   ],
+   [
+    28,
+    24,
+    3
+   ],
+   [
+    24,
+    24,
+    6
+   ],
+   [
+    26,
+    24,
+    6
+   ]
+  ]
+ },
+ "apparitions_problemes": [],
+ "parcours_depuis_rouge": {
+  "cases_atteintes": 4180,
+  "cases_dans_camp_adverse": 2209,
+  "avancee_max_x_signee": 37,
+  "exemple": [
+   [
+    1,
+    35,
+    20
+   ],
+   [
+    1,
+    35,
+    21
+   ],
+   [
+    1,
+    35,
+    23
+   ]
+  ]
+ },
+ "parcours_depuis_bleu": {
+  "cases_atteintes": 4180,
+  "cases_dans_camp_adverse": 1950,
+  "avancee_max_x_signee": 32,
+  "exemple": [
+   [
+    -32,
+    25,
+    -10
+   ],
+   [
+    -32,
+    25,
+    -9
+   ],
+   [
+    -32,
+    25,
+    -8
+   ]
+  ]
+ },
+ "top_blocs": [
+  [
+   "water",
+   27997
+  ],
+  [
+   "stone",
+   7887
+  ],
+  [
+   "cyan_terracotta",
+   6356
+  ],
+  [
+   "clay",
+   1756
+  ],
+  [
+   "polished_andesite",
+   1724
+  ],
+  [
+   "smooth_stone_slab",
+   1705
+  ],
+  [
+   "andesite",
+   1600
+  ],
+  [
+   "stone_brick_stairs",
+   1586
+  ],
+  [
+   "stone_bricks",
+   1276
+  ],
+  [
+   "stone_brick_slab",
+   1166
+  ],
+  [
+   "cobblestone_wall",
+   781
+  ],
+  [
+   "smooth_stone",
+   726
+  ]
+ ]
+}

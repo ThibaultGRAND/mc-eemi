@@ -1,0 +1,63 @@
+# EemiSheepWars - Sheep Wars d'EEMICRAFT
+# Rouge contre Bleu, une ferme chacun au-dessus du vide (regles du Sheep Wars d'Hypixel). On lance des
+# moutons sur le camp adverse ; une seule vie, la derniere equipe en vie gagne.
+# La map est construite par le plugin dans un monde vide ("sheepwars") : au demarrage du serveur,
+# apres chaque partie, et avec /sheepwars build. Les iles detruites repartent donc toujours a neuf.
+
+world: sheepwars
+hub-world: lobby
+
+# Les maps (4.0) sont posees avec leur bas en center-y - 30, centrees en x/z 0 (Rouge a l'ouest).
+# La hauteur de mort et la laine magique sont reglees par map dans le plugin.
+center-y: 100
+# Salle d'attente au-dessus du centre (au-dessus de la plus haute map).
+lobby-y: 140
+
+# Maps tirees au hasard apres chaque partie (jamais deux fois de suite). Absente ou vide = toutes.
+# rose (Desert rose), vert (Iles vertes), vaisseau, glacier (Pics geles), jade (Temple de jade), engrenages (Cite des engrenages). /sheepwars map <id> impose la prochaine.
+maps: [rose, vert, vaisseau, glacier, jade, engrenages]
+
+# Parties en parallele (4.1) : partie 1 = monde "world", parties 2..N = copies sheepwars_2, sheepwars_3...
+# faites depuis le modele sheepwars_modele (copie propre de la partie 1). Chaque partie tire sa map.
+max-instances: 3
+
+min-players: 2
+max-players: 12
+countdown: 30
+full-countdown: 10
+# Duree max (secondes) : a la fin, l'equipe avec le plus de joueurs en vie gagne.
+game-time: 600
+end-time: 8
+
+# Moutons (2.0, comme Hypixel) : un mouton au hasard a chaque joueur toutes les 12 s (5-6 en vie dans
+# l'equipe), 10 s (3-4), 8 s (2) ou 6 s (1) ; max-sheep en inventaire.
+start-sheep: 2
+max-sheep: 6
+# Points de vie d'un mouton lance (20 = 3 a 4 coups d'epee en pierre).
+sheep-health: 20
+# Vitesses : clic gauche = tir droit sans gravite, clic droit = tir en cloche (plus fort).
+straight-speed: 1.3
+gravity-speed: 2.0
+# Cages de depart (secondes).
+cage-time: 5
+# Laine magique : apparait au-dessus du vide toutes les N secondes, reste N secondes.
+magic-wool-interval: 30
+magic-wool-life: 20
+
+# Probabilite relative de chaque mouton (0 = desactive).
+weights:
+  explosif: 20
+  explosif-fort: 8
+  incendiaire: 12
+  glace: 12
+  aveuglant: 10
+  trou-noir: 8
+  seisme: 10
+  soin: 10
+  chercheur: 8
+  foudre: 10
+  intergalactique: 6
+  poison: 10
+  ender: 8
+  abordage: 6
+  echangeur: 8
