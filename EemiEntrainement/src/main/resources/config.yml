@@ -1,0 +1,150 @@
+# EemiEntrainement - entrainement solo : bridge, knockback, MLG et perle
+# Toutes les valeurs ont un defaut dans le code : une cle absente reprend ce defaut.
+
+# Monde vide cree par le plugin (pas par Multiverse).
+world: entrainement
+# Hauteur du dessus des iles.
+base-y: 100
+# Ecart en x entre deux pistes (une piste par joueur).
+lane-spacing: 200
+# Graine du bruit des iles (meme graine = memes iles).
+seed: 20261116
+max-players: 30
+# On entre seulement depuis ces mondes (vide = partout).
+join-from: [lobby]
+lobby-command: lobby
+# Repli si /lobby ne marche pas : spawn DeluxeHub du lobby.
+hub:
+  world: lobby
+  x: 722.5
+  y: 51
+  z: 650.5
+  yaw: 90
+  pitch: 0
+# Seules commandes permises en entrainement (les admins passent). Vide = liste par defaut du plugin.
+allowed-commands: [entrainement, training, practice, lobby, hub, spawn, l, msg, tell, w, r, party, p, pc, groupe, profil, musique, music, spectate, spec, regarder]
+# Les joueurs en entrainement ne se voient pas entre eux.
+hide-players: true
+eemicore-id: entrainement
+
+# Recompense EemiCore "play" en partant : session d'au moins min-seconds,
+# au plus une fois toutes les cooldown-minutes par joueur. min-seconds: -1 = jamais.
+reward:
+  min-seconds: 120
+  cooldown-minutes: 30
+
+bridge:
+  # 4 distances au plus (blocs de vide entre les deux iles, 4 a 120).
+  distances: [16, 32, 50, 100]
+  # Style "montee" : l'ile d'arrivee est plus haute de distance x incline.
+  incline: 0.25
+  # Retour au depart si on tombe a plus de fall-depth blocs sous l'ile de depart.
+  fall-depth: 8
+  # Pause apres l'arrivee avant le retour au depart (ticks).
+  reset-ticks: 50
+
+knockback:
+  # Echec si on tombe a plus de fall-limit blocs sous le ponton.
+  fall-limit: 12
+  # Ticks a rester sur ses blocs pour reussir (20 = 1 s).
+  stable-ticks: 20
+  npc-name: '&cEntraineur'
+  # Pseudo Minecraft pour le skin du PNJ (vide = skin par defaut du mannequin).
+  npc-skin: ''
+  # Vitesses en blocs par tick (le recul vanilla est d'environ 0,4).
+  # delay = attente avant le coup (ticks), spread = angle au hasard (degres),
+  # double-chance = chance d'un 2e coup en l'air.
+  difficulties:
+    facile:
+      horizontal-min: 0.42
+      horizontal-max: 0.42
+      vertical: 0.36
+      delay-min: 40
+      delay-max: 40
+      warn: true
+      spread: 0
+      double-chance: 0
+    moyen:
+      horizontal-min: 0.55
+      horizontal-max: 0.7
+      vertical: 0.38
+      delay-min: 25
+      delay-max: 70
+      warn: false
+      spread: 15
+      double-chance: 0
+    difficile:
+      horizontal-min: 0.7
+      horizontal-max: 0.85
+      vertical: 0.4
+      delay-min: 15
+      delay-max: 60
+      warn: false
+      spread: 55
+      double-chance: 0.5
+      double-delay-min: 8
+      double-delay-max: 12
+      double-horizontal: 0.35
+      double-vertical: 0.3
+      double-spread: 70
+
+# MLG (1.1.0) : sauter d'une tour et se sauver avec un seau d'eau, une toile ou une echelle.
+mlg:
+  # 4 hauteurs au plus (10 a 80).
+  heights: [10, 20, 30, 50]
+  # (1.1.2) L'amorti (eau, toile, echelle) ne compte qu'au pied de la tour : pieds a au plus
+  # max-cushion-height blocs au-dessus du sol de l'ile. Touche plus haut = essai rate (« Trop haut »).
+  max-cushion-height: 3.0
+  # Echelle : vitesse de chute minimale (blocs par tick) en l'attrapant (pas de descente a la main).
+  ladder-min-speed: 0.5
+
+# Perle : l'entraineur ejecte loin dans le vide, il faut revenir a la perle de l'Ender.
+# (1.2.0) Trois difficultes. Les anciennes cles pearl.horizontal-min, pearl.vertical... de la 1.1.x
+# restent lues comme reglages du facile ; pearl.difficulties.<difficulte> passe par-dessus.
+# horizontal-min/max, vertical-min/max : vitesse d'ejection (blocs par tick, environ 11 blocs de vol par 1,0)
+# spread : angle au hasard (degres, 90 = de cote) ; delay : attente avant le coup (ticks) ; warn : coup annonce
+# fall-limit : il faut avoir lance avant de tomber de fall-limit blocs sous le ponton (une perle en vol garde sa chance)
+# double-* : 2e coup en l'air (chance, delai en ticks, vitesse, angle) ; target : ile (ile ou ponton) ou ponton (planches seulement)
+pearl:
+  difficulties:
+    facile:
+      horizontal-min: 1.1
+      horizontal-max: 1.45
+      vertical-min: 0.55
+      vertical-max: 0.55
+      spread: 25
+      delay-min: 30
+      delay-max: 60
+      warn: true
+      fall-limit: 30
+      double-chance: 0
+      target: ile
+    moyen:
+      horizontal-min: 1.45
+      horizontal-max: 1.8
+      vertical-min: 0.3
+      vertical-max: 0.55
+      spread: 50
+      delay-min: 20
+      delay-max: 70
+      warn: false
+      fall-limit: 22
+      double-chance: 0
+      target: ile
+    difficile:
+      horizontal-min: 1.7
+      horizontal-max: 2.1
+      vertical-min: 0.12
+      vertical-max: 0.45
+      spread: 80
+      delay-min: 12
+      delay-max: 60
+      warn: false
+      fall-limit: 16
+      double-chance: 0.4
+      double-delay-min: 6
+      double-delay-max: 14
+      double-horizontal: 0.6
+      double-vertical: 0.2
+      double-spread: 90
+      target: ponton

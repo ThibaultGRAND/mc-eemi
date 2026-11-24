@@ -1,0 +1,17 @@
+name: EemiEntrainement
+version: ${project.version}
+main: fr.eemicraft.entrainement.EemiEntrainement
+api-version: '1.21'
+softdepend: [EemiCore]
+description: 'Entrainement solo - bridge, knockback (clutch), MLG et perle'
+
+commands:
+  entrainement:
+    description: 'Entrainement bridge, knockback, MLG et perle'
+    usage: '/entrainement [bridge|knockback|mlg|perle|top|leave]'
+    aliases: [training, practice]
+
+permissions:
+  eemientrainement.admin:
+    description: '/entrainement reload et info'
+    default: op
