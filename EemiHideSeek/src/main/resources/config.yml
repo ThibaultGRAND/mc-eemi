@@ -57,7 +57,7 @@ shockwave-radius: 5.0
 shockwave-cooldown: 15
 # Radar : distance du cacheur le plus proche en mots, sans direction (Brulant < radar-burning < Chaud < radar-hot
 # < Tiede < radar-warm < Froid).
-radar-cooldown: 1
+radar-cooldown: 4
 radar-burning: 10.0
 radar-hot: 20.0
 radar-warm: 35.0
