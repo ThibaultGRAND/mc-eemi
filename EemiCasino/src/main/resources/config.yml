@@ -73,6 +73,7 @@ shop:
   title_c_bluffeur: {name: "&bTitre Bluffeur", icon: ENDER_EYE, price: 15000, lore: ["&8[&bBluffeur&8] devant ton pseudo"]}
   title_c_highroller: {name: "&5&lTitre High Roller", icon: AMETHYST_SHARD, price: 50000, lore: ["&8[&5&lHigh Roller&8] devant ton pseudo"]}
   title_c_roi: {name: "&6&lTitre Roi du casino", icon: GOLDEN_HELMET, price: 250000, lore: ["&8[&6&lRoi du casino&8] devant ton pseudo"]}
+  title_c_dieu: {name: "&c&lTitre Dieu du casino", icon: NETHER_STAR, price: 1000000, lore: ["&8[&c&lDieu du casino&8] devant ton pseudo", "&7Pour les meilleurs des meilleurs"]}
   trail_c_or: {name: "&ePluie d'or", icon: GOLD_INGOT, price: 20000, lore: ["&7Trainee de particules au hub"]}
   hat_c_or: {name: "&6Lingot geant", icon: GOLD_BLOCK, price: 30000, lore: ["&7Chapeau en bloc d'or au hub"]}
   join_c_jackpot: {name: "&6Entree Jackpot", icon: BELL, price: 40000, lore: ["&7Message d'arrivee sur le serveur"]}
