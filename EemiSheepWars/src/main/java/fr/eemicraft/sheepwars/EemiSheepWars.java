@@ -95,6 +95,7 @@ package fr.eemicraft.sheepwars;
 
 import fr.eemicraft.sheepwars.WorldClone;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -113,6 +114,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.logging.Level;
+import org.bukkit.configuration.file.YamlConfiguration;
 import java.util.zip.GZIPInputStream;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -227,6 +229,8 @@ implements Listener {
     private final List<Runnable> modeleWaiters = new ArrayList<Runnable>();
     private final Map<String, Long> destroyedAt = new HashMap<String, Long>();
     private String nextMap;
+    /** 4.7.1 : derniere map JOUEE (toutes parties), gardee dans data.yml (last-map) pour ne jamais la rejouer deux fois de suite, meme apres un redemarrage. */
+    private String lastMap;
     private static final Map<String, Imported> IMPORTED = new LinkedHashMap<String, Imported>();
     private static final int CLEAR_X = 60;
     private static final int CLEAR_Z = 58;
@@ -245,6 +249,7 @@ implements Listener {
         this.reloadConfig();
         this.base = this.getConfig().getString("world", "sheepwars");
         this.cy = this.cfg("center-y", 100);
+        this.lastMap = YamlConfiguration.loadConfiguration((File)this.dataFile()).getString("last-map");
         Game first = new Game(1);
         this.games.add(first);
         first.attach(Bukkit.getWorld((String)this.base));
@@ -263,7 +268,7 @@ implements Listener {
             }
             WorldClone.cleanup((Plugin)this, first.world, this.base, this.maxInstances());
             first.remakeModele = true;
-            first.rebuild(null, this.pickMap(first, false));
+            first.rebuild(null, this.pickMap(first));
         }, 100L);
         this.reportStatus();
     }
@@ -427,25 +432,13 @@ implements Listener {
                 g.mapId = map;
                 g.restoreArea();
                 g.preparing = false;
-                World hub = this.hubWorld();
-                for (UUID id : new ArrayList<UUID>(g.pending)) {
-                    g.pending.remove(id);
-                    Player pl = Bukkit.getPlayer((UUID)id);
-                    if (pl == null || hub != null && !pl.getWorld().equals((Object)hub)) {
-                        this.byPlayer.remove(id);
-                        if (pl == null) continue;
-                        pl.sendMessage("\u00a78[\u00a79Sheep Wars\u00a78] \u00a77\u00a77Tu n'es plus dans le hub : inscription annul\u00e9e.");
-                        continue;
-                    }
-                    g.addPlayer(pl);
-                }
-                if (g.players.isEmpty()) {
-                    this.destroyGame(g);
-                    return;
-                }
-                String pick = this.pickMap(g, true);
+                // 4.7.1 : tirage a la creation de la partie ; les inscrits arrivent une fois la map posee
+                String pick = this.pickMap(g);
                 if (!pick.equals(g.mapId) || !this.areaCache.containsKey(g.mapId)) {
                     g.rebuild(null, pick);
+                }
+                if (!g.building) {
+                    g.flushPending();
                 }
                 this.reportStatus();
             });
@@ -503,7 +496,19 @@ implements Listener {
             for (Game g : this.games) {
                 g.spectators.remove(id);
             }
-            if (best.preparing) {
+            if (!best.preparing && best.n == 1 && best.state == State.WAITING && best.size() == 0 && !best.busy()) {
+                // 4.7.1 : premier joueur dans une partie vide en attente = nouveau tirage de la map
+                String pick = this.pickMap(best);
+                if (!pick.equals(best.mapId) || !this.areaCache.containsKey(best.mapId)) {
+                    best.rebuild(null, pick);
+                }
+            }
+            if (!best.preparing && best.building) {
+                best.pending.add(id);
+                this.byPlayer.put(id, best);
+                p.sendMessage("§8[§9Sheep Wars§8] §7Chargement de la map, un instant...");
+                this.reportStatus();
+            } else if (best.preparing) {
                 best.pending.add(id);
                 this.byPlayer.put(id, best);
                 p.sendMessage("\u00a78[\u00a79Sheep Wars\u00a78] \u00a77\u00a77Pr\u00e9paration d'une nouvelle partie...");
@@ -750,7 +755,31 @@ implements Listener {
         });
     }
 
-    private String pickMap(Game g, boolean sameOk) {
+    private File dataFile() {
+        return new File(this.getDataFolder(), "data.yml");
+    }
+
+    /** 4.7.1 : note la map qui vient d'etre jouee (exclue du prochain tirage) et l'ecrit dans data.yml. */
+    private void markPlayed(Game g) {
+        g.lastPlayed = g.mapId;
+        this.lastMap = g.mapId;
+        File f = this.dataFile();
+        YamlConfiguration y = YamlConfiguration.loadConfiguration((File)f);
+        y.set("last-map", this.lastMap);
+        try {
+            y.save(f);
+        }
+        catch (IOException ex) {
+            this.getLogger().warning("data.yml non ecrit : " + ex.getMessage());
+        }
+    }
+
+    /**
+     * 4.7.1 : tirage uniforme dans la liste "maps" du config, sans la derniere map jouee
+     * (celle de la partie, sinon celle de data.yml), sauf s'il n'y a qu'une map possible.
+     * Plus de map par defaut exclue : la map posee n'est pas forcement une map jouee.
+     */
+    private String pickMap(Game g) {
         if (g.n == 1 && this.nextMap != null) {
             String m = this.nextMap;
             this.nextMap = null;
@@ -758,14 +787,16 @@ implements Listener {
         }
         ArrayList<String> pool = new ArrayList<String>();
         for (String id : this.getConfig().getStringList("maps")) {
-            if (!IMPORTED.containsKey(id.toLowerCase())) continue;
-            pool.add(id.toLowerCase());
+            String k = id.toLowerCase();
+            if (!IMPORTED.containsKey(k) || pool.contains(k)) continue;
+            pool.add(k);
         }
         if (pool.isEmpty()) {
             pool.addAll(IMPORTED.keySet());
         }
-        if (!sameOk && pool.size() > 1) {
-            pool.remove(g.mapId);
+        String last = g.lastPlayed != null ? g.lastPlayed : this.lastMap;
+        if (last != null && pool.size() > 1) {
+            pool.remove(last);
         }
         return (String)pool.get(this.random.nextInt(pool.size()));
     }
@@ -1506,7 +1537,7 @@ implements Listener {
                 }
                 sender.sendMessage("\u00a78[\u00a79Sheep Wars\u00a78] \u00a77\u00a77Construction de la map (partie 1), puis copie du mod\u00e8le...");
                 g.remakeModele = true;
-                g.rebuild(sender, this.pickMap(g, false));
+                g.rebuild(sender, this.pickMap(g));
                 break;
             }
             case "map": 
@@ -1529,7 +1560,7 @@ implements Listener {
                 if (!(g == null || g.state != State.WAITING && g.state != State.STARTING || g.building || g.world == null || this.preparingCopies())) {
                     sender.sendMessage("\u00a78[\u00a79Sheep Wars\u00a78] \u00a77\u00a77Construction de \u00a7e" + IMPORTED.get(id).name() + "\u00a77 (partie 1)...");
                     g.remakeModele = true;
-                    g.rebuild(sender, this.pickMap(g, false));
+                    g.rebuild(sender, this.pickMap(g));
                     break;
                 }
                 sender.sendMessage("\u00a78[\u00a79Sheep Wars\u00a78] \u00a77\u00a77Prochaine map de la partie 1 : \u00a7e" + IMPORTED.get(id).name());
@@ -1643,6 +1674,8 @@ implements Listener {
         boolean building;
         final List<Block> cages = new ArrayList<Block>();
         String mapId = "rose";
+        /** 4.7.1 : derniere map jouee par cette partie (null = celle de data.yml). */
+        String lastPlayed;
         int aMinX = -60;
         int aMaxX = 60;
         int aMinY;
@@ -1935,6 +1968,23 @@ implements Listener {
             }
         }
 
+        /** 4.7.1 : fait entrer les joueurs en attente (copie preparee ou map en construction) dans la salle d'attente. */
+        void flushPending() {
+            World hub = EemiSheepWars.this.hubWorld();
+            for (UUID id : new ArrayList<UUID>(this.pending)) {
+                this.pending.remove(id);
+                Player pl = Bukkit.getPlayer((UUID)id);
+                if (pl == null || hub != null && !pl.getWorld().equals((Object)hub)) {
+                    EemiSheepWars.this.byPlayer.remove(id);
+                    if (pl == null) continue;
+                    pl.sendMessage("§8[§9Sheep Wars§8] §7Tu n'es plus dans le hub : inscription annulée.");
+                    continue;
+                }
+                this.addPlayer(pl);
+            }
+            EemiSheepWars.this.reportStatus();
+        }
+
         void addPlayer(Player p) {
             UUID id = p.getUniqueId();
             this.spectators.remove(id);
@@ -2049,6 +2099,7 @@ implements Listener {
                 return;
             }
             Collections.shuffle(list);
+            EemiSheepWars.this.markPlayed(this);
             this.ready.clear();
             this.teams.clear();
             this.alive.clear();
@@ -2221,7 +2272,7 @@ implements Listener {
             }
             Bukkit.getScheduler().runTaskLater((Plugin)EemiSheepWars.this, () -> {
                 if (!this.destroyed) {
-                    this.rebuild(null, EemiSheepWars.this.pickMap(this, false));
+                    this.rebuild(null, EemiSheepWars.this.pickMap(this));
                 }
             }, 20L);
         }
@@ -2768,6 +2819,9 @@ implements Listener {
                 }
                 catch (IOException | RuntimeException ex) {
                     this.building = false;
+                    if (!this.preparing && !this.pending.isEmpty()) {
+                        this.flushPending();
+                    }
                     if (this.remakeModele) {
                         this.remakeModele = false;
                         ArrayList<Runnable> todo = new ArrayList<Runnable>(EemiSheepWars.this.modeleWaiters);
@@ -2803,6 +2857,9 @@ implements Listener {
             }
             this.building = false;
             this.clearEntities();
+            if (!this.preparing && !this.pending.isEmpty()) {
+                this.flushPending();
+            }
             EemiSheepWars.this.getLogger().info("Map Sheep Wars construite (" + this.world.getName() + ") : " + this.mapName() + " (" + this.mapId + ", " + ops.size() + " op\u00e9rations).");
             if (sender != null) {
                 sender.sendMessage("\u00a78[\u00a79Sheep Wars\u00a78] \u00a77\u00a7aMap construite : \u00a7e" + this.mapName());
