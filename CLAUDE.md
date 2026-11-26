@@ -376,7 +376,7 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 - Boussole (structure actuelle, sous-menus = fichiers de `DeluxeHub/menus/`, chargés automatiquement ; Retour = `[MENU] serverselector`) :
   - Titres : `&f` + U+E300 + glyphe du fond + U+E301 + `&fMini-jeux ...` (fonds : selector E310, iles E311, survie E312, equipes E313, combat E314, tnt E315, ambiance E316, dans `minecraft:default` du pack). Les caractères réels (UTF-8) sont écrits dans les yml. Aucune vitre de remplissage (style « Game Menu » d'Hypixel voulu par Thibault).
   - `serverselector.yml` (accueil, 45 cases) : Partie au hasard 4 (`[COMMAND] jouer`), Îles 11, Survie 13, Équipes 15, Combat 29, Jeux TNT 31, Ambiance 33, Casino 22 au centre (`[COMMAND] eemi join casino`, mis là par Esteban le 10/11), Fermer 40.
-  - `iles.yml` (36 cases, Retour 31) : SkyBlock 11, L'Abysse 13 (`[COMMAND] abysse`), OneBlock 15, Jump 16 (`[COMMAND] eemi join jump`), Dernier Refuge 21 (tête de zombie, `[COMMAND] refuge`), Tycoon Resto 23 (gâteau, `[COMMAND] eemi join resto`).
+  - `iles.yml` (36 cases, Retour 31) : SkyBlock 11, L'Abysse 13 (`[COMMAND] abysse`), OneBlock 15, Jump 16 (`[COMMAND] eemi join jump`), Dernier Refuge 21 (tête de zombie, `[COMMAND] refuge`), Tycoon 23 (gâteau, `[MENU] tycoon`, 26/11) ; sous-menu `tycoon.yml` (27 cases) : Resto 11 (`eemi join resto`), Fête foraine 15 (fusée, `eemi join fete`, « NOUVEAU » jusqu'au 01/12, bêta), Retour 22.
   - `survie.yml` : UHC Run 11, Speedrun 13, EEMINGO 15.
   - `equipes.yml` : Towers, Bridge, BedWars, Balls of Steel, Sheep Wars, Paintball (cases non relevées).
   - `combat.yml` : SkyWars 11, Hunger Games 13, PvP 15 (`duel`), Entraînement 22 (laine blanche), Pitchout 29, JumpLeague 31 ; case 33 libre (Block Sumo retiré le 17/11, Esteban).
@@ -1327,9 +1327,52 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - Admin/tests : `/resto admin legendaire <id>`, `secret`, `acheter <joueur> <n|tout>`, `give`.
   - Pack : 14 sprites (`EemiResto/pack_src/gen_resto_pack.py`, aperçu `pack_src/apercu/apercu.png`), sous `assets/eemicraft/{items,models/item,textures/item}/resto/` ; fusion `build_pack.py <pack en ligne> <sortie>` (refuse toute collision). Pack publié de référence SHA-1 c9a5ab6f5d828189b54e2383e18614603e36ad1e.
   - Audit hors serveur `EemiResto/outil-audit/audit.ps1`.
-  - Intégrations : AuraSkills `disabled_worlds`, mondes désactivés de DeluxeHub, TAB disable-condition, EemiAdmin `resto`/`tycoon`/`restaurant` bloqués en vanish, EemiCore `games.resto` (« &6Tycoon resto », CAKE, join `resto`, 1-16), boussole `menus/iles.yml` case 23 (gâteau, `[COMMAND] eemi join resto`). MV-Inventories : `resto` hors de tout groupe.
+  - Intégrations : AuraSkills `disabled_worlds`, mondes désactivés de DeluxeHub, TAB disable-condition, EemiAdmin `resto`/`tycoon`/`restaurant` bloqués en vanish, EemiCore `games.resto` (« &6Tycoon resto », CAKE, join `resto`, 1-16), boussole `menus/iles.yml` case 23 « Tycoon » → sous-menu `tycoon.yml` case 11 (`eemi join resto`). MV-Inventories : `resto` hors de tout groupe.
 - **Pièges** : `onInteract` refusait tout clic droit sur un bloc (`useInteractedBlock DENY`), portes comprises (« on reste bloqué dedans ») → portes, portillons, trappes (tags DOORS / FENCE_GATES / TRAPDOORS, sauf fer) autorisés ; le reste (coffres, fours, plaques…) bloqué.
 - **À vérifier en jeu** : ouverture des portes, textures du pack, plats secrets.
+
+## Tycoon Fête foraine (EemiFete)
+
+**État**
+- **EemiFete 0.1.0** : compilé le 26/11 (`a_deposer/EemiFete-0.1.0.jar`), PAS ENCORE INSTALLÉ. À installer en bêta : `/droits jeu fete beta` après le redémarrage. Rien n'a été vu en jeu.
+- **Réglages du serveur** (faits le 26/11, actifs au redémarrage) :
+  - `games.fete` d'EemiCore (« &dTycoon fête foraine », FIREWORK_ROCKET, join `fete`, join-aliases `foire`/`feteforaine`, monde `fete`, 1-20) ;
+  - sous-menu `tycoon.yml` de la boussole ;
+  - monde `fete` dans AuraSkills `disabled_worlds`, dans les mondes désactivés de DeluxeHub et dans la disable-condition de TAB ;
+  - EemiAdmin : `fete`, `foire` et `feteforaine` bloqués en vanish.
+  - Backups dans `/.ai-backups/*20261126-1544*`.
+
+**Fonctionnement**
+- **Origine.** Demande d'Esteban (26/11) : un 2e Tycoon (« si c'est bien fait ça peut mettre une très grosse claque »). Source `EemiFete/`, conception `EemiFete/CONCEPTION.md`, rendus `EemiFete/apercus/` (parc animé, nuit, jour, vue d'ensemble).
+- **Moteur.** Repris d'EemiResto : réclamation par l'arche, boutons d'achat au sol (fenêtre de 2), caisse (dalle d'or du guichet), renaissance, nom du parc (`/fete nom`), classement, visite, revenu hors ligne.
+- **Différences avec le resto.**
+  - Le revenu est théorique (tickets « ✪ »), versé chaque seconde au propriétaire connecté, où qu'il soit. Il n'y a pas d'objets qui circulent.
+  - Des « +tickets » apparaissent au-dessus de chaque attraction à chaque tour.
+  - Un parc complet tire des feux d'artifice.
+- **Monde.** `fete` (vide, créé par le plugin, nuit fixe 17000, chunks forceload). Allée foraine de 23 de large avec guirlandes, place d'entrée (kiosque, arches), 10 parcs de 48 × 48 (`Geo`). Côté nord : rotation de 180°, jamais un miroir.
+- **Économie** (`Econ`, simulée par `outil-test/.../TestEcon.java`) : `base-wait` 30, `growth` 1.17, environ 3 h 20 pour le 1er parc à plein revenu.
+  - 12 attractions (`Defs.ATTRACTIONS`) ;
+  - 5 multiplicateurs (orgue, mascotte, néons, VIP, arche) ;
+  - 3 accélérateurs de 15 % ;
+  - 31 achats, dont 4 donnés à la réclamation.
+- **Manèges animés** (`Ride`, `Rides`, `Show`).
+  - **Principe.** Chaque cube d'une pièce mobile est un BlockDisplay posé au pivot. Sa transformation (rotation JOML + translation) est renvoyée tous les `Show.STEP` = 10 ticks, pour la pose à t + 0,5 s, et le client interpole. Les pièces fixes (pieds de la grande roue, portique du bateau) sont posées une fois.
+  - **Les 8 manèges :** carrousel, grande roue (nacelles droites), chaises volantes, bateau pirate, tour de chute, auto-tamponneuses, train fantôme, montagnes russes en tour de parc.
+  - **Budget.** Environ 1 020 pièces pour un parc complet. Seuls les parcs à moins de `show-distance` (80) blocs d'un joueur sont animés, `max-shows` (6) au plus.
+  - **Contrôle hors serveur.** `TestShow` vérifie que les coins des BlockDisplay tombent sur les boîtes du modèle (côtés nord et sud) : écart max 0,00003 bloc.
+- **Visiteurs** (`Crowd`). Des Mannequin sans IA se déplacent par téléportation courte tous les 2 ticks, en marche aléatoire sur le graphe des allées. Leur nombre vaut 2 + le nombre d'attractions, plafonné à `visitors.max-per-park` (10).
+- **Commandes.** `/fete` (`/foire`, `/feteforaine`) `menu|aller|visiter <joueur>|top|nom <nom>|quitter`.
+  - Admin (`eemifete.admin`) : `/fete admin reload|info [joueur]|reset <joueur>|nom|give <joueur> <tickets>|acheter <joueur> <n|tout>|build [maintenant]`.
+  - EemiCore : `eemi reward <j> fete play` toutes les 30 min, `win` à chaque renaissance (+250 pièces, +300 xp), paliers de tickets.
+- **Outils** (`EemiFete/outil-test/`) : `TestRender.java` (vidages de blocs et boîtes tournées), `render_iso.py` (rendu isométrique jour/nuit et GIF), `TestEcon`, `TestShow`. Les 191 états de blocs ont été comparés aux blockstates du client 26.3 : tous existent.
+
+**À vérifier en jeu**
+- Charge réseau et serveur des BlockDisplay (environ 100 mises à jour par tick et par parc animé).
+- Fluidité des manèges, rendu de nuit (luminosité forcée à 13, ampoules à 15) et sens de rotation des parcs du côté nord.
+- Visiteurs : skins par défaut, description vide, rien de coincé.
+- Construction de l'allée au premier démarrage : environ 1 million de blocs à 8 ms/tick.
+- Popups de tickets et feux d'artifice.
+- Bêta par EemiDroits.
 
 # Modes persistants et en développement
 
