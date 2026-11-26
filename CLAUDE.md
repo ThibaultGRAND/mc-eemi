@@ -132,8 +132,8 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 ## EemiCore (plugin central : registre des jeux, groupes, progression, boutique)
 
 **État**
-- 1.9.1 compilée (26/11, `a_deposer/EemiCore-1.9.1.jar`, carte #114), PAS installée : menu « Top 10 des niveaux » du navigateur (style refuge) rangé en pyramide, lue de haut en bas et de gauche à droite (#1 au centre de la 1re ligne, #2-#3, #4-#6, #7-#10 ; cases `liste` 3, 9, 11, 15, 17, 19, 21, 23, 25, 27). Avant, le podium était centré sur la 1re ligne (#1 au milieu, #2 à gauche, #3 à droite…) : « l'ordre commence au milieu ». Les placeholders `%eemi_rank_level_<n>%` étaient déjà justes (vérifié au `papi parse`).
-- Installé : EemiCore 1.9.0 (22/11/2026, « 40 jeux » au `eemi reload`). `EemiCore/A_APPLIQUER_1.9.0.md` appliqué au config du serveur (accents, Halloween `available-until: "2026-11-03"` + `hide-off-season`, 6 cosmétiques de Noël). Rien de la 1.9.0 vu en jeu.
+- Installé : EemiCore 1.9.1 (26/11, redémarrage 10:54 sans erreur, `a_deposer_installes/EemiCore-1.9.1.jar`, carte #114) : menu « Top 10 des niveaux » du navigateur (style refuge) rangé en pyramide, lue de haut en bas et de gauche à droite (#1 au centre de la 1re ligne, #2-#3, #4-#6, #7-#10 ; cases `liste` 3, 9, 11, 15, 17, 19, 21, 23, 25, 27). Avant, le podium était centré sur la 1re ligne (#1 au milieu, #2 à gauche, #3 à droite…) : « l'ordre commence au milieu ». Les placeholders `%eemi_rank_level_<n>%` étaient déjà justes (vérifié au `papi parse`).
+- Avant : EemiCore 1.9.0 (en `.jar.old` ; 22/11/2026, « 40 jeux » au `eemi reload`). `EemiCore/A_APPLIQUER_1.9.0.md` appliqué au config du serveur (accents, Halloween `available-until: "2026-11-03"` + `hide-off-season`, 6 cosmétiques de Noël). Rien de la 1.9.0 vu en jeu.
 - Jamais vérifié en jeu : chapeaux, gadgets, titre au-dessus de la tête (hauteur), anti-vol, menus `/jeux` (alignement), blocage des commandes tapées en maintenance pour un non-op, conflits d'alias `/p`, `/shop`, `/play`.
 - Ouvert : niveau dans TAB (optionnel), meilleur joueur dans les hologrammes ; Esteban (17/11) n'aime pas les contours rouges/verts/dorés autour des cosmétiques de la boutique (aucune option dans le config) : à trancher avec Thibault.
 
@@ -1579,7 +1579,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Ménage du serveur (16/11/2026, demande d'Esteban)
 
-- Il reste UN `.jar.old` par plugin (le précédent) ; 118 plus anciens supprimés.
+- Il reste UN `.jar.old` par plugin (le précédent) ; 118 plus anciens supprimés. Règle redite par Esteban le 26/11 : à chaque installation, supprimer les `.old` plus anciens sans redemander (14 supprimés ce jour-là).
 - Supprimés : zips de maps déjà importées à la racine (Ruins of Altrac, pitchout, 6 zips BedWars, carnival, museum, mm_campblood, mm_cheaphouse, Paintball_Map_1), /plugins/Balls-of-Steel.zip, ancien /EemicraftPack.zip de la racine, /EemiStagiaires-1.0.0.jar en double, /server-icon-ancienne.png, /tmp_sbwjar, /maps-sources/jarscan ; plus tard les zips dropper et `/buildbattle_duo_datapack` (accord d'Esteban).
 - Plugins supprimés (jar + dossier) : EemiTaxe, EemiRing (ring de l'ancien lobby).
 - Gardés après question : /refuge_bourgade.zip et /plugins/RefugePack.zip (Thibault), /plugins/EemicraftPack.zip, /eemicraft-skyblock-source-2026-10-29.zip, /hungerGames-map, /map boat, /maps-sources, /sauvegardes ; EemiCombat (dossier seul), EemiTonte 1.2.3 (de nouveau en place, origine inconnue), EemiHalloween, EemiFeux.
