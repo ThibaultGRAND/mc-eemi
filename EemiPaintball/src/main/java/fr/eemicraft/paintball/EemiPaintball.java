@@ -170,12 +170,13 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
             2000, 30, -112, 30, 82.5, 95, 112.5, 0f, 180f));
     /** Petite map posee au centre (speedball, chantier, western, tournoi ; voir SmallMaps), notee dans data.yml. */
     String smallMap = "speedball";
-    /** Derniere petite map jouee (jamais deux fois de suite). */
+    /** Derniere petite map JOUEE (jamais deux fois de suite), gardee dans data.yml (last-small) depuis la 1.9.1. */
     String lastSmall;
     /** Vrai apres le tirage du demarrage : la premiere partie se joue sur la map posee (celle vue depuis la salle d'attente). */
     boolean keepPosed;
     /** Map de la partie en cours (null = petite map, voir smallMap). */
     BigMap cur;
+    /** Derniere grande map jouee, gardee dans data.yml (last-big) depuis la 1.9.1. */
     String lastBig;
     /** La partie en cours se joue sur une grande map. */
     boolean onBig;
@@ -254,8 +255,10 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
         if (SmallMaps.get(sm) == null) {
             buildVersion = 0;
         }
-        // la map posee compte comme la derniere jouee : la premiere partie apres un redemarrage en change
-        lastSmall = smallMap;
+        // 1.9.1 : derniere map JOUEE lue dans data.yml (avant : la map posee comptait comme jouee, ce qui biaisait le tirage)
+        String ls = data.getString("last-small");
+        lastSmall = ls == null || SmallMaps.get(ls) == null ? null : SmallMaps.get(ls).id();
+        lastBig = data.getString("last-big");
         for (BigMap b : bigs) {
             b.version = data.getInt("bigs." + b.id + ".version", 0);
             b.dirty = data.getBoolean("bigs." + b.id + ".dirty", false);
@@ -376,18 +379,16 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
             }
             build();
         }
-        // demarrage : une autre petite map est tiree au hasard et posee tout de suite (comme le correctif de Mario
-        // Barque 2.3.2) ; la map d'avant le redemarrage reste exclue du tirage du premier lancement (lastSmall)
-        List<String> ids = smallIds();
-        String before = smallMap;
-        ids.remove(before);
-        if (getConfig().getBoolean("random-start-map", true) && !ids.isEmpty()) {
-            String pick = ids.get(rnd.nextInt(ids.size()));
-            getLogger().info("Demarrage : petite map tiree au hasard = " + pick + " (avant le redemarrage : " + before + ").");
-            buildSmall(pick, true);
+        // demarrage : une petite map est tiree au hasard (sans la derniere jouee, lastSmall de data.yml) et posee
+        // tout de suite ; elle est de nouveau tiree quand le premier joueur entre dans la salle vide (drawOnJoin)
+        if (getConfig().getBoolean("random-start-map", true)) {
+            String pick = pickSmall();
+            getLogger().info("Demarrage : petite map tiree au hasard = " + pick + " (derniere jouee : " + lastSmall + ").");
+            if (!pick.equals(smallMap)) {
+                buildSmall(pick, true);
+            }
             keepPosed = smallMap.equals(pick);
         }
-        lastSmall = before;
         spawnRules();
     }
 
@@ -431,6 +432,31 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
             + (System.currentTimeMillis() - t0) + " ms.");
     }
 
+    /** 1.9.1 : tirage uniforme d'une petite map jouable, sans la derniere jouee (sauf s'il n'y en a qu'une). */
+    String pickSmall() {
+        List<String> ids = smallIds();
+        if (ids.size() > 1 && lastSmall != null) {
+            ids.remove(lastSmall);
+        }
+        return ids.get(rnd.nextInt(ids.size()));
+    }
+
+    /**
+     * 1.9.1 : premier joueur dans la salle d'attente vide (pas de partie en cours) = nouveau tirage de la petite map,
+     * posee avant son arrivee si elle change ; elle sera jouee telle quelle (keepPosed) si le match se fait en petite map.
+     */
+    void drawOnJoin() {
+        if (world == null || state != State.WAITING || !players.isEmpty()) {
+            return;
+        }
+        String pick = pickSmall();
+        if (!pick.equals(smallMap)) {
+            restorePaint();
+            buildSmall(pick, false);
+        }
+        keepPosed = smallMap.equals(pick);
+    }
+
     /** Petites maps jouables : liste small-maps du config (vide ou absente = toutes). */
     List<String> smallIds() {
         List<String> ids = new ArrayList<>();
@@ -447,6 +473,8 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
         YamlConfiguration y = new YamlConfiguration();
         y.set("build-version", buildVersion);
         y.set("small-map", smallMap);
+        y.set("last-small", lastSmall);
+        y.set("last-big", lastBig);
         for (BigMap b : bigs) {
             y.set("bigs." + b.id + ".version", b.version);
             y.set("bigs." + b.id + ".dirty", b.dirty);
@@ -902,6 +930,7 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
             if (!ok.isEmpty()) {
                 cur = ok.get(rnd.nextInt(ok.size()));
                 lastBig = cur.id;
+                saveData();
             }
         }
         onBig = cur != null;
@@ -918,6 +947,8 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
             lastSmall = pick;
             if (!pick.equals(smallMap)) {
                 buildSmall(pick, false);
+            } else {
+                saveData();
             }
         }
         bar = BossBar.bossBar(c("&fTemps &e" + clock(timeLeft)), 1f, BossBar.Color.YELLOW, BossBar.Overlay.NOTCHED_10);
@@ -1796,6 +1827,7 @@ public final class EemiPaintball extends JavaPlugin implements Listener {
             msg(p, "&7La partie se termine : reessaie dans quelques secondes.");
             return;
         }
+        drawOnJoin();
         boolean wasSpec = spectators.remove(id);
         PB pb = new PB(id, p.getName());
         int c0 = count(0);
