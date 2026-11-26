@@ -439,7 +439,10 @@ public final class EemiInfection extends JavaPlugin implements Listener {
             }
         }
         seeds.add(new int[]{(int) Math.floor(City.EXIT[0]), (int) Math.floor(City.EXIT[1]), (int) Math.floor(City.EXIT[2])});
-        int reached = reach.run(seeds.toArray(new int[0][]));
+        int[][] seedArr = seeds.toArray(new int[0][]);
+        int reached = reach.run(seedArr);
+        // 1.9.0 (carte #136) : parcours inverse = on doit pouvoir RESSORTIR de la case (pas seulement y tomber)
+        reach.runBack(seedArr);
         int refused = 0;
         for (int x = -lim; x <= lim; x++) {
             for (int z = -lim; z <= lim; z++) {
@@ -462,7 +465,8 @@ public final class EemiInfection extends JavaPlugin implements Listener {
                     if (bb.getWidthX() < 0.9 || bb.getWidthZ() < 0.9 || bb.getHeight() < 0.5) {
                         continue;
                     }
-                    if (!reach.reached(x, y, z)) {
+                    // reliee a la rue dans les deux sens, 3 cases libres en hauteur, 4 voisines praticables (Reach.roomy)
+                    if (!reach.roomy(x, y, z)) {
                         refused++;
                         continue;
                     }
@@ -471,7 +475,7 @@ public final class EemiInfection extends JavaPlugin implements Listener {
             }
         }
         getLogger().info("Accessibilite : " + reached + " positions atteintes a pied, " + spots.size() + " cases de dispersion gardees, "
-                + refused + " refusees (enfermees).");
+                + refused + " refusees (enfermees, sans sortie a pied ou trop a l'etroit).");
         if (spots.isEmpty()) {
             getLogger().warning("Aucune case de dispersion trouvee : /infection build");
         }
@@ -488,9 +492,14 @@ public final class EemiInfection extends JavaPlugin implements Listener {
                 || t == Material.CAVE_VINES || t == Material.CAVE_VINES_PLANT) {
             return Reach.PASS | Reach.CLIMB;
         }
+        // portes, portillons et trappes : seulement ceux qu'on peut ouvrir (openable, voir onInteract)
         if (t.isAir() || !t.isSolid() || Tag.WOOL_CARPETS.isTagged(t) || t == Material.MOSS_CARPET || t == Material.SNOW
-                || Tag.WOODEN_DOORS.isTagged(t) || Tag.TRAPDOORS.isTagged(t)) {
+                || openable(t)) {
             return Reach.PASS;
+        }
+        // clotures et murets : collision de 1,5, on ne tient pas debout dessus (1.9.0)
+        if (Tag.FENCES.isTagged(t) || Tag.WALLS.isTagged(t)) {
+            return Reach.TALL;
         }
         return 0;
     }

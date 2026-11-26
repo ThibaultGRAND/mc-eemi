@@ -1139,6 +1139,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 ## Infection (EemiInfection)
 
 **État**
+- 1.9.0 compilée (26/11, `a_deposer/EemiInfection-1.9.0.jar`, carte #136 « on spawn dans des zones qui bloquent »), PAS installée : une case de dispersion (survivants et réapparition des zombies, liste `spots`) doit être reliée à la rue dans les deux sens (`Reach.run` + `runBack` ; avant, une case atteinte seulement en tombant était gardée), clôtures et murets ne servent plus de marche (`TALL`), seules portes/trappes/portillons ouvrables sont traversables, marge `roomy` (3 cases de haut, 4 voisines praticables). Mesuré hors serveur : 9 305 cases, 0 piégée (1.8.0 : 26 423 dont 232 piégées). `BUILD_VERSION` inchangée (ville non reconstruite). Au démarrage, « Accessibilite : … cases de dispersion gardees » ≈ 9 000. Audit : `EemiInfection/outils/src/fr/eemicraft/infection/ReachAudit.java` (le `spots()` de `TestCity` ne vaut rien pour l'accessibilité).
 - Installé : EemiInfection 1.8.0. Une 1re partie a été jouée le 16/11 (avec la 1.3.0) ; les versions suivantes (pouvoirs au menu, Charge, textures, retour au salon) n'ont pas été vues jouées dans les notes. Textures activées (`textures: true`) mais rendu en jeu pas confirmé.
 
 **Fonctionnement**
