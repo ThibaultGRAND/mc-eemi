@@ -688,6 +688,27 @@ implements Listener {
         return ids;
     }
 
+    /** 1.9.6 : cosmetique de saison (cle season) que le joueur possede et voit, hors casino. */
+    private boolean seasonOwned(PlayerData d, String id) {
+        ConfigurationSection s = this.cosmetic(id);
+        if (s == null || !d.owned.contains(id) || this.casinoOnly(s)) {
+            return false;
+        }
+        String season = s.getString("season");
+        return season != null && !season.isBlank();
+    }
+
+    /** 1.9.6 (Esteban, 26/11) : cosmetiques de saison deja achetes, ranges par evenement (ordre du config). */
+    private LinkedHashMap<String, List<String>> seasonOwnedByEvent(PlayerData d) {
+        LinkedHashMap<String, List<String>> by = new LinkedHashMap<String, List<String>>();
+        for (String cat : CATEGORIES) {
+            for (String id : this.cosmeticsOf(cat)) {
+                if (this.seasonOwned(d, id)) by.computeIfAbsent(this.cosmetic(id).getString("season"), k -> new ArrayList<String>()).add(id);
+            }
+        }
+        return by;
+    }
+
     /** Page ou revenir apres un clic sur un cosmetique : la page Saison si on y etait. */
     private String backCat(Player p, String cat) {
         return this.saisonView.contains(p.getUniqueId()) ? "saison" : cat;
@@ -2797,7 +2818,21 @@ implements Listener {
         }
         // 1.9.4 : la case « quetes » de l'accueil de la boutique devient « Saison » (les quetes restent dans le profil)
         List<String> saison = this.saisonIds(d);
-        lines.add(new NavUi.Ligne("s_quetes", saison.isEmpty() ? "SAISON : RIEN" : "SAISON : " + saison.size(), NavUi.colorOf(saison.isEmpty() ? "&7" : "&6")));
+        // 1.9.6 : « achetes / total » comme les autres categories ; cadre dore si un cosmetique de saison est equipe
+        // ou si la saison a des cosmetiques en vente
+        int seasonHave = 0;
+        for (List<String> l : this.seasonOwnedByEvent(d).values()) seasonHave += l.size();
+        int seasonTotal = seasonHave + saison.size();
+        boolean seasonWorn = false;
+        for (String cat : CATEGORIES) {
+            String eqId = d.equipped.get(cat);
+            if (eqId != null && this.seasonOwned(d, eqId)) seasonWorn = true;
+        }
+        // le calque n'existe qu'avec le pack qui le dessine (sinon NavUi previent a chaque ouverture)
+        if ((seasonWorn || !saison.isEmpty()) && NavFonds.GLYPHES.containsKey("ov:boutique:sel:quetes")) {
+            ov.add("sel:quetes");
+        }
+        lines.add(new NavUi.Ligne("s_quetes", seasonHave + " / " + seasonTotal, NavUi.colorOf(seasonHave > 0 ? "&a" : "&7")));
         lines.add(new NavUi.Ligne("bas", "GAGNE DES PIÈCES EN JOUANT"));
         Inventory inv = this.navInv(h, "boutique", ov, lines);
         this.navHead(h, inv, "boutique", List.of("&7Cadre &6doré &7: un cosmétique de la", "&7catégorie est équipé.", "", "&7Pièces : parties, victoires, kills,", "&7quêtes du jour et connexion quotidienne."));
@@ -2806,10 +2841,10 @@ implements Listener {
         }
         String seasonName = saison.isEmpty() ? null : this.cosmetic(saison.get(0)).getString("season");
         this.navBtn(h, inv, "boutique", "quetes", "&6&l✦ Saison" + (seasonName == null ? "" : " &e" + seasonName),
-                saison.isEmpty() ? List.of("&7Aucun cosmétique de saison en vente", "&7pour le moment.")
-                        : List.of("&7Les cosmétiques de la saison en cours,", "&7en vente pour un temps limité.", "", "&7À acheter : &f" + saison.size(),
-                        "&8Une fois achetés, ils vont dans leur catégorie.", "", "&eClic : voir"),
-                saison.isEmpty() ? null : "shopcat:saison");
+                List.of("&7Cosmétiques des événements (Halloween, Noël...),", "&7en vente pour un temps limité.", "",
+                        "&7En vente : &f" + saison.size(), "&7Achetés : &f" + seasonHave + "&7/&f" + seasonTotal,
+                        "&8Achetés, ils sont aussi dans leur catégorie.", "", seasonTotal == 0 ? "&8Rien pour le moment" : "&eClic : voir"),
+                seasonTotal == 0 ? null : "shopcat:saison");
         this.navBtn(h, inv, "boutique", "retour", "&eMon profil", List.of(), "profile:" + d.uuid);
         this.openLater(p, inv);
     }
@@ -2888,7 +2923,12 @@ implements Listener {
         int[] cells = EemiCore.navCells("boutique_cat", "articles");
         ArrayList<String> visible = new ArrayList<String>();
         if (saisonPage) {
+            // 1.9.6 : en vente d'abord, puis les deja achetes, chaque evenement sur une nouvelle ligne (cases vides = null)
             visible.addAll(this.saisonIds(d));
+            for (List<String> group : this.seasonOwnedByEvent(d).values()) {
+                while (visible.size() % 7 != 0) visible.add(null);
+                visible.addAll(group);
+            }
             if (visible.isEmpty()) {
                 this.navShop(p);
                 return;
@@ -2909,6 +2949,11 @@ implements Listener {
         int i = 0;
         for (int k = page * cells.length; k < visible.size() && i < cells.length; ++k, ++i) {
             String id = visible.get(k);
+            if (id == null) {
+                items.add(null);
+                acts.add(null);
+                continue;
+            }
             ConfigurationSection s = this.cosmetic(id);
             ShopState st = this.shopState(d, id, s);
             ArrayList<String> lore = new ArrayList<String>(this.cosmeticLore(p, s, s.getString("type", cat)));
@@ -2923,13 +2968,13 @@ implements Listener {
             items.add(this.cosmeticItem(s, s.getString("name", id), lore, st == ShopState.EQUIPE));
             acts.add("cos:" + id + ":" + page);
         }
-        String seasonName = saisonPage ? this.cosmetic(visible.get(0)).getString("season", "") : "";
-        List<NavUi.Ligne> lines = List.of(new NavUi.Ligne("haut", saisonPage ? seasonName.toUpperCase().replace("Ë", "E").replace("Ï", "I").replace("Ü", "U") : EemiCore.strip(CATEGORY_NAMES[ci])),
+        List<NavUi.Ligne> lines = List.of(new NavUi.Ligne("haut", saisonPage ? "SAISONS" : EemiCore.strip(CATEGORY_NAMES[ci])),
                 new NavUi.Ligne("page", (page + 1) + "/" + pages), new NavUi.Ligne("solde", EemiCore.num(d.coins) + " ⛃", NavUi.colorOf("&6")));
         Inventory inv = this.navInv(h, "boutique_cat", ov, lines);
         this.navHead(h, inv, "boutique_cat", List.of("&7Cadre &6doré &7: équipé", "&7Cadre &avert &7: acheté", "&7Cadre &crouge &7: pas assez de pièces", "&7Sans cadre : à acheter", "",
-                saisonPage ? "&6Cosmétiques de saison, en vente pour un temps limité" : CATEGORY_HELP[ci]));
+                saisonPage ? "&6En haut : en vente. Plus bas : tes achats, par événement" : CATEGORY_HELP[ci]));
         for (int k = 0; k < items.size(); ++k) {
+            if (items.get(k) == null) continue;
             inv.setItem(cells[k], items.get(k));
             h.actions.put(cells[k], acts.get(k));
         }

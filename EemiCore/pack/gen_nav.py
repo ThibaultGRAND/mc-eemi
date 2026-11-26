@@ -317,7 +317,7 @@ def build_menu_defs():
     el.append(btn("retour", 0, 5, 1, 1, "retour"))
     el.append(("text", "bas", 96, row_y(5) + 7, "c", 130))
     menus.append(dict(id="boutique", titre="BOUTIQUE", rows=6, el=el,
-                      overlays=[("sel", c[0]) for c in SHOP_CATS]))
+                      overlays=[("sel", c[0]) for c in SHOP_CATS] + [("sel", "quetes")]))
     # page d'une catégorie de la boutique
     el = list(HEAD) + [("cells", "articles", LIST_CELLS)] + PAGER + [("text", "solde", 167, row_y(5) + 7, "d", 48)]
     menus.append(dict(id="boutique_cat", titre="BOUTIQUE", rows=6, el=el,
@@ -740,7 +740,7 @@ EX = {
     "profil": (["profil:bar:xp:8"], {"haut": "ENOSIK · NIVEAU 12 · 2 450 ⛃", "parties": "184", "victoires": "37",
                "kills": "212", "serie": "5 J", "niveau": "NIV 12", "xp": "XP 120 / 300"}),
     "boutique": (["boutique:sel:title"], {"haut": "2 450 ⛃", "s_trail": "3 / 10", "s_hat": "1 / 7", "s_title": "4 / 24",
-                 "s_join": "0 / 5", "s_gadget": "0 / 4", "s_quetes": "SAISON : 10", "bas": "GAGNE DES PIÈCES EN JOUANT"}),
+                 "s_join": "0 / 5", "s_gadget": "0 / 4", "s_quetes": "2 / 10", "bas": "GAGNE DES PIÈCES EN JOUANT"}),
     "boutique_cat": (["boutique_cat:chef:articles:0", "boutique_cat:ok:articles:1", "boutique_cat:non:articles:5"],
                      {"haut": "TITRES", "page": "1/2", "solde": "2 450 ⛃"}),
     "confirmer": ([], {"nom": "TITRE LÉGENDE", "prix": "2 000 ⛃ · IL TE RESTERA 450 ⛃"}),
