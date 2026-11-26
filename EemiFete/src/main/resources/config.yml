@@ -23,6 +23,10 @@ visitors:
   enabled: true
   # Visiteurs par parc : 2 + nombre d'attractions, plafonne a cette valeur.
   max-per-park: 10
+  # Skins : les joueurs deja venus sur le serveur (au plus max-skins, tires au hasard) + ces pseudos ;
+  # 1 visiteur sur 3 garde un des 9 skins par defaut du jeu.
+  max-skins: 40
+  skins: []
 
 economy:
   # Premier achat = 30 s de revenu, puis x1,17 par achat (environ 3 h 20 pour finir le premier parc).

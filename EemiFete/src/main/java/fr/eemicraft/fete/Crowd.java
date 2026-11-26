@@ -67,6 +67,7 @@ final class Crowd {
                 m.setImmovable(true);
                 m.setDescription(Component.empty());
                 m.setCustomNameVisible(false);
+                m.setProfile(pl.visitorProfile());
             });
             if (w.e != null) walkers.add(w);
         }

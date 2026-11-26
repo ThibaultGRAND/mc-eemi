@@ -1,5 +1,6 @@
 package fr.eemicraft.fete;
 
+import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import java.io.File;
 import java.io.IOException;
@@ -107,6 +108,8 @@ public final class EemiFete extends JavaPlugin implements Listener {
     private boolean spawning;
     private long seconds;
     private List<PData> top = new ArrayList<>();
+    /** Skins des visiteurs : profils (textures comprises) des joueurs déjà venus sur le serveur. */
+    private final List<ResolvableProfile> skins = new java.util.concurrent.CopyOnWriteArrayList<>();
 
     // =================================================================== cycle de vie
 
@@ -134,6 +137,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
             sendStatus();
         }, 1200L, 1200L);
         Bukkit.getScheduler().runTask(this, this::startup);
+        loadSkins();
         getLogger().info("Tycoon fete foraine : " + geo.parcels + " parcs, " + players.size() + " comptes, " + Defs.PURCHASES.size() + " achats.");
     }
 
@@ -250,6 +254,32 @@ public final class EemiFete extends JavaPlugin implements Listener {
         l.removeIf(d -> d.earned <= 0);
         l.sort((a, b) -> Double.compare(b.earned, a.earned));
         top = l.size() > 10 ? new ArrayList<>(l.subList(0, 10)) : l;
+    }
+
+    /**
+     * Skins des visiteurs (26/11, Esteban : « c'est toujours Alex qui se balade ») : les pseudos des joueurs déjà
+     * venus (et ceux de {@code visitors.skins}), résolus une fois côté serveur, textures comprises.
+     */
+    void loadSkins() {
+        java.util.LinkedHashSet<String> names = new java.util.LinkedHashSet<>(getConfig().getStringList("visitors.skins"));
+        for (org.bukkit.OfflinePlayer op : Bukkit.getOfflinePlayers()) if (op.getName() != null) names.add(op.getName());
+        List<String> l = new ArrayList<>(names);
+        java.util.Collections.shuffle(l, rnd);
+        int max = Math.max(0, getConfig().getInt("visitors.max-skins", 40));
+        for (String n : l.subList(0, Math.min(max, l.size()))) {
+            ResolvableProfile.resolvableProfile().name(n).build().resolve().whenComplete((profile, error) -> {
+                if (error == null && profile != null && profile.hasTextures()) skins.add(ResolvableProfile.resolvableProfile(profile));
+            });
+        }
+    }
+
+    /**
+     * Profil d'un nouveau visiteur : un joueur du serveur (2 fois sur 3 s'il y en a), sinon un des 9 skins par défaut
+     * du jeu (profil sans textures, choisi par le client d'après un UUID au hasard).
+     */
+    ResolvableProfile visitorProfile() {
+        if (!skins.isEmpty() && rnd.nextInt(3) > 0) return skins.get(rnd.nextInt(skins.size()));
+        return ResolvableProfile.resolvableProfile().uuid(UUID.randomUUID()).build();
     }
 
     BlockData blockData(String state) {
