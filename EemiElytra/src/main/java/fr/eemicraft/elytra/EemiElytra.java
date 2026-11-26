@@ -119,6 +119,8 @@ public final class EemiElytra extends JavaPlugin implements Listener {
     Builder builder;
     String nextCourse;
     String lastCourse;
+    /** Parcours impose par /elytra map ou forced-next : pas de nouveau tirage a l'arrivee du premier joueur. */
+    boolean nextLocked;
     Course active;
     final Map<UUID, Racer> racers = new LinkedHashMap<>();
     final List<UUID> spectators = new ArrayList<>();
@@ -227,6 +229,8 @@ public final class EemiElytra extends JavaPlugin implements Listener {
         for (String id : ready) {
             gateFor(courses.get(id), true);
         }
+        // 1.1.1 : dernier parcours joue (data.yml, cle last-map), exclu du tirage meme apres un redemarrage
+        lastCourse = data.getString("last-map", null);
         nextCourse = chooseNext();
         getServer().getPluginManager().registerEvents(this, this);
         ticker = Bukkit.getScheduler().runTaskTimer(this, this::tick, 1L, 1L);
@@ -416,7 +420,9 @@ public final class EemiElytra extends JavaPlugin implements Listener {
             }
         }
         if (pool.isEmpty()) {
-            return courses.keySet().iterator().next();
+            // aucun parcours pret : valeur d'attente au hasard, retiree des qu'un parcours est construit
+            List<String> all = new ArrayList<>(courses.keySet());
+            return all.get(rnd.nextInt(all.size()));
         }
         if (pool.size() > 1 && lastCourse != null) {
             pool.remove(lastCourse);
@@ -627,6 +633,11 @@ public final class EemiElytra extends JavaPlugin implements Listener {
         }
         gen++;
         active = courses.get(nextCourse);
+        // 1.1.1 : parcours joue note tout de suite (exclu du prochain tirage, meme apres un redemarrage)
+        lastCourse = active.id;
+        nextLocked = false;
+        data.set("last-map", active.id);
+        saveData();
         state = State.PRESTART;
         prestart = 60;
         finished = 0;
@@ -1041,8 +1052,10 @@ public final class EemiElytra extends JavaPlugin implements Listener {
         state = State.WAITING;
         String forced = getConfig().getString("forced-next", "");
         nextCourse = chooseNext();
+        nextLocked = false;
         if (forced != null && !forced.isEmpty() && ready.contains(forced)) {
             nextCourse = forced;
+            nextLocked = true;
         }
         getConfig().set("forced-next", null);
         boolean courseOk = ready.contains(nextCourse);
@@ -1129,8 +1142,10 @@ public final class EemiElytra extends JavaPlugin implements Listener {
         state = State.WAITING;
         String forced = getConfig().getString("forced-next", "");
         nextCourse = chooseNext();
+        nextLocked = false;
         if (forced != null && !forced.isEmpty() && ready.contains(forced)) {
             nextCourse = forced;
+            nextLocked = true;
         }
         getConfig().set("forced-next", null);
         sendStatus();
@@ -1250,6 +1265,10 @@ public final class EemiElytra extends JavaPlugin implements Listener {
             spectate(p);
             wantsNext.add(id);
             return;
+        }
+        // 1.1.1 : premier joueur dans une salle d'attente vide = nouveau parcours tire au hasard
+        if (state == State.WAITING && racers.isEmpty() && !nextLocked) {
+            nextCourse = chooseNext();
         }
         if (!ready.contains(nextCourse)) {
             nextCourse = chooseNext();
@@ -1713,6 +1732,7 @@ public final class EemiElytra extends JavaPlugin implements Listener {
                     msg(s, "&cCe parcours est en construction.");
                 } else if (state == State.WAITING || state == State.COUNTDOWN) {
                     nextCourse = id;
+                    nextLocked = true;
                     Course k = courses.get(id);
                     for (Racer r : racers.values()) {
                         Player p = Bukkit.getPlayer(r.id);
