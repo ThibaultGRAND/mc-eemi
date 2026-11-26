@@ -44,6 +44,7 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 - **Après chaque modification** (jar compilé, plugin, générateur, pack, ce fichier) : commit puis `git push` tout de suite, sans demander (autorisé par Thibault). Message en français : `EemiAbysse 2.5.1 : monstres S4 moins forts (#57)`. Une modif = un commit ; le jar de `a_deposer/` va dans le même commit que sa source. Push refusé → `git pull --rebase` puis `git push`. Jamais de `--force`.
 - **Conflits** : `.md` en fusion automatique (`merge=union` dans `.gitattributes`) ; après chaque pull, relire les sections touchées, fondre deux versions d'une même ligne en une seule ligne datée, supprimer les doublons exacts, ne jamais effacer une info de l'autre. Code : garder les deux changements si possible ; si les deux ont changé la même logique dans des sens contraires, s'arrêter et demander. Version en conflit : la plus haute +1. Jar en conflit : recompiler depuis la source fusionnée. Jamais de `git reset --hard`, `git checkout -- .`, `git clean` ni suppression de branche sans accord.
 - **Ne jamais commiter** : mots de passe, jetons, clés d'API, `server.properties`, zips de maps (>100 Mo), dossiers `target/`.
+- `maps/` est ignoré par `.gitignore`, SAUF `**/src/main/resources/maps/` (maps embarquées dans les jars : Sheep Wars `.swm`, Paintball `.pbm`) : sans elles, un jar compilé depuis le dépôt n'a plus de map (piège trouvé le 26/11).
 
 ### 2. Configs et fichiers du serveur
 
