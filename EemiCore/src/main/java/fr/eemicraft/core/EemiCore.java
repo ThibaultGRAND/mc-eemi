@@ -655,8 +655,12 @@ implements Listener {
     /** 1.9.0 : visible dans la boutique pour ce joueur (achete, ou en vente et pas reserve au casino ; jamais hors saison masque). */
     private boolean shopVisible(PlayerData d, String id) {
         ConfigurationSection s = this.cosmetic(id);
-        if (s == null || this.offSeason(s)) {
+        if (s == null) {
             return false;
+        }
+        // 1.9.2 : hors saison, il reste visible (grise, non equipable) pour ceux qui l'ont achete
+        if (this.offSeason(s)) {
+            return d.owned.contains(id);
         }
         return d.owned.contains(id) || (this.onSale(s) && !this.casinoOnly(s));
     }
@@ -2787,11 +2791,14 @@ implements Listener {
     /** 1.9.0 (#122) : etat d'un cosmetique pour un joueur, le MEME pour le cadre, la description et l'achat.
      *  EQUIPE / ACHETE / ACHETABLE (pieces >= prix, egalite comprise) / TROP_CHER ; BLOQUE = ni achete ni achetable
      *  autrement (hors vente, casino) : cadre rouge aussi. */
-    private enum ShopState { EQUIPE, ACHETE, ACHETABLE, TROP_CHER, BLOQUE }
+    private enum ShopState { EQUIPE, ACHETE, ACHETABLE, TROP_CHER, BLOQUE, HORS_SAISON }
 
     private ShopState shopState(PlayerData d, String id, ConfigurationSection s) {
         String cat = s.getString("type", "trail");
         if (d.owned.contains(id)) {
+            if (this.offSeason(s)) {
+                return ShopState.HORS_SAISON;
+            }
             return id.equals(d.equipped.get(cat)) ? ShopState.EQUIPE : ShopState.ACHETE;
         }
         if (!this.onSale(s) || this.casinoOnly(s) || this.offSeason(s)) {
@@ -2831,6 +2838,7 @@ implements Listener {
             case ACHETABLE -> List.of("&6&l" + EemiCore.num(price) + " pièces", "&eClic : acheter");
             case TROP_CHER -> List.of("&c&l" + EemiCore.num(price) + " pièces", "&cIl te manque " + EemiCore.num((long)price - d.coins) + " pièces", "&7Gagnes-en en jouant et avec les quêtes du jour");
             case BLOQUE -> List.of("&c&lPas en vente");
+            case HORS_SAISON -> List.of("&8&lHors saison", "&7Tu l'as : il revient avec sa saison");
         };
     }
 
@@ -3416,6 +3424,7 @@ implements Listener {
                 // 1.9.0 (#122) : ce style n'a pas de cadre dessine ; la case sous la carte devient une vitre ROUGE
                 // (sans icone du pack, qui etait un cadenas dore) pour marquer ce qu'on ne peut pas acheter.
                 case TROP_CHER, BLOQUE -> EemiCore.item(Material.RED_STAINED_GLASS_PANE, stateName, stateHelp, false);
+                case HORS_SAISON -> EemiCore.item(Material.GRAY_STAINED_GLASS_PANE, stateName, stateHelp, false);
             };
             // 1.6.2 : le cosmetique garde son VRAI objet (tete de creeper, bloc de diamant...), jamais l'icone de sa categorie
             inv.setItem(slots[i], this.cosmeticItem(s, s.getString("name", id), lore, st == ShopState.EQUIPE));
