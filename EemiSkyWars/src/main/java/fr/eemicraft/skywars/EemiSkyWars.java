@@ -146,6 +146,30 @@ public final class EemiSkyWars extends JavaPlugin implements Listener {
     private final Map<String, Long> freedAt = new HashMap<>();
     private String lastStatus;
     private final Random random = new Random();
+    /** 1.2.4 : derniere map jouee par la partie 1, sauvee dans data.yml (cle last-map) : exclue du tirage, meme apres un redemarrage. */
+    private String lastPlayed;
+
+    private java.io.File dataFile() {
+        return new java.io.File(getDataFolder(), "data.yml");
+    }
+
+    private void loadLastPlayed() {
+        java.io.File f = dataFile();
+        if (f.exists()) lastPlayed = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f).getString("last-map");
+    }
+
+    private void saveLastPlayed(String id) {
+        lastPlayed = id;
+        java.io.File f = dataFile();
+        org.bukkit.configuration.file.YamlConfiguration y = f.exists() ? org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f) : new org.bukkit.configuration.file.YamlConfiguration();
+        y.set("last-map", id);
+        try {
+            getDataFolder().mkdirs();
+            y.save(f);
+        } catch (java.io.IOException e) {
+            getLogger().warning("Impossible d'ecrire data.yml : " + e.getMessage());
+        }
+    }
 
     // ------------------------------------------------------------------ cycle de vie
 
@@ -164,7 +188,9 @@ public final class EemiSkyWars extends JavaPlugin implements Listener {
             setupMaps();
             Game g1 = new Game(1);
             games.put(1, g1);
-            if (!maps.isEmpty()) g1.setMap(pickMap(null), null);
+            loadLastPlayed();
+            g1.lastMap = lastPlayed;
+            if (!maps.isEmpty()) g1.setMap(pickMap(lastPlayed), null);
             remakeAllModels();
             status();
         }, 40L);
@@ -832,6 +858,12 @@ public final class EemiSkyWars extends JavaPlugin implements Listener {
                 updateSidebar(p);
                 return;
             }
+            // 1.2.4 : premier joueur dans une partie 1 vide en attente -> tirage de la map maintenant
+            // (jamais la derniere jouee) ; les maps sont des mondes separes deja remis a zero
+            if (n == 1 && state == State.WAITING && players.size() == 1 && cageOf.isEmpty() && maps.size() > 1) {
+                setMap(pickMap(lastMap), null);
+                p.sendMessage(PREFIX + "§7Map tirée : §d" + map.name);
+            }
             toCage(p);
             if (cageOf.containsKey(id)) broadcast("§a" + p.getName() + " §7a rejoint SkyWars (§f" + cageOf.size() + "/" + capacity() + "§7).");
         }
@@ -931,6 +963,7 @@ public final class EemiSkyWars extends JavaPlugin implements Listener {
             elapsed = 0;
             total = list.size();
             lastMap = map.id;
+            if (n == 1) saveLastPlayed(map.id);
             for (Player p : list) {
                 int[] c = cages().get(cageOf.get(p.getUniqueId()));
                 openCage(c);
