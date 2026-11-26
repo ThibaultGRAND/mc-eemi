@@ -190,6 +190,8 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
     /** Modèle propre (copie de la partie 1) d'où partent les copies ; personne n'y va. */
     private World model;
     private String modelArenaId;
+    /** 2.2.3 : derniere arene JOUEE (toutes parties), gardee dans data.yml (last-map) : jamais deux fois de suite, meme apres un redemarrage. */
+    private String lastArena;
     private boolean modelBusy;
     private int modelGen;
     private long ticks;
@@ -205,6 +207,7 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
         entityKey = new NamespacedKey(this, "entity");
         saveDefaultConfig();
         loadSettings();
+        lastArena = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(dataFile()).getString("last-map");
         getServer().getPluginManager().registerEvents(this, this);
         World w = setupWorld();
         if (w != null) {
@@ -319,6 +322,24 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
         });
     }
 
+    private java.io.File dataFile() {
+        return new java.io.File(getDataFolder(), "data.yml");
+    }
+
+    /** 2.2.3 : note l'arene qui vient d'etre jouee (exclue du prochain tirage) et l'ecrit dans data.yml. */
+    private void markPlayed(Game g) {
+        g.lastPlayed = g.arenaId;
+        lastArena = g.arenaId;
+        java.io.File f = dataFile();
+        org.bukkit.configuration.file.YamlConfiguration y = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f);
+        y.set("last-map", lastArena);
+        try {
+            y.save(f);
+        } catch (java.io.IOException ex) {
+            getLogger().warning("data.yml non ecrit : " + ex.getMessage());
+        }
+    }
+
     /** Nouvelle partie dans une copie du modèle (numéro libre le plus bas), ou null si impossible. */
     private Game newCopy() {
         if (model == null || modelBusy) return null;
@@ -348,6 +369,9 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
             g.prepareWorld();
             g.applyArena();
             g.computeSpots();
+            // 2.2.3 : tirage a la creation de la partie (premier joueur), avant d'y faire entrer quiconque
+            String pick = g.pickArena();
+            if (!pick.equals(g.arenaId)) g.build(pick);
             g.preparing = false;
             World hub = hubWorld();
             for (Player p : online(g.pending)) {
@@ -470,6 +494,8 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
         World world;
         boolean preparing, destroyed;
         String arenaId = "desert";
+        /** 2.2.3 : derniere arene jouee par cette partie (null = celle de data.yml). */
+        String lastPlayed;
         /** Arène imposée par un admin pour la prochaine construction (partie 1). */
         String nextArena;
         int radius, voidY;
@@ -584,7 +610,10 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
             world.getBlockAt(x, y, z).setType(m, false);
         }
 
-        /** Arène de la prochaine construction : celle imposée, sinon au hasard parmi « arenas » (pas deux fois de suite). */
+        /**
+         * Arène de la prochaine construction : celle imposée, sinon au hasard uniforme parmi « arenas », sans la
+         * dernière arène JOUÉE (celle de la partie, sinon celle de data.yml), sauf s'il n'y en a qu'une (2.2.3).
+         */
         String pickArena() {
             if (nextArena != null) {
                 String a = nextArena;
@@ -592,9 +621,13 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
                 return a;
             }
             List<String> pool = new ArrayList<>();
-            for (String id : getConfig().getStringList("arenas")) if (ARENAS.containsKey(id.toLowerCase())) pool.add(id.toLowerCase());
+            for (String id : getConfig().getStringList("arenas")) {
+                String k = id.toLowerCase();
+                if (ARENAS.containsKey(k) && !pool.contains(k)) pool.add(k);
+            }
             if (pool.isEmpty()) pool.addAll(ARENAS.keySet());
-            if (pool.size() > 1) pool.remove(arenaId);
+            String last = lastPlayed != null ? lastPlayed : lastArena;
+            if (last != null && pool.size() > 1) pool.remove(last);
             return pool.get(random.nextInt(pool.size()));
         }
 
@@ -605,8 +638,12 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
          * de 3, pour avoir le temps de lancer la perle) ; la lave compte aussi.
          */
         void build() {
+            build(pickArena());
+        }
+
+        void build(String id) {
             int F = floorY, L = lobbyY;
-            arenaId = pickArena();
+            arenaId = id;
             Arena a = arena();
             applyArena();
             int ext = 45;
@@ -1118,6 +1155,7 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
             pearlTimer.clear();
             outOrder.clear();
             clearBonuses();
+            markPlayed(this);
             state = State.PLAYING;
             total = list.size();
             gameLeft = Math.max(30, cfg("game-time", 600));
@@ -1589,6 +1627,12 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
             if (games.size() >= maxInstances()) { p.sendMessage(PREFIX + "§cToutes les parties sont pleines."); return; }
             target = newCopy();
             if (target == null) { p.sendMessage(PREFIX + "§cUne partie est en préparation, réessaie dans quelques secondes."); return; }
+        }
+        if (target.index == 1 && !target.preparing && target.state == State.WAITING && !modelBusy
+                && target.players.isEmpty() && target.pending.isEmpty()) {
+            // 2.2.3 : premier joueur dans la partie 1 vide en attente = nouveau tirage, arène posée AVANT d'y entrer
+            String pick = target.pickArena();
+            if (!pick.equals(target.arenaId)) target.build(pick);
         }
         if (target.preparing) {
             target.pending.add(id);
