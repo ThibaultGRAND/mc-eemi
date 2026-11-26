@@ -1302,6 +1302,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## EemiResto (Tycoon restaurant, carte #115)
 
+- **1.2.0 compilée, PAS installée** (26/11, `a_deposer/EemiResto-1.2.0.jar`, carte #144, demande de Rémi) : `/resto nom <nom>` (alias `renommer`, `name`) donne un nom au restaurant, affiché sur l'arche (« Nom » + « de Pseudo »), l'enseigne, `/resto visiter` et le classement (lore « Patron : … ») ; `/resto nom reset` = retour à « Chez Pseudo ». 2-24 caractères (lettres avec accents, chiffres, espace, ' & . ! -), codes couleur retirés, 1re lettre en majuscule, mots interdits (admin, modo, staff, eemicraft, serveur, owner, op), nom unique, 60 s entre deux changements. Admin : `/resto admin nom <joueur> <nom|reset>` (sans délai ni filtre). Fiche joueur : clé `resto-name`. Astuce donnée à la réclamation. Pas testé en jeu.
 - **1.1.0 installée** le 26/11 (`a_deposer_installes/EemiResto-1.1.0.jar`, carte #133), redémarrage 10:23 sans erreur : renaissance = `eemi reward win` + `eemi give` 250 pièces + 300 xp (`renaissance.coins` / `renaissance.xp`, défauts du code tant que le config serveur ne les a pas) ; l'ancienne `rewards.rebirth-coins` (75) n'est plus lue.
 - **Avant** : 1.0.1 (en `.jar.old`), pack du resto publié (`textures: true`). Rendu et correctif des portes pas encore confirmés en jeu.
 - **Fonctionnement**

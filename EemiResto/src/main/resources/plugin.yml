@@ -8,7 +8,7 @@ description: Tycoon restaurant d'EEMICRAFT - droppers, tapis roulants, boutons d
 commands:
   resto:
     description: Aller a son restaurant et ouvrir le menu du tycoon
-    usage: '/resto [menu|aller|visiter <joueur>|top|collection|quitter]'
+    usage: '/resto [menu|aller|visiter <joueur>|top|collection|nom <nom>|quitter]'
     aliases: [tycoon, restaurant]
 
 permissions:

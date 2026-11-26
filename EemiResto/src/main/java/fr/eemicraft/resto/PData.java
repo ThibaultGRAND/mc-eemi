@@ -18,6 +18,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 final class PData {
     final UUID uuid;
     String name = "?";
+    /** Nom donne au restaurant par /resto nom (vide = « Chez pseudo »). */
+    String restoName = "";
+    long renamedAt;
     int parcel = -1;
     double money, pending, earned;
     int rebirths;
@@ -55,6 +58,7 @@ final class PData {
             return d;
         }
         d.name = y.getString("name", "?");
+        d.restoName = y.getString("resto-name", "");
         d.parcel = y.getInt("parcel", -1);
         d.money = Math.max(0, y.getDouble("money"));
         d.pending = Math.max(0, y.getDouble("pending"));
@@ -80,6 +84,7 @@ final class PData {
         if (broken) return;
         YamlConfiguration y = new YamlConfiguration();
         y.set("name", name);
+        if (!restoName.isEmpty()) y.set("resto-name", restoName);
         y.set("parcel", parcel);
         y.set("money", money);
         y.set("pending", pending);

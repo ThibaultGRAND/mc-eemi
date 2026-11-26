@@ -523,9 +523,10 @@ public final class EemiResto extends JavaPlugin implements Listener {
             add(l, text(at(i, 11.5, y + 5.6, 0.5), "&a&lRÉCLAMER CE RESTAURANT\n&7Passe sous l'arche pour qu'il soit à toi", 1.0f));
             return;
         }
-        add(l, text(at(i, 11.5, y + 5.6, 0.5), "&6&lChez " + d.name + (d.rebirths > 0 ? "\n&d✦ Renaissance " + d.rebirths : ""), 1.0f));
+        add(l, text(at(i, 11.5, y + 5.6, 0.5), "&6&l" + title(d) + (d.restoName.isEmpty() ? "" : "\n&7de &f" + d.name)
+                + (d.rebirths > 0 ? "\n&d✦ Renaissance " + d.rebirths : ""), 1.0f));
         if (d.bought.contains("etoile")) add(l, text(at(i, 11.5, y + 7.4, 0.5), "&e&l★ Étoile du guide ★", 0.9f));
-        if (d.bought.contains("enseigne")) add(l, text(at(i, 11.5, y + 4.3, 4.35), "&f&lChez " + d.name, 1.1f));
+        if (d.bought.contains("enseigne")) add(l, text(at(i, 11.5, y + 4.3, 4.35), "&f&l" + title(d), 1.1f));
         if (d.bought.contains("comptoir")) {
             Interaction it = spawn(at(i, Defs.COLLECTOR[0] + 0.5, y + 1, Defs.COLLECTOR[1] + 0.5), Interaction.class, e -> {
                 e.setInteractionWidth(1.1f);
@@ -734,6 +735,7 @@ public final class EemiResto extends JavaPlugin implements Listener {
         p.showTitle(U.title("&6&lRestaurant à toi", "&7Marche sur les boutons pour construire"));
         p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1.2f);
         U.msg(p, "&aCe restaurant est à toi ! &7Les plats arrivent au comptoir, encaisse sur la &6dalle d'or&7, puis marche sur les &aboutons verts &7pour construire.");
+        U.msg(p, "&7Donne-lui un nom avec &f/resto nom <nom>&7 (sinon : &6Chez " + p.getName() + "&7).");
     }
 
     void buy(Player p, PData d, int idx) {
@@ -1023,7 +1025,7 @@ public final class EemiResto extends JavaPlugin implements Listener {
             PData d = owner(i);
             if (d == null) continue;
             int fi = i;
-            ItemStack h = U.item(Material.PLAYER_HEAD, "&6Chez " + d.name, List.of("&7Construit : &f" + d.bought.size() + "/" + Defs.PURCHASES.size(),
+            ItemStack h = U.item(Material.PLAYER_HEAD, "&6" + title(d), List.of("&7Patron : &f" + d.name, "&7Construit : &f" + d.bought.size() + "/" + Defs.PURCHASES.size(),
                     "&7Renaissances : &d" + d.rebirths, "&7Chiffre d'affaires : &a" + U.eur(d.earned)), false);
             if (h.getItemMeta() instanceof SkullMeta sm) {
                 sm.setOwningPlayer(Bukkit.getOfflinePlayer(d.uuid));
@@ -1048,8 +1050,8 @@ public final class EemiResto extends JavaPlugin implements Listener {
         int[] sl = {4, 12, 13, 14, 20, 21, 22, 23, 24, 11};
         for (int k = 0; k < top.size() && k < sl.length; k++) {
             PData d = top.get(k);
-            ItemStack h = U.item(Material.PLAYER_HEAD, (k == 0 ? "&6&l" : "&e") + (k + 1) + ". " + d.name,
-                    List.of("&7Chiffre d'affaires : &a" + U.eur(d.earned), "&7Renaissances : &d" + d.rebirths, "&7Plats secrets : &d" + d.secrets.size()), k == 0);
+            ItemStack h = U.item(Material.PLAYER_HEAD, (k == 0 ? "&6&l" : "&e") + (k + 1) + ". " + title(d),
+                    List.of("&7Patron : &f" + d.name, "&7Chiffre d'affaires : &a" + U.eur(d.earned), "&7Renaissances : &d" + d.rebirths, "&7Plats secrets : &d" + d.secrets.size()), k == 0);
             if (h.getItemMeta() instanceof SkullMeta sm) {
                 sm.setOwningPlayer(Bukkit.getOfflinePlayer(d.uuid));
                 h.setItemMeta(sm);
@@ -1289,16 +1291,79 @@ public final class EemiResto extends JavaPlugin implements Listener {
                     return true;
                 }
                 p.teleport(parcelEntrance(d.parcel));
-                U.msg(p, "&7Bienvenue chez &6" + d.name + "&7 !");
+                U.msg(p, d.restoName.isEmpty() ? "&7Bienvenue chez &6" + d.name + "&7 !"
+                        : "&7Bienvenue au &6" + d.restoName + " &7(de &f" + d.name + "&7) !");
             }
             case "top", "classement" -> openTop(p);
             case "collection", "recettes" -> openCollection(p);
+            case "nom", "renommer", "name" -> rename(p, data(p), args, 1, false);
             case "lobby", "quitter" -> {
                 if (inWorld(p)) goLobby(p);
             }
-            default -> U.msg(p, "&7/resto [menu|aller|visiter <joueur>|top|collection|quitter]");
+            default -> U.msg(p, "&7/resto [menu|aller|visiter <joueur>|top|collection|nom <nom>|quitter]");
         }
         return true;
+    }
+
+    /** Nom affiché d'un restaurant : son nom choisi, sinon « Chez pseudo ». */
+    static String title(PData d) {
+        return d.restoName.isEmpty() ? "Chez " + d.name : d.restoName;
+    }
+
+    static final java.util.regex.Pattern RESTO_NAME = java.util.regex.Pattern.compile("[\\p{L}0-9 '’&.!-]+");
+    static final String[] RESTO_BANNED = {"admin", "modo", "staff", "eemicraft", "serveur", "owner", "op"};
+
+    /** /resto nom <nom...> | reset ; admin = sans délai ni mots interdits. */
+    void rename(CommandSender s, PData d, String[] a, int from, boolean admin) {
+        if (d == null) {
+            U.msg(s, "&cJoueur inconnu.");
+            return;
+        }
+        if (d.parcel < 0) {
+            U.msg(s, admin ? "&c" + d.name + " n'a pas de restaurant." : "&cRéclame d'abord un restaurant (&f/resto&c).");
+            return;
+        }
+        if (a.length <= from) {
+            U.msg(s, "&7Nom actuel : &6" + title(d) + "&7. Change-le avec &f/resto nom <nom>&7, ou &f/resto nom reset&7.");
+            return;
+        }
+        String raw = String.join(" ", java.util.Arrays.copyOfRange(a, from, a.length)).replaceAll("[&§].?", "").replaceAll("\\s+", " ").trim();
+        long now = System.currentTimeMillis();
+        if (!admin && now - d.renamedAt < 60_000) {
+            U.msg(s, "&cAttends encore &f" + ((60_000 - (now - d.renamedAt)) / 1000 + 1) + " s &cavant de renommer ton restaurant.");
+            return;
+        }
+        String name;
+        if (raw.equalsIgnoreCase("reset") || raw.equalsIgnoreCase("aucun")) {
+            name = "";
+        } else {
+            if (raw.length() < 2 || raw.length() > 24) {
+                U.msg(s, "&cLe nom doit faire entre 2 et 24 caractères.");
+                return;
+            }
+            if (!RESTO_NAME.matcher(raw).matches()) {
+                U.msg(s, "&cLettres, chiffres, espaces et ' & . ! - seulement.");
+                return;
+            }
+            if (!admin) {
+                String low = java.text.Normalizer.normalize(raw.toLowerCase(java.util.Locale.ROOT), java.text.Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+                for (String w : RESTO_BANNED) if (low.matches(".*\\b" + w + "\\b.*")) {
+                    U.msg(s, "&cCe nom n'est pas autorisé.");
+                    return;
+                }
+                for (PData o : players.values()) if (o != d && o.restoName.equalsIgnoreCase(raw)) {
+                    U.msg(s, "&cUn autre restaurant s'appelle déjà comme ça.");
+                    return;
+                }
+            }
+            name = Character.toUpperCase(raw.charAt(0)) + raw.substring(1);
+        }
+        d.restoName = name;
+        if (!admin) d.renamedAt = now;
+        d.dirty = true;
+        d.save(getDataFolder(), getLogger());
+        refreshParcel(d.parcel);
+        U.msg(s, name.isEmpty() ? "&aLe restaurant reprend son nom : &6" + title(d) + "&a." : "&aLe restaurant s'appelle maintenant &6" + name + "&a !");
     }
 
     private boolean admin(CommandSender s, String[] a) {
@@ -1404,7 +1469,8 @@ public final class EemiResto extends JavaPlugin implements Listener {
                     startup();
                 }
             }
-            default -> U.msg(s, "&7/resto admin reload | info [joueur] | reset <joueur> | give <joueur> <montant> | secret <joueur> <id> | legendaire <id> | acheter <joueur> <n|tout> | build [maintenant]");
+            case "nom" -> rename(s, t, a, 3, true);
+            default -> U.msg(s, "&7/resto admin reload | info [joueur] | reset <joueur> | nom <joueur> <nom|reset> | give <joueur> <montant> | secret <joueur> <id> | legendaire <id> | acheter <joueur> <n|tout> | build [maintenant]");
         }
         return true;
     }
@@ -1413,7 +1479,7 @@ public final class EemiResto extends JavaPlugin implements Listener {
     public List<String> onTabComplete(CommandSender s, Command c, String l, String[] a) {
         List<String> r = new ArrayList<>();
         if (a.length == 1) {
-            for (String x : new String[]{"menu", "aller", "visiter", "top", "collection", "quitter"}) if (x.startsWith(a[0].toLowerCase())) r.add(x);
+            for (String x : new String[]{"menu", "aller", "visiter", "top", "collection", "nom", "quitter"}) if (x.startsWith(a[0].toLowerCase())) r.add(x);
             if (s.hasPermission("eemiresto.admin") && "admin".startsWith(a[0].toLowerCase())) r.add("admin");
         } else if (a.length == 2 && a[0].equalsIgnoreCase("visiter")) {
             for (int i = 0; i < owners.length; i++) {
@@ -1421,7 +1487,7 @@ public final class EemiResto extends JavaPlugin implements Listener {
                 if (d != null && d.name.toLowerCase().startsWith(a[1].toLowerCase())) r.add(d.name);
             }
         } else if (a.length == 2 && a[0].equalsIgnoreCase("admin")) {
-            for (String x : new String[]{"reload", "info", "reset", "give", "secret", "legendaire", "acheter", "build"}) if (x.startsWith(a[1].toLowerCase())) r.add(x);
+            for (String x : new String[]{"reload", "info", "reset", "give", "secret", "legendaire", "acheter", "build", "nom"}) if (x.startsWith(a[1].toLowerCase())) r.add(x);
         } else if (a.length == 3 && a[0].equalsIgnoreCase("admin") && a[1].equalsIgnoreCase("legendaire")
                 || a.length == 4 && a[0].equalsIgnoreCase("admin") && a[1].equalsIgnoreCase("secret")) {
             for (Defs.Secret sc : Defs.SECRETS) r.add(sc.dish());
