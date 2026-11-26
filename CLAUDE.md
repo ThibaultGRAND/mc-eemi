@@ -690,6 +690,7 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 
 ## Sheep Wars (EemiSheepWars)
 
+- **4.7.0 compilée** (26/11, `a_deposer/EemiSheepWars-4.7.0.jar`, carte #134), PAS installée : objet « Prêt » (colorant gris, case 4 de la salle d'attente, PDC `eemisheepwars:ready`, seul objet protégé contre les clics d'inventaire), tous prêts pendant le décompte → `ready-skip-to` (5). Les 9 `.swm` de `src/main/resources/maps/` sont indispensables au build (jar de 80 Ko sans map sinon).
 - **État** : 4.6.0 installée (17/11) ; Esteban a vu les nouvelles maps : « parfait comme ça ». Non vérifié : camping dans les souterrains, éclairage des nouvelles maps.
 - **Fonctionnement** :
   - Monde `sheepwars` (vide, créé par le plugin ; spawn du monde 0 141 0), salle d'attente y 140. `/sheepwars` (`/sw`) `join|leave`, admin `start|stop|build|reload|give <type>|map [id]` (`map <id>` impose la prochaine, reconstruite tout de suite hors partie). Fin de partie : les joueurs restent en file (retour au salon) ; `/sheepwars stop` garde aussi en file. Wool Games : menu DeluxeMenus `gui_menus/wool_games.yml` (/woolgames), Sheep Wars seul (slot 11).
@@ -894,6 +895,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Speedrun d'objets (EemiSpeedrun)
 
+- **1.2.0 compilée** (26/11, `a_deposer/EemiSpeedrun-1.2.0.jar`, carte #134), PAS installée : objet « Prêt » donné au lobby aux joueurs en file (case 3, sinon 5 ou 1 ; PDC `eemispeedrun:pret`), synchronisé chaque seconde comme le lit « Quitter la file », retiré avant la téléportation ; toute la file du mode en décompte prête → `ready-skip-to` (5). Non vérifié : interaction avec LobbyGuard d'EemiCore au lobby.
 - **État** : 1.1.0 installée (retour au salon d'attente). Joué au moins en solo/2 joueurs le 30/10 ; suivi de groupe (1.0.3) et papier Rejouer pas encore testés.
 - **Fonctionnement** :
   - Source `EemiSpeedrun/` (faite sur le PC d'Esteban). Build : JDK 25 + Maven, paper-api `26.3.build.218-stable`, `release 21`.
@@ -993,6 +995,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 ## Murder Mystery (EemiMurder)
 
 **État**
+- 1.14.0 compilée (26/11, `a_deposer/EemiMurder-1.14.0.jar`, carte #134), PAS installée : objet « Prêt » (colorant gris → vert au clic droit, case 4 du salon, PDC `eemimurder:ready`, non déplaçable) ; tous les inscrits prêts pendant le décompte (au moins le minimum) → temps ramené à `ready-skip-to` (5 ; 0 = coupé ; absent du config serveur = défaut du code). État par partie, effacé au lancement, au départ d'un joueur et au retour au salon. Pas testé en jeu ; le saut à 5 s peut tomber avant que la copie de map soit prête (le code attend alors « Préparation de la map »).
 - Installé : EemiMurder 1.13.0. Rotation de 6 maps construites par le plugin : 4 grandes (`bibliotheque`, `fete`, `musee`, `paquebot`) et 2 petites (`hotel`, `chalet`). Aucune de ces maps n'a encore été jouée d'après les notes (dernier fait : reconstruites sans état invalide le 17/11).
 - Deux sources du Murder ont existé : celle de Thibault et `EemiMurder/`, décompilée par Esteban depuis le jar 1.6.0 du serveur le 16/11 (jar d'origine dans `EemiMurder/_origine/`). Toutes les versions depuis la 1.7.0 partent de `EemiMurder/` : ne rien sortir depuis une autre source.
 
@@ -1037,6 +1040,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 ## Cache-cache (EemiHideSeek)
 
 **État**
+- 1.6.0 compilée (26/11, `a_deposer/EemiHideSeek-1.6.0.jar`, carte #135 « ne pas pouvoir se cacher sur les maisons ou en hauteur à base de jump »), PAS installée : un cacheur posé au sol, à l'air libre (rien de solide sur `roof-cover-scan` 24 blocs ; feuilles, barrières et blocs de cacheurs ne comptent pas) et à plus de `max-roof-height` (3) blocs au-dessus du sol de la map (`HsMap.roofGround`, max des 3×3 colonnes autour) ne peut pas devenir solide ; après `roof-return-delay` (2 s), ramené au dernier point valide au sol (sinon au départ des cacheurs). Chercheurs, spectateurs et cacheurs déjà solides non concernés. `roof-block: false` coupe la règle. Sols : village y 64 (toits ≥ +5 interdits, auvents des étals +3 permis, haut du puits interdit) ; port = terrain du générateur + ponts des bateaux, estacade, plancher de la galerie du phare (`perchAllowed`) ; supermarché entièrement couvert (gondoles et mezzanine permises). Banc `outil-test/.../PerchTest.java` : port 820 cases interdites sur 7 943, toutes des toits. Toute nouvelle passerelle extérieure en hauteur doit être déclarée dans `roofGround`/`perchAllowed`.
 - Installé : EemiHideSeek 1.5.1. Maps en rotation : `village`, `supermarche`, `port`. Les nouveautés depuis la 1.3.0 (vrais blocs, onde de choc, port) n'ont pas été vues jouées dans les notes.
 - Deux sources ont existé : `EemiHideSeek/` est décompilée par Esteban depuis la 1.2.4 (jar d'origine dans `_origine/`) et sert depuis.
 
@@ -1536,6 +1540,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Spleef (EemiSpleef)
 
+- **1.3.0 compilée** (26/11, `a_deposer/EemiSpleef-1.3.0.jar`, carte #134), PAS installée : objet « Prêt » (colorant gris, case 4 du chalet, tag PDC `eemispleef:item = ready`, retiré par `clearGameItems`), tous prêts pendant le décompte → `ready-skip-to` (5). Pas testé en jeu.
 - **État** : 1.2.0 installée. Pas encore joué. (Spleef avait d'abord été reporté à Noël, 06/11.)
 - **Fonctionnement** : source `EemiSpleef/`, monde `spleef` créé par le plugin, 3 arènes côte à côte (x 0/400/800, `max-instances` 3) préparées au démarrage ; 2-16 joueurs ; `/spleef join|leave|spectate`, admin `start|stop|build|reload|parties`.
   - Décor v2 (Esteban : « une grande map tout droit avec que de la neige ») : un seul terrain de neige plat 37 × 25 (HX 18, HZ 12) enfoncé dans un stade, mur de 4 blocs (andésite polie, glace tassée à pilastres de glace bleue, chaperon de quartz), fosse de 13 blocs à lit de lave, gradins au nord, obélisques de glace, chalet d'attente au sud (z -31..-21, sol y 105). ~207 000 blocs par arène. Rendus `EemiSpleef/apercu_dessus.png`, `apercu_coupe.png`.
