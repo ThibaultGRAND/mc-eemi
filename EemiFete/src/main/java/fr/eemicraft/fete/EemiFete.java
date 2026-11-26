@@ -93,6 +93,8 @@ public final class EemiFete extends JavaPlugin implements Listener {
     private final Map<Integer, TextDisplay> collectorLabels = new HashMap<>();
     private final Map<UUID, Integer> interactions = new HashMap<>();
     private final Map<Integer, Map<Long, String>> lastPlans = new HashMap<>();
+    /** Parcs à reposer en entier au prochain dessin (après une reconstruction de l'allée). */
+    private final java.util.Set<Integer> forceFull = new java.util.HashSet<>();
     private final Map<Integer, String> builtSig = new HashMap<>();
     private final Set<Integer> drawing = new HashSet<>();
     private final Set<Integer> redrawAgain = new HashSet<>();
@@ -425,6 +427,10 @@ public final class EemiFete extends JavaPlugin implements Listener {
                         streetReady = true;
                         spawnNutella();
                         builtSig.clear();
+                        // l'allée sème herbes et fleurs sur tout le terrain, parcs compris : chaque parc doit être
+                        // reposé EN ENTIER (sans comparaison avec son plan précédent), sinon la végétation reste
+                        lastPlans.clear();
+                        for (int i = 0; i < geo.parcels; i++) forceFull.add(i);
                         saveData();
                         for (int i = 0; i < geo.parcels; i++) redraw(i);
                     }, "Allee foraine"));
@@ -482,7 +488,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
         drawing.add(i);
         Draw.State st = state(i);
         String sg = sig(i);
-        Map<Long, String> prev = lastPlans.get(i);
+        Map<Long, String> prev = forceFull.remove(i) ? null : lastPlans.get(i);
         drawer.submit(() -> {
             Plan.Compiled c;
             try {
