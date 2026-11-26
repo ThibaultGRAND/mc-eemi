@@ -28,6 +28,13 @@ visitors:
   max-skins: 40
   skins: []
 
+# Manèges montables (0.3.0) : panneau « MONTER » devant chaque manège (clic droit, accroupi pour descendre),
+# visiteurs qui font un tour de temps en temps ; seat-y = hauteur du siège par rapport à la place.
+rides:
+  enabled: true
+  visitors: true
+  seat-y: -0.05
+
 # Pack de la fete (FetePack : modeles 3D des chevaux, nacelles, voitures, wagons, objets perdus), SEPARE du pack
 # du serveur : envoye en entrant dans le monde de la fete, retire en sortant. false = assemblages de blocs.
 pack:

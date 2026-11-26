@@ -21,6 +21,11 @@ final class Crowd {
         int from, to;
         double u, v;
         int pause;
+        /** Pas (de 2 ticks) restants sur un manège ; 0 = à pied. */
+        int riding;
+        /** Point d'embarquement visé (u, v) et manège, ou null. */
+        double[] goal;
+        Ride goalRide;
     }
 
     final EemiFete pl;
@@ -119,8 +124,16 @@ final class Crowd {
     void tick() {
         for (Walker w : walkers) {
             if (w.e == null || !w.e.isValid()) continue;
+            if (w.riding > 0) {
+                if (--w.riding == 0) getOff(w);
+                continue;
+            }
             if (w.pause > 0) {
                 w.pause--;
+                continue;
+            }
+            if (w.goal != null) {
+                walkToGoal(w);
                 continue;
             }
             double tu = nodes[w.to][0], tv = nodes[w.to][1];
@@ -130,6 +143,7 @@ final class Crowd {
                 w.v = tv;
                 // au carrefour : pause éventuelle, puis une autre direction (pas demi-tour si possible)
                 if (rnd.nextInt(3) == 0) w.pause = 10 + rnd.nextInt(40);
+                if (pickRide(w)) continue;
                 List<Integer> next = new ArrayList<>();
                 for (int[] e : edges) {
                     if (e[0] == w.to && e[1] != w.from) next.add(e[1]);
@@ -146,6 +160,65 @@ final class Crowd {
             double yaw = Math.toDegrees(Math.atan2(-du, dv)) + (pl.geo.north(parcel) ? 180 : 0);
             w.e.teleport(loc(w.u, w.v, (float) yaw));
         }
+    }
+
+    /** Au carrefour : une fois sur trois, le visiteur va vers un manège proche (moins de 22 blocs). */
+    private boolean pickRide(Walker w) {
+        Show s = pl.showOf(parcel);
+        if (s == null || rnd.nextInt(3) != 0 || !pl.getConfig().getBoolean("rides.visitors", true)) return false;
+        List<Ride> near = new ArrayList<>();
+        for (Ride r : s.rides) {
+            if (r.board == null) continue;
+            if (Math.hypot(r.board[0] - w.u, r.board[1] - w.v) < 22) near.add(r);
+        }
+        if (near.isEmpty()) return false;
+        w.goalRide = near.get(rnd.nextInt(near.size()));
+        w.goal = w.goalRide.board;
+        return true;
+    }
+
+    /** Marche tout droit vers le point d'embarquement, puis monte s'il y a de la place. */
+    private void walkToGoal(Walker w) {
+        double du = w.goal[0] - w.u, dv = w.goal[1] - w.v, d = Math.hypot(du, dv);
+        if (d >= SPEED) {
+            w.u += du / d * SPEED;
+            w.v += dv / d * SPEED;
+            double yaw = Math.toDegrees(Math.atan2(-du, dv)) + (pl.geo.north(parcel) ? 180 : 0);
+            w.e.teleport(loc(w.u, w.v, (float) yaw));
+            return;
+        }
+        Show s = pl.showOf(parcel);
+        if (s != null && s.board(w.goalRide, w.e)) {
+            w.riding = 150 + rnd.nextInt(250); // 15 à 40 s
+            return;
+        }
+        backToPath(w);
+    }
+
+    /** Fin du tour : redescend au point d'embarquement puis repart vers le carrefour le plus proche. */
+    private void getOff(Walker w) {
+        Show s = pl.showOf(parcel);
+        if (s != null) {
+            Show.Seat seat = s.seatOf(w.e);
+            if (seat != null) s.unboard(seat);
+        }
+        backToPath(w);
+    }
+
+    private void backToPath(Walker w) {
+        if (w.goal != null) {
+            w.u = w.goal[0];
+            w.v = w.goal[1];
+        }
+        w.goal = null;
+        w.goalRide = null;
+        int best = 0;
+        for (int k = 1; k < nodes.length; k++) {
+            if (Math.hypot(nodes[k][0] - w.u, nodes[k][1] - w.v) < Math.hypot(nodes[best][0] - w.u, nodes[best][1] - w.v)) best = k;
+        }
+        // trajet direct jusqu'au carrefour, puis la marche reprend normalement
+        w.from = best;
+        w.to = best;
     }
 
     void stop() {

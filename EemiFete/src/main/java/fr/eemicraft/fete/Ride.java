@@ -50,6 +50,13 @@ public final class Ride {
         public final Axis axis;
         public final Motion motion;
         public final List<Cube> cubes = new ArrayList<>();
+        /** Places assises (relatives au pivot, repère de la pièce) : on s'y assoit au-dessus de ce point. */
+        public final List<double[]> seats = new ArrayList<>();
+
+        public Part seat(double x, double y, double z) {
+            seats.add(new double[]{x, y, z});
+            return this;
+        }
         /** Variante des cubes ajoutés ensuite (voir {@link Cube#shown}). */
         private int variant;
 
@@ -121,6 +128,19 @@ public final class Ride {
 
     public final String id;
     public final List<Part> parts = new ArrayList<>();
+    /** Point d'embarquement (u, v) au sol, au bord du manège ; on y redescend. null = pas montable. */
+    public double[] board;
+
+    public Ride board(double u, double v) {
+        board = new double[]{u, v};
+        return this;
+    }
+
+    /** Position (u, y, v) d'une place à l'instant t. */
+    public static double[] seatAt(Part p, double[] s, Pose pose) {
+        double[] r = rot(p.axis, pose.angle(), s[0], s[1], s[2]);
+        return new double[]{p.pu + pose.dx() + r[0], p.py + pose.dy() + r[1], p.pv + pose.dz() + r[2]};
+    }
 
     public Ride(String id) {
         this.id = id;

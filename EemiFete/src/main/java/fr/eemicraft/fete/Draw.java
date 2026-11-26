@@ -2,6 +2,7 @@ package fr.eemicraft.fete;
 
 import fr.eemicraft.fete.build.B;
 import fr.eemicraft.fete.build.Connect;
+import fr.eemicraft.fete.build.Dir;
 import fr.eemicraft.fete.build.Noise;
 import fr.eemicraft.fete.build.Palette;
 import fr.eemicraft.fete.build.Sink;
@@ -161,34 +162,7 @@ public final class Draw {
                 s.set(x, F, z, ring % 3 == 0 ? "minecraft:red_terracotta" : (ring % 3 == 1 ? "minecraft:white_terracotta" : "minecraft:yellow_terracotta"));
             }
         }
-        // kiosque à musique : octogone, colonnes, toit en dôme rayé
-        double kc = pc + 0.0;
-        for (int x = pc - 5; x <= pc + 5; x++) {
-            for (int z = -5; z <= 5; z++) {
-                double d = Math.sqrt(Ride.sq(x + 0.5 - kc) + Ride.sq(z + 0.5));
-                if (d <= 4.6) {
-                    s.set(x, F + 1, z, d > 3.8 ? "minecraft:polished_diorite_stairs[facing=" + face(x + 0.5 - kc, z + 0.5) + ",half=bottom,shape=straight]" : "minecraft:smooth_quartz");
-                }
-                if (d <= 4.6 && d > 3.8 && (x + z) % 3 == 0) {
-                    for (int y = F + 2; y <= F + 6; y++) s.set(x, y, z, "minecraft:quartz_pillar[axis=y]");
-                }
-            }
-        }
-        for (int ring = 0; ring < 4; ring++) {
-            double rr = 5.3 - ring * 1.4;
-            for (int x = pc - 6; x <= pc + 6; x++) {
-                for (int z = -6; z <= 6; z++) {
-                    double d = Math.sqrt(Ride.sq(x + 0.5 - kc) + Ride.sq(z + 0.5));
-                    if (d <= rr && d > rr - 1.5) {
-                        double a = Math.atan2(z + 0.5, x + 0.5 - kc);
-                        int sector = (int) Math.floor((a + Math.PI) / (Math.PI / 6));
-                        s.set(x, F + 7 + ring, z, sector % 2 == 0 ? "minecraft:red_wool" : "minecraft:white_wool");
-                    }
-                }
-            }
-        }
-        s.set(pc, F + 11, 0, "minecraft:gold_block");
-        s.set(pc, F + 12, 0, "minecraft:ochre_froglight");
+        kiosque(s, pc + 0.5, 0.5);
         // grande arche d'entrée côté nord de la place (z négatif) et côté sud
         for (int side = -1; side <= 1; side += 2) {
             int z = side * (depth - 2);
@@ -220,6 +194,61 @@ public final class Draw {
                 balloons(s, pc + dx + 3, z, seed + dx + side);
             }
         }
+    }
+
+    /**
+     * Kiosque à musique (26/11, refait : « gros souci niveau design ») : socle octogonal en pierre à 4 escaliers,
+     * plancher en bois, 8 colonnettes en fer forgé (murets de pierre noire) à chapiteau doré, garde-corps en bois,
+     * toit conique en escaliers rayé rouge et blanc avec débord, lanternes sous l'avant-toit, guirlande d'ampoules,
+     * flèche dorée. Centre (cx, cz) au milieu d'un bloc.
+     */
+    static void kiosque(Sink s, double cx, double cz) {
+        int x0 = (int) Math.floor(cx), z0 = (int) Math.floor(cz);
+        for (int x = x0 - 8; x <= x0 + 8; x++) {
+            for (int z = z0 - 8; z <= z0 + 8; z++) {
+                double dx = x + 0.5 - cx, dz = z + 0.5 - cz, d = oct(dx, dz);
+                if (d <= 4.6) {
+                    s.set(x, F + 1, z, d > 3.9 ? "minecraft:polished_andesite" : "minecraft:stone_bricks");
+                    s.set(x, F + 2, z, d > 3.9 ? "minecraft:polished_andesite" : ((x + z) % 2 == 0 ? "minecraft:spruce_planks" : "minecraft:stripped_spruce_wood[axis=y]"));
+                } else if (d <= 5.6) {
+                    // marche tout autour (escalier qui monte vers le centre)
+                    s.set(x, F + 1, z, B.stairs("minecraft:stone_brick_stairs", towards(dx, dz), false));
+                }
+                for (int y = F + 3; y <= F + 13; y++) {
+                    if (d <= 6.8) s.set(x, y, z, AIR);
+                }
+            }
+        }
+        // 4 escaliers d'accès (marche supplémentaire au milieu de chaque face)
+        for (int[] o : new int[][]{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}) {
+            for (int k = -1; k <= 1; k++) {
+                int x = x0 + o[0] * 5 + (o[0] == 0 ? k : 0), z = z0 + o[1] * 5 + (o[1] == 0 ? k : 0);
+                s.set(x, F + 2, z, B.stairs("minecraft:stone_brick_stairs", towards(x + 0.5 - cx, z + 0.5 - cz), false));
+            }
+        }
+        // garde-corps (ouvert face aux escaliers) ; colonnettes et toit : pièces fines du plugin (Rides.kiosque)
+        for (int x = x0 - 5; x <= x0 + 5; x++) {
+            for (int z = z0 - 5; z <= z0 + 5; z++) {
+                double dx = x + 0.5 - cx, dz = z + 0.5 - cz, d = oct(dx, dz);
+                boolean opening = Math.abs(dx) < 1.6 || Math.abs(dz) < 1.6;
+                if (d > 3.6 && d <= 4.6 && !opening) s.set(x, F + 3, z, "minecraft:dark_oak_fence");
+            }
+        }
+        s.set(x0, F + 3, z0, "minecraft:jukebox");
+        s.set(x0 + 1, F + 3, z0, "minecraft:note_block");
+        s.set(x0 - 1, F + 3, z0, "minecraft:note_block");
+    }
+
+    /** Distance « octogonale » (contour à 8 pans au lieu d'un cercle pixelisé). */
+    static double oct(double dx, double dz) {
+        double ax = Math.abs(dx), az = Math.abs(dz);
+        return Math.max(Math.max(ax, az), (ax + az) / 1.3);
+    }
+
+    /** Escalier qui monte vers le centre (facing = côté haut). */
+    static Dir towards(double dx, double dz) {
+        if (Math.abs(dx) > Math.abs(dz)) return dx > 0 ? Dir.WEST : Dir.EAST;
+        return dz > 0 ? Dir.NORTH : Dir.SOUTH;
     }
 
     static String face(double dx, double dz) {

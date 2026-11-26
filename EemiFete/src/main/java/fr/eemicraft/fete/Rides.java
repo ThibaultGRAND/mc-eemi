@@ -51,7 +51,7 @@ public final class Rides {
 
     /** Carrousel : centre (cu, cv) au milieu d'un bloc, rayon 6. Toit rayé rouge et blanc, 8 chevaux qui montent et descendent. */
     public static Ride carrousel(Sink s, double cu, double cv) {
-        Ride r = new Ride("carrousel");
+        Ride r = new Ride("carrousel").board(cu, cv - 7.9);
         // socle fixe : marche circulaire et barrière dorée
         disk(s, cu, cv, 6.9, F + 1, B.slab("minecraft:polished_diorite_slab", "bottom"));
         for (int k = 0; k < 40; k++) {
@@ -105,6 +105,7 @@ public final class Rides {
             String coat = coats[k % 4], saddle = saddles[k % 4];
             h.cube(x, 3.0, z, 0.12, 5.6, 0.12, "minecraft:gold_block");                    // barre
             h.model(x, 2.0, z, 1.3, a + 180, "cheval", COATS[k % COATS.length]);
+            h.seat(x, 2.45, z);
             h.blocksOnly();
             h.cube(x, 1.55, z, 0.5, 0.55, 1.25, a, coat);                                  // corps
             h.cube(x + tx * 0.75, 2.05, z + tz * 0.75, 0.38, 0.7, 0.4, a, coat);            // cou
@@ -126,6 +127,49 @@ public final class Rides {
     /** Couleurs des nacelles, voitures et wagons (teinte du modèle). */
     static final int[] PAINT = {0xD03A3A, 0xF2C230, 0x58B7E6, 0x7BD04A, 0xF08A2A, 0xF08CB4};
 
+    // ------------------------------------------------------------------ kiosque de la place
+
+    /**
+     * Kiosque à musique de la place (pièces FIXES en coordonnées monde, pas de parc) : 8 colonnettes en fer forgé à
+     * chapiteau doré, toit conique rayé rouge et blanc comme le carrousel, lambrequin doré, ampoules, flèche.
+     * Le socle, le plancher et le garde-corps sont en blocs ({@link Draw#kiosque}).
+     */
+    public static Ride kiosque(double cx, double cz) {
+        Ride r = new Ride("kiosque");
+        double py = F + 3;
+        Ride.Part k = r.part("kiosque", cx, py, cz, Ride.Axis.Y, Ride.fixed());
+        for (int i = 0; i < 8; i++) {
+            double a = Math.toRadians(i * 45 + 22.5);
+            double x = 3.95 * Math.cos(a), z = 3.95 * Math.sin(a);
+            k.cube(x, 1.9, z, 0.22, 3.8, 0.22, "minecraft:polished_blackstone");
+            k.cube(x, 0.1, z, 0.42, 0.2, 0.42, "minecraft:gold_block");
+            k.cube(x, 3.75, z, 0.42, 0.25, 0.42, "minecraft:gold_block");
+            // consoles dorées vers l'avant-toit
+            k.cube(x * 1.12, 3.55, z * 1.12, 0.12, 0.12, 0.9, i * 45 + 22.5 + 90, "minecraft:gold_block");
+        }
+        for (int i = 0; i < 32; i++) {
+            double a = i * 11.25;
+            String w = (i / 2) % 2 == 0 ? "minecraft:red_wool" : "minecraft:white_wool";
+            for (int ring = 0; ring < 5; ring++) {
+                double rr = 6.2 - ring * 1.3, y = 4.1 + ring * 0.85;
+                double x = rr * Math.cos(Math.toRadians(a)), z = rr * Math.sin(Math.toRadians(a));
+                k.cube(x, y, z, 1.4 * (rr / 6.2) + 0.55, 0.6, 1.45, a, w);
+            }
+        }
+        k.cube(0, 8.6, 0, 1.0, 1.0, 1.0, "minecraft:gold_block");
+        k.cube(0, 9.6, 0, 0.2, 1.2, 0.2, "minecraft:gold_block");
+        k.light(0, 10.35, 0, 0.45, WARM);
+        for (int i = 0; i < 24; i++) {
+            double a = Math.toRadians(i * 15);
+            k.cube(6.45 * Math.cos(a), 3.55, 6.45 * Math.sin(a), 0.25, 0.55, 1.75, i * 15, "minecraft:gold_block");
+            k.light(6.7 * Math.cos(a), 3.15, 6.7 * Math.sin(a), 0.3, bulb(i));
+        }
+        // plafond : rosace dorée et lustre
+        k.cube(0, 4.0, 0, 3.2, 0.12, 3.2, "minecraft:gold_block");
+        k.light(0, 3.6, 0, 0.6, WARM);
+        return r;
+    }
+
     // ------------------------------------------------------------------ grande roue
 
     /**
@@ -133,7 +177,7 @@ public final class Rides {
      * Pieds en A de part et d'autre (v = cv ± 2).
      */
     public static Ride roue(Sink s, double cu, double cy, double cv, double R) {
-        Ride r = new Ride("grande_roue");
+        Ride r = new Ride("grande_roue").board(cu, cv - 3.5);
         // pieds en A (poutres fines en BlockDisplay) et socles en pierre
         Ride.Part legs = r.part("pieds", cu, cy, cv, Ride.Axis.V, Ride.fixed());
         double h = cy - F - 1;
@@ -185,6 +229,8 @@ public final class Rides {
             Ride.Part g = r.part("nacelle" + k, cu, cy, cv, Ride.Axis.V, Ride.orbit(Ride.Axis.V, R, 40, a0));
             String c = "minecraft:" + cols[k % cols.length] + "_concrete";
             g.model(0, -1.95, 0, 1.7, 0, "nacelle", PAINT[k % PAINT.length]);
+            g.seat(-0.35, -2.55, 0);
+            g.seat(0.35, -2.55, 0);
             g.blocksOnly();
             g.cube(0, -0.35, 0, 0.12, 0.7, 0.12, "minecraft:iron_block");          // attache
             g.cube(0, -1.35, 0, 1.5, 0.15, 1.5, c);                                // toit
@@ -201,7 +247,7 @@ public final class Rides {
 
     /** Chaises volantes : tour centrale fixe, parasol tournant, 12 sièges suspendus qui s'écartent. */
     public static Ride chaises(Sink s, double cu, double cv) {
-        Ride r = new Ride("chaises_volantes");
+        Ride r = new Ride("chaises_volantes").board(cu, cv - 9.3);
         int cuI = (int) Math.floor(cu), cvI = (int) Math.floor(cv);
         disk(s, cu, cv, 2.6, F + 1, "minecraft:polished_andesite");
         for (int y = F + 1; y <= F + 11; y++) {
@@ -242,6 +288,7 @@ public final class Rides {
             }
             String seat = k % 2 == 0 ? "minecraft:yellow_concrete" : "minecraft:red_concrete";
             top.cube(ca * 7.3, -5.6, sa * 7.3, 0.7, 0.18, 0.7, k * 30 + 15, seat);
+            top.seat(ca * 7.3, -5.45, sa * 7.3);
             top.cube(ca * 7.6, -5.2, sa * 7.6, 0.12, 0.6, 0.7, k * 30 + 15, seat);
         }
         return r;
@@ -251,7 +298,7 @@ public final class Rides {
 
     /** Bateau pirate : coque suspendue sous un portique, balancement le long de u. */
     public static Ride bateau(Sink s, double cu, double cv) {
-        Ride r = new Ride("bateau_pirate");
+        Ride r = new Ride("bateau_pirate").board(cu, cv - 4.2);
         double py = F + 11.5;
         Ride.Part frame = r.part("portique", cu, py, cv, Ride.Axis.V, Ride.fixed());
         double h = py - F - 1;
@@ -286,6 +333,10 @@ public final class Rides {
         }
         // mât, voile, drapeau, figure de proue
         ship.cube(0, -5.2, 0, 0.3, 5.5, 0.3, "minecraft:spruce_log");
+        for (int i : new int[]{-4, -3, -2, 2, 3, 4}) {
+            ship.seat(i, -7.75 + 0.06 * i * i, 0.55);
+            ship.seat(i, -7.75 + 0.06 * i * i, -0.55);
+        }
         ship.cube(0, -5.4, 0, 3.2, 2.6, 0.12, "minecraft:white_wool");
         ship.cube(0, -2.2, 0.0, 1.0, 0.6, 0.08, "minecraft:black_wool");
         ship.cube(5.9, -7.0, 0, 0.7, 0.7, 0.6, "minecraft:gold_block");
@@ -298,7 +349,7 @@ public final class Rides {
 
     /** Tour de chute de 30 blocs : nacelle annulaire qui monte lentement et retombe. */
     public static Ride tour(Sink s, int cu, int cv) {
-        Ride r = new Ride("tour_chute");
+        Ride r = new Ride("tour_chute").board(cu - 2.6, cv + 1.0);
         int top = F + 32;
         for (int y = F + 1; y <= top; y++) {
             for (int du = 0; du <= 1; du++) {
@@ -324,6 +375,7 @@ public final class Rides {
             double a = k * 45;
             double x = 1.65 * Math.cos(Math.toRadians(a)), z = 1.65 * Math.sin(Math.toRadians(a));
             ring.cube(x, 0, z, 0.9, 0.25, 0.9, a, "minecraft:yellow_concrete");
+            ring.seat(x, 0.15, z);
             ring.cube(x * 1.25, 0.55, z * 1.25, 0.15, 0.9, 0.8, a, "minecraft:yellow_concrete");
             ring.light(x * 1.35, 1.05, z * 1.35, 0.22, bulb(k));
         }
@@ -335,7 +387,7 @@ public final class Rides {
 
     /** Piste d'auto-tamponneuses (u1..u2, v1..v2) sous un plafond lumineux, 6 voitures. */
     public static Ride autos(Sink s, int u1, int v1, int u2, int v2) {
-        Ride r = new Ride("autos");
+        Ride r = new Ride("autos").board((u1 + u2 + 1) / 2.0, v1 - 0.8);
         for (int u = u1; u <= u2; u++) {
             for (int v = v1; v <= v2; v++) {
                 boolean edge = u == u1 || u == u2 || v == v1 || v == v2;
@@ -367,6 +419,7 @@ public final class Rides {
                     Ride.bumper(ax, az, 0.37 + 0.06 * k, 0.53 - 0.05 * k, k * 1.3));
             String c = "minecraft:" + cols[k] + "_concrete";
             car.model(0, 0.25, 0, 1.1, 0, "auto", PAINT[k % PAINT.length]);
+            car.seat(0, 0.3, -0.1);
             car.blocksOnly();
             car.cube(0, 0, 0, 1.3, 0.55, 1.7, c);
             car.cube(0, 0.15, -0.55, 1.0, 0.35, 0.35, "minecraft:white_concrete");
@@ -383,7 +436,7 @@ public final class Rides {
 
     /** Train fantôme : façade de manoir hanté (u1..u2, v1..v2), fantôme qui flotte, wagonnet qui entre et sort. */
     public static Ride fantome(Sink s, int u1, int v1, int u2, int v2) {
-        Ride r = new Ride("train_fantome");
+        Ride r = new Ride("train_fantome").board((u1 + u2) / 2 + 1.0, v1 - 3.2);
         if (s != null) {
             for (int u = u1; u <= u2; u++) {
                 for (int v = v1; v <= v2; v++) {
@@ -454,6 +507,7 @@ public final class Rides {
                 {mid + 4.5, F + 1.4, v1 + 0.5}, {mid + 4.5, F + 1.4, v1 + 4.0}, {mid - 2.5, F + 1.4, v1 + 4.0}};
         Ride.Part cart = r.part("wagonnet", mid + 1.0, F + 1.4, v1 + 1.0, Ride.Axis.Y, Ride.path(track, 14, mid + 1.0, F + 1.4, v1 + 1.0));
         cart.cube(0, 0.1, 0, 1.0, 0.7, 1.3, "minecraft:purple_concrete");
+        cart.seat(0, 0.45, -0.1);
         cart.cube(0, 0.55, 0.45, 0.9, 0.5, 0.2, "minecraft:bone_block");
         return r;
     }
@@ -513,7 +567,7 @@ public final class Rides {
     }
 
     public static Ride montagnes(Sink s) {
-        Ride r = new Ride("montagnes_russes");
+        Ride r = new Ride("montagnes_russes").board(28.5, 2.5);
         double[][] pts = coasterPath();
         if (s != null) {
             int n = pts.length;
@@ -543,6 +597,7 @@ public final class Rides {
         for (int w = 0; w < 3; w++) {
             double z = -w * 1.6;
             train.model(0, 1.15, z, 1.2, 0, "wagon", w == 1 ? 0x2F6BD8 : 0xF2C230);
+            train.seat(0, 1.15, z - 0.1);
             train.blocksOnly();
             train.cube(0, 0.85, z, 1.2, 0.6, 1.4, cols[w]);
             train.cube(0, 1.25, z - 0.55, 1.2, 0.35, 0.2, "minecraft:black_concrete");

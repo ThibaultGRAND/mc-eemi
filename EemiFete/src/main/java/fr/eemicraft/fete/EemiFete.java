@@ -144,6 +144,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         stopAllShows();
+        if (plaza != null) plaza.stop();
         removeAllEntities();
         long now = System.currentTimeMillis();
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -706,6 +707,10 @@ public final class EemiFete extends JavaPlugin implements Listener {
         if (f != null) f.remove();
     }
 
+    Show showOf(int i) {
+        return shows.get(i);
+    }
+
     void restartShow(int i) {
         if (shows.containsKey(i)) {
             stopShow(i);
@@ -729,6 +734,13 @@ public final class EemiFete extends JavaPlugin implements Listener {
             }
         }
         if (serverTick % 2 == 0) {
+            for (Show s : shows.values()) {
+                try {
+                    s.seatTick(serverTick);
+                } catch (RuntimeException ex) {
+                    getLogger().warning("Places du parc " + s.parcel + " : " + ex);
+                }
+            }
             for (Crowd c : crowds.values()) {
                 try {
                     c.tick();
@@ -820,8 +832,18 @@ public final class EemiFete extends JavaPlugin implements Listener {
         d.save(getDataFolder(), getLogger());
     }
 
+    /** Décor fixe de la place (kiosque) : posé une fois au démarrage, toujours présent (chunks forceload). */
+    private Show plaza;
+
+    void spawnPlaza() {
+        if (plaza != null) plaza.stop();
+        double[] sp = Draw.spawn(geo);
+        plaza = new Show(this, List.of(Rides.kiosque(sp[0], 0.5)));
+    }
+
     /** Pot de Nutella caché sur la place d'entrée (le même pour tous), entité cliquable. */
     void spawnNutella() {
+        spawnPlaza();
         if (world == null) return;
         List<Entity> old = statics.remove(-1);
         if (old != null) for (Entity e : old) if (e.isValid()) e.remove();
@@ -1333,6 +1355,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
     public void onWorldChange(PlayerChangedWorldEvent e) {
         Player p = e.getPlayer();
         if (world == null) return;
+        if (e.getFrom().equals(world)) leaveSeat(p);
         if (e.getFrom().equals(world)) {
             sendStatusLater();
             updatePack(p, 1L);
@@ -1350,9 +1373,25 @@ public final class EemiFete extends JavaPlugin implements Listener {
         }, 10L);
     }
 
+    /** Le joueur quitte sa place (déconnexion, changement de monde). */
+    void leaveSeat(Player p) {
+        for (Show s : shows.values()) {
+            Show.Seat seat = s.seatOf(p);
+            if (seat != null) {
+                seat.rider = null;
+                if (seat.carrier != null) {
+                    seat.carrier.eject();
+                    seat.carrier.remove();
+                    seat.carrier = null;
+                }
+            }
+        }
+    }
+
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
         Player p = e.getPlayer();
+        leaveSeat(p);
         PData d = players.get(p.getUniqueId());
         if (d != null) {
             d.lastSeen = System.currentTimeMillis();
@@ -1380,6 +1419,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
         if (world == null || !e.getRightClicked().getWorld().equals(world)) return;
         if (e.getRightClicked().getScoreboardTags().contains(TAG)) e.setCancelled(true);
         if (e.getHand() == EquipmentSlot.HAND && clickEgg(e.getPlayer(), e.getRightClicked())) return;
+        if (e.getHand() == EquipmentSlot.HAND && clickBoard(e.getPlayer(), e.getRightClicked())) return;
         Integer i = interactions.get(e.getRightClicked().getUniqueId());
         if (i == null || e.getHand() != EquipmentSlot.HAND) return;
         PData o = owner(i);
@@ -1392,9 +1432,43 @@ public final class EemiFete extends JavaPlugin implements Listener {
         if (!e.getAttacked().getScoreboardTags().contains(TAG)) return;
         e.setCancelled(true);
         if (clickEgg(e.getPlayer(), e.getAttacked())) return;
+        if (clickBoard(e.getPlayer(), e.getAttacked())) return;
         Integer i = interactions.get(e.getAttacked().getUniqueId());
         PData o = i == null ? null : owner(i);
         if (o != null && o.uuid.equals(e.getPlayer().getUniqueId())) collect(e.getPlayer(), o);
+    }
+
+    /** Clic sur le panneau « Monter » d'un manège : le joueur s'assoit à une place libre. */
+    boolean clickBoard(Player p, Entity en) {
+        for (Show s : shows.values()) {
+            Ride r = s.boards.get(en.getUniqueId());
+            if (r == null) continue;
+            if (p.isInsideVehicle()) return true;
+            if (!cooldown(p, 800)) return true;
+            if (s.board(r, p)) {
+                p.sendActionBar(U.c("&aBon tour ! &7Accroupis-toi pour descendre."));
+                p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, 0.8f, 1.4f);
+            } else U.msg(p, "&7Ce manège est complet, attends le prochain tour !");
+            return true;
+        }
+        return false;
+    }
+
+    /** Descente d'un manège (accroupi) : la place est libérée, retour au point d'embarquement. */
+    @EventHandler
+    public void onDismount(org.bukkit.event.entity.EntityDismountEvent e) {
+        if (!e.getDismounted().getScoreboardTags().contains("fete_siege")) return;
+        Entity who = e.getEntity();
+        Bukkit.getScheduler().runTask(this, () -> {
+            for (Show s : shows.values()) {
+                Show.Seat seat = s.seatOf(who);
+                if (seat != null) {
+                    s.unboard(seat);
+                    return;
+                }
+            }
+            e.getDismounted().remove();
+        });
     }
 
     /** Clic sur une entité d'easter egg. */

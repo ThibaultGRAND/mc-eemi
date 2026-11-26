@@ -46,6 +46,8 @@ public final class TestRender {
         SchemWriter.write(s, new File(out, "fete.schem"));
         dump(s, new File(out, "fete.txt"), null);
         try (BufferedWriter w = new BufferedWriter(new FileWriter(new File(out, "fete.txt"), true))) {
+            double[] sp = Draw.spawn(g);
+            writeBoxes(w, g, -1, Rides.kiosque(sp[0], 0.5).boxes(0));
             for (Object[] o : allBoxes) {
                 @SuppressWarnings("unchecked") List<Ride.Box> l = (List<Ride.Box>) o[1];
                 writeBoxes(w, g, (Integer) o[0], l);
@@ -84,8 +86,8 @@ public final class TestRender {
         for (Ride.Box b : l) {
             StringBuilder sb = new StringBuilder("box ").append(b.state()).append(' ').append(b.glow() ? 1 : 0);
             for (double[] c : b.corners()) {
-                sb.append(' ').append(String.format(java.util.Locale.ROOT, "%.3f %.3f %.3f",
-                        g.wxd(parcel, c[0], c[2]), c[1], g.wzd(parcel, c[0], c[2])));
+                double x = parcel < 0 ? c[0] : g.wxd(parcel, c[0], c[2]), z = parcel < 0 ? c[2] : g.wzd(parcel, c[0], c[2]);
+                sb.append(' ').append(String.format(java.util.Locale.ROOT, "%.3f %.3f %.3f", x, c[1], z));
             }
             w.write(sb.append('\n').toString());
         }
