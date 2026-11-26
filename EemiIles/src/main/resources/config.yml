@@ -1,0 +1,56 @@
+# EemiIles : iles SkyBlock (BentoBox / BSkyBlock) et OneBlock (addon AOneBlock).
+# Apres modification : /iles reload (les niveaux du MultiTool sont repris au prochain bloc casse ou changement de monde).
+
+skyblock:
+  # Mondes du SkyBlock qui partagent le meme inventaire (groupe Multiverse-Inventories « skyblock »).
+  # Sert a reconnaitre une ile BSkyBlock et a savoir ou vider l'inventaire.
+  mondes: [bskyblock_world, bskyblock_world_nether, bskyblock_world_the_end, arene_boss]
+  reset:
+    # Carte #138 : apres un reset de son ile, le joueur repart de zero
+    # (inventaire 41 cases, coffre de l'Ender et XP vides ; portefeuille et banque EemiBank non touches).
+    actif: true
+    # Delai en ticks entre l'arrivee (ou le reset) et le vidage : laisse passer Multiverse-Inventories
+    # et la restauration d'EemiSkyGarde (3 ticks) avant de vider.
+    delai-ticks: 10
+    # Lancer « skygarde oublier <joueur> » au reset pour qu'EemiSkyGarde ne remette pas l'ancien inventaire.
+    couper-skygarde: true
+
+oneblock:
+  # Mondes du OneBlock (le MultiTool n'est actif que la).
+  mondes: [oneblock_world, oneblock_world_nether, oneblock_world_the_end]
+  # Monde des iles AOneBlock (pour retrouver l'ile d'un joueur).
+  monde-iles: oneblock_world
+  paliers:
+    # Carte #133 : recompense EemiCore tous les N blocs magiques casses sur l'ile
+    # (compteur AOneBlock de l'ile, celui qui ne redescend pas quand on change de phase).
+    actif: true
+    tous-les: 1000
+    pieces: 50
+    xp: 100
+    # casseur = le joueur qui casse le bloc du palier (le proprietaire si c'est une machine) ;
+    # membres = chaque membre de l'ile connecte (un joueur hors ligne est paye a sa prochaine connexion seulement en mode casseur).
+    destinataire: casseur
+
+multitool:
+  # Carte #140 : /multitool (alias /mt) donne un outil unique qui casse comme une pioche, une pelle et une hache.
+  actif: true
+  # Familles de blocs cassees a la bonne vitesse : pickaxe, shovel, axe (hoe possible).
+  outils: [pickaxe, shovel, axe]
+  # Niveaux selon le nombre de blocs casses sur l'ile du joueur (dans l'ordre croissant).
+  #   blocs     : palier a atteindre
+  #   nom       : nom affiche
+  #   materiau  : apparence de l'objet
+  #   vitesse   : vitesse de minage (bois 2, pierre 4, fer 6, diamant 8, netherite 9)
+  #   tier      : bois, pierre, cuivre, fer, or, diamant ou netherite (minerais que l'outil fait tomber)
+  #   efficacite: niveau d'Efficacite (0 = aucun)
+  niveaux:
+    - {blocs: 0, nom: "Bois", materiau: WOODEN_PICKAXE, vitesse: 2.0, tier: bois, efficacite: 0}
+    - {blocs: 250, nom: "Pierre", materiau: STONE_PICKAXE, vitesse: 4.0, tier: pierre, efficacite: 0}
+    - {blocs: 1000, nom: "Fer", materiau: IRON_PICKAXE, vitesse: 6.0, tier: fer, efficacite: 0}
+    - {blocs: 5000, nom: "Diamant", materiau: DIAMOND_PICKAXE, vitesse: 8.0, tier: diamant, efficacite: 0}
+    - {blocs: 15000, nom: "Netherite", materiau: NETHERITE_PICKAXE, vitesse: 9.0, tier: netherite, efficacite: 0}
+    - {blocs: 30000, nom: "Netherite, Efficacité I", materiau: NETHERITE_PICKAXE, vitesse: 9.0, tier: netherite, efficacite: 1}
+    - {blocs: 45000, nom: "Netherite, Efficacité II", materiau: NETHERITE_PICKAXE, vitesse: 9.0, tier: netherite, efficacite: 2}
+    - {blocs: 60000, nom: "Netherite, Efficacité III", materiau: NETHERITE_PICKAXE, vitesse: 9.0, tier: netherite, efficacite: 3}
+    - {blocs: 80000, nom: "Netherite, Efficacité IV", materiau: NETHERITE_PICKAXE, vitesse: 9.0, tier: netherite, efficacite: 4}
+    - {blocs: 100000, nom: "Netherite, Efficacité V", materiau: NETHERITE_PICKAXE, vitesse: 9.0, tier: netherite, efficacite: 5}

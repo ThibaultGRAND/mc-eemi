@@ -1,0 +1,25 @@
+name: EemiIles
+version: ${project.version}
+main: fr.eemicraft.iles.EemiIles
+api-version: '1.21'
+softdepend: [BentoBox, EemiCore, EemiSkyGarde, Multiverse-Inventories]
+description: Iles EEMICRAFT - reset SkyBlock propre, paliers OneBlock, MultiTool du OneBlock
+
+commands:
+  iles:
+    description: Administration d'EemiIles
+    usage: '/iles <reload|info>'
+    permission: eemiiles.admin
+  multitool:
+    description: Recevoir le MultiTool du OneBlock (pioche, pelle et hache en un seul outil)
+    usage: '/multitool'
+    aliases: [mt]
+    permission: eemiiles.multitool
+
+permissions:
+  eemiiles.admin:
+    description: Commandes /iles
+    default: op
+  eemiiles.multitool:
+    description: Utiliser /multitool dans le OneBlock
+    default: true
