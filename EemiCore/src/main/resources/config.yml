@@ -294,7 +294,7 @@ cosmetics:
   trail_enchant: {type: trail, name: "&dTraînée magique", icon: ENCHANTING_TABLE, price: 125, particle: ENCHANT}
   trail_fumee: {type: trail, name: "&8Traînée de fumée", icon: CAMPFIRE, price: 75, particle: SMOKE}
   trail_arcenciel: {type: trail, name: "&cA&6r&ec&a-&be&9n&d-&cc&6i&ee&al", icon: PRISMARINE_CRYSTALS, price: 275, particle: RAINBOW}
-  hat_citrouille: {type: hat, name: "&6Citrouille d'Halloween", icon: JACK_O_LANTERN, price: 75, material: JACK_O_LANTERN, available-until: "2026-11-03", hide-off-season: true}
+  hat_citrouille: {type: hat, name: "&6Citrouille d'Halloween", icon: JACK_O_LANTERN, price: 75, material: JACK_O_LANTERN, available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
   hat_creeper: {type: hat, name: "&aTête de Creeper", icon: CREEPER_HEAD, price: 125, material: CREEPER_HEAD}
   hat_wither: {type: hat, name: "&8Crâne de Wither", icon: WITHER_SKELETON_SKULL, price: 175, material: WITHER_SKELETON_SKULL}
   hat_dragon: {type: hat, name: "&5Tête de dragon", icon: DRAGON_HEAD, price: 350, material: DRAGON_HEAD}
@@ -302,7 +302,7 @@ cosmetics:
   hat_diamant: {type: hat, name: "&bBloc de diamant", icon: DIAMOND_BLOCK, price: 250, material: DIAMOND_BLOCK}
   title_debutant: {type: title, name: "&7Titre Débutant", icon: NAME_TAG, price: 20, text: "&7Débutant"}
   title_fantome: {type: title, name: "&fTitre Fantôme", icon: GHAST_TEAR, price: 100, text: "&fFantôme"}
-  title_citrouille: {type: title, name: "&6Titre Citrouille", icon: PUMPKIN, price: 100, text: "&6Citrouille", available-until: "2026-11-03", hide-off-season: true}
+  title_citrouille: {type: title, name: "&6Titre Citrouille", icon: PUMPKIN, price: 100, text: "&6Citrouille", available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
   title_champion: {type: title, name: "&eTitre Champion", icon: GOLD_INGOT, price: 200, text: "&eChampion"}
   title_tryhard: {type: title, name: "&cTitre Tryhard", icon: IRON_SWORD, price: 175, text: "&cTryhard"}
   title_batisseur: {type: title, name: "&aTitre Bâtisseur", icon: BRICKS, price: 125, text: "&aBâtisseur"}
@@ -321,23 +321,23 @@ cosmetics:
   # 1.9.0 : hide-off-season: true = hors des dates, ni vendu, ni dans la boutique, ni porte (meme equipe) ;
   # l'achat est garde et revient avec les dates suivantes (Halloween 2027 : available-from "2027-10-15",
   # available-until "2027-11-03").
-  title_h_sorciere: {type: title, name: "&5&lTitre Sorcière", icon: CAULDRON, price: 125, text: "&5&lSorcière", available-until: "2026-11-03", hide-off-season: true}
-  title_h_vampire: {type: title, name: "&4Titre Vampire", icon: REDSTONE, price: 125, text: "&4Vampire", available-until: "2026-11-03", hide-off-season: true}
-  title_h_zombie: {type: title, name: "&2Titre Zombie", icon: ROTTEN_FLESH, price: 100, text: "&2Zombie", available-until: "2026-11-03", hide-off-season: true}
-  title_h_2026: {type: title, name: "&6&lTitre Halloween 2026", icon: CARVED_PUMPKIN, price: 222, text: "&6&lHalloween 2026", available-until: "2026-11-03", hide-off-season: true}
-  title_n_lutin: {type: title, name: "&aTitre Lutin", icon: GREEN_WOOL, price: 100, text: "&aLutin", available-from: "2026-12-01", available-until: "2027-01-02"}
-  title_n_renne: {type: title, name: "&cTitre Renne", icon: LEATHER, price: 125, text: "&cRenne", available-from: "2026-12-01", available-until: "2027-01-02"}
-  title_n_pere: {type: title, name: "&c&lTitre Père Noël", icon: RED_WOOL, price: 275, text: "&c&lPère Noël", available-from: "2026-12-01", available-until: "2027-01-02"}
-  title_n_2026: {type: title, name: "&f&lTitre Noël 2026", icon: SNOWBALL, price: 222, text: "&f&lNoël 2026", available-from: "2026-12-01", available-until: "2027-01-02"}
+  title_h_sorciere: {type: title, name: "&5&lTitre Sorcière", icon: CAULDRON, price: 125, text: "&5&lSorcière", available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
+  title_h_vampire: {type: title, name: "&4Titre Vampire", icon: REDSTONE, price: 125, text: "&4Vampire", available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
+  title_h_zombie: {type: title, name: "&2Titre Zombie", icon: ROTTEN_FLESH, price: 100, text: "&2Zombie", available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
+  title_h_2026: {type: title, name: "&6&lTitre Halloween 2026", icon: CARVED_PUMPKIN, price: 222, text: "&6&lHalloween 2026", available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
+  title_n_lutin: {type: title, name: "&aTitre Lutin", icon: GREEN_WOOL, price: 100, text: "&aLutin", available-from: "2026-12-01", available-until: "2027-01-02", season: "Noël 2026"}
+  title_n_renne: {type: title, name: "&cTitre Renne", icon: LEATHER, price: 125, text: "&cRenne", available-from: "2026-12-01", available-until: "2027-01-02", season: "Noël 2026"}
+  title_n_pere: {type: title, name: "&c&lTitre Père Noël", icon: RED_WOOL, price: 275, text: "&c&lPère Noël", available-from: "2026-12-01", available-until: "2027-01-02", season: "Noël 2026"}
+  title_n_2026: {type: title, name: "&f&lTitre Noël 2026", icon: SNOWBALL, price: 222, text: "&f&lNoël 2026", available-from: "2026-12-01", available-until: "2027-01-02", season: "Noël 2026"}
   # 1.9.0 : Noel (chapeaux, traines, messages), du 01/12/2026 au 02/01/2027, masques hors saison.
-  hat_n_sapin: {type: hat, name: "&2Sapin de Noël", icon: SPRUCE_LEAVES, price: 150, material: SPRUCE_LEAVES, description: ["Un sapin sur la tête"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true}
-  hat_n_bonhomme: {type: hat, name: "&fTête de bonhomme de neige", icon: SNOW_BLOCK, price: 175, material: SNOW_BLOCK, description: ["Attention, ça fond au soleil"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true}
-  trail_n_flocons: {type: trail, name: "&fTraînée de flocons", icon: SNOWBALL, price: 150, particle: ITEM_SNOWBALL, description: ["Des boules de neige à chaque pas"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true}
-  trail_n_clochettes: {type: trail, name: "&6Traînée de clochettes", icon: BELL, price: 150, particle: NOTE, description: ["Des notes qui tintent derrière toi"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true}
-  join_n_traineau: {type: join, name: "&cArrivée en traîneau", icon: SPRUCE_SAPLING, price: 175, message: "&c%player% &7arrive en traîneau. Ho ho ho !", available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true}
-  join_n_hotte: {type: join, name: "&aHotte pleine", icon: CHEST, price: 175, message: "&a%player% &7débarque avec une hotte pleine de cadeaux !", available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true}
+  hat_n_sapin: {type: hat, name: "&2Sapin de Noël", icon: SPRUCE_LEAVES, price: 150, material: SPRUCE_LEAVES, description: ["Un sapin sur la tête"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true, season: "Noël 2026"}
+  hat_n_bonhomme: {type: hat, name: "&fTête de bonhomme de neige", icon: SNOW_BLOCK, price: 175, material: SNOW_BLOCK, description: ["Attention, ça fond au soleil"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true, season: "Noël 2026"}
+  trail_n_flocons: {type: trail, name: "&fTraînée de flocons", icon: SNOWBALL, price: 150, particle: ITEM_SNOWBALL, description: ["Des boules de neige à chaque pas"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true, season: "Noël 2026"}
+  trail_n_clochettes: {type: trail, name: "&6Traînée de clochettes", icon: BELL, price: 150, particle: NOTE, description: ["Des notes qui tintent derrière toi"], available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true, season: "Noël 2026"}
+  join_n_traineau: {type: join, name: "&cArrivée en traîneau", icon: SPRUCE_SAPLING, price: 175, message: "&c%player% &7arrive en traîneau. Ho ho ho !", available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true, season: "Noël 2026"}
+  join_n_hotte: {type: join, name: "&aHotte pleine", icon: CHEST, price: 175, message: "&a%player% &7débarque avec une hotte pleine de cadeaux !", available-from: "2026-12-01", available-until: "2027-01-02", hide-off-season: true, season: "Noël 2026"}
   join_fracas: {type: join, name: "&eEntrée fracassante", icon: TNT, price: 125, message: "&e%player% &7fait une entrée fracassante !"}
-  join_fantome: {type: join, name: "&fApparition fantôme", icon: PHANTOM_MEMBRANE, price: 125, message: "&f%player% &7surgit d'outre-tombe... Bouh !", available-until: "2026-11-03", hide-off-season: true}
+  join_fantome: {type: join, name: "&fApparition fantôme", icon: PHANTOM_MEMBRANE, price: 125, message: "&f%player% &7surgit d'outre-tombe... Bouh !", available-until: "2026-11-03", hide-off-season: true, season: "Halloween 2026"}
   join_star: {type: join, name: "&6Arrivée de star", icon: NETHER_STAR, price: 275, message: "&6&l%player% &eest arrivé ! Place à la star !"}
   # 1.6.0 : nouveaux cosmetiques (prix a l'echelle des gains : partie 5, victoire 25, bonus du jour 15/50).
   trail_etoiles: {type: trail, name: "&fTraînée d'étoiles", icon: END_ROD, price: 150, particle: END_ROD}

@@ -1297,7 +1297,7 @@ public final class EemiNoel extends JavaPlugin implements Listener {
         if (!getConfig().getBoolean("boutique.enabled", true)) return "§7désactivée";
         Plugin core = Bukkit.getPluginManager().getPlugin("EemiCore");
         if (core == null || !core.isEnabled()) return "§cEemiCore absent";
-        return ambiance ? "§atitres de Noël en vente" : "§ctitres de Noël retirés";
+        return (ambiance ? "§aen vente" : "§cretirée") + "§7 (" + Saison.onSaleCount(this) + " cosmétiques de saison en vente dans EemiCore)";
     }
 
     // ------------------------------------------------------------------ commande

@@ -640,16 +640,16 @@ implements Listener {
     }
 
     /** 1.9.0 (#88) : cosmetique saisonnier masque hors saison (hide-off-season: true et hors des dates
-     *  available-from / available-until) : ni vendu, ni dans la boutique, ni porte, meme s'il est achete et equipe.
-     *  L'achat et l'equipement sont gardes : il revient tout seul a la saison suivante (nouvelles dates). */
+     *  available-from / available-until) : ni vendu, ni visible dans la boutique pour ceux qui ne l'ont pas.
+     *  1.9.3 (Esteban, 26/11) : ceux qui l'ont achete le voient toujours et peuvent l'equiper et le porter. */
     private boolean offSeason(ConfigurationSection s) {
         return s != null && s.getBoolean("hide-off-season", false) && !this.onSale(s);
     }
 
-    /** 1.9.0 : cosmetique equipe a AFFICHER (null si rien ou masque hors saison). */
+    /** Cosmetique equipe a AFFICHER (null si rien). 1.9.3 : un cosmetique equipe est forcement achete, donc
+     *  toujours porte, meme hors saison. */
     private ConfigurationSection worn(String id) {
-        ConfigurationSection s = this.cosmetic(id);
-        return this.offSeason(s) ? null : s;
+        return this.cosmetic(id);
     }
 
     /** 1.9.0 : visible dans la boutique pour ce joueur (achete, ou en vente et pas reserve au casino ; jamais hors saison masque). */
@@ -2796,9 +2796,6 @@ implements Listener {
     private ShopState shopState(PlayerData d, String id, ConfigurationSection s) {
         String cat = s.getString("type", "trail");
         if (d.owned.contains(id)) {
-            if (this.offSeason(s)) {
-                return ShopState.HORS_SAISON;
-            }
             return id.equals(d.equipped.get(cat)) ? ShopState.EQUIPE : ShopState.ACHETE;
         }
         if (!this.onSale(s) || this.casinoOnly(s) || this.offSeason(s)) {
@@ -2821,6 +2818,11 @@ implements Listener {
         }
         if (this.casinoOnly(s)) {
             lore.add("&6Exclusivité du casino");
+        }
+        // 1.9.3 : saison du cosmetique (cle « season » du config, ex. « Noël 2026 ») pour qu'on voie qu'il est temporaire
+        String season = s.getString("season");
+        if (season != null && !season.isBlank()) {
+            lore.add(this.onSale(s) ? "&6✦ Édition " + season + " &7(temporaire)" : "&8✦ Édition " + season);
         }
         String until = s.getString("available-until");
         if (until != null) {
@@ -3483,13 +3485,6 @@ implements Listener {
                 d.equipped.remove(cat);
                 EemiCore.msg((CommandSender)p, "&6[EEMICRAFT] &r&7Retiré : " + name);
             } else {
-                if (this.offSeason(s)) {
-                    // 1.9.0 (#88) : masque hors saison (menu ouvert avant la fin de la saison)
-                    EemiCore.msg((CommandSender)p, "&6[EEMICRAFT] &r&c" + name + " &cest hors saison : il reviendra avec sa saison.");
-                    this.uiSound(p, "erreur");
-                    this.openShopCategory(p, cat, page);
-                    return;
-                }
                 d.equipped.put(cat, id);
                 EemiCore.msg((CommandSender)p, "&6[EEMICRAFT] &r&aÉquipé : " + name);
             }

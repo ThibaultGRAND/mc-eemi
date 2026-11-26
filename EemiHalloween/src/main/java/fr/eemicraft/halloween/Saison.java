@@ -22,8 +22,8 @@ import java.util.List;
  * Boutique : EemiCore lit available-from / available-until / text de ses cosmétiques dans sa config EN MÉMOIRE
  * (getConfig(), jamais sauvegardée par EemiCore). On modifie seulement cette copie en mémoire, jamais le fichier :
  * - saison activée : en vente (available-from retiré, available-until = boutique.jusqu-au ou 2099-12-31), titre affiché ;
- * - saison coupée : plus en vente ni visible pour ceux qui ne l'ont pas (available-from 2099-01-01), et le texte du
- *   titre vidé, donc les titres de saison déjà équipés ne s'affichent plus (chat, liste, au-dessus de la tête).
+ * - saison coupée : plus en vente ni visible pour ceux qui ne l'ont pas (available-from 2099-01-01) ; ceux qui l'ont
+ *   le voient toujours et peuvent le porter (26/11, Esteban).
  *   Les joueurs gardent leurs achats ; tout revient à l'activation suivante.
  * Les valeurs d'origine sont relues dans plugins/EemiCore/config.yml (lecture seule). Un /eemi reload remet la config
  * du fichier : apply() est rappelé toutes les 10 s pour reprendre la main.
@@ -68,11 +68,36 @@ final class Saison {
             } else {
                 set(s, "available-from", "2099-01-01");
                 if (orig != null && orig.contains("available-until")) set(s, "available-until", orig.getString("available-until"));
-                if ("title".equals(s.getString("type"))) set(s, "text", "");
+                // 26/11 : hors saison, le titre reste porte par ceux qui l'ont (EemiCore le cache aux autres)
+                if ("title".equals(s.getString("type")) && !text.isEmpty()) set(s, "text", text);
             }
             n++;
         }
         return n;
+    }
+
+    /** Nombre de cosmetiques de boutique.cosmetiques reellement en vente dans la config EN MEMOIRE d'EemiCore,
+     *  au format « n/total » (pour /noel status et /halloween status). */
+    static String onSaleCount(JavaPlugin pl) {
+        Plugin core = Bukkit.getPluginManager().getPlugin("EemiCore");
+        List<String> ids = pl.getConfig().getStringList("boutique.cosmetiques");
+        if (!(core instanceof JavaPlugin jp)) return "?/" + ids.size();
+        ConfigurationSection mem = jp.getConfig().getConfigurationSection("cosmetics");
+        LocalDate today = LocalDate.now();
+        int n = 0;
+        for (String id : ids) {
+            ConfigurationSection s = mem == null ? null : mem.getConfigurationSection(id);
+            if (s == null) continue;
+            try {
+                String from = s.getString("available-from"), until = s.getString("available-until");
+                if (from != null && today.isBefore(LocalDate.parse(from))) continue;
+                if (until != null && today.isAfter(LocalDate.parse(until))) continue;
+            } catch (RuntimeException e) {
+                // date illisible : EemiCore la considere en vente
+            }
+            n++;
+        }
+        return n + "/" + ids.size();
     }
 
     private static void set(ConfigurationSection s, String key, Object value) {
