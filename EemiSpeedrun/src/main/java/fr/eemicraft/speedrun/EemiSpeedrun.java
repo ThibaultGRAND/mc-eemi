@@ -60,6 +60,9 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
     private BukkitTask countdownTask;
     private final NamespacedKey replayKey = new NamespacedKey(this, "replay");
     private final NamespacedKey queueKey = new NamespacedKey(this, "quitter_file");
+    /** 1.2.0 (#134) : objet « Pret » des joueurs en file, et joueurs qui ont clique dessus. */
+    private final NamespacedKey readyKey = new NamespacedKey(this, "pret");
+    private final Set<UUID> ready = new java.util.HashSet<>();
 
     @Override
     public void onEnable() {
@@ -272,7 +275,9 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
                 + (game != null ? " §7Une partie est en cours : la tienne commencera apres." : "")
                 + (queue.size() < min ? " §7Encore " + (min - queue.size()) + " joueur(s) pour lancer." : ""));
         notifyQueue(mode, "§7" + p.getName() + " rejoint la file (" + queue.size() + "/" + max + ").", p);
+        ready.remove(p.getUniqueId());
         giveQueueItem(p);
+        giveReadyItem(p);
         status("waiting", totalQueued(), 0);
     }
 
@@ -286,7 +291,10 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
                 }
             }
         }
-        if (removed) removeQueueItem(p);
+        if (removed) {
+            ready.remove(p.getUniqueId());
+            removeQueueItem(p);
+        }
         if (removed && game == null) status("waiting", totalQueued(), 0);
         return removed;
     }
@@ -300,6 +308,7 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
     /** Chaque seconde : lance le decompte de la file la plus remplie quand elle atteint le minimum. */
     private void queueTick() {
         for (Set<UUID> q : queues.values()) q.removeIf(id -> Bukkit.getPlayer(id) == null);
+        ready.removeIf(id -> queueOf(id) == null);
         syncQueueItems();
         if (game != null || countdownTask != null) return;
         int min = getConfig().getInt("min-players", 2);
@@ -316,6 +325,7 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
                 cancelCountdown("§cPas assez de joueurs, decompte annule.");
                 return;
             }
+            checkReady();
             if (countdownLeft <= 0) {
                 // cancelCountdown remet countdownMode a null : garder le mode avant (bug de la 1.0.0).
                 Mode mode = countdownMode;
@@ -356,6 +366,7 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
         if (joined.isEmpty()) return false;
         for (Player p : joined) {
             queues.get(mode).remove(p.getUniqueId());
+            ready.remove(p.getUniqueId());
             // avant la teleportation : Multiverse-Inventories ne doit pas garder le lit dans l'inventaire du lobby
             removeQueueItem(p);
         }
@@ -443,13 +454,132 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
             if (isQueueItem(contents[i])) p.getInventory().setItem(i, null);
         }
         if (isQueueItem(p.getItemOnCursor())) p.setItemOnCursor(null);
+        removeReadyItem(p);
+    }
+
+    // ------------------------------------------------------------------ objet « Pret » (1.2.0, #134)
+
+    private Mode queueOf(UUID id) {
+        for (Map.Entry<Mode, Set<UUID>> e : queues.entrySet()) if (e.getValue().contains(id)) return e.getKey();
+        return null;
+    }
+
+    boolean isReadyItem(ItemStack item) {
+        return item != null && item.hasItemMeta()
+                && item.getItemMeta().getPersistentDataContainer().has(readyKey, PersistentDataType.BYTE);
+    }
+
+    private boolean hasReadyItem(Player p) {
+        for (ItemStack it : p.getInventory().getContents()) if (isReadyItem(it)) return true;
+        return false;
+    }
+
+    private ItemStack readyItem(boolean on) {
+        ItemStack it = new ItemStack(on ? org.bukkit.Material.LIME_DYE : org.bukkit.Material.GRAY_DYE);
+        var meta = it.getItemMeta();
+        var legacy = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection();
+        meta.displayName(legacy.deserialize(on ? "§a§lPrêt ! §7(clic droit pour annuler)" : "§7Prêt ? §8(clic droit)")
+                .decoration(net.kyori.adventure.text.format.TextDecoration.ITALIC, false));
+        meta.lore(List.of(
+                legacy.deserialize(on ? "§7Tu attends les autres joueurs." : "§7Quand toute la file est prête,")
+                        .decoration(net.kyori.adventure.text.format.TextDecoration.ITALIC, false),
+                legacy.deserialize(on ? "§7Clic droit pour annuler." : "§7le départ est avancé.")
+                        .decoration(net.kyori.adventure.text.format.TextDecoration.ITALIC, false)));
+        meta.getPersistentDataContainer().set(readyKey, PersistentDataType.BYTE, (byte) 1);
+        it.setItemMeta(meta);
+        return it;
+    }
+
+    /** Colorant « Pret » pour un joueur en file au lobby : case 3, sinon 5 ou 1 (DeluxeHub 0/2/4/6/8, gadget 7). */
+    private void giveReadyItem(Player p) {
+        if (!isHub(p) || !queued(p) || hasReadyItem(p)) return;
+        int slot = -1;
+        for (int i : new int[] {3, 5, 1}) {
+            if (p.getInventory().getItem(i) == null) {
+                slot = i;
+                break;
+            }
+        }
+        for (int i = 0; i < 9 && slot < 0; i++) if (p.getInventory().getItem(i) == null) slot = i;
+        if (slot < 0) return;
+        p.getInventory().setItem(slot, readyItem(ready.contains(p.getUniqueId())));
+    }
+
+    private void removeReadyItem(Player p) {
+        ItemStack[] contents = p.getInventory().getContents();
+        for (int i = 0; i < contents.length; i++) {
+            if (isReadyItem(contents[i])) p.getInventory().setItem(i, null);
+        }
+        if (isReadyItem(p.getItemOnCursor())) p.setItemOnCursor(null);
+    }
+
+    private int readyCount(Mode mode) {
+        int n = 0;
+        for (UUID id : queues.get(mode)) if (ready.contains(id)) n++;
+        return n;
+    }
+
+    private void toggleReady(Player p) {
+        Mode mode = queueOf(p.getUniqueId());
+        if (mode == null) {
+            removeReadyItem(p);
+            return;
+        }
+        boolean now = !ready.remove(p.getUniqueId());
+        if (now) ready.add(p.getUniqueId());
+        ItemStack[] contents = p.getInventory().getContents();
+        boolean found = false;
+        for (int i = 0; i < contents.length; i++) {
+            if (isReadyItem(contents[i])) {
+                p.getInventory().setItem(i, readyItem(now));
+                found = true;
+                break;
+            }
+        }
+        if (!found) giveReadyItem(p);
+        p.playSound(p.getLocation(), org.bukkit.Sound.UI_BUTTON_CLICK, 0.6f, now ? 1.6f : 0.9f);
+        notifyQueue(mode, "§f" + p.getName() + (now ? " §aest prêt" : " §7n'est plus prêt") + " §7("
+                + readyCount(mode) + "/" + queues.get(mode).size() + ")", null);
+        checkReady();
+    }
+
+    /** Decompte lance et toute la file prete : temps restant ramene a ready-skip-to (0 = desactive). */
+    private void checkReady() {
+        int skip = Math.max(0, getConfig().getInt("ready-skip-to", 5));
+        if (skip <= 0 || countdownTask == null || countdownMode == null) return;
+        Set<UUID> queue = queues.get(countdownMode);
+        if (queue.isEmpty() || queue.size() < getConfig().getInt("min-players", 2)) return;
+        for (UUID id : queue) if (!ready.contains(id)) return;
+        if (countdownLeft > skip) {
+            countdownLeft = skip;
+            notifyQueue(countdownMode, "§aTout le monde est prêt : départ dans §e" + skip + " s§a.", null);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onReadyItemClick(PlayerInteractEvent e) {
+        if (!isReadyItem(e.getItem())) return;
+        e.setCancelled(true);
+        if (e.getHand() != EquipmentSlot.HAND) return;
+        if (e.getAction() != org.bukkit.event.block.Action.RIGHT_CLICK_AIR
+                && e.getAction() != org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK) return;
+        toggleReady(e.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onReadyItemSwap(org.bukkit.event.player.PlayerSwapHandItemsEvent e) {
+        if (isReadyItem(e.getMainHandItem()) || isReadyItem(e.getOffHandItem())) e.setCancelled(true);
     }
 
     /** Chaque seconde : le lit suit l'inscription (donne en file au lobby, retire sinon). */
     private void syncQueueItems() {
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (queued(p) && isHub(p)) giveQueueItem(p);
-            else if (hasQueueItem(p)) removeQueueItem(p);
+            if (queued(p) && isHub(p)) {
+                giveQueueItem(p);
+                giveReadyItem(p);
+            } else if (hasQueueItem(p) || hasReadyItem(p)) {
+                removeQueueItem(p);
+            }
         }
     }
 
@@ -572,21 +702,24 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onQueueItemMove(InventoryClickEvent e) {
         if (isQueueItem(e.getCurrentItem()) || isQueueItem(e.getCursor()) || isReplayItem(e.getCurrentItem()) || isReplayItem(e.getCursor())
+                || isReadyItem(e.getCurrentItem()) || isReadyItem(e.getCursor())
                 || (e.getClick() == org.bukkit.event.inventory.ClickType.NUMBER_KEY && e.getHotbarButton() >= 0
                     && e.getWhoClicked() instanceof Player hp
-                    && (isQueueItem(hp.getInventory().getItem(e.getHotbarButton())) || isReplayItem(hp.getInventory().getItem(e.getHotbarButton()))))) {
+                    && (isQueueItem(hp.getInventory().getItem(e.getHotbarButton())) || isReplayItem(hp.getInventory().getItem(e.getHotbarButton()))
+                        || isReadyItem(hp.getInventory().getItem(e.getHotbarButton()))))) {
             e.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onQueueItemDrag(org.bukkit.event.inventory.InventoryDragEvent e) {
-        if (isQueueItem(e.getOldCursor()) || isReplayItem(e.getOldCursor())) e.setCancelled(true);
+        if (isQueueItem(e.getOldCursor()) || isReplayItem(e.getOldCursor()) || isReadyItem(e.getOldCursor())) e.setCancelled(true);
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onReplayDrop(PlayerDropItemEvent e) {
-        if (isReplayItem(e.getItemDrop().getItemStack()) || isQueueItem(e.getItemDrop().getItemStack())) e.setCancelled(true);
+        if (isReplayItem(e.getItemDrop().getItemStack()) || isQueueItem(e.getItemDrop().getItemStack())
+                || isReadyItem(e.getItemDrop().getItemStack())) e.setCancelled(true);
     }
 
     @EventHandler

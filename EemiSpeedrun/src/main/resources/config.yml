@@ -10,6 +10,9 @@ min-players: 2
 max-players: 16
 # Decompte au lobby quand la file atteint min-players (secondes).
 countdown: 30
+# Objet "Pret" (colorant gris donne au lobby aux joueurs en file, case 3 sinon 5 ou 1) : quand tous les
+# joueurs de la file du decompte sont prets, le temps restant est ramene a ce nombre de secondes (0 = desactive).
+ready-skip-to: 5
 
 # Manches : une roulette par manche. Par defaut UNE seule manche : le premier qui trouve gagne la partie.
 # (Avec plusieurs manches, le joueur qui a le plus de points a la fin gagne, egalite possible.)
