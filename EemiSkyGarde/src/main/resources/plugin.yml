@@ -7,7 +7,7 @@ description: Coffre-fort de l'inventaire du skyblock (sauvegarde en sortant, res
 commands:
   skygarde:
     description: Sauvegardes de l'inventaire du skyblock
-    usage: /skygarde <liste|restaurer|sauver|reload> [joueur] [n]
+    usage: '/skygarde <liste|restaurer|sauver|oublier|reload> [joueur] [n]'
     permission: eemiskygarde.admin
 permissions:
   eemiskygarde.admin:

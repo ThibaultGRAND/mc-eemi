@@ -1200,6 +1200,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## EemiSkyGarde (filet de sécurité de l'inventaire skyblock)
 
+- **1.0.1 compilée** (26/11, `a_deposer/EemiSkyGarde-1.0.1.jar`), PAS installée, à installer AVEC EemiIles : `/skygarde oublier <joueur> [raison]` (console/op) met `restore: false` et vide la copie d'avant commande, pour qu'un reset d'île ne soit pas annulé par la restauration automatique.
 - **État** : 1.0.0 installée ; une restauration réelle vue dans les logs. Non vérifié : ordre réel avec MV-Inv, commandes lancées par DeluxeMenus `[player]` (peut-être pas vues par `PlayerCommandPreprocessEvent`).
 - **Fonctionnement**
   - Source `EemiSkyGarde/`. Demande de Thibault : « sauvegarder puis remettre l'inventaire avec un loading sûr », indépendant des jeux. Mondes protégés : `bskyblock_world`, `_nether`, `_the_end`, `arene_boss`.

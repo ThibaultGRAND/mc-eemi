@@ -290,7 +290,7 @@ public final class EemiSkyGarde extends JavaPlugin implements Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(PREFIX + "/skygarde liste <joueur> | restaurer <joueur> <n> | sauver <joueur> | reload");
+            sender.sendMessage(PREFIX + "/skygarde liste <joueur> | restaurer <joueur> <n> | sauver <joueur> | oublier <joueur> [raison] | reload");
             return true;
         }
         switch (args[0].toLowerCase()) {
@@ -343,6 +343,18 @@ public final class EemiSkyGarde extends JavaPlugin implements Listener {
                 apply(p, read(list.get(n - 1)));
                 sender.sendMessage(PREFIX + "Sauvegarde " + n + " remise a " + p.getName() + ".");
             }
+            case "oublier", "forget" -> {
+                // Appelée par EemiIles après un reset d'île : la sauvegarde d'avant le reset ne doit plus être remise.
+                if (args.length < 2) return usage(sender);
+                Player online = Bukkit.getPlayerExact(args[1]);
+                UUID id = online != null ? online.getUniqueId() : Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+                String why = args.length >= 3 ? String.join(" ", java.util.Arrays.copyOfRange(args, 2, args.length)) : "oubli manuel";
+                beforeCommand.remove(id);
+                leftAt.remove(id);
+                forget(id, why);
+                getLogger().info("Restauration automatique coupee pour " + args[1] + " (" + why + ").");
+                sender.sendMessage(PREFIX + "Plus de restauration automatique pour " + args[1] + " (" + why + ").");
+            }
             case "sauver", "save" -> {
                 if (args.length < 2) return usage(sender);
                 Player p = Bukkit.getPlayerExact(args[1]);
@@ -361,7 +373,7 @@ public final class EemiSkyGarde extends JavaPlugin implements Listener {
     }
 
     private boolean usage(CommandSender sender) {
-        sender.sendMessage(PREFIX + "/skygarde liste <joueur> | restaurer <joueur> <n> | sauver <joueur> | reload");
+        sender.sendMessage(PREFIX + "/skygarde liste <joueur> | restaurer <joueur> <n> | sauver <joueur> | oublier <joueur> [raison] | reload");
         return true;
     }
 }
