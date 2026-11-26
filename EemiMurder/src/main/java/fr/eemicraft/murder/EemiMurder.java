@@ -178,6 +178,41 @@ implements Listener {
     private final List<BuiltMap> built = new ArrayList<BuiltMap>();
     /** 1.12.0 : derniere petite map tiree (toutes parties confondues) : les petites maps passent en alternance. */
     private String lastSmallMapId;
+    /** 1.14.1 : derniere map JOUEE (toutes parties), sauvee dans data.yml (cle last-map) : exclue du tirage suivant, meme apres un redemarrage. */
+    private String lastPlayedMapId;
+
+    private java.io.File dataFile() {
+        return new java.io.File(this.getDataFolder(), "data.yml");
+    }
+
+    private void loadLastMaps() {
+        java.io.File f = this.dataFile();
+        if (!f.exists()) {
+            return;
+        }
+        org.bukkit.configuration.file.YamlConfiguration y = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f);
+        this.lastPlayedMapId = y.getString("last-map");
+        this.lastSmallMapId = y.getString("last-small-map");
+    }
+
+    /** 1.14.1 : appele au lancement d'une partie (map reellement jouee). */
+    void saveLastPlayed(GameMap m) {
+        this.lastPlayedMapId = m.id;
+        if (m.small) {
+            this.lastSmallMapId = m.id;
+        }
+        java.io.File f = this.dataFile();
+        org.bukkit.configuration.file.YamlConfiguration y = f.exists() ? org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f) : new org.bukkit.configuration.file.YamlConfiguration();
+        y.set("last-map", this.lastPlayedMapId);
+        y.set("last-small-map", this.lastSmallMapId);
+        try {
+            this.getDataFolder().mkdirs();
+            y.save(f);
+        }
+        catch (java.io.IOException e) {
+            this.getLogger().warning("Impossible d'ecrire data.yml : " + e.getMessage());
+        }
+    }
 
     public void onEnable() {
         this.toolKey = new NamespacedKey((Plugin)this, "tool");
@@ -188,6 +223,7 @@ implements Listener {
             this.built.add(new BuiltMap(this, d));
         }
         this.loadSettings();
+        this.loadLastMaps();
         this.enableBuiltMaps();
         this.games.put(1, new Game(1));
         this.getServer().getPluginManager().registerEvents((Listener)this, (Plugin)this);
@@ -1368,6 +1404,8 @@ implements Listener {
         Game(int n) {
             this.n = n;
             this.teamName = n == 1 ? EemiMurder.TEAM : "eemimurder_" + n;
+            // 1.14.1 : jamais la derniere map jouee (meme apres un redemarrage)
+            this.lastMapId = EemiMurder.this.lastPlayedMapId;
         }
 
         String label() {
@@ -1640,6 +1678,13 @@ implements Listener {
             if (this.state == State.PLAYING || this.state == State.ENDING) {
                 p.sendMessage("\u00a78[\u00a7dMurder\u00a78] \u00a77\u00a77Une partie est en cours, tu joueras \u00e0 la suivante.");
             }
+            else if (this.n == 1 && this.state == State.WAITING && this.players.size() == 1 && this.chosen == null && !this.preparing) {
+                // 1.14.1 : premier joueur dans une salle vide -> tirage de la map maintenant (refait si la taille change)
+                this.prepareMap();
+                if (this.chosen != null) {
+                    this.broadcast("\u00a77Map tir\u00e9e : \u00a7f" + this.chosen.name + "\u00a77.");
+                }
+            }
             EemiMurder.this.reportStatus();
         }
 
@@ -1740,6 +1785,20 @@ implements Listener {
                 EemiMurder.this.removeGame(this);
                 return;
             }
+            if (this.n == 1 && this.players.isEmpty() && (this.state == State.WAITING || this.state == State.STARTING)) {
+                // 1.14.1 : salle vide -> la map tiree est liberee (nouveau tirage au prochain joueur) ; elle n'a pas
+                // ete jouee, on remet donc la derniere map jouee comme map a exclure
+                this.state = State.WAITING;
+                this.forced = false;
+                if (this.chosen != null) {
+                    String chosenId = this.chosen.id;
+                    this.releaseWorld();
+                    this.lastMapId = this.lastMapIdBefore;
+                    if (chosenId.equals(EemiMurder.this.lastSmallMapId)) {
+                        EemiMurder.this.lastSmallMapId = this.lastSmallBefore;
+                    }
+                }
+            }
             EemiMurder.this.reportStatus();
         }
 
@@ -1834,6 +1893,8 @@ implements Listener {
             }
             this.forced = false;
             this.current = this.chosen.withWorld(this.world.getName());
+            this.lastMapId = this.chosen.id;
+            EemiMurder.this.saveLastPlayed(this.chosen);
             List<Player> list = EemiMurder.this.online(this.players);
             if (list.size() < 2) {
                 this.state = State.WAITING;
