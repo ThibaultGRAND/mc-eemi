@@ -180,6 +180,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -206,6 +210,9 @@ implements Listener {
     private NamespacedKey kitKey;
     private NamespacedKey sheepKey;
     private NamespacedKey ballKey;
+    /** 4.7.0 (#134) : objet "Pret" de la salle d'attente (case READY_SLOT ; 8 = lit "Quitter Sheep Wars"). */
+    private NamespacedKey readyKey;
+    private static final int READY_SLOT = 4;
     private String base;
     private int cy;
     private final List<Game> games = new ArrayList<Game>();
@@ -233,6 +240,7 @@ implements Listener {
         this.kitKey = new NamespacedKey((Plugin)this, "kit");
         this.sheepKey = new NamespacedKey((Plugin)this, "sheep");
         this.ballKey = new NamespacedKey((Plugin)this, "ball");
+        this.readyKey = new NamespacedKey((Plugin)this, "ready");
         this.saveDefaultConfig();
         this.reloadConfig();
         this.base = this.getConfig().getString("world", "sheepwars");
@@ -589,6 +597,56 @@ implements Listener {
         meta.getPersistentDataContainer().set(this.kitKey, PersistentDataType.BYTE, (byte)1);
         it.setItemMeta(meta);
         return it;
+    }
+
+    /** Objet "Pret" (4.7.0, #134) : gris = pas pret, vert = pret. */
+    private ItemStack readyItem(boolean ready) {
+        ItemStack it = new ItemStack(ready ? Material.LIME_DYE : Material.GRAY_DYE);
+        ItemMeta meta = it.getItemMeta();
+        meta.displayName(Component.text((String)(ready ? "Pr\u00eat ! (clic droit pour annuler)" : "Pr\u00eat ? (clic droit)"), (TextColor)(ready ? NamedTextColor.GREEN : NamedTextColor.GRAY)).decoration(TextDecoration.ITALIC, false));
+        meta.lore(List.of(Component.text((String)(ready ? "Tu attends les autres joueurs." : "Quand tout le monde est pr\u00eat,"), (TextColor)NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false), Component.text((String)(ready ? "Clic droit pour annuler." : "le d\u00e9part est avanc\u00e9."), (TextColor)NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)));
+        meta.getPersistentDataContainer().set(this.kitKey, PersistentDataType.BYTE, (byte)1);
+        meta.getPersistentDataContainer().set(this.readyKey, PersistentDataType.BYTE, (byte)1);
+        it.setItemMeta(meta);
+        return it;
+    }
+
+    private boolean isReadyItem(ItemStack it) {
+        return it != null && it.hasItemMeta() && it.getItemMeta().getPersistentDataContainer().has(this.readyKey, PersistentDataType.BYTE);
+    }
+
+    @EventHandler(priority=EventPriority.HIGH, ignoreCancelled=true)
+    public void onReadyItemClick(InventoryClickEvent e) {
+        HumanEntity who = e.getWhoClicked();
+        if (!(who instanceof Player) || who.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+        Player p = (Player)who;
+        boolean hotbar = e.getHotbarButton() >= 0 && this.isReadyItem(p.getInventory().getItem(e.getHotbarButton()));
+        if (this.isReadyItem(e.getCurrentItem()) || this.isReadyItem(e.getCursor()) || hotbar || e.getClick() == ClickType.SWAP_OFFHAND && this.isReadyItem(p.getInventory().getItemInOffHand())) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority=EventPriority.HIGH, ignoreCancelled=true)
+    public void onReadyItemDrag(InventoryDragEvent e) {
+        if (this.isReadyItem(e.getOldCursor())) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority=EventPriority.HIGH, ignoreCancelled=true)
+    public void onReadyItemSwap(PlayerSwapHandItemsEvent e) {
+        if (this.isReadyItem(e.getMainHandItem()) || this.isReadyItem(e.getOffHandItem())) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler(ignoreCancelled=true)
+    public void onReadyItemDrop(PlayerDropItemEvent e) {
+        if (this.isReadyItem(e.getItemDrop().getItemStack())) {
+            e.setCancelled(true);
+        }
     }
 
     private boolean isKit(ItemStack it) {
@@ -1186,6 +1244,13 @@ implements Listener {
             }
             return;
         }
+        if (this.isReadyItem(it)) {
+            e.setCancelled(true);
+            if (right) {
+                g.toggleReady(p);
+            }
+            return;
+        }
         if (right && it.getType() == Material.RED_BED && this.isKit(it)) {
             e.setCancelled(true);
             g.leave(p, true);
@@ -1564,6 +1629,8 @@ implements Listener {
         final Map<UUID, Launched> sheep = new HashMap<UUID, Launched>();
         final Map<UUID, Scoreboard> boards = new HashMap<UUID, Scoreboard>();
         final Set<UUID> spectators = new HashSet<UUID>();
+        /** 4.7.0 (#134) : inscrits qui ont clique sur "Pret" pendant l'attente de cette partie. */
+        final Set<UUID> ready = new HashSet<UUID>();
         final Map<Side, Integer> sheepTimer = new EnumMap<Side, Integer>(Side.class);
         final Map<Side, Map<String, Long>> buffs = new EnumMap<Side, Map<String, Long>>(Side.class);
         State state = State.WAITING;
@@ -1662,6 +1729,7 @@ implements Listener {
                     if (this.players.size() >= EemiSheepWars.this.cfg("max-players", 12)) {
                         this.timer = Math.min(this.timer, EemiSheepWars.this.cfg("full-countdown", 10));
                     }
+                    this.checkReady();
                     if (this.timer <= 5 && this.timer > 0) {
                         for (Player p : EemiSheepWars.this.online(this.players)) {
                             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1.0f, 1.0f);
@@ -1887,7 +1955,63 @@ implements Listener {
             }
             EemiSheepWars.this.resetPlayer(p, GameMode.ADVENTURE);
             p.getInventory().setItem(8, EemiSheepWars.this.kit(new ItemStack(Material.RED_BED), "Quitter Sheep Wars"));
+            this.giveReady(p);
             this.updateSidebar(p);
+        }
+
+        // ---------------------------------------------------------------- objet "Pret" (4.7.0, #134)
+
+        int readyCount() {
+            int c = 0;
+            for (UUID id : this.players) {
+                if (!this.ready.contains(id)) continue;
+                ++c;
+            }
+            return c;
+        }
+
+        void giveReady(Player p) {
+            ItemStack it = EemiSheepWars.this.readyItem(this.ready.contains(p.getUniqueId()));
+            for (int i = 0; i < p.getInventory().getSize(); ++i) {
+                if (!EemiSheepWars.this.isReadyItem(p.getInventory().getItem(i))) continue;
+                p.getInventory().setItem(i, it);
+                return;
+            }
+            p.getInventory().setItem(EemiSheepWars.READY_SLOT, it);
+        }
+
+        void toggleReady(Player p) {
+            UUID id = p.getUniqueId();
+            if (!this.players.contains(id)) {
+                return;
+            }
+            if (this.state != State.WAITING && this.state != State.STARTING) {
+                p.sendMessage(EemiSheepWars.PREFIX + "\u00a77Une partie est en cours : attends la suivante.");
+                return;
+            }
+            boolean now = !this.ready.remove(id);
+            if (now) {
+                this.ready.add(id);
+            }
+            this.giveReady(p);
+            p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 0.6f, now ? 1.6f : 0.9f);
+            this.broadcast("\u00a7f" + p.getName() + (now ? " \u00a7aest pr\u00eat" : " \u00a77n'est plus pr\u00eat") + " \u00a77(\u00a7f" + this.readyCount() + "\u00a77/\u00a7f" + this.players.size() + "\u00a77)");
+            this.checkReady();
+        }
+
+        /** Decompte lance et tous les inscrits prets : temps restant ramene a ready-skip-to (0 = desactive). */
+        void checkReady() {
+            int skip = Math.max(0, EemiSheepWars.this.cfg("ready-skip-to", 5));
+            if (skip <= 0 || this.state != State.STARTING || this.players.isEmpty()) {
+                return;
+            }
+            if (this.players.size() < EemiSheepWars.this.cfg("min-players", 2) || this.readyCount() < this.players.size()) {
+                return;
+            }
+            if (this.timer > skip) {
+                this.timer = skip;
+                this.broadcast("\u00a7aTout le monde est pr\u00eat : d\u00e9part dans \u00a7e" + skip + " s\u00a7a.");
+            }
         }
 
         void leave(Player p, boolean teleport) {
@@ -1900,6 +2024,7 @@ implements Listener {
             if (!this.players.remove(id)) {
                 return;
             }
+            this.ready.remove(id);
             EemiSheepWars.this.byPlayer.remove(id);
             Side side = this.teams.remove(id);
             boolean wasAlive = this.alive.remove(id);
@@ -1924,6 +2049,7 @@ implements Listener {
                 return;
             }
             Collections.shuffle(list);
+            this.ready.clear();
             this.teams.clear();
             this.alive.clear();
             this.kills.clear();
@@ -2071,6 +2197,12 @@ implements Listener {
 
         void backToLobby() {
             this.clearNames();
+            // nouvelle attente : personne n'est pret ; ceux qui attendaient deja en salle recoivent un colorant gris
+            this.ready.clear();
+            for (Player w : EemiSheepWars.this.online(this.players)) {
+                if (this.teams.containsKey(w.getUniqueId()) || this.world == null || !w.getWorld().equals((Object)this.world)) continue;
+                this.giveReady(w);
+            }
             for (UUID id : new ArrayList<UUID>(this.teams.keySet())) {
                 Player p = Bukkit.getPlayer((UUID)id);
                 if (p == null || !this.players.contains(id)) continue;

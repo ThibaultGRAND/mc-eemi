@@ -30,6 +30,9 @@ min-players: 2
 max-players: 12
 countdown: 30
 full-countdown: 10
+# Objet "Pret" (colorant gris, case 4 de la salle d'attente) : quand tous les inscrits de la partie sont prets
+# et que le decompte tourne, le temps restant est ramene a ce nombre de secondes (0 = desactive).
+ready-skip-to: 5
 # Duree max (secondes) : a la fin, l'equipe avec le plus de joueurs en vie gagne.
 game-time: 600
 end-time: 8
