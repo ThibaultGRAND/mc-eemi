@@ -226,13 +226,18 @@ final class Traineau implements Listener {
         return Math.max(0, Math.min(120, cfgI("annonce-secondes", 10)));
     }
 
-    /** Annonce dans le chat à tous les joueurs du lobby : le Père Noël arrive. */
+    /** Annonce dans le chat : le Père Noël arrive. 1.4.2 (#150) : à TOUS les joueurs (partout sur le serveur),
+     *  avec un rappel /lobby pour ceux qui n'y sont pas ; les sons seulement au lobby (pas en pleine partie). */
     private void announce() {
         announced = true;
         String text = plugin.prefix() + plugin.msg("traineau-annonce",
                 "§fLe Père Noël arrive au-dessus du lobby ! §7Ramasse ses cadeaux §8(dans {secondes} s)",
                 "secondes", announceSeconds());
-        for (Player pl : lobbyPlayers()) {
+        List<Player> lobby = lobbyPlayers();
+        for (Player pl : Bukkit.getOnlinePlayers()) {
+            if (!lobby.contains(pl)) pl.sendMessage(text + " §7(§f/lobby §7pour y aller)");
+        }
+        for (Player pl : lobby) {
             pl.sendMessage(text);
             pl.playSound(pl.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME, SoundCategory.MASTER, 0.9f, 1.4f);
             pl.playSound(pl.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, 0.7f, 1.8f);

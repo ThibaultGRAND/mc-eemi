@@ -1709,7 +1709,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
                     sb.append(" &7- chrono &b").append(time(e.best));
                 }
                 long ft = finishTime(e);
-                if (ft >= 0) {
+                // 1.6.1 (#149) : avec un chrono, on n'affiche plus le temps de jeu cumule (il s'additionnait)
+                if (ft >= 0 && e.best < 0) {
                     // temps de jeu a la 1re fin ; pour ceux qui ont fini avant la 1.4.0, temps de jeu total sur le parcours
                     sb.append(e.finishMs >= 0 ? " &7- fini en &f" : " &7- &f").append(time(ft)).append(e.finishMs >= 0 ? " &7de jeu" : " &7de jeu au total");
                 }
@@ -2111,6 +2112,12 @@ public final class EemiJump extends JavaPlugin implements Listener {
         long now = System.currentTimeMillis();
         long levelMs = now - s.levelStart;
         String lt = levelTime(p, s, n, now);
+        // 1.6.1 (#149) : tout passage complet depuis le debut (niveau 0 -> 1) est chronometre, plus besoin de passer
+        // par « Recommencer depuis le debut » ; le classement garde le MEILLEUR chrono, jamais un temps cumule.
+        // Un changement de niveau par le menu ou /jump niveau remet runStart a -1 (pas de raccourci).
+        if (n == 1 && s.cur == 0 && s.runStart < 0) {
+            s.runStart = s.levelStart;
+        }
         s.cur = n;
         s.levelStart = now;
         Progress pr = progress(s.id, c);
