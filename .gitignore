@@ -8,5 +8,6 @@ maps_refuge/
 !a_deposer/EemicraftPack.zip
 !EemicraftPack/publie/*.zip
 .claude/settings.local.json
-__pycache__/# Maps embarquées dans les jars (ressources des plugins) : à suivre malgré « maps/ »
+__pycache__/
+# Maps embarquées dans les jars (ressources des plugins) : à suivre malgré « maps/ »
 !**/src/main/resources/maps/
