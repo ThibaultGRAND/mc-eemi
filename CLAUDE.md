@@ -1334,7 +1334,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 ## Tycoon Fête foraine (EemiFete)
 
 **État**
-- **EemiFete 0.1.0** : compilé le 26/11 (`a_deposer/EemiFete-0.1.0.jar`), PAS ENCORE INSTALLÉ. À installer en bêta : `/droits jeu fete beta` après le redémarrage. Rien n'a été vu en jeu.
+- **EemiFete 0.1.0** : installé le 26/11 (redémarrage 16:49, sans erreur ni exception, `a_deposer_installes/`). Allée foraine posée au 1er démarrage (1 087 163 blocs en 1,6 s), puis les 10 parcs (108 288 blocs chacun). En BÊTA (`/droits jeu fete beta`, 16:49) : seuls les bêta-testeurs et les admins entrent. Rien n'a été vu en jeu.
 - **Réglages du serveur** (faits le 26/11, actifs au redémarrage) :
   - `games.fete` d'EemiCore (« &dTycoon fête foraine », FIREWORK_ROCKET, join `fete`, join-aliases `foire`/`feteforaine`, monde `fete`, 1-20) ;
   - sous-menu `tycoon.yml` de la boussole ;
