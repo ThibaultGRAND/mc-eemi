@@ -1,0 +1,115 @@
+package fr.eemicraft.fete;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.AtomicMoveNotSupportedException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.logging.Logger;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+/** Progression d'un joueur : plugins/EemiFete/players/&lt;uuid&gt;.yml, écrite de façon atomique. */
+final class PData {
+    final UUID uuid;
+    String name = "?";
+    /** Nom donné au parc par /fete nom (vide = « Fête de pseudo »). */
+    String parkName = "";
+    long renamedAt;
+    int parcel = -1;
+    double money, pending, earned;
+    int rebirths;
+    long rides;
+    final Set<String> bought = new LinkedHashSet<>();
+    final List<Integer> milestones = new ArrayList<>();
+    long lastSeen, presence, rebirthAt;
+    boolean broken, dirty;
+
+    PData(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    static File file(File dir, UUID id) {
+        return new File(dir, "players" + File.separator + id + ".yml");
+    }
+
+    static PData load(File dir, UUID id, Logger log) {
+        PData d = new PData(id);
+        File f = file(dir, id);
+        if (!f.exists()) return d;
+        YamlConfiguration y = new YamlConfiguration();
+        try {
+            y.load(f);
+        } catch (IOException | InvalidConfigurationException e) {
+            d.broken = true;
+            try {
+                Files.copy(f.toPath(), new File(f.getPath() + ".bak").toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ignored) {
+                // la copie est un bonus
+            }
+            log.severe("Fichier illisible " + f.getName() + " (copie .bak) : il ne sera pas reecrit. " + e.getMessage());
+            return d;
+        }
+        d.name = y.getString("name", "?");
+        d.parkName = y.getString("park-name", "");
+        d.parcel = y.getInt("parcel", -1);
+        d.money = Math.max(0, y.getDouble("money"));
+        d.pending = Math.max(0, y.getDouble("pending"));
+        d.earned = Math.max(0, y.getDouble("earned"));
+        d.rebirths = Math.max(0, y.getInt("rebirths"));
+        d.rides = Math.max(0, y.getLong("rides"));
+        d.bought.addAll(y.getStringList("bought"));
+        d.milestones.addAll(y.getIntegerList("milestones"));
+        d.lastSeen = y.getLong("last-seen");
+        d.presence = y.getLong("presence");
+        d.rebirthAt = y.getLong("rebirth-at");
+        d.bought.retainAll(Defs.INDEX.keySet());
+        return d;
+    }
+
+    /** Écriture atomique (fichier .tmp puis remplacement) ; jamais sur un fichier illisible. */
+    void save(File dir, Logger log) {
+        if (broken) return;
+        YamlConfiguration y = new YamlConfiguration();
+        y.set("name", name);
+        if (!parkName.isEmpty()) y.set("park-name", parkName);
+        y.set("parcel", parcel);
+        y.set("money", money);
+        y.set("pending", pending);
+        y.set("earned", earned);
+        y.set("rebirths", rebirths);
+        y.set("rides", rides);
+        y.set("bought", new ArrayList<>(bought));
+        y.set("milestones", milestones);
+        y.set("last-seen", lastSeen);
+        y.set("presence", presence);
+        y.set("rebirth-at", rebirthAt);
+        File f = file(dir, uuid);
+        File tmp = new File(f.getPath() + ".tmp");
+        try {
+            f.getParentFile().mkdirs();
+            y.save(tmp);
+            try {
+                Files.move(tmp.toPath(), f.toPath(), StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+            } catch (AtomicMoveNotSupportedException e) {
+                Files.move(tmp.toPath(), f.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+            dirty = false;
+        } catch (IOException e) {
+            log.warning("Sauvegarde de " + name + " : " + e.getMessage());
+        }
+    }
+
+    /** Remet le parc à zéro (renaissance ou reset) : garde nom et stats à vie. */
+    void resetRun() {
+        bought.clear();
+        for (Defs.Purchase p : Defs.PURCHASES) if (p.auto()) bought.add(p.id());
+        money = 0;
+        pending = 0;
+    }
+}

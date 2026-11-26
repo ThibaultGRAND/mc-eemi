@@ -165,6 +165,15 @@ public final class Ride {
         };
     }
 
+    /** Trajet le long d'une polyligne fermée, relatif à un pivot (ou, oy, ov) : le pivot reste près du trajet. */
+    public static Motion path(double[][] pts, double period, double ou, double oy, double ov) {
+        Motion m = path(pts, period);
+        return t -> {
+            Pose p = m.at(t);
+            return new Pose(p.angle(), p.dx() - ou, p.dy() - oy, p.dz() - ov, 0);
+        };
+    }
+
     /** Trajet le long d'une polyligne fermée (wagon des montagnes russes), vitesse variable selon la pente. */
     public static Motion path(double[][] pts, double period) {
         int n = pts.length;

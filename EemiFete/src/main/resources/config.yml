@@ -1,0 +1,50 @@
+# EemiFete - Tycoon fete foraine. Toute cle absente prend la valeur par defaut du code.
+
+# Monde cree par le plugin (generateur vide). Ne PAS le mettre dans un groupe Multiverse-Inventories avec le lobby.
+world: fete
+# Mondes depuis lesquels /fete teleporte (vide = partout ; les admins passent toujours).
+join-from: [lobby]
+# Commande lancee par le joueur pour revenir au lobby.
+lobby-command: lobby
+# Nombre de parcs (pair, 2 a 20). Change au redemarrage, et reconstruit toute l'allee.
+parcels: 10
+# Graine du terrain autour de l'allee.
+seed: 4242
+# Heure fixe du monde (17000 = nuit : la fete est faite pour etre vue de nuit).
+time: 17000
+# Pose des blocs : millisecondes par tick au maximum.
+build-ms-per-tick: 8
+
+# Manèges animés : seulement les parcs a moins de show-distance blocs d'un joueur, max-shows parcs a la fois.
+show-distance: 80
+max-shows: 6
+
+visitors:
+  enabled: true
+  # Visiteurs par parc : 2 + nombre d'attractions, plafonne a cette valeur.
+  max-per-park: 10
+
+economy:
+  # Premier achat = 30 s de revenu, puis x1,17 par achat (environ 3 h 20 pour finir le premier parc).
+  base-wait: 30
+  growth: 1.17
+  # Gain par renaissance (+50 % de tickets) et hausse des prix par renaissance (+25 %).
+  rebirth-gain: 0.5
+  rebirth-price: 0.25
+
+offline:
+  # Revenus hors ligne : part du revenu theorique et plafond en heures.
+  factor: 0.4
+  max-hours: 6
+
+rewards:
+  # eemi reward <joueur> fete play toutes les N minutes passees dans le monde de la fete.
+  play-minutes: 30
+  # Pieces EemiCore a chaque palier de tickets gagnes (a vie), une fois par palier.
+  milestones-earned: [10000, 1000000, 100000000, 10000000000, 1000000000000]
+  milestones-coins: [20, 30, 40, 50, 75]
+
+# Recompense EemiCore a chaque renaissance (en plus de eemi reward <joueur> fete win).
+renaissance:
+  coins: 250
+  xp: 300

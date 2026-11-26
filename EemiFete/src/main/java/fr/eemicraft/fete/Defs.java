@@ -66,6 +66,21 @@ public final class Defs {
     /** Accélérateurs : les tours durent 15 % de moins. */
     public static final List<String> SPEED = List.of("vitesse1", "vitesse2", "vitesse3");
 
+    /** Point (u, y, v) au-dessus de chaque attraction : « +tickets » à chaque tour. */
+    public static final Map<String, double[]> POPUP = Map.ofEntries(
+            Map.entry("peche", new double[]{4.5, Geo.FLOOR + 7.5, 6.5}),
+            Map.entry("barbe", new double[]{12.5, Geo.FLOOR + 7.5, 6.5}),
+            Map.entry("chamboule", new double[]{32.5, Geo.FLOOR + 7.5, 6.5}),
+            Map.entry("tir", new double[]{40.5, Geo.FLOOR + 7.5, 6.5}),
+            Map.entry("carrousel", new double[]{12.5, Geo.FLOOR + 13.0, 19.5}),
+            Map.entry("autos", new double[]{37.5, Geo.FLOOR + 10.0, 18.5}),
+            Map.entry("chaises", new double[]{11.5, Geo.FLOOR + 16.0, 37.5}),
+            Map.entry("bateau", new double[]{36.5, Geo.FLOOR + 14.0, 33.5}),
+            Map.entry("fantome", new double[]{41.5, Geo.FLOOR + 17.0, 40.0}),
+            Map.entry("roue", new double[]{24.0, Geo.FLOOR + 27.5, 43.5}),
+            Map.entry("tour", new double[]{45.0, Geo.FLOOR + 36.0, 27.0}),
+            Map.entry("montagnes", new double[]{46.5, Geo.FLOOR + 27.0, 30.0}));
+
     // ------------------------------------------------------------------ achats
 
     /** Achat (bouton au sol). auto = donné à la réclamation. */

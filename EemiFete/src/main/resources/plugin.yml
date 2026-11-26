@@ -1,0 +1,17 @@
+name: EemiFete
+version: ${project.version}
+main: fr.eemicraft.fete.EemiFete
+api-version: '1.21'
+softdepend: [EemiCore]
+description: Tycoon fete foraine d'EEMICRAFT - parcs, manèges animés, visiteurs, boutons d'achat, renaissances
+
+commands:
+  fete:
+    description: Aller a son parc et ouvrir le menu du tycoon fete foraine
+    usage: '/fete [menu|aller|visiter <joueur>|top|nom <nom>|quitter]'
+    aliases: [foire, feteforaine]
+
+permissions:
+  eemifete.admin:
+    description: Commandes /fete admin
+    default: op

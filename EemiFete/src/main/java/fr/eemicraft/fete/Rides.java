@@ -438,7 +438,7 @@ public final class Rides {
         ghost.light(0, 0.7, 0, 0.3, "minecraft:verdant_froglight");
         double[][] track = {{mid - 2.5, F + 1.4, v1 + 0.5}, {mid - 2.5, F + 1.4, v1 - 1.5}, {mid + 4.5, F + 1.4, v1 - 1.5},
                 {mid + 4.5, F + 1.4, v1 + 0.5}, {mid + 4.5, F + 1.4, v1 + 4.0}, {mid - 2.5, F + 1.4, v1 + 4.0}};
-        Ride.Part cart = r.part("wagonnet", 0, 0, 0, Ride.Axis.Y, Ride.path(track, 14));
+        Ride.Part cart = r.part("wagonnet", mid + 1.0, F + 1.4, v1 + 1.0, Ride.Axis.Y, Ride.path(track, 14, mid + 1.0, F + 1.4, v1 + 1.0));
         cart.cube(0, 0.1, 0, 1.0, 0.7, 1.3, "minecraft:purple_concrete");
         cart.cube(0, 0.55, 0.45, 0.9, 0.5, 0.2, "minecraft:bone_block");
         return r;
@@ -524,7 +524,7 @@ public final class Rides {
                 if (i % 4 == 0) set(s, (int) Math.floor(a[0]), (int) Math.floor(a[1]) + 1, (int) Math.floor(a[2]), bulb(i));
             }
         }
-        Ride.Part train = r.part("wagons", 0, 0, 0, Ride.Axis.Y, Ride.path(pts, 30));
+        Ride.Part train = r.part("wagons", 24.0, F + 12.0, 24.0, Ride.Axis.Y, Ride.path(pts, 30, 24.0, F + 12.0, 24.0));
         String[] cols = {"minecraft:yellow_concrete", "minecraft:blue_concrete", "minecraft:yellow_concrete"};
         for (int w = 0; w < 3; w++) {
             double z = -w * 1.6;

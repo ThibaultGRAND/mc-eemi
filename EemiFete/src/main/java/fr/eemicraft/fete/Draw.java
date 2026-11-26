@@ -110,6 +110,11 @@ public final class Draw {
         Connect.fix(s, xa - 1, F - 1, za - 1, xb + 1, F + 30, zb + 1);
     }
 
+    /** Point d'arrivée : sur la place, au sud du kiosque, face au kiosque {x, y, z, yaw}. */
+    public static double[] spawn(Geo g) {
+        return new double[]{g.plazaX0 + Geo.PLAZA / 2 + 0.5, F + 1, Geo.EDGE + 4.5, 180};
+    }
+
     /** Poteau de guirlande rayé rouge et blanc, lanterne au sommet. */
     static void post(Sink s, int x, int z) {
         for (int y = F + 1; y <= F + 9; y++) s.set(x, y, z, (y % 2 == 0) ? "minecraft:red_concrete" : "minecraft:white_concrete");
