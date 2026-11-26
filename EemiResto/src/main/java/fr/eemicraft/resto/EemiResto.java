@@ -785,8 +785,15 @@ public final class EemiResto extends JavaPlugin implements Listener {
         p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 0.8f);
         for (Player o : Bukkit.getOnlinePlayers()) U.msg(o, "&f" + d.name + " &7a fait renaître son restaurant (&d" + d.rebirths + "&7) !");
         eemi("eemi reward " + p.getName() + " resto win");
-        int coins = getConfig().getInt("rewards.rebirth-coins", 75);
+        // Recompense EemiCore de la renaissance (remplace l'ancienne cle rewards.rebirth-coins, plus lue).
+        int coins = Math.max(0, getConfig().getInt("renaissance.coins", 250));
+        int xp = Math.max(0, getConfig().getInt("renaissance.xp", 300));
         if (coins > 0) eemi("eemi give " + p.getName() + " coins " + coins);
+        if (xp > 0) eemi("eemi give " + p.getName() + " xp " + xp);
+        if (coins > 0 || xp > 0) {
+            String parts = (coins > 0 ? "&e+" + coins + " pièces" : "") + (coins > 0 && xp > 0 ? " &7et " : "") + (xp > 0 ? "&b+" + xp + " xp" : "");
+            U.msg(p, "&7Récompense de renaissance : " + parts + " &7!");
+        }
     }
 
     boolean cooldown(Player p, long ms) {

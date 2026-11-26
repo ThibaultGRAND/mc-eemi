@@ -1286,6 +1286,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## EemiResto (Tycoon restaurant, carte #115)
 
+- **1.1.0 compilée** (26/11, `a_deposer/EemiResto-1.1.0.jar`, carte #133), PAS installée : renaissance = `eemi reward win` + `eemi give` 250 pièces + 300 xp (`renaissance.coins` / `renaissance.xp`, défauts du code tant que le config serveur ne les a pas) ; l'ancienne `rewards.rebirth-coins` (75) n'est plus lue.
 - **État** : 1.0.1 installée, pack du resto publié (`textures: true`). Rendu et correctif des portes pas encore confirmés en jeu.
 - **Fonctionnement**
   - Tycoon « façon Roblox » (précision d'une joueuse). `/resto` (alias `/tycoon`, `/restaurant`), id EemiCore `resto`. Source `EemiResto/` (package `fr.eemicraft.resto`, bibliothèque `_commun/build` copiée en `fr.eemicraft.resto.build`).

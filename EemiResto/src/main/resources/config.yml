@@ -56,6 +56,12 @@ rewards:
   # Pieces EemiCore a chaque palier de chiffre d'affaires (a vie), une fois par palier.
   milestones-earned: [10000, 1000000, 100000000, 10000000000, 1000000000000]
   milestones-coins: [20, 30, 40, 50, 75]
-  # Pieces EemiCore a la decouverte d'un plat secret et a chaque renaissance (+ eemi reward ... resto win).
+  # Pieces EemiCore a la decouverte d'un plat secret.
   secret-coins: 25
-  rebirth-coins: 75
+
+# Recompense EemiCore a chaque renaissance (en plus de eemi reward <joueur> resto win),
+# donnee par la console : eemi give <joueur> coins <coins> puis eemi give <joueur> xp <xp>.
+# 0 = ne rien donner. (L'ancienne cle rewards.rebirth-coins n'est plus lue.)
+renaissance:
+  coins: 250
+  xp: 300
