@@ -2132,6 +2132,16 @@ public final class EemiJump extends JavaPlugin implements Listener {
         }
         if (finish && s.runStart >= 0) {
             long run = now - s.runStart;
+            // 1.6.2 (Esteban, 26/11) : seul le record du PARCOURS COMPLET (tous joueurs) est annonce a tout le serveur ;
+            // les records par niveau ne le sont plus (announce-from-level a 0), ils spammaient le chat.
+            long global = -1;
+            for (Entry e : board.getOrDefault(c.id, Map.of()).values()) {
+                if (e.best >= 0 && (global < 0 || e.best < global)) global = e.best;
+            }
+            if (global < 0 || run < global) {
+                Bukkit.broadcast(c(P + "&6&l★ &f" + p.getName() + " &abat le record de &f" + c.name + " &a: &b" + time(run)
+                        + (global >= 0 ? " &8(avant : " + time(global) + ")" : "")));
+            }
             if (pr.bestRunMs < 0 || run < pr.bestRunMs) {
                 pr.bestRunMs = run;
                 msg(p, "&b&lNouveau record de chrono : &f" + time(run) + " &b!");

@@ -52,5 +52,5 @@ level-times:
   min-ms: 300
   # nouveau record d'un niveau annonce a tout le serveur a partir de ce niveau (0 = jamais) ; un parcours peut avoir le sien
   announce-from-level:
-    default: 50
-    balade: 30
+    default: 0
+    balade: 0
