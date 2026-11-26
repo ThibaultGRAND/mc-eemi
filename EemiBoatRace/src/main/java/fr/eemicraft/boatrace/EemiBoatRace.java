@@ -200,6 +200,8 @@ implements Listener {
     private long lastStatusAt;
     private long ticks;
     private YamlConfiguration records;
+    /** 2.4.1 : dernier circuit joue (records.yml, cle last-map), exclu du tirage meme apres un redemarrage. */
+    private String lastPlayed;
     private final Random random = new Random();
     private final Map<Integer, Game> games = new TreeMap<Integer, Game>();
     private final Map<UUID, Game> byPlayer = new HashMap<UUID, Game>();
@@ -223,6 +225,7 @@ implements Listener {
             if (this.getConfig().getBoolean("rotation", true)) {
                 ArrayList<Course> all = new ArrayList<Course>(this.courses.values());
                 all.removeIf(co -> co.base() == null);
+                this.dropLast(all);
                 if (!all.isEmpty()) {
                     c = all.get(this.random.nextInt(all.size()));
                 }
@@ -402,6 +405,48 @@ implements Listener {
     private void loadRecords() {
         File f = new File(this.getDataFolder(), "records.yml");
         this.records = YamlConfiguration.loadConfiguration((File)f);
+        this.lastPlayed = this.records.getString("last-map", null);
+    }
+
+    /** Note le circuit qui demarre comme dernier joue (records.yml, cle last-map). */
+    private void markPlayed(Course c) {
+        this.lastPlayed = c.id;
+        this.records.set("last-map", (Object)c.id);
+        this.saveRecords();
+    }
+
+    /** Retire le dernier circuit joue d'une liste de candidats, sauf s'il est le seul. */
+    private void dropLast(List<Course> list) {
+        if (list.size() > 1 && this.lastPlayed != null) {
+            list.removeIf(co -> co.id.equals(this.lastPlayed));
+        }
+    }
+
+    /**
+     * Tirage uniforme du circuit d'une partie en attente (2.4.1) : circuits libres (monde charge, pris par aucune
+     * autre partie) + son circuit actuel, sans le dernier joue ni, si {@code excludeCurrent}, celui qu'elle vient de
+     * jouer (sauf s'il ne reste qu'un candidat). Peut rendre le circuit actuel (rien a changer).
+     */
+    private Course pickCourse(Game g, boolean excludeCurrent) {
+        ArrayList<Course> list = new ArrayList<Course>();
+        for (Course c : this.courses.values()) {
+            World w;
+            Game o;
+            if (c == g.c) {
+                list.add(c);
+                continue;
+            }
+            if ((w = c.base()) == null || (o = this.gameOfWorld(w)) != null && o != g) continue;
+            list.add(c);
+        }
+        if (list.isEmpty()) {
+            return g.c;
+        }
+        this.dropLast(list);
+        if (excludeCurrent && list.size() > 1) {
+            list.remove(g.c);
+        }
+        return list.get(this.random.nextInt(list.size()));
     }
 
     private void saveRecords() {
@@ -874,6 +919,7 @@ implements Listener {
             if (c == except || (w = c.base()) == null || this.gameOfWorld(w) != null) continue;
             list.add(c);
         }
+        this.dropLast(list);
         return list.isEmpty() ? null : (Course)list.get(this.random.nextInt(list.size()));
     }
 
@@ -939,6 +985,7 @@ implements Listener {
             p.sendMessage("\u00a7c[\u00a7eMario Barque\u00a7c] \u00a7r\u00a7cLes parties ne sont pas encore pretes, reessaie dans un instant.");
             return;
         }
+        this.dropLast(ready);
         Course cc = (Course)ready.get(this.random.nextInt(ready.size()));
         ArrayList<UUID> list = new ArrayList<UUID>();
         list.add(id);
@@ -1953,6 +2000,7 @@ implements Listener {
             }
             Collections.shuffle(list, EemiBoatRace.this.random);
             this.setCourse(this.c);
+            EemiBoatRace.this.markPlayed(this.c);
             this.racers.clear();
             this.finished = 0;
             this.grace = -1;
@@ -2448,8 +2496,9 @@ implements Listener {
                 EemiBoatRace.this.spectating.remove(id, this);
             }
             this.spectators.clear();
-            Course course = next = EemiBoatRace.this.getConfig().getBoolean("rotation", true) && (!this.players.isEmpty() || this.n == 1) ?EemiBoatRace.this.freeCourse(this.c) : null;
-            if (next != null) {
+            // 2.4.1 : jamais le circuit qui vient d'etre joue (ni le dernier joue, sauvegarde)
+            next = EemiBoatRace.this.getConfig().getBoolean("rotation", true) && (!this.players.isEmpty() || this.n == 1) ? EemiBoatRace.this.pickCourse(this, true) : null;
+            if (next != null && next != this.c) {
                 this.switchCourse(next);
             } else {
                 for (Player p : EemiBoatRace.this.online(this.players)) {
@@ -2522,9 +2571,9 @@ implements Listener {
 
         void add(Player p) {
             if (this.players.isEmpty() && this.state == State.WAITING && EemiBoatRace.this.getConfig().getBoolean("rotation", true)) {
-                // partie vide : nouveau tirage du circuit (le circuit actuel garde sa chance)
-                Course nc = EemiBoatRace.this.freeCourse(this.c);
-                if (nc != null && EemiBoatRace.this.random.nextInt(EemiBoatRace.this.courses.size()) != 0) {
+                // 2.4.1 : partie vide = tirage uniforme parmi les circuits libres + l'actuel, sans le dernier joue
+                Course nc = EemiBoatRace.this.pickCourse(this, false);
+                if (nc != null && nc != this.c) {
                     this.switchCourse(nc);
                 }
             }
