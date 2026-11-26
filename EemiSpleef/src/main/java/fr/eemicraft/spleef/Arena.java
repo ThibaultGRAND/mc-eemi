@@ -47,6 +47,8 @@ final class Arena {
     final List<UUID> spectators = new ArrayList<>();
     /** Joueurs qui ont bouge la tete pendant la partie : seuls eux restent en file a la fin (anti-AFK). */
     final java.util.Set<UUID> active = new java.util.HashSet<>();
+    /** 1.3.0 (#134) : inscrits qui ont clique sur « Pret » pendant l'attente de cette partie. */
+    final java.util.Set<UUID> ready = new java.util.HashSet<>();
     /** Numero de partie : une tache planifiee d'une autre partie ne fait rien. */
     int gen;
     int countdown;
@@ -264,6 +266,7 @@ final class Arena {
                     countdown = full;
                     tell("&aPartie pleine : depart dans &e" + countdown + " s&a.");
                 }
+                checkReady();
                 countdown--;
                 if (countdown <= 0) {
                     start();
@@ -334,6 +337,61 @@ final class Arena {
         }
     }
 
+    // ================================================================ objet « Pret » (1.3.0, #134)
+
+    int readyCount() {
+        int n = 0;
+        for (UUID id : players.keySet()) {
+            if (ready.contains(id)) {
+                n++;
+            }
+        }
+        return n;
+    }
+
+    /** Donne (ou met a jour) l'objet « Pret » d'un inscrit, dans sa case ou en case READY_SLOT. */
+    void giveReady(Player p) {
+        PlayerInventory inv = p.getInventory();
+        ItemStack it = pl.readyItem(ready.contains(p.getUniqueId()));
+        for (int i = 0; i < inv.getSize(); i++) {
+            if ("ready".equals(pl.tag(inv.getItem(i)))) {
+                inv.setItem(i, it);
+                return;
+            }
+        }
+        inv.setItem(EemiSpleef.READY_SLOT, it);
+    }
+
+    void toggleReady(Player p) {
+        UUID id = p.getUniqueId();
+        if (!waitingPhase() || !players.containsKey(id)) {
+            return;
+        }
+        boolean now = !ready.remove(id);
+        if (now) {
+            ready.add(id);
+        }
+        giveReady(p);
+        p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 0.6f, now ? 1.6f : 0.9f);
+        tell("&f" + p.getName() + (now ? " &aest prêt" : " &7n'est plus prêt") + " &7(&f" + readyCount() + "&7/&f" + players.size() + "&7)");
+        checkReady();
+    }
+
+    /** Decompte lance et tous les inscrits prets : temps restant ramene a ready-skip-to (0 = desactive). */
+    void checkReady() {
+        int skip = pl.cfg("ready-skip-to", 5, 0, 300);
+        if (skip <= 0 || state != State.COUNTDOWN || players.isEmpty()) {
+            return;
+        }
+        if (players.size() < pl.cfg("min-players", 2, 1, 32) || readyCount() < players.size()) {
+            return;
+        }
+        if (countdown > skip) {
+            countdown = skip;
+            tell("&aTout le monde est prêt : départ dans &e" + skip + " s&a.");
+        }
+    }
+
     List<UUID> alivePlayers() {
         List<UUID> l = new ArrayList<>();
         for (Map.Entry<UUID, Boolean> e : players.entrySet()) {
@@ -364,6 +422,7 @@ final class Arena {
         }
         startedWith = online.size();
         active.clear();
+        ready.clear();
         lastOut = null;
         elapsed = 0;
         melting = false;
@@ -655,6 +714,7 @@ final class Arena {
             }
         }
         active.clear();
+        ready.clear();
         Map<UUID, String> keptNames = new LinkedHashMap<>();
         for (UUID id : stay) {
             keptNames.put(id, names.getOrDefault(id, "?"));
@@ -715,6 +775,7 @@ final class Arena {
         p.setFireTicks(0);
         p.setFallDistance(0);
         p.getInventory().setItem(8, pl.leaveItem());
+        giveReady(p);
         EemiSpleef.msg(p, "&7Tu restes dans la file du &bSpleef&7. Clique sur le lit (ou &f/spleef leave&7) pour revenir au lobby.");
     }
 
@@ -736,6 +797,7 @@ final class Arena {
         }
         players.clear();
         spectators.clear();
+        ready.clear();
         forceLoad(false);
     }
 
@@ -743,6 +805,7 @@ final class Arena {
 
     void addPlayer(Player p) {
         UUID id = p.getUniqueId();
+        ready.remove(id);
         players.put(id, true);
         names.put(id, p.getName());
         pl.where.put(id, this);
@@ -758,6 +821,7 @@ final class Arena {
             }
             p.getInventory().clear();
             p.getInventory().setItem(8, pl.leaveItem());
+            giveReady(p);
         }, 2L);
         int max = pl.cfg("max-players", 16, 2, 32);
         tell("&f" + p.getName() + " &7rejoint la partie " + (index + 1) + " (&f" + players.size() + "&7/&f" + max + "&7)");
@@ -785,6 +849,7 @@ final class Arena {
         UUID id = p.getUniqueId();
         pl.where.remove(id);
         boolean wasSpec = spectators.remove(id);
+        ready.remove(id);
         Boolean wasAlive = players.get(id);
         if (wasAlive != null) {
             if (inGamePhase()) {

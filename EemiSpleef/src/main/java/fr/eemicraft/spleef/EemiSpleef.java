@@ -58,6 +58,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class EemiSpleef extends JavaPlugin implements Listener {
     static final String P = "&f&l[&b&lSpleef&f&l] &r";
+    /** Case de l'objet « Pret » au chalet d'attente (8 = lit « Retour au lobby », 0 = pelle en partie). */
+    static final int READY_SLOT = 4;
     private static final LegacyComponentSerializer L = LegacyComponentSerializer.legacyAmpersand();
 
     World world;
@@ -421,6 +423,17 @@ public final class EemiSpleef extends JavaPlugin implements Listener {
         return tagged(Material.RED_BED, "&cRetour au lobby &7(clic droit)", "leave");
     }
 
+    /** Objet « Pret » de la salle d'attente (1.3.0, #134) : gris = pas pret, vert = pret. */
+    ItemStack readyItem(boolean ready) {
+        ItemStack it = tagged(ready ? Material.LIME_DYE : Material.GRAY_DYE,
+                ready ? "&a&lPrêt ! &7(clic droit pour annuler)" : "&7Prêt ? &8(clic droit)", "ready");
+        ItemMeta meta = it.getItemMeta();
+        meta.lore(List.of(c(ready ? "&7Tu attends les autres joueurs." : "&7Quand tout le monde est prêt,"),
+                c(ready ? "&7Clic droit pour annuler." : "&7le départ est avancé.")));
+        it.setItemMeta(meta);
+        return it;
+    }
+
     String tag(ItemStack it) {
         if (it == null || !it.hasItemMeta()) {
             return null;
@@ -507,6 +520,14 @@ public final class EemiSpleef extends JavaPlugin implements Listener {
         boolean right = e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK;
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.PHYSICAL) {
             e.setUseInteractedBlock(Event.Result.DENY);
+        }
+        if (right && "ready".equals(t) && a != null) {
+            e.setUseItemInHand(Event.Result.DENY);
+            e.setCancelled(true);
+            if (e.getHand() == org.bukkit.inventory.EquipmentSlot.HAND) {
+                a.toggleReady(p);
+            }
+            return;
         }
         if (right && "leave".equals(t) && a != null) {
             e.setUseItemInHand(Event.Result.DENY);

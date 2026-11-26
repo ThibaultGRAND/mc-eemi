@@ -12,6 +12,9 @@ instance-spacing: 400
 # Decompte (secondes) des que le minimum est atteint, et quand la partie est pleine
 countdown: 30
 countdown-full: 10
+# Objet "Pret" (colorant gris, case 4 du chalet) : quand tous les inscrits sont prets et que le decompte
+# tourne, le temps restant est ramene a ce nombre de secondes (0 = desactive).
+ready-skip-to: 5
 # Secondes au debut sans pouvoir casser (on se place)
 grace: 5
 # Duree avant la fonte (secondes) ; ensuite le terrain retrecit d'un anneau toutes les melt-interval secondes
