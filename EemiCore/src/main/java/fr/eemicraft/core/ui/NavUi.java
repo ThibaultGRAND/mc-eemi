@@ -40,6 +40,13 @@ public final class NavUi {
         Builder b = new Builder();
         b.moveTo(0);
         b.glyph(NavFonds.GLYPHES.get("bg:" + menu));
+        // 26/11 : libellés fixes en police lisse (plus dans le fond), sous les calques (grisé « off »)
+        for (NavFonds.Libelle lb : d.libelles()) {
+            float w = lb.largeur() / (float) NavFonds.UNITE;
+            float x0 = lb.align() == 'c' ? lb.x() - w / 2f : lb.align() == 'd' ? lb.x() - w : lb.x();
+            b.moveTo(x0);
+            b.text(lb.texte(), Key.key("eemicraft", lb.police()), TextColor.color(lb.couleur()), w);
+        }
         for (String ov : overlays) {
             Character ch = NavFonds.GLYPHES.get("ov:" + menu + ":" + ov);
             if (ch == null) {
@@ -56,11 +63,15 @@ public final class NavUi {
                 if (log != null) log.warning("Ancre de texte inconnue " + menu + ":" + l.anchor());
                 continue;
             }
-            String s = fit(normalize(l.text()), t.max());
-            int w = width(s) - 1;
-            int x0 = t.align() == 'c' ? t.x() - w / 2 : t.align() == 'd' ? t.x() - w : t.x();
+            // trop large : taille suivante (nt<y>_<k>), puis coupé à la plus petite
+            String s = normalize(l.text());
+            int k = 0;
+            while (k < NavFonds.TAILLES.length - 1 && width(s, k) > t.max()) k++;
+            s = fit(s, t.max(), k);
+            float w = width(s, k);
+            float x0 = t.align() == 'c' ? t.x() - w / 2f : t.align() == 'd' ? t.x() - w : t.x();
             b.moveTo(x0);
-            b.text(s, Key.key("eemicraft", "nt" + t.y()), l.color());
+            b.text(s, Key.key("eemicraft", "nt" + t.y() + (k == 0 ? "" : "_" + k)), l.color(), w);
         }
         return b.build();
     }
@@ -103,25 +114,31 @@ public final class NavUi {
         return out.toString();
     }
 
-    public static int width(String s) {
-        int w = 0;
-        for (char c : s.toCharArray()) w += c == ' ' ? NavFonds.ESPACE : NavFonds.AVANCES.getOrDefault(c, 4);
-        return w;
+    /** Largeur en pixels d'interface à la taille k (police lisse ; +3 % de marge pour les tailles réduites). */
+    public static float width(String s, int k) {
+        int q = 0;
+        for (char c : s.toCharArray()) q += c == ' ' ? NavFonds.ESPACE : NavFonds.AVANCES.getOrDefault(c, 20);
+        float w = q / (float) NavFonds.UNITE;
+        return k == 0 ? w : w * NavFonds.TAILLES[k] / NavFonds.TAILLES[0] * 1.03f;
     }
 
-    private static String fit(String s, int max) {
-        if (width(s) - 1 <= max) return s;
+    public static float width(String s) {
+        return width(s, 0);
+    }
+
+    private static String fit(String s, int max, int k) {
+        if (width(s, k) <= max) return s;
         String t = s;
-        while (t.length() > 1 && width(t + ".") - 1 > max) t = t.substring(0, t.length() - 1);
+        while (t.length() > 1 && width(t + ".", k) > max) t = t.substring(0, t.length() - 1);
         return t.stripTrailing() + ".";
     }
 
     private static final class Builder {
         private final TextComponent.Builder root = Component.text();
-        private int x = 8; // le titre commence en x = 8 du coffre
+        private float x = 8; // le titre commence en x = 8 du coffre (position réelle du curseur, en float)
 
-        void moveTo(int target) {
-            int delta = target - x;
+        void moveTo(float target) {
+            int delta = Math.round(target - x);
             if (delta == 0) return;
             StringBuilder sb = new StringBuilder();
             char[] set = delta < 0 ? NavFonds.NEG : NavFonds.POS;
@@ -137,7 +154,7 @@ public final class NavUi {
                 }
             }
             root.append(Component.text(sb.toString()).font(FONT));
-            x = target;
+            x += delta;
         }
 
         void glyph(char ch) {
@@ -145,9 +162,9 @@ public final class NavUi {
             x += NavFonds.AVANCE_FOND;
         }
 
-        void text(String s, Key font, TextColor color) {
+        void text(String s, Key font, TextColor color, float w) {
             root.append(Component.text(s).font(font).color(color == null ? GRIS : color));
-            x += width(s);
+            x += w;
         }
 
         Component build() {

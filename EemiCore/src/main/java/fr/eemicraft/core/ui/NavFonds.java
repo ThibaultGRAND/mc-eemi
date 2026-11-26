@@ -9,12 +9,18 @@ public final class NavFonds {
     public static final int AVANCE_FOND = 177;
     public static final char[] NEG = {'\uf800', '\uf801', '\uf802', '\uf803', '\uf804', '\uf805', '\uf806', '\uf807', '\uf808'};
     public static final char[] POS = {'\uf810', '\uf811', '\uf812', '\uf813', '\uf814', '\uf815', '\uf816', '\uf817', '\uf818'};
-    public static final int ESPACE = 3;
+    /** Avances en quarts de pixel (police lisse, 26/11). */
+    public static final int UNITE = 4;
+    /** Tailles de la police (la 1re = AVANCES) : un texte trop large passe à la suivante (police nt<y>_<k>). */
+    public static final float[] TAILLES = {6.75f, 6.25f, 5.75f, 5.25f};
+    public static final int ESPACE = 8;
     public static final Map<String, Character> GLYPHES = new HashMap<>();
     public static final Map<Character, Integer> AVANCES = new HashMap<>();
     public record Texte(int x, int y, char align, int max) { }
+    /** Libellé fixe d'un menu (écrit par le client en police lisse, plus dans le fond). */
+    public record Libelle(String texte, int x, int y, char align, int couleur, String police, int largeur) { }
     public record Disposition(int lignes, Map<String, int[]> boutons, Map<String, int[]> cases,
-                              Map<String, Texte> textes) { }
+                              Map<String, Texte> textes, List<Libelle> libelles) { }
     public static final Map<String, Disposition> MENUS = new HashMap<>();
     /** Catégorie -> pages ; page -> ids des jeux dans l'ordre des boutons g0..g5. */
     public static final Map<String, List<String>> PAGES = new HashMap<>();
@@ -194,171 +200,178 @@ public final class NavFonds {
         GLYPHES.put("ov:boutique:sel:title", '\ue496');
         GLYPHES.put("ov:boutique:sel:join", '\ue497');
         GLYPHES.put("ov:boutique:sel:gadget", '\ue498');
-        GLYPHES.put("ov:boutique_cat:ok:articles:0", '\ue499');
-        GLYPHES.put("ov:boutique_cat:chef:articles:0", '\ue49a');
-        GLYPHES.put("ov:boutique_cat:non:articles:0", '\ue49b');
-        GLYPHES.put("ov:boutique_cat:ok:articles:1", '\ue49c');
-        GLYPHES.put("ov:boutique_cat:chef:articles:1", '\ue49d');
-        GLYPHES.put("ov:boutique_cat:non:articles:1", '\ue49e');
-        GLYPHES.put("ov:boutique_cat:ok:articles:2", '\ue49f');
-        GLYPHES.put("ov:boutique_cat:chef:articles:2", '\ue4a0');
-        GLYPHES.put("ov:boutique_cat:non:articles:2", '\ue4a1');
-        GLYPHES.put("ov:boutique_cat:ok:articles:3", '\ue4a2');
-        GLYPHES.put("ov:boutique_cat:chef:articles:3", '\ue4a3');
-        GLYPHES.put("ov:boutique_cat:non:articles:3", '\ue4a4');
-        GLYPHES.put("ov:boutique_cat:ok:articles:4", '\ue4a5');
-        GLYPHES.put("ov:boutique_cat:chef:articles:4", '\ue4a6');
-        GLYPHES.put("ov:boutique_cat:non:articles:4", '\ue4a7');
-        GLYPHES.put("ov:boutique_cat:ok:articles:5", '\ue4a8');
-        GLYPHES.put("ov:boutique_cat:chef:articles:5", '\ue4a9');
-        GLYPHES.put("ov:boutique_cat:non:articles:5", '\ue4aa');
-        GLYPHES.put("ov:boutique_cat:ok:articles:6", '\ue4ab');
-        GLYPHES.put("ov:boutique_cat:chef:articles:6", '\ue4ac');
-        GLYPHES.put("ov:boutique_cat:non:articles:6", '\ue4ad');
-        GLYPHES.put("ov:boutique_cat:ok:articles:7", '\ue4ae');
-        GLYPHES.put("ov:boutique_cat:chef:articles:7", '\ue4af');
-        GLYPHES.put("ov:boutique_cat:non:articles:7", '\ue4b0');
-        GLYPHES.put("ov:boutique_cat:ok:articles:8", '\ue4b1');
-        GLYPHES.put("ov:boutique_cat:chef:articles:8", '\ue4b2');
-        GLYPHES.put("ov:boutique_cat:non:articles:8", '\ue4b3');
-        GLYPHES.put("ov:boutique_cat:ok:articles:9", '\ue4b4');
-        GLYPHES.put("ov:boutique_cat:chef:articles:9", '\ue4b5');
-        GLYPHES.put("ov:boutique_cat:non:articles:9", '\ue4b6');
-        GLYPHES.put("ov:boutique_cat:ok:articles:10", '\ue4b7');
-        GLYPHES.put("ov:boutique_cat:chef:articles:10", '\ue4b8');
-        GLYPHES.put("ov:boutique_cat:non:articles:10", '\ue4b9');
-        GLYPHES.put("ov:boutique_cat:ok:articles:11", '\ue4ba');
-        GLYPHES.put("ov:boutique_cat:chef:articles:11", '\ue4bb');
-        GLYPHES.put("ov:boutique_cat:non:articles:11", '\ue4bc');
-        GLYPHES.put("ov:boutique_cat:ok:articles:12", '\ue4bd');
-        GLYPHES.put("ov:boutique_cat:chef:articles:12", '\ue4be');
-        GLYPHES.put("ov:boutique_cat:non:articles:12", '\ue4bf');
-        GLYPHES.put("ov:boutique_cat:ok:articles:13", '\ue4c0');
-        GLYPHES.put("ov:boutique_cat:chef:articles:13", '\ue4c1');
-        GLYPHES.put("ov:boutique_cat:non:articles:13", '\ue4c2');
-        GLYPHES.put("ov:boutique_cat:ok:articles:14", '\ue4c3');
-        GLYPHES.put("ov:boutique_cat:chef:articles:14", '\ue4c4');
-        GLYPHES.put("ov:boutique_cat:non:articles:14", '\ue4c5');
-        GLYPHES.put("ov:boutique_cat:ok:articles:15", '\ue4c6');
-        GLYPHES.put("ov:boutique_cat:chef:articles:15", '\ue4c7');
-        GLYPHES.put("ov:boutique_cat:non:articles:15", '\ue4c8');
-        GLYPHES.put("ov:boutique_cat:ok:articles:16", '\ue4c9');
-        GLYPHES.put("ov:boutique_cat:chef:articles:16", '\ue4ca');
-        GLYPHES.put("ov:boutique_cat:non:articles:16", '\ue4cb');
-        GLYPHES.put("ov:boutique_cat:ok:articles:17", '\ue4cc');
-        GLYPHES.put("ov:boutique_cat:chef:articles:17", '\ue4cd');
-        GLYPHES.put("ov:boutique_cat:non:articles:17", '\ue4ce');
-        GLYPHES.put("ov:boutique_cat:ok:articles:18", '\ue4cf');
-        GLYPHES.put("ov:boutique_cat:chef:articles:18", '\ue4d0');
-        GLYPHES.put("ov:boutique_cat:non:articles:18", '\ue4d1');
-        GLYPHES.put("ov:boutique_cat:ok:articles:19", '\ue4d2');
-        GLYPHES.put("ov:boutique_cat:chef:articles:19", '\ue4d3');
-        GLYPHES.put("ov:boutique_cat:non:articles:19", '\ue4d4');
-        GLYPHES.put("ov:boutique_cat:ok:articles:20", '\ue4d5');
-        GLYPHES.put("ov:boutique_cat:chef:articles:20", '\ue4d6');
-        GLYPHES.put("ov:boutique_cat:non:articles:20", '\ue4d7');
-        GLYPHES.put("ov:boutique_cat:ok:articles:21", '\ue4d8');
-        GLYPHES.put("ov:boutique_cat:chef:articles:21", '\ue4d9');
-        GLYPHES.put("ov:boutique_cat:non:articles:21", '\ue4da');
-        GLYPHES.put("ov:boutique_cat:ok:articles:22", '\ue4db');
-        GLYPHES.put("ov:boutique_cat:chef:articles:22", '\ue4dc');
-        GLYPHES.put("ov:boutique_cat:non:articles:22", '\ue4dd');
-        GLYPHES.put("ov:boutique_cat:ok:articles:23", '\ue4de');
-        GLYPHES.put("ov:boutique_cat:chef:articles:23", '\ue4df');
-        GLYPHES.put("ov:boutique_cat:non:articles:23", '\ue4e0');
-        GLYPHES.put("ov:boutique_cat:ok:articles:24", '\ue4e1');
-        GLYPHES.put("ov:boutique_cat:chef:articles:24", '\ue4e2');
-        GLYPHES.put("ov:boutique_cat:non:articles:24", '\ue4e3');
-        GLYPHES.put("ov:boutique_cat:ok:articles:25", '\ue4e4');
-        GLYPHES.put("ov:boutique_cat:chef:articles:25", '\ue4e5');
-        GLYPHES.put("ov:boutique_cat:non:articles:25", '\ue4e6');
-        GLYPHES.put("ov:boutique_cat:ok:articles:26", '\ue4e7');
-        GLYPHES.put("ov:boutique_cat:chef:articles:26", '\ue4e8');
-        GLYPHES.put("ov:boutique_cat:non:articles:26", '\ue4e9');
-        GLYPHES.put("ov:boutique_cat:ok:articles:27", '\ue4ea');
-        GLYPHES.put("ov:boutique_cat:chef:articles:27", '\ue4eb');
-        GLYPHES.put("ov:boutique_cat:non:articles:27", '\ue4ec');
-        GLYPHES.put("ov:quetes:on:q0", '\ue4ed');
-        GLYPHES.put("ov:quetes:on:q1", '\ue4ee');
-        GLYPHES.put("ov:quetes:on:q2", '\ue4ef');
-        GLYPHES.put("ov:groupe:chef:membres:0", '\ue4f0');
-        GLYPHES.put("ov:groupe:chef:membres:1", '\ue4f1');
-        GLYPHES.put("ov:groupe:chef:membres:2", '\ue4f2');
-        GLYPHES.put("ov:groupe:chef:membres:3", '\ue4f3');
-        GLYPHES.put("ov:groupe:chef:membres:4", '\ue4f4');
-        GLYPHES.put("ov:groupe:chef:membres:5", '\ue4f5');
-        GLYPHES.put("ov:groupe:chef:membres:6", '\ue4f6');
-        GLYPHES.put("ov:groupe:chef:membres:7", '\ue4f7');
-        GLYPHES.put("ov:groupe:off:inviter", '\ue4f8');
-        GLYPHES.put("ov:groupe:off:regarder", '\ue4f9');
-        GLYPHES.put("ov:groupe:off:accepter", '\ue4fa');
-        GLYPHES.put("ov:groupe:off:quitter", '\ue4fb');
-        GLYPHES.put("ov:groupe:on:accepter", '\ue4fc');
-        AVANCES.put('A', 4);
-        AVANCES.put('B', 4);
-        AVANCES.put('C', 4);
-        AVANCES.put('D', 4);
-        AVANCES.put('E', 4);
-        AVANCES.put('F', 4);
-        AVANCES.put('G', 4);
-        AVANCES.put('H', 4);
-        AVANCES.put('I', 2);
-        AVANCES.put('J', 4);
-        AVANCES.put('K', 4);
-        AVANCES.put('L', 4);
-        AVANCES.put('M', 6);
-        AVANCES.put('N', 5);
-        AVANCES.put('O', 4);
-        AVANCES.put('P', 4);
-        AVANCES.put('Q', 4);
-        AVANCES.put('R', 4);
-        AVANCES.put('S', 4);
-        AVANCES.put('T', 4);
-        AVANCES.put('U', 4);
-        AVANCES.put('V', 4);
-        AVANCES.put('W', 6);
-        AVANCES.put('X', 4);
-        AVANCES.put('Y', 4);
-        AVANCES.put('Z', 4);
-        AVANCES.put('0', 4);
-        AVANCES.put('1', 3);
-        AVANCES.put('2', 4);
-        AVANCES.put('3', 4);
-        AVANCES.put('4', 4);
-        AVANCES.put('5', 4);
-        AVANCES.put('6', 4);
-        AVANCES.put('7', 4);
-        AVANCES.put('8', 4);
-        AVANCES.put('9', 4);
-        AVANCES.put('.', 2);
-        AVANCES.put(':', 2);
-        AVANCES.put('!', 2);
-        AVANCES.put('?', 4);
-        AVANCES.put('\'', 2);
-        AVANCES.put('-', 4);
-        AVANCES.put('+', 4);
-        AVANCES.put('/', 4);
-        AVANCES.put('(', 3);
-        AVANCES.put(')', 3);
-        AVANCES.put('%', 4);
-        AVANCES.put('_', 4);
-        AVANCES.put('\u00b7', 2);
-        AVANCES.put('\u00d7', 4);
-        AVANCES.put('#', 6);
-        AVANCES.put('\u26c3', 6);
-        AVANCES.put('\u2605', 6);
-        AVANCES.put('\u2764', 6);
-        AVANCES.put('\u2694', 6);
-        AVANCES.put('\u00c9', 4);
-        AVANCES.put('\u00c8', 4);
-        AVANCES.put('\u00ca', 4);
-        AVANCES.put('\u00c0', 4);
-        AVANCES.put('\u00d4', 4);
-        AVANCES.put('\u00c2', 4);
-        AVANCES.put('\u00ce', 2);
-        AVANCES.put('\u00db', 4);
-        AVANCES.put('\u00d9', 4);
-        AVANCES.put(',', 2);
+        GLYPHES.put("ov:boutique:sel:quetes", '\ue499');
+        GLYPHES.put("ov:boutique_cat:ok:articles:0", '\ue49a');
+        GLYPHES.put("ov:boutique_cat:chef:articles:0", '\ue49b');
+        GLYPHES.put("ov:boutique_cat:non:articles:0", '\ue49c');
+        GLYPHES.put("ov:boutique_cat:ok:articles:1", '\ue49d');
+        GLYPHES.put("ov:boutique_cat:chef:articles:1", '\ue49e');
+        GLYPHES.put("ov:boutique_cat:non:articles:1", '\ue49f');
+        GLYPHES.put("ov:boutique_cat:ok:articles:2", '\ue4a0');
+        GLYPHES.put("ov:boutique_cat:chef:articles:2", '\ue4a1');
+        GLYPHES.put("ov:boutique_cat:non:articles:2", '\ue4a2');
+        GLYPHES.put("ov:boutique_cat:ok:articles:3", '\ue4a3');
+        GLYPHES.put("ov:boutique_cat:chef:articles:3", '\ue4a4');
+        GLYPHES.put("ov:boutique_cat:non:articles:3", '\ue4a5');
+        GLYPHES.put("ov:boutique_cat:ok:articles:4", '\ue4a6');
+        GLYPHES.put("ov:boutique_cat:chef:articles:4", '\ue4a7');
+        GLYPHES.put("ov:boutique_cat:non:articles:4", '\ue4a8');
+        GLYPHES.put("ov:boutique_cat:ok:articles:5", '\ue4a9');
+        GLYPHES.put("ov:boutique_cat:chef:articles:5", '\ue4aa');
+        GLYPHES.put("ov:boutique_cat:non:articles:5", '\ue4ab');
+        GLYPHES.put("ov:boutique_cat:ok:articles:6", '\ue4ac');
+        GLYPHES.put("ov:boutique_cat:chef:articles:6", '\ue4ad');
+        GLYPHES.put("ov:boutique_cat:non:articles:6", '\ue4ae');
+        GLYPHES.put("ov:boutique_cat:ok:articles:7", '\ue4af');
+        GLYPHES.put("ov:boutique_cat:chef:articles:7", '\ue4b0');
+        GLYPHES.put("ov:boutique_cat:non:articles:7", '\ue4b1');
+        GLYPHES.put("ov:boutique_cat:ok:articles:8", '\ue4b2');
+        GLYPHES.put("ov:boutique_cat:chef:articles:8", '\ue4b3');
+        GLYPHES.put("ov:boutique_cat:non:articles:8", '\ue4b4');
+        GLYPHES.put("ov:boutique_cat:ok:articles:9", '\ue4b5');
+        GLYPHES.put("ov:boutique_cat:chef:articles:9", '\ue4b6');
+        GLYPHES.put("ov:boutique_cat:non:articles:9", '\ue4b7');
+        GLYPHES.put("ov:boutique_cat:ok:articles:10", '\ue4b8');
+        GLYPHES.put("ov:boutique_cat:chef:articles:10", '\ue4b9');
+        GLYPHES.put("ov:boutique_cat:non:articles:10", '\ue4ba');
+        GLYPHES.put("ov:boutique_cat:ok:articles:11", '\ue4bb');
+        GLYPHES.put("ov:boutique_cat:chef:articles:11", '\ue4bc');
+        GLYPHES.put("ov:boutique_cat:non:articles:11", '\ue4bd');
+        GLYPHES.put("ov:boutique_cat:ok:articles:12", '\ue4be');
+        GLYPHES.put("ov:boutique_cat:chef:articles:12", '\ue4bf');
+        GLYPHES.put("ov:boutique_cat:non:articles:12", '\ue4c0');
+        GLYPHES.put("ov:boutique_cat:ok:articles:13", '\ue4c1');
+        GLYPHES.put("ov:boutique_cat:chef:articles:13", '\ue4c2');
+        GLYPHES.put("ov:boutique_cat:non:articles:13", '\ue4c3');
+        GLYPHES.put("ov:boutique_cat:ok:articles:14", '\ue4c4');
+        GLYPHES.put("ov:boutique_cat:chef:articles:14", '\ue4c5');
+        GLYPHES.put("ov:boutique_cat:non:articles:14", '\ue4c6');
+        GLYPHES.put("ov:boutique_cat:ok:articles:15", '\ue4c7');
+        GLYPHES.put("ov:boutique_cat:chef:articles:15", '\ue4c8');
+        GLYPHES.put("ov:boutique_cat:non:articles:15", '\ue4c9');
+        GLYPHES.put("ov:boutique_cat:ok:articles:16", '\ue4ca');
+        GLYPHES.put("ov:boutique_cat:chef:articles:16", '\ue4cb');
+        GLYPHES.put("ov:boutique_cat:non:articles:16", '\ue4cc');
+        GLYPHES.put("ov:boutique_cat:ok:articles:17", '\ue4cd');
+        GLYPHES.put("ov:boutique_cat:chef:articles:17", '\ue4ce');
+        GLYPHES.put("ov:boutique_cat:non:articles:17", '\ue4cf');
+        GLYPHES.put("ov:boutique_cat:ok:articles:18", '\ue4d0');
+        GLYPHES.put("ov:boutique_cat:chef:articles:18", '\ue4d1');
+        GLYPHES.put("ov:boutique_cat:non:articles:18", '\ue4d2');
+        GLYPHES.put("ov:boutique_cat:ok:articles:19", '\ue4d3');
+        GLYPHES.put("ov:boutique_cat:chef:articles:19", '\ue4d4');
+        GLYPHES.put("ov:boutique_cat:non:articles:19", '\ue4d5');
+        GLYPHES.put("ov:boutique_cat:ok:articles:20", '\ue4d6');
+        GLYPHES.put("ov:boutique_cat:chef:articles:20", '\ue4d7');
+        GLYPHES.put("ov:boutique_cat:non:articles:20", '\ue4d8');
+        GLYPHES.put("ov:boutique_cat:ok:articles:21", '\ue4d9');
+        GLYPHES.put("ov:boutique_cat:chef:articles:21", '\ue4da');
+        GLYPHES.put("ov:boutique_cat:non:articles:21", '\ue4db');
+        GLYPHES.put("ov:boutique_cat:ok:articles:22", '\ue4dc');
+        GLYPHES.put("ov:boutique_cat:chef:articles:22", '\ue4dd');
+        GLYPHES.put("ov:boutique_cat:non:articles:22", '\ue4de');
+        GLYPHES.put("ov:boutique_cat:ok:articles:23", '\ue4df');
+        GLYPHES.put("ov:boutique_cat:chef:articles:23", '\ue4e0');
+        GLYPHES.put("ov:boutique_cat:non:articles:23", '\ue4e1');
+        GLYPHES.put("ov:boutique_cat:ok:articles:24", '\ue4e2');
+        GLYPHES.put("ov:boutique_cat:chef:articles:24", '\ue4e3');
+        GLYPHES.put("ov:boutique_cat:non:articles:24", '\ue4e4');
+        GLYPHES.put("ov:boutique_cat:ok:articles:25", '\ue4e5');
+        GLYPHES.put("ov:boutique_cat:chef:articles:25", '\ue4e6');
+        GLYPHES.put("ov:boutique_cat:non:articles:25", '\ue4e7');
+        GLYPHES.put("ov:boutique_cat:ok:articles:26", '\ue4e8');
+        GLYPHES.put("ov:boutique_cat:chef:articles:26", '\ue4e9');
+        GLYPHES.put("ov:boutique_cat:non:articles:26", '\ue4ea');
+        GLYPHES.put("ov:boutique_cat:ok:articles:27", '\ue4eb');
+        GLYPHES.put("ov:boutique_cat:chef:articles:27", '\ue4ec');
+        GLYPHES.put("ov:boutique_cat:non:articles:27", '\ue4ed');
+        GLYPHES.put("ov:quetes:on:q0", '\ue4ee');
+        GLYPHES.put("ov:quetes:on:q1", '\ue4ef');
+        GLYPHES.put("ov:quetes:on:q2", '\ue4f0');
+        GLYPHES.put("ov:groupe:chef:membres:0", '\ue4f1');
+        GLYPHES.put("ov:groupe:chef:membres:1", '\ue4f2');
+        GLYPHES.put("ov:groupe:chef:membres:2", '\ue4f3');
+        GLYPHES.put("ov:groupe:chef:membres:3", '\ue4f4');
+        GLYPHES.put("ov:groupe:chef:membres:4", '\ue4f5');
+        GLYPHES.put("ov:groupe:chef:membres:5", '\ue4f6');
+        GLYPHES.put("ov:groupe:chef:membres:6", '\ue4f7');
+        GLYPHES.put("ov:groupe:chef:membres:7", '\ue4f8');
+        GLYPHES.put("ov:groupe:off:inviter", '\ue4f9');
+        GLYPHES.put("ov:groupe:off:regarder", '\ue4fa');
+        GLYPHES.put("ov:groupe:off:accepter", '\ue4fb');
+        GLYPHES.put("ov:groupe:off:quitter", '\ue4fc');
+        GLYPHES.put("ov:groupe:on:accepter", '\ue4fd');
+        AVANCES.put('A', 19);
+        AVANCES.put('B', 17);
+        AVANCES.put('C', 19);
+        AVANCES.put('D', 19);
+        AVANCES.put('E', 16);
+        AVANCES.put('F', 16);
+        AVANCES.put('G', 20);
+        AVANCES.put('H', 20);
+        AVANCES.put('I', 7);
+        AVANCES.put('J', 14);
+        AVANCES.put('K', 18);
+        AVANCES.put('L', 15);
+        AVANCES.put('M', 24);
+        AVANCES.put('N', 20);
+        AVANCES.put('O', 20);
+        AVANCES.put('P', 17);
+        AVANCES.put('Q', 20);
+        AVANCES.put('R', 17);
+        AVANCES.put('S', 17);
+        AVANCES.put('T', 17);
+        AVANCES.put('U', 20);
+        AVANCES.put('V', 19);
+        AVANCES.put('W', 26);
+        AVANCES.put('X', 18);
+        AVANCES.put('Y', 19);
+        AVANCES.put('Z', 17);
+        AVANCES.put('0', 16);
+        AVANCES.put('1', 13);
+        AVANCES.put('2', 16);
+        AVANCES.put('3', 16);
+        AVANCES.put('4', 16);
+        AVANCES.put('5', 16);
+        AVANCES.put('6', 16);
+        AVANCES.put('7', 15);
+        AVANCES.put('8', 16);
+        AVANCES.put('9', 16);
+        AVANCES.put('.', 8);
+        AVANCES.put(':', 8);
+        AVANCES.put('!', 8);
+        AVANCES.put('?', 15);
+        AVANCES.put('\'', 6);
+        AVANCES.put('-', 12);
+        AVANCES.put('+', 17);
+        AVANCES.put('/', 10);
+        AVANCES.put('(', 9);
+        AVANCES.put(')', 9);
+        AVANCES.put('%', 22);
+        AVANCES.put('_', 12);
+        AVANCES.put('\u00b7', 8);
+        AVANCES.put('\u00d7', 17);
+        AVANCES.put(',', 8);
+        AVANCES.put('#', 17);
+        AVANCES.put('\u00c9', 16);
+        AVANCES.put('\u00c8', 16);
+        AVANCES.put('\u00ca', 16);
+        AVANCES.put('\u00c0', 19);
+        AVANCES.put('\u00d4', 20);
+        AVANCES.put('\u00c2', 19);
+        AVANCES.put('\u00ce', 7);
+        AVANCES.put('\u00db', 20);
+        AVANCES.put('\u00d9', 20);
+        AVANCES.put('\u00c7', 19);
+        AVANCES.put('\u00cb', 16);
+        AVANCES.put('\u00cf', 9);
+        AVANCES.put('\u00dc', 20);
+        AVANCES.put('\u0152', 26);
+        AVANCES.put('\u00c6', 27);
+        AVANCES.put('\u26c3', 24);
+        AVANCES.put('\u2605', 24);
+        AVANCES.put('\u2764', 24);
+        AVANCES.put('\u2694', 24);
         { // jeux
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
             Map<String, Texte> t = new HashMap<>();
@@ -374,13 +387,13 @@ public final class NavFonds {
             b.put("casino", new int[]{48, 49, 50});
             b.put("groupe", new int[]{51, 52, 53});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_iles", new Texte(34, 63, 'c', 47));
-            t.put("s_survie", new Texte(88, 63, 'c', 47));
-            t.put("s_equipes", new Texte(142, 63, 'c', 47));
-            t.put("s_combat", new Texte(34, 99, 'c', 47));
-            t.put("s_tnt", new Texte(88, 99, 'c', 47));
-            t.put("s_ambiance", new Texte(142, 99, 'c', 47));
-            MENUS.put("jeux", new Disposition(6, b, c, t));
+            t.put("s_iles", new Texte(34, 63, 'c', 46));
+            t.put("s_survie", new Texte(88, 63, 'c', 46));
+            t.put("s_equipes", new Texte(142, 63, 'c', 46));
+            t.put("s_combat", new Texte(34, 99, 'c', 46));
+            t.put("s_tnt", new Texte(88, 99, 'c', 46));
+            t.put("s_ambiance", new Texte(142, 99, 'c', 46));
+            MENUS.put("jeux", new Disposition(6, b, c, t, List.of(new Libelle("MINI-JEUX", 88, -3, 'c', 0xF2B632, "nt-3", 138), new Libelle("\u00ceLES", 34, 56, 'c', 0xEEF0F6, "nt56", 55), new Libelle("SURVIE", 88, 56, 'c', 0xEEF0F6, "nt56", 96), new Libelle("\u00c9QUIPES", 142, 56, 'c', 0xEEF0F6, "nt56", 113), new Libelle("COMBAT", 34, 92, 'c', 0xEEF0F6, "nt92", 116), new Libelle("TNT", 88, 92, 'c', 0xEEF0F6, "nt92", 54), new Libelle("AMBIANCE", 142, 92, 'c', 0xEEF0F6, "nt92", 141), new Libelle("HASARD", 29, 114, 'g', 0xEEF0F6, "nt114", 111), new Libelle("CASINO", 83, 114, 'g', 0xEEF0F6, "nt114", 102), new Libelle("GROUPE", 137, 114, 'g', 0xEEF0F6, "nt114", 110))));
         }
         { // jeux_iles
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -393,11 +406,11 @@ public final class NavFonds {
             b.put("g3", new int[]{27, 28, 29, 36, 37, 38});
             b.put("retour", new int[]{45});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            t.put("s_g3", new Texte(34, 99, 'c', 47));
-            MENUS.put("jeux_iles", new Disposition(6, b, c, t));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            t.put("s_g3", new Texte(34, 99, 'c', 46));
+            MENUS.put("jeux_iles", new Disposition(6, b, c, t, List.of(new Libelle("\u00ceLES ET AVENTURE", 88, -3, 'c', 0xF2B632, "nt-3", 248), new Libelle("SKYBLOCK", 34, 56, 'c', 0xEEF0F6, "nt56", 143), new Libelle("L\'ABYSSE", 88, 56, 'c', 0xEEF0F6, "nt56", 126), new Libelle("ONEBLOCK", 142, 56, 'c', 0xEEF0F6, "nt56", 145), new Libelle("JUMP", 34, 92, 'c', 0xEEF0F6, "nt92", 75))));
         }
         { // jeux_survie
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -409,10 +422,10 @@ public final class NavFonds {
             b.put("g2", new int[]{15, 16, 17, 24, 25, 26});
             b.put("retour", new int[]{45});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            MENUS.put("jeux_survie", new Disposition(6, b, c, t));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            MENUS.put("jeux_survie", new Disposition(6, b, c, t, List.of(new Libelle("SURVIE", 88, -3, 'c', 0xF2B632, "nt-3", 96), new Libelle("UHC RUN", 34, 56, 'c', 0xEEF0F6, "nt56", 124), new Libelle("SPEEDRUN", 88, 56, 'c', 0xEEF0F6, "nt56", 142), new Libelle("EEMINGO", 142, 56, 'c', 0xEEF0F6, "nt56", 123))));
         }
         { // jeux_equipes
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -427,13 +440,13 @@ public final class NavFonds {
             b.put("g5", new int[]{33, 34, 35, 42, 43, 44});
             b.put("retour", new int[]{45});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            t.put("s_g3", new Texte(34, 99, 'c', 47));
-            t.put("s_g4", new Texte(88, 99, 'c', 47));
-            t.put("s_g5", new Texte(142, 99, 'c', 47));
-            MENUS.put("jeux_equipes", new Disposition(6, b, c, t));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            t.put("s_g3", new Texte(34, 99, 'c', 46));
+            t.put("s_g4", new Texte(88, 99, 'c', 46));
+            t.put("s_g5", new Texte(142, 99, 'c', 46));
+            MENUS.put("jeux_equipes", new Disposition(6, b, c, t, List.of(new Libelle("\u00c9QUIPES", 88, -3, 'c', 0xF2B632, "nt-3", 113), new Libelle("BEDWARS", 34, 56, 'c', 0xEEF0F6, "nt56", 131), new Libelle("THE BRIDGE", 88, 56, 'c', 0xEEF0F6, "nt56", 157), new Libelle("THE TOWERS", 142, 56, 'c', 0xEEF0F6, "nt56", 174), new Libelle("SHEEP WARS", 34, 92, 'c', 0xEEF0F6, "nt92", 173), new Libelle("B. OF STEEL", 88, 92, 'c', 0xEEF0F6, "nt92", 158), new Libelle("PAINTBALL", 142, 92, 'c', 0xEEF0F6, "nt92", 146))));
         }
         { // jeux_combat
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -447,12 +460,12 @@ public final class NavFonds {
             b.put("g4", new int[]{30, 31, 32, 39, 40, 41});
             b.put("retour", new int[]{45});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            t.put("s_g3", new Texte(34, 99, 'c', 47));
-            t.put("s_g4", new Texte(88, 99, 'c', 47));
-            MENUS.put("jeux_combat", new Disposition(6, b, c, t));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            t.put("s_g3", new Texte(34, 99, 'c', 46));
+            t.put("s_g4", new Texte(88, 99, 'c', 46));
+            MENUS.put("jeux_combat", new Disposition(6, b, c, t, List.of(new Libelle("COMBAT", 88, -3, 'c', 0xF2B632, "nt-3", 116), new Libelle("SKYWARS", 34, 56, 'c', 0xEEF0F6, "nt56", 133), new Libelle("HUNGER GAME", 88, 56, 'c', 0xEEF0F6, "nt56_1", 183), new Libelle("DUELS \u00b7 FFA", 142, 56, 'c', 0xEEF0F6, "nt56", 162), new Libelle("PITCHOUT", 34, 92, 'c', 0xEEF0F6, "nt92", 137), new Libelle("JUMPLEAGUE", 88, 92, 'c', 0xEEF0F6, "nt92", 181))));
         }
         { // jeux_tnt
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -467,13 +480,13 @@ public final class NavFonds {
             b.put("g5", new int[]{33, 34, 35, 42, 43, 44});
             b.put("retour", new int[]{45});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            t.put("s_g3", new Texte(34, 99, 'c', 47));
-            t.put("s_g4", new Texte(88, 99, 'c', 47));
-            t.put("s_g5", new Texte(142, 99, 'c', 47));
-            MENUS.put("jeux_tnt", new Disposition(6, b, c, t));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            t.put("s_g3", new Texte(34, 99, 'c', 46));
+            t.put("s_g4", new Texte(88, 99, 'c', 46));
+            t.put("s_g5", new Texte(142, 99, 'c', 46));
+            MENUS.put("jeux_tnt", new Disposition(6, b, c, t, List.of(new Libelle("JEUX TNT", 88, -3, 'c', 0xF2B632, "nt-3", 130), new Libelle("TNT RUN", 34, 56, 'c', 0xEEF0F6, "nt56", 119), new Libelle("TNT TAG", 88, 56, 'c', 0xEEF0F6, "nt56", 118), new Libelle("BOW SPLEEF", 142, 56, 'c', 0xEEF0F6, "nt56", 168), new Libelle("PVP RUN", 34, 92, 'c', 0xEEF0F6, "nt92", 118), new Libelle("TNT WARS", 88, 92, 'c', 0xEEF0F6, "nt92", 141), new Libelle("TNT WIZARDS", 142, 92, 'c', 0xEEF0F6, "nt92", 184))));
         }
         { // jeux_ambiance_1
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -489,14 +502,14 @@ public final class NavFonds {
             b.put("retour", new int[]{45});
             b.put("suiv", new int[]{50});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            t.put("s_g3", new Texte(34, 99, 'c', 47));
-            t.put("s_g4", new Texte(88, 99, 'c', 47));
-            t.put("s_g5", new Texte(142, 99, 'c', 47));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            t.put("s_g3", new Texte(34, 99, 'c', 46));
+            t.put("s_g4", new Texte(88, 99, 'c', 46));
+            t.put("s_g5", new Texte(142, 99, 'c', 46));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("jeux_ambiance_1", new Disposition(6, b, c, t));
+            MENUS.put("jeux_ambiance_1", new Disposition(6, b, c, t, List.of(new Libelle("AMBIANCE", 88, -3, 'c', 0xF2B632, "nt-3", 141), new Libelle("MURDER", 34, 56, 'c', 0xEEF0F6, "nt56", 113), new Libelle("LOUP-GAROU", 88, 56, 'c', 0xEEF0F6, "nt56", 180), new Libelle("CACHE-CACHE", 142, 56, 'c', 0xEEF0F6, "nt56_2", 173), new Libelle("BLOCK PARTY", 34, 92, 'c', 0xEEF0F6, "nt92_1", 174), new Libelle("BUILD BATTLE", 88, 92, 'c', 0xEEF0F6, "nt92_1", 175), new Libelle("MARIO BARQUE", 142, 92, 'c', 0xEEF0F6, "nt92_2", 174))));
         }
         { // jeux_ambiance_2
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -512,14 +525,14 @@ public final class NavFonds {
             b.put("retour", new int[]{45});
             b.put("prec", new int[]{48});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_g0", new Texte(34, 63, 'c', 47));
-            t.put("s_g1", new Texte(88, 63, 'c', 47));
-            t.put("s_g2", new Texte(142, 63, 'c', 47));
-            t.put("s_g3", new Texte(34, 99, 'c', 47));
-            t.put("s_g4", new Texte(88, 99, 'c', 47));
-            t.put("s_g5", new Texte(142, 99, 'c', 47));
+            t.put("s_g0", new Texte(34, 63, 'c', 46));
+            t.put("s_g1", new Texte(88, 63, 'c', 46));
+            t.put("s_g2", new Texte(142, 63, 'c', 46));
+            t.put("s_g3", new Texte(34, 99, 'c', 46));
+            t.put("s_g4", new Texte(88, 99, 'c', 46));
+            t.put("s_g5", new Texte(142, 99, 'c', 46));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("jeux_ambiance_2", new Disposition(6, b, c, t));
+            MENUS.put("jeux_ambiance_2", new Disposition(6, b, c, t, List.of(new Libelle("AMBIANCE", 88, -3, 'c', 0xF2B632, "nt-3", 141), new Libelle("D\u00c9 \u00c0 COUDRE", 34, 56, 'c', 0xEEF0F6, "nt56", 181), new Libelle("1 2 3 SOLEIL", 88, 56, 'c', 0xEEF0F6, "nt56", 159), new Libelle("INFECTION", 142, 56, 'c', 0xEEF0F6, "nt56", 142), new Libelle("\u00c9LYTRES", 34, 92, 'c', 0xEEF0F6, "nt92", 117), new Libelle("DROPPER", 88, 92, 'c', 0xEEF0F6, "nt92", 123), new Libelle("HORS COURS", 142, 92, 'c', 0xEEF0F6, "nt92", 175))));
         }
         { // profil
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -537,12 +550,12 @@ public final class NavFonds {
             c.put("tete", new int[]{13});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("niveau", new Texte(88, 61, 'c', 32));
-            t.put("parties", new Texte(25, 62, 'c', 30));
-            t.put("victoires", new Texte(61, 62, 'c', 30));
-            t.put("kills", new Texte(115, 62, 'c', 30));
-            t.put("serie", new Texte(151, 62, 'c', 30));
+            t.put("parties", new Texte(25, 62, 'c', 28));
+            t.put("victoires", new Texte(61, 62, 'c', 28));
+            t.put("kills", new Texte(115, 62, 'c', 28));
+            t.put("serie", new Texte(151, 62, 'c', 28));
             t.put("xp", new Texte(88, 73, 'c', 150));
-            MENUS.put("profil", new Disposition(6, b, c, t));
+            MENUS.put("profil", new Disposition(6, b, c, t, List.of(new Libelle("PROFIL", 88, -3, 'c', 0xF2B632, "nt-3", 92), new Libelle("PARTIES", 25, 40, 'c', 0xEEF0F6, "nt40", 110), new Libelle("VICTOIRES", 61, 40, 'c', 0xEEF0F6, "nt40_3", 110), new Libelle("KILLS", 115, 40, 'c', 0xEEF0F6, "nt40", 72), new Libelle("S\u00c9RIE", 151, 40, 'c', 0xEEF0F6, "nt40", 73), new Libelle("BOUTIQUE", 25, 114, 'c', 0xEEF0F6, "nt114_3", 108), new Libelle("QU\u00caTES", 61, 114, 'c', 0xEEF0F6, "nt114", 106), new Libelle("JOUEURS", 115, 114, 'c', 0xEEF0F6, "nt114_2", 107), new Libelle("TOP 10", 151, 114, 'c', 0xEEF0F6, "nt114", 91))));
         }
         { // boutique
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -557,14 +570,14 @@ public final class NavFonds {
             b.put("quetes", new int[]{33, 34, 35, 42, 43, 44});
             b.put("retour", new int[]{45});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_trail", new Texte(34, 63, 'c', 47));
-            t.put("s_hat", new Texte(88, 63, 'c', 47));
-            t.put("s_title", new Texte(142, 63, 'c', 47));
-            t.put("s_join", new Texte(34, 99, 'c', 47));
-            t.put("s_gadget", new Texte(88, 99, 'c', 47));
-            t.put("s_quetes", new Texte(142, 99, 'c', 47));
+            t.put("s_trail", new Texte(34, 63, 'c', 46));
+            t.put("s_hat", new Texte(88, 63, 'c', 46));
+            t.put("s_title", new Texte(142, 63, 'c', 46));
+            t.put("s_join", new Texte(34, 99, 'c', 46));
+            t.put("s_gadget", new Texte(88, 99, 'c', 46));
+            t.put("s_quetes", new Texte(142, 99, 'c', 46));
             t.put("bas", new Texte(96, 114, 'c', 130));
-            MENUS.put("boutique", new Disposition(6, b, c, t));
+            MENUS.put("boutique", new Disposition(6, b, c, t, List.of(new Libelle("BOUTIQUE", 88, -3, 'c', 0xF2B632, "nt-3", 137), new Libelle("TRA\u00ceN\u00c9ES", 34, 56, 'c', 0xEEF0F6, "nt56", 129), new Libelle("CHAPEAUX", 88, 56, 'c', 0xEEF0F6, "nt56", 148), new Libelle("TITRES", 142, 56, 'c', 0xEEF0F6, "nt56", 91), new Libelle("ARRIV\u00c9ES", 34, 92, 'c', 0xEEF0F6, "nt92", 128), new Libelle("GADGETS", 88, 92, 'c', 0xEEF0F6, "nt92", 128), new Libelle("SAISON", 142, 92, 'c', 0xEEF0F6, "nt92", 100))));
         }
         { // boutique_cat
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -578,7 +591,7 @@ public final class NavFonds {
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
             t.put("solde", new Texte(167, 114, 'd', 48));
-            MENUS.put("boutique_cat", new Disposition(6, b, c, t));
+            MENUS.put("boutique_cat", new Disposition(6, b, c, t, List.of(new Libelle("BOUTIQUE", 88, -3, 'c', 0xF2B632, "nt-3", 137))));
         }
         { // confirmer
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -589,7 +602,7 @@ public final class NavFonds {
             c.put("objet", new int[]{13});
             t.put("nom", new Texte(88, 57, 'c', 160));
             t.put("prix", new Texte(88, 65, 'c', 160));
-            MENUS.put("confirmer", new Disposition(5, b, c, t));
+            MENUS.put("confirmer", new Disposition(5, b, c, t, List.of(new Libelle("CONFIRMER", 88, -3, 'c', 0xF2B632, "nt-3", 156), new Libelle("ANNULER", 52, 96, 'c', 0xEEF0F6, "nt96", 127), new Libelle("ACHETER", 124, 96, 'c', 0xEEF0F6, "nt96", 124))));
         }
         { // quetes
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -611,7 +624,7 @@ public final class NavFonds {
             t.put("q2", new Texte(30, 77, 'g', 96));
             t.put("p2", new Texte(164, 77, 'd', 34));
             t.put("bas", new Texte(96, 96, 'c', 130));
-            MENUS.put("quetes", new Disposition(5, b, c, t));
+            MENUS.put("quetes", new Disposition(5, b, c, t, List.of(new Libelle("QU\u00caTES DU JOUR", 88, -3, 'c', 0xF2B632, "nt-3", 232))));
         }
         { // groupe
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -627,7 +640,7 @@ public final class NavFonds {
             c.put("envoyees", new int[]{46, 47, 48, 49, 50, 51, 52});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("info", new Texte(88, 59, 'c', 160));
-            MENUS.put("groupe", new Disposition(6, b, c, t));
+            MENUS.put("groupe", new Disposition(6, b, c, t, List.of(new Libelle("GROUPE", 88, -3, 'c', 0xF2B632, "nt-3", 110), new Libelle("INVITER", 25, 96, 'c', 0xEEF0F6, "nt96", 103), new Libelle("PARTIES", 61, 96, 'c', 0xEEF0F6, "nt96", 110), new Libelle("ENTRER", 115, 96, 'c', 0xEEF0F6, "nt96", 103), new Libelle("QUITTER", 151, 96, 'c', 0xEEF0F6, "nt96_1", 107))));
         }
         { // liste_inviter
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -640,7 +653,7 @@ public final class NavFonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("liste_inviter", new Disposition(6, b, c, t));
+            MENUS.put("liste_inviter", new Disposition(6, b, c, t, List.of(new Libelle("INVITER", 88, -3, 'c', 0xF2B632, "nt-3", 103))));
         }
         { // liste_joueurs
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -653,7 +666,7 @@ public final class NavFonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("liste_joueurs", new Disposition(6, b, c, t));
+            MENUS.put("liste_joueurs", new Disposition(6, b, c, t, List.of(new Libelle("JOUEURS", 88, -3, 'c', 0xF2B632, "nt-3", 124))));
         }
         { // liste_regarder
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -666,7 +679,7 @@ public final class NavFonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("liste_regarder", new Disposition(6, b, c, t));
+            MENUS.put("liste_regarder", new Disposition(6, b, c, t, List.of(new Libelle("REGARDER", 88, -3, 'c', 0xF2B632, "nt-3", 141))));
         }
         { // classement
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -679,7 +692,7 @@ public final class NavFonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("classement", new Disposition(6, b, c, t));
+            MENUS.put("classement", new Disposition(6, b, c, t, List.of(new Libelle("TOP 10", 88, -3, 'c', 0xF2B632, "nt-3", 91))));
         }
         JEUX.put("jeux_iles", List.of("skyblock", "abysse", "oneblock", "jump"));
         JEUX.put("jeux_survie", List.of("uhc", "speedrun", "bingo"));

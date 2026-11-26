@@ -1,6 +1,7 @@
 package fr.eemicraft.droits.ui;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /** GÉNÉRÉ par pack/gen_droits.py (ne pas modifier à la main) : glyphes et dispositions de /droits. */
@@ -8,12 +9,16 @@ public final class Fonds {
     public static final int AVANCE_FOND = 177;
     public static final char[] NEG = {'\uf800', '\uf801', '\uf802', '\uf803', '\uf804', '\uf805', '\uf806', '\uf807', '\uf808'};
     public static final char[] POS = {'\uf810', '\uf811', '\uf812', '\uf813', '\uf814', '\uf815', '\uf816', '\uf817', '\uf818'};
-    public static final int ESPACE = 3;
+    /** Avances en quarts de pixel (police lisse, 26/11). */
+    public static final int UNITE = 4;
+    public static final float[] TAILLES = {6.75f, 6.25f, 5.75f, 5.25f};
+    public static final int ESPACE = 8;
     public static final Map<String, Character> GLYPHES = new HashMap<>();
     public static final Map<Character, Integer> AVANCES = new HashMap<>();
     public record Texte(int x, int y, char align, int max) { }
+    public record Libelle(String texte, int x, int y, char align, int couleur, String police, int largeur) { }
     public record Disposition(int lignes, Map<String, int[]> boutons, Map<String, int[]> cases,
-                              Map<String, Texte> textes) { }
+                              Map<String, Texte> textes, List<Libelle> libelles) { }
     public static final Map<String, Disposition> MENUS = new HashMap<>();
 
     static {
@@ -362,71 +367,77 @@ public final class Fonds {
         GLYPHES.put("ov:droits_jeux:non:liste:26", '\ue54d');
         GLYPHES.put("ov:droits_jeux:chef:liste:27", '\ue54e');
         GLYPHES.put("ov:droits_jeux:non:liste:27", '\ue54f');
-        AVANCES.put('A', 4);
-        AVANCES.put('B', 4);
-        AVANCES.put('C', 4);
-        AVANCES.put('D', 4);
-        AVANCES.put('E', 4);
-        AVANCES.put('F', 4);
-        AVANCES.put('G', 4);
-        AVANCES.put('H', 4);
-        AVANCES.put('I', 2);
-        AVANCES.put('J', 4);
-        AVANCES.put('K', 4);
-        AVANCES.put('L', 4);
-        AVANCES.put('M', 6);
-        AVANCES.put('N', 5);
-        AVANCES.put('O', 4);
-        AVANCES.put('P', 4);
-        AVANCES.put('Q', 4);
-        AVANCES.put('R', 4);
-        AVANCES.put('S', 4);
-        AVANCES.put('T', 4);
-        AVANCES.put('U', 4);
-        AVANCES.put('V', 4);
-        AVANCES.put('W', 6);
-        AVANCES.put('X', 4);
-        AVANCES.put('Y', 4);
-        AVANCES.put('Z', 4);
-        AVANCES.put('0', 4);
-        AVANCES.put('1', 3);
-        AVANCES.put('2', 4);
-        AVANCES.put('3', 4);
-        AVANCES.put('4', 4);
-        AVANCES.put('5', 4);
-        AVANCES.put('6', 4);
-        AVANCES.put('7', 4);
-        AVANCES.put('8', 4);
-        AVANCES.put('9', 4);
-        AVANCES.put('.', 2);
-        AVANCES.put(':', 2);
-        AVANCES.put('!', 2);
-        AVANCES.put('?', 4);
-        AVANCES.put('\'', 2);
-        AVANCES.put('-', 4);
-        AVANCES.put('+', 4);
-        AVANCES.put('/', 4);
-        AVANCES.put('(', 3);
-        AVANCES.put(')', 3);
-        AVANCES.put('%', 4);
-        AVANCES.put('_', 4);
-        AVANCES.put('\u00b7', 2);
-        AVANCES.put('\u00d7', 4);
-        AVANCES.put('#', 6);
-        AVANCES.put('\u26c3', 6);
-        AVANCES.put('\u2605', 6);
-        AVANCES.put('\u2764', 6);
-        AVANCES.put('\u2694', 6);
-        AVANCES.put('\u00c9', 4);
-        AVANCES.put('\u00c8', 4);
-        AVANCES.put('\u00ca', 4);
-        AVANCES.put('\u00c0', 4);
-        AVANCES.put('\u00d4', 4);
-        AVANCES.put('\u00c2', 4);
-        AVANCES.put('\u00ce', 2);
-        AVANCES.put('\u00db', 4);
-        AVANCES.put('\u00d9', 4);
-        AVANCES.put(',', 2);
+        AVANCES.put('A', 19);
+        AVANCES.put('B', 17);
+        AVANCES.put('C', 19);
+        AVANCES.put('D', 19);
+        AVANCES.put('E', 16);
+        AVANCES.put('F', 16);
+        AVANCES.put('G', 20);
+        AVANCES.put('H', 20);
+        AVANCES.put('I', 7);
+        AVANCES.put('J', 14);
+        AVANCES.put('K', 18);
+        AVANCES.put('L', 15);
+        AVANCES.put('M', 24);
+        AVANCES.put('N', 20);
+        AVANCES.put('O', 20);
+        AVANCES.put('P', 17);
+        AVANCES.put('Q', 20);
+        AVANCES.put('R', 17);
+        AVANCES.put('S', 17);
+        AVANCES.put('T', 17);
+        AVANCES.put('U', 20);
+        AVANCES.put('V', 19);
+        AVANCES.put('W', 26);
+        AVANCES.put('X', 18);
+        AVANCES.put('Y', 19);
+        AVANCES.put('Z', 17);
+        AVANCES.put('0', 16);
+        AVANCES.put('1', 13);
+        AVANCES.put('2', 16);
+        AVANCES.put('3', 16);
+        AVANCES.put('4', 16);
+        AVANCES.put('5', 16);
+        AVANCES.put('6', 16);
+        AVANCES.put('7', 15);
+        AVANCES.put('8', 16);
+        AVANCES.put('9', 16);
+        AVANCES.put('.', 8);
+        AVANCES.put(':', 8);
+        AVANCES.put('!', 8);
+        AVANCES.put('?', 15);
+        AVANCES.put('\'', 6);
+        AVANCES.put('-', 12);
+        AVANCES.put('+', 17);
+        AVANCES.put('/', 10);
+        AVANCES.put('(', 9);
+        AVANCES.put(')', 9);
+        AVANCES.put('%', 22);
+        AVANCES.put('_', 12);
+        AVANCES.put('\u00b7', 8);
+        AVANCES.put('\u00d7', 17);
+        AVANCES.put(',', 8);
+        AVANCES.put('#', 17);
+        AVANCES.put('\u00c9', 16);
+        AVANCES.put('\u00c8', 16);
+        AVANCES.put('\u00ca', 16);
+        AVANCES.put('\u00c0', 19);
+        AVANCES.put('\u00d4', 20);
+        AVANCES.put('\u00c2', 19);
+        AVANCES.put('\u00ce', 7);
+        AVANCES.put('\u00db', 20);
+        AVANCES.put('\u00d9', 20);
+        AVANCES.put('\u00c7', 19);
+        AVANCES.put('\u00cb', 16);
+        AVANCES.put('\u00cf', 9);
+        AVANCES.put('\u00dc', 20);
+        AVANCES.put('\u0152', 26);
+        AVANCES.put('\u00c6', 27);
+        AVANCES.put('\u26c3', 24);
+        AVANCES.put('\u2605', 24);
+        AVANCES.put('\u2764', 24);
+        AVANCES.put('\u2694', 24);
         { // droits
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
             Map<String, Texte> t = new HashMap<>();
@@ -437,12 +448,12 @@ public final class Fonds {
             b.put("betas", new int[]{15, 16, 17, 24, 25, 26});
             b.put("interdits", new int[]{30, 31, 32, 39, 40, 41});
             t.put("haut", new Texte(88, 23, 'c', 118));
-            t.put("s_joueurs", new Texte(34, 63, 'c', 47));
-            t.put("s_jeux", new Texte(88, 63, 'c', 47));
-            t.put("s_betas", new Texte(142, 63, 'c', 47));
-            t.put("s_interdits", new Texte(88, 99, 'c', 47));
+            t.put("s_joueurs", new Texte(34, 63, 'c', 46));
+            t.put("s_jeux", new Texte(88, 63, 'c', 46));
+            t.put("s_betas", new Texte(142, 63, 'c', 46));
+            t.put("s_interdits", new Texte(88, 99, 'c', 46));
             t.put("bas", new Texte(88, 114, 'c', 160));
-            MENUS.put("droits", new Disposition(6, b, c, t));
+            MENUS.put("droits", new Disposition(6, b, c, t, List.of(new Libelle("DROITS", 88, -3, 'c', 0xF2B632, "dt-3", 97), new Libelle("JOUEURS", 34, 56, 'c', 0xEEF0F6, "dt56", 124), new Libelle("JEUX", 88, 56, 'c', 0xEEF0F6, "dt56", 68), new Libelle("B\u00caTA", 142, 56, 'c', 0xEEF0F6, "dt56", 69), new Libelle("INTERDITS", 88, 92, 'c', 0xEEF0F6, "dt92", 137))));
         }
         { // droits_joueurs
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -455,7 +466,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_joueurs", new Disposition(6, b, c, t));
+            MENUS.put("droits_joueurs", new Disposition(6, b, c, t, List.of(new Libelle("JOUEURS", 88, -3, 'c', 0xF2B632, "dt-3", 124))));
         }
         { // droits_betas
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -468,7 +479,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_betas", new Disposition(6, b, c, t));
+            MENUS.put("droits_betas", new Disposition(6, b, c, t, List.of(new Libelle("B\u00caTA-TESTEURS", 88, -3, 'c', 0xF2B632, "dt-3", 218))));
         }
         { // droits_interdits
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -481,7 +492,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_interdits", new Disposition(6, b, c, t));
+            MENUS.put("droits_interdits", new Disposition(6, b, c, t, List.of(new Libelle("INTERDITS", 88, -3, 'c', 0xF2B632, "dt-3", 137))));
         }
         { // droits_fiche
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -498,7 +509,7 @@ public final class Fonds {
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("resume", new Texte(142, 96, 'c', 50));
             t.put("bas", new Texte(96, 114, 'c', 140));
-            MENUS.put("droits_fiche", new Disposition(6, b, c, t));
+            MENUS.put("droits_fiche", new Disposition(6, b, c, t, List.of(new Libelle("FICHE", 88, -3, 'c', 0xF2B632, "dt-3", 78), new Libelle("B\u00caTA", 29, 42, 'g', 0xEEF0F6, "dt42", 69), new Libelle("GROUPES", 137, 42, 'g', 0xEEF0F6, "dt42_2", 110), new Libelle("MONDES", 29, 96, 'g', 0xEEF0F6, "dt96_1", 108), new Libelle("JEUX", 83, 96, 'g', 0xEEF0F6, "dt96", 68))));
         }
         { // droits_groupes
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -511,7 +522,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_groupes", new Disposition(6, b, c, t));
+            MENUS.put("droits_groupes", new Disposition(6, b, c, t, List.of(new Libelle("GROUPES", 88, -3, 'c', 0xF2B632, "dt-3", 127))));
         }
         { // droits_mondes
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -524,7 +535,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_mondes", new Disposition(6, b, c, t));
+            MENUS.put("droits_mondes", new Disposition(6, b, c, t, List.of(new Libelle("MONDES", 88, -3, 'c', 0xF2B632, "dt-3", 116))));
         }
         { // droits_jeuxj
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -537,7 +548,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_jeuxj", new Disposition(6, b, c, t));
+            MENUS.put("droits_jeuxj", new Disposition(6, b, c, t, List.of(new Libelle("JEUX INTERDITS", 88, -3, 'c', 0xF2B632, "dt-3", 213))));
         }
         { // droits_jeux
             Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();
@@ -550,7 +561,7 @@ public final class Fonds {
             c.put("liste", new int[]{10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43});
             t.put("haut", new Texte(88, 23, 'c', 118));
             t.put("page", new Texte(88, 114, 'c', 18));
-            MENUS.put("droits_jeux", new Disposition(6, b, c, t));
+            MENUS.put("droits_jeux", new Disposition(6, b, c, t, List.of(new Libelle("\u00c9TAT DES JEUX", 88, -3, 'c', 0xF2B632, "dt-3", 205))));
         }
     }
 

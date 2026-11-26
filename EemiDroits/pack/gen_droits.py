@@ -108,39 +108,37 @@ def build_files(v54, ic):
         providers.append({"type": "bitmap", "file": f"{NS}:font/{FONT}/ov_{oid.replace(':', '_')}.png",
                           "ascent": gn.ASCENT_BG, "height": 256, "chars": [ch]})
     files[f"assets/{NS}/font/{FONT}.json"] = json.dumps({"providers": providers}, indent=1, ensure_ascii=True).encode()
-    tpng, tlines = gn.text_font_png()
-    files[f"assets/{NS}/textures/font/{FONT}/texte.png"] = gn.png_bytes(tpng)
-    ys = sorted({t[1] for lay in layouts.values() for t in lay["texts"].values()})
-    for y in ys:
-        asc = 13 - (y - 2)
-        if asc > 8:
-            raise SystemExit(f"ERREUR : texte trop haut (y {y})")
-        f = {"providers": [{"type": "space", "advances": {" ": gn.SPACE_ADV}},
-                           {"type": "bitmap", "file": f"{NS}:font/{FONT}/texte.png", "ascent": asc, "height": 8,
-                            "chars": tlines}]}
-        files[f"assets/{NS}/font/dt{y}.json"] = json.dumps(f, indent=1, ensure_ascii=True).encode()
+    # 26/11 : police lisse Inter de gen_nav.py (eemicraft:nav/inter.ttf et ses symboles, déjà dans le pack)
+    yks = {(t[1], k) for lay in layouts.values() for t in lay["texts"].values() for k in range(len(gn.TAILLES))} \
+        | {(lb[2], lb[5]) for lay in layouts.values() for lb in lay["labels"]}
+    ys = sorted({y for y, _ in yks})
+    files.update(gn.text_fonts("dt", yks, f"{NS}:font/nav/symboles.png"))
     return files, dict(bases=bases, overlays=overlays, layouts=layouts, glyphs=glyphs, ys=ys)
 
 
 def write_java(data):
     j = gn.jstr
-    Lj = ["package fr.eemicraft.droits.ui;", "", "import java.util.HashMap;", "import java.util.Map;", "",
+    Lj = ["package fr.eemicraft.droits.ui;", "", "import java.util.HashMap;", "import java.util.List;",
+          "import java.util.Map;", "",
           "/** GÉNÉRÉ par pack/gen_droits.py (ne pas modifier à la main) : glyphes et dispositions de /droits. */",
           "public final class Fonds {",
           f"    public static final int AVANCE_FOND = {gn.ADV_BG};",
           "    public static final char[] NEG = {" + ", ".join("'\\u%04x'" % c for c, _ in gn.NEG) + "};",
           "    public static final char[] POS = {" + ", ".join("'\\u%04x'" % c for c, _ in gn.POS) + "};",
-          f"    public static final int ESPACE = {gn.SPACE_ADV};",
+          "    /** Avances en quarts de pixel (police lisse, 26/11). */",
+          "    public static final int UNITE = 4;",
+          "    public static final float[] TAILLES = {" + ", ".join(f"{t}f" for t in gn.TAILLES) + "};",
+          f"    public static final int ESPACE = {gn.ESPACE_Q};",
           "    public static final Map<String, Character> GLYPHES = new HashMap<>();",
           "    public static final Map<Character, Integer> AVANCES = new HashMap<>();",
           "    public record Texte(int x, int y, char align, int max) { }",
+          "    public record Libelle(String texte, int x, int y, char align, int couleur, String police, int largeur) { }",
           "    public record Disposition(int lignes, Map<String, int[]> boutons, Map<String, int[]> cases,",
-          "                              Map<String, Texte> textes) { }",
+          "                              Map<String, Texte> textes, List<Libelle> libelles) { }",
           "    public static final Map<String, Disposition> MENUS = new HashMap<>();", "", "    static {"]
     for k, ch in data["glyphs"].items():
         Lj.append(f"        GLYPHES.put({j(k)}, '{gn.jchar(ch)}');")
-    for ch in gn.TEXT_CHARS:
-        Lj.append(f"        AVANCES.put('{gn.jchar(ch)}', {gn.glyph_width(ch)});")
+    Lj += gn.java_avances()
     for mid, lay in data["layouts"].items():
         Lj.append(f"        {{ // {mid}")
         Lj.append("            Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();")
@@ -151,7 +149,10 @@ def write_java(data):
             Lj.append(f"            c.put({j(k)}, new int[]{{{', '.join(map(str, sl))}}});")
         for k, (x, y, al, mx) in lay["texts"].items():
             Lj.append(f"            t.put({j(k)}, new Texte({x}, {y}, '{al}', {mx}));")
-        Lj.append(f"            MENUS.put({j(mid)}, new Disposition({lay['rows']}, b, c, t));")
+        libs = ", ".join(f"new Libelle({j(lb[0])}, {lb[1]}, {lb[2]}, '{lb[3]}', 0x{lb[4][0]:02X}{lb[4][1]:02X}{lb[4][2]:02X}, "
+                         f"{j(gn.font_key('dt', lb[2], lb[5]))}, {round(gn.width_k(lb[0], lb[5]) * 4)})"
+                         for lb in lay["labels"])
+        Lj.append(f"            MENUS.put({j(mid)}, new Disposition({lay['rows']}, b, c, t, List.of({libs})));")
         Lj.append("        }")
     Lj += ["    }", "", "    private Fonds() { }", "}"]
     os.makedirs(os.path.dirname(JAVA), exist_ok=True)

@@ -25,7 +25,7 @@ import sys
 import zipfile
 from collections import Counter
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 RACINE = os.path.dirname(ICI)
@@ -36,7 +36,7 @@ ADV_BG = 177
 JAVA = os.path.join(RACINE, "src", "main", "java", "fr", "eemicraft", "core", "ui", "NavFonds.java")
 JAR = os.path.join(os.environ.get("APPDATA", ""), ".minecraft", "versions", "26.3", "26.3.jar")
 # fichiers de ce script dans le pack (remplacés à chaque génération)
-RESERVES = (f"assets/{NS}/font/nav.json", f"assets/{NS}/textures/font/nav/", f"assets/{NS}/items/nav/",
+RESERVES = (f"assets/{NS}/font/nav.json", f"assets/{NS}/font/nav/", f"assets/{NS}/textures/font/nav/", f"assets/{NS}/items/nav/",
             f"assets/{NS}/models/item/nav/", f"assets/{NS}/textures/item/nav/")
 
 
@@ -116,7 +116,6 @@ ACCENTS = {"É": ("E", ["..#", ".#."]), "È": ("E", ["#..", ".#."]), "Ê": ("E",
            "Î": ("I", ["#", "."]), "Û": ("U", [".#.", "#.#"]), "Ù": ("U", ["#..", ".#."])}
 for ch, (base, acc) in ACCENTS.items():
     F5[ch] = base
-SPACE_ADV = 3
 
 
 def glyph_rows(ch):
@@ -134,43 +133,146 @@ def glyph_rows(ch):
     return [tail, tail] + g + [tail]
 
 
-def glyph_width(ch):
-    if ch == " ":
-        return SPACE_ADV
-    w = 0
-    for r in glyph_rows(ch):
-        for i, c in enumerate(r):
-            if c == "#":
-                w = max(w, i + 1)
-    return w + 1
+# 26/11/2026 (Esteban) : textes en police lisse Inter UI Medium (SIL OFL 1.1, police/OFL.txt), fournisseur « ttf »
+# du client, rendue à OVS texels par pixel d'interface. Les petites capitales F5 ci-dessus ne servent plus qu'à
+# définir le jeu de caractères. Les symboles absents d'Inter (pièce, étoile, cœur, épées) sont un bitmap HD.
+POLICE = os.path.join(ICI, "police", "Inter-UI-Medium.ttf")
+POLICE_LICENCE = os.path.join(ICI, "police", "OFL.txt")
+TTF_SIZE = 6.75          # taille en pixels d'interface : majuscules d'environ 5 px, comme avant
+OVS = 4                  # texels par pixel d'interface (GUI x4 = 1:1)
+FONT = ImageFont.truetype(POLICE, round(TTF_SIZE * OVS))
+# un libellé fixe trop large pour son bouton passe à la taille suivante (jamais au-delà du bouton)
+TAILLES = [6.75, 6.25, 5.75, 5.25]
+FONTS = [ImageFont.truetype(POLICE, round(t * OVS)) for t in TAILLES]
+SYMBOLES = "⛃★❤⚔"
+SYM_ADV = 6              # 20 texels d'encre -> round(5) + 1
+EXTRA = "ÇËÏÜŒÆ"
+CHARS = [c for c in F5 if c not in SYMBOLES] + [c for c in EXTRA if c not in F5]
+MARGE = 2                # aucun libellé à moins de 2 px du bord de son bouton (Esteban : « jamais dépasser »)
+
+
+def adv(ch, k=0):
+    """Avance d'un caractère en pixels d'interface (float), comme le client (pas de crénage)."""
+    if ch in SYMBOLES:
+        return SYM_ADV
+    return FONTS[k].getlength(ch) / OVS
+
+
+def width_k(s, k=0):
+    return sum(adv(c, k) for c in s)
+
+
+def font_key(prefix, y, k):
+    return f"{prefix}{y}" if k == 0 else f"{prefix}{y}_{k}"
+
+
+def shift_y(y, k):
+    """Décalage vertical : pied des majuscules en y + 5, les petites tailles centrées sur la même ligne."""
+    cap = 5 * TAILLES[k] / TAILLES[0]
+    return round(y - 8 - (5 - cap) / 2, 2)
 
 
 def text_width(s):
-    return sum(glyph_width(c) for c in s)
+    # +1 : les appelants retirent 1 (héritage de la police bitmap)
+    return sum(adv(c) for c in s) + 1
 
 
-def draw_text(img, x, y, s, color, oy=0):
+def sym_cell(ch):
+    """Symbole en 32x32 (une case = 8x8 pixels d'interface), encre de x 0 à 19, lignes 8 à 27."""
+    k = 4  # sur-échantillonnage
+    im = Image.new("L", (32 * k, 32 * k), 0)
+    d = ImageDraw.Draw(im)
+    x0, y0, x1, y1 = 0, 8 * k, 20 * k - 1, 28 * k - 1
+    if ch == "⛃":
+        d.ellipse([x0, y0, x1, y1], outline=255, width=3 * k)
+        d.ellipse([x0 + 7 * k, y0 + 7 * k, x1 - 7 * k, y1 - 7 * k], fill=255)
+    elif ch == "★":
+        import math
+        pts = []
+        for i in range(10):
+            r = (10 * k) if i % 2 == 0 else (4 * k)
+            a = -math.pi / 2 + i * math.pi / 5
+            pts.append((10 * k + r * math.cos(a), 18.5 * k + r * math.sin(a)))
+        d.polygon(pts, fill=255)
+    elif ch == "❤":
+        d.ellipse([x0, y0, x0 + 10 * k, y0 + 10 * k], fill=255)
+        d.ellipse([x0 + 10 * k - 1, y0, x1, y0 + 10 * k], fill=255)
+        d.polygon([(x0 + k, y0 + 7 * k), (x1 - k, y0 + 7 * k), (10 * k, y1)], fill=255)
+    else:  # épées croisées
+        d.line([(x0 + k, y0 + k), (x1 - k, y1 - k)], fill=255, width=3 * k)
+        d.line([(x1 - k, y0 + k), (x0 + k, y1 - k)], fill=255, width=3 * k)
+    im = im.resize((32, 32), Image.LANCZOS)
+    out = Image.new("RGBA", (32, 32), (255, 255, 255, 0))
+    out.putalpha(im)
+    return out
+
+
+def draw_text(img, x, y, s, color, oy=0, k=0):
+    """Dessine en HD sur une image à l'échelle OVS (aperçus) ; x, y en pixels d'interface (même ancre qu'avant :
+    haut des majuscules en y, pied en y + 5)."""
+    d = ImageDraw.Draw(img)
     for ch in s:
-        if ch == " ":
-            x += SPACE_ADV
-            continue
-        for j, r in enumerate(glyph_rows(ch)):
-            for i, c in enumerate(r):
-                if c == "#":
-                    px, py = x + i, y - 2 + j + oy
-                    if 0 <= px < img.width and 0 <= py < img.height:
-                        img.putpixel((px, py), color)
-        x += glyph_width(ch)
+        if ch in SYMBOLES:
+            cell = sym_cell(ch)
+            tint = Image.new("RGBA", cell.size, tuple(color[:3]) + (255,))
+            tint.putalpha(cell.getchannel("A"))
+            img.alpha_composite(tint, (round(x * OVS), round((y - 2 + oy) * OVS)))
+        elif ch != " ":
+            base = y + 5 + oy - (5 - 5 * TAILLES[k] / TAILLES[0]) / 2
+            d.text((x * OVS, base * OVS), ch, font=FONTS[k], fill=tuple(color), anchor="ls")
+        x += adv(ch, k)
 
 
 def norm(s):
     out = []
     for ch in s.upper():
-        if ch == " " or ch in F5:
+        if ch == " " or ch in CHARS or ch in SYMBOLES:
             out.append(ch)
         else:
             raise SystemExit(f"ERREUR : caractère sans glyphe dans un libellé : {ch!r} ({s!r})")
     return "".join(out)
+
+
+def text_fonts(prefix, yks, sym_file):
+    """Polices de texte <prefix><y>[_k].json (une par hauteur et par taille) : Inter décalée pour que le pied des
+    majuscules tombe en y + 5, puis les symboles HD (taille normale seulement). Partagé avec gen_droits.py."""
+    files = {}
+    for y, k in sorted(set(yks)):
+        prov = [{"type": "ttf", "file": f"{NS}:nav/inter.ttf", "size": TAILLES[k], "oversample": OVS,
+                 "shift": [0, shift_y(y, k)], "skip": SYMBOLES}]
+        asc = 15 - y
+        if k == 0 and asc <= 8:
+            prov.append({"type": "bitmap", "file": sym_file, "ascent": asc, "height": 8, "chars": [SYMBOLES]})
+        files[f"assets/{NS}/font/{font_key(prefix, y, k)}.json"] = json.dumps({"providers": prov}, indent=1,
+                                                                              ensure_ascii=True).encode()
+    return files
+
+
+def symbols_png():
+    img = Image.new("RGBA", (32 * len(SYMBOLES), 32), (0, 0, 0, 0))
+    for i, ch in enumerate(SYMBOLES):
+        img.alpha_composite(sym_cell(ch), (32 * i, 0))
+    return img
+
+
+def java_avances():
+    """Lignes Java des avances, en quarts de pixel (UNITE = 4)."""
+    return [f"        AVANCES.put('{jchar(ch)}', {round(adv(ch) * 4)});" for ch in CHARS + list(SYMBOLES)]
+
+
+ESPACE_Q = round(adv(" ") * 4)
+
+
+def fit_box(boxes, x, y, align):
+    """Place disponible dans le bouton qui contient l'ancre (x, y), marge comprise ; None hors bouton."""
+    for bx0, by0, bx1, by1 in boxes.values():
+        if bx0 <= x <= bx1 and by0 <= y <= by1:
+            if align == "c":
+                return 2 * min(x - (bx0 + MARGE), (bx1 - MARGE) - x)
+            if align == "d":
+                return x - (bx0 + MARGE)
+            return (bx1 - MARGE) - x
+    return None
 
 
 # ------------------------------------------------------------------ icônes
@@ -367,6 +469,7 @@ class Canvas:
     def __init__(self):
         self.img = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
         self.d = ImageDraw.Draw(self.img)
+        self.labels = []
 
     def rect(self, x0, y0, x1, y1, c):
         self.d.rectangle([x0, y0 + T, x1, y1 + T], fill=c)
@@ -381,12 +484,8 @@ class Canvas:
         self.img.alpha_composite(im, (x, y + T))
 
     def text(self, x, y, s, c, align="g"):
-        w = text_width(s) - 1
-        if align == "c":
-            x = x - w // 2
-        elif align == "d":
-            x = x - w
-        draw_text(self.img, x, y, s, c, oy=T)
+        # 26/11 : plus dessiné dans le fond, écrit par NavUi en police lisse (libellés fixes de NavFonds)
+        self.labels.append((s, x, y, align, c))
 
 
 def raised(cv, x0, y0, x1, y1, fill=BTN, accent=None):
@@ -469,13 +568,9 @@ def draw_btn(cv, el, ic, texts):
     if h == 1:  # bouton large d'une ligne : icône à gauche, libellé à côté
         cv.paste(ic[icon], x0 + 2, y0)
         lw = text_width(label) - 1
-        if lw > (x1 - x0) - 22:
-            raise SystemExit(f"ERREUR : libellé trop long pour {bid} : {label}")
         cv.text(x0 + 21, y0 + 6, label, TXT)
         return
     lw = text_width(label) - 1
-    if lw > (x1 - x0) - 3:
-        raise SystemExit(f"ERREUR : libellé trop long pour le bouton {bid} : {label} ({lw} px > {x1 - x0 - 3})")
     if status:  # icône, nom, puis ligne de statut dynamique
         cv.paste(ic[icon], mid - 8, y0 + 3)
         cv.text(mid, y0 + 20, label, TXT, "c")
@@ -505,6 +600,9 @@ def frame(cv, x0, y0, x1, y1, c, dark, width=2):
         cv.rect(x0 + k, y1 - k, x1 - k, y1 - k, col)
         cv.rect(x0 + k, y0 + k, x0 + k, y1 - k, col)
         cv.rect(x1 - k, y0 + k, x1 - k, y1 - k, col)
+
+
+TROP = []
 
 
 def build_menus(v54, ic):
@@ -557,6 +655,20 @@ def build_menus(v54, ic):
                     raise SystemExit(f"ERREUR : case {s} hors du menu {m['id']}")
                 used[s] = k
         bases[m["id"]] = cv.img
+        labels = []
+        for (lab, x, y, al, col) in cv.labels:
+            room = fit_box(boxes, x, y + 2, al)
+            k = 0
+            while room is not None and k < len(TAILLES) - 1 and width_k(lab, k) > room:
+                k += 1
+            if room is not None and width_k(lab, k) > room:
+                TROP.append(f"{m['id']}: « {lab} » {width_k(lab, k):.1f} px > {room} px")
+            labels.append((lab, x, y, al, col, k))
+        lay["labels"] = labels
+        for tid, (x, y, al, mx) in list(lay["texts"].items()):
+            room = fit_box(boxes, x, y + 2, al)
+            if room is not None and room < mx:
+                lay["texts"][tid] = (x, y, al, int(room))
         for ov in m["overlays"]:
             ocv = Canvas()
             ocv.px(175, 40, BLACK)
@@ -593,6 +705,8 @@ def build_menus(v54, ic):
                 raise SystemExit(f"calque inconnu {ov}")
             overlays[name] = ocv.img
         layouts[m["id"]] = lay
+    if TROP:
+        raise SystemExit("ERREUR : libellés qui dépassent leur bouton (marge 2 px) :\n  " + "\n  ".join(TROP))
     return bases, overlays, layouts
 
 
@@ -646,17 +760,15 @@ def build_files(v54, ic):
         providers.append({"type": "bitmap", "file": f"{NS}:font/nav/ov_{fname}.png", "ascent": ASCENT_BG,
                           "height": 256, "chars": [ch]})
     files[f"assets/{NS}/font/nav.json"] = json.dumps({"providers": providers}, indent=1, ensure_ascii=True).encode()
-    tpng, tlines = text_font_png()
-    files[f"assets/{NS}/textures/font/nav/texte.png"] = png_bytes(tpng)
-    ys = sorted({t[1] for lay in layouts.values() for t in lay["texts"].values()})
-    for y in ys:
-        asc = 13 - (y - 2)
-        if asc > 8:
-            raise SystemExit(f"ERREUR : texte trop haut (y {y})")
-        f = {"providers": [{"type": "space", "advances": {" ": SPACE_ADV}},
-                           {"type": "bitmap", "file": f"{NS}:font/nav/texte.png", "ascent": asc, "height": 8,
-                            "chars": tlines}]}
-        files[f"assets/{NS}/font/nt{y}.json"] = json.dumps(f, indent=1, ensure_ascii=True).encode()
+    with open(POLICE, "rb") as f:
+        files[f"assets/{NS}/font/nav/inter.ttf"] = f.read()
+    with open(POLICE_LICENCE, "rb") as f:
+        files[f"assets/{NS}/font/nav/OFL.txt"] = f.read()
+    files[f"assets/{NS}/textures/font/nav/symboles.png"] = png_bytes(symbols_png())
+    yks = {(t[1], k) for lay in layouts.values() for t in lay["texts"].values() for k in range(len(TAILLES))} \
+        | {(lb[2], lb[5]) for lay in layouts.values() for lb in lay["labels"]}
+    ys = sorted({y for y, _ in yks})
+    files.update(text_fonts("nt", yks, f"{NS}:font/nav/symboles.png"))
     # objet invisible des cases cliquables
     files[f"assets/{NS}/textures/item/nav/vide.png"] = png_bytes(Image.new("RGBA", (16, 16), (0, 0, 0, 0)))
     files[f"assets/{NS}/models/item/nav/vide.json"] = json.dumps(
@@ -685,12 +797,18 @@ def write_java(data):
          f"    public static final int AVANCE_FOND = {ADV_BG};",
          "    public static final char[] NEG = {" + ", ".join("'\\u%04x'" % c for c, _ in NEG) + "};",
          "    public static final char[] POS = {" + ", ".join("'\\u%04x'" % c for c, _ in POS) + "};",
-         f"    public static final int ESPACE = {SPACE_ADV};",
+         "    /** Avances en quarts de pixel (police lisse, 26/11). */",
+         "    public static final int UNITE = 4;",
+         "    /** Tailles de la police (la 1re = AVANCES) : un texte trop large passe à la suivante (police nt<y>_<k>). */",
+         "    public static final float[] TAILLES = {" + ", ".join(f"{t}f" for t in TAILLES) + "};",
+         f"    public static final int ESPACE = {ESPACE_Q};",
          "    public static final Map<String, Character> GLYPHES = new HashMap<>();",
          "    public static final Map<Character, Integer> AVANCES = new HashMap<>();",
          "    public record Texte(int x, int y, char align, int max) { }",
+         "    /** Libellé fixe d'un menu (écrit par le client en police lisse, plus dans le fond). */",
+         "    public record Libelle(String texte, int x, int y, char align, int couleur, String police, int largeur) { }",
          "    public record Disposition(int lignes, Map<String, int[]> boutons, Map<String, int[]> cases,",
-         "                              Map<String, Texte> textes) { }",
+         "                              Map<String, Texte> textes, List<Libelle> libelles) { }",
          "    public static final Map<String, Disposition> MENUS = new HashMap<>();",
          "    /** Catégorie -> pages ; page -> ids des jeux dans l'ordre des boutons g0..g5. */",
          "    public static final Map<String, List<String>> PAGES = new HashMap<>();",
@@ -700,8 +818,7 @@ def write_java(data):
          "", "    static {"]
     for k, ch in data["glyphs"].items():
         L.append(f"        GLYPHES.put({jstr(k)}, '{jchar(ch)}');")
-    for ch in TEXT_CHARS:
-        L.append(f"        AVANCES.put('{jchar(ch)}', {glyph_width(ch)});")
+    L += java_avances()
     for mid, lay in data["layouts"].items():
         L.append(f"        {{ // {mid}")
         L.append("            Map<String, int[]> b = new HashMap<>(), c = new HashMap<>();")
@@ -712,7 +829,10 @@ def write_java(data):
             L.append(f"            c.put({jstr(k)}, new int[]{{{', '.join(map(str, sl))}}});")
         for k, (x, y, al, mx) in lay["texts"].items():
             L.append(f"            t.put({jstr(k)}, new Texte({x}, {y}, '{al}', {mx}));")
-        L.append(f"            MENUS.put({jstr(mid)}, new Disposition({lay['rows']}, b, c, t));")
+        libs = ", ".join(f"new Libelle({jstr(lb[0])}, {lb[1]}, {lb[2]}, '{lb[3]}', 0x{lb[4][0]:02X}{lb[4][1]:02X}{lb[4][2]:02X}, "
+                         f"{jstr(font_key('nt', lb[2], lb[5]))}, {round(width_k(lb[0], lb[5]) * 4)})"
+                         for lb in lay["labels"])
+        L.append(f"            MENUS.put({jstr(mid)}, new Disposition({lay['rows']}, b, c, t, List.of({libs})));")
         L.append("        }")
     pages = {}
     for m in MENUS:
@@ -752,7 +872,8 @@ EX = {
 }
 
 
-def preview(data, v54, mid, scale=3):
+def preview(data, v54, mid):
+    """Aperçu à l'échelle OVS (GUI x4) : ce que le client affiche, textes en police lisse."""
     lay = data["layouts"][mid]
     rows = lay["rows"]
     h = 114 + 18 * rows
@@ -763,22 +884,36 @@ def preview(data, v54, mid, scale=3):
     img = Image.new("RGBA", (176, H), (60, 66, 60, 255))
     img.alpha_composite(chest, (0, T))
     img.alpha_composite(data["bases"][mid].crop((0, 0, 176, H)), (0, 0))
+    big = img.resize((176 * OVS, H * OVS), Image.NEAREST)
+
+    def put(s, x, y, al, col, k=0):
+        w = width_k(s, k)
+        x0 = x - w / 2 if al == "c" else (x - w if al == "d" else x)
+        draw_text(big, x0, y, s, col, oy=T, k=k)
+
+    for (s, x, y, al, col, k) in lay["labels"]:
+        put(s, x, y, al, col, k)
     ovs, txt = EX.get(mid, ([], {}))
     for ov in ovs:
-        img.alpha_composite(data["overlays"][ov].crop((0, 0, 176, H)), (0, 0))
+        big.alpha_composite(data["overlays"][ov].crop((0, 0, 176, H)).resize((176 * OVS, H * OVS), Image.NEAREST))
     for tid, s in txt.items():
         x, y, al, mx = lay["texts"][tid]
         s = norm(s)
-        w = text_width(s) - 1
-        if w > mx:
-            print(f"  (aperçu) texte {mid}:{tid} trop large : {w} > {mx}")
-        x0 = x - w // 2 if al == "c" else (x - w if al == "d" else x)
-        draw_text(img, x0, y, s, TXT, oy=T)
-    return img.resize((176 * scale, H * scale), Image.NEAREST)
+        k = 0
+        while k < len(TAILLES) - 1 and width_k(s, k) * 1.03 > mx:
+            k += 1
+        while len(s) > 1 and width_k(s, k) * 1.03 > mx:
+            s = s[:-2].rstrip() + "."
+            print(f"  (apercu) texte {mid}:{tid} coupe : {s}")
+        put(s, x, y, al, TXT, k)
+    return big
 
 
 def planche(data, v54, path):
-    ims = [(mid, preview(data, v54, mid)) for mid in data["layouts"]]
+    ims = []
+    for mid in data["layouts"]:
+        im = preview(data, v54, mid)
+        ims.append((mid, im.resize((176 * 3, im.height * 3 // OVS), Image.LANCZOS)))
     cols = 5
     cw = max(im.width for _, im in ims) + 24
     ch = max(im.height for _, im in ims) + 40
