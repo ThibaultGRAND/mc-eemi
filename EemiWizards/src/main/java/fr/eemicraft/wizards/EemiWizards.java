@@ -137,6 +137,30 @@ public final class EemiWizards extends JavaPlugin implements Listener {
     private String lastStatus;
     private long lastStatusAt;
     private final Random random = new Random();
+    /** 1.4.2 : derniere map jouee par la partie 1, sauvee dans data.yml (cle last-map) : exclue du tirage, meme apres un redemarrage. */
+    private String lastPlayed;
+
+    private java.io.File dataFile() {
+        return new java.io.File(getDataFolder(), "data.yml");
+    }
+
+    private void loadLastPlayed() {
+        java.io.File f = dataFile();
+        if (f.exists()) lastPlayed = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f).getString("last-map");
+    }
+
+    private void saveLastPlayed(String id) {
+        lastPlayed = id;
+        java.io.File f = dataFile();
+        org.bukkit.configuration.file.YamlConfiguration y = f.exists() ? org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f) : new org.bukkit.configuration.file.YamlConfiguration();
+        y.set("last-map", id);
+        try {
+            getDataFolder().mkdirs();
+            y.save(f);
+        } catch (java.io.IOException e) {
+            getLogger().warning("Impossible d'ecrire data.yml : " + e.getMessage());
+        }
+    }
     /** Classe choisie par joueur (gardée dans classes.yml). */
     private final Map<UUID, Wizard> classes = new HashMap<>();
     private File classesFile;
@@ -160,7 +184,9 @@ public final class EemiWizards extends JavaPlugin implements Listener {
         World w = setupWorld();
         if (w != null) {
             WorldClone.cleanup(this, w, base, maxInstances());
+            loadLastPlayed();
             Game g1 = new Game(1, w);
+            g1.lastMap = lastPlayed;
             games.put(1, g1);
             g1.prepareWorld();
         }
@@ -549,7 +575,10 @@ public final class EemiWizards extends JavaPlugin implements Listener {
         World world;
         Arena arena;
         final List<Arena> arenas = new ArrayList<>();
+        /** Derniere map JOUEE par cette partie (exclue du tirage suivant). */
         String lastMap;
+        /** 1.4.2 : la map actuelle a ete tiree pour la prochaine partie (au 1er joueur d'une salle vide). */
+        boolean mapDrawn;
         boolean preparing, destroyed;
 
         final Set<UUID> players = new LinkedHashSet<>();
@@ -594,6 +623,7 @@ public final class EemiWizards extends JavaPlugin implements Listener {
             arenas.clear();
             for (Arena.Layout l : Arena.LAYOUTS) arenas.add(new Arena(world, floorY, lobbyY, getLogger(), l));
             useArena(arenas.get(0));
+            mapDrawn = false;
         }
 
         void useArena(Arena a) {
@@ -603,8 +633,19 @@ public final class EemiWizards extends JavaPlugin implements Listener {
             for (Arena.PointDef d : a.lay.points()) points.add(new CapPoint(d, a.lay.oz()));
         }
 
-        /** Map de la prochaine partie : celle imposée par un admin, sinon au hasard (pas deux fois de suite). */
+        /**
+         * Map du lancement : celle imposee par un admin, sinon celle tiree au 1er joueur (1.4.2), sinon un tirage
+         * maintenant ; elle devient la derniere map jouee (sauvee pour la partie 1).
+         */
         void chooseMap() {
+            if (forcedMap != null || !mapDrawn) drawMap();
+            mapDrawn = false;
+            lastMap = arena.lay.id();
+            if (index == 1) saveLastPlayed(lastMap);
+        }
+
+        /** Tirage : map imposee par un admin, sinon au hasard parmi les maps autorisees, jamais la derniere jouee. */
+        void drawMap() {
             List<Arena> pool = new ArrayList<>();
             List<String> allowed = getConfig().getStringList("maps");
             for (Arena a : arenas) if (allowed.isEmpty() || allowed.contains(a.lay.id())) pool.add(a);
@@ -616,7 +657,7 @@ public final class EemiWizards extends JavaPlugin implements Listener {
                 if (pool.size() > 1) pool.removeIf(a -> a.lay.id().equals(lastMap));
                 pick = pool.get(random.nextInt(pool.size()));
             }
-            lastMap = pick.lay.id();
+            mapDrawn = true;
             if (pick != arena) useArena(pick);
         }
 
@@ -1930,6 +1971,11 @@ public final class EemiWizards extends JavaPlugin implements Listener {
             Game sg = spectatorGame(p);
             if (sg != null) sg.spectators.remove(id);
             players.add(id);
+            // 1.4.2 : premier joueur dans une salle d'attente vide -> tirage de la map maintenant
+            if (state == State.WAITING && players.size() == 1 && !arenas.isEmpty()) {
+                drawMap();
+                p.sendMessage(PREFIX + "§7Map tirée : §d" + arena.lay.name());
+            }
             toWaiting(p);
             broadcast("§a" + p.getName() + " §7a rejoint TNT Wizards §8(partie " + index + ") §7(§f" + players.size() + "/" + cfg("max-players", 16) + "§7).");
             reportStatus();
