@@ -81,5 +81,5 @@ scare:
 boutique:
   enabled: true
   jusqu-au: ""
-  cosmetiques: [title_h_sorciere, title_h_vampire, title_h_zombie, title_h_2026]
+  cosmetiques: [title_h_sorciere, title_h_vampire, title_h_zombie, title_h_2026, title_citrouille, hat_citrouille, join_fantome]
 # Musique : /halloween music on = playlist Halloween au lobby, /halloween music off = musique de base.

@@ -131,7 +131,7 @@ bells:
 boutique:
   enabled: true
   jusqu-au: "2027-01-02"
-  cosmetiques: [title_n_lutin, title_n_renne, title_n_pere, title_n_2026]
+  cosmetiques: [title_n_lutin, title_n_renne, title_n_pere, title_n_2026, hat_n_sapin, hat_n_bonhomme, trail_n_flocons, trail_n_clochettes, join_n_traineau, join_n_hotte]
 # Musique : /noel music on = playlist de Noël au lobby (songs_noel.yml du jar copiée dans plugins/EemiMusique/songs.yml),
 # /noel music off = musique de base.
 
