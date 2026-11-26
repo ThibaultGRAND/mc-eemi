@@ -182,6 +182,30 @@ public final class EemiHungerGames extends JavaPlugin implements Listener {
     /** Marqueur des coffres ouverts (TextDisplay non sauvegardé), par position de bloc de coffre. */
     private NamespacedKey markerKey;
     private final Random random = new Random();
+    /** 1.5.4 : derniere map jouee par la partie 1, sauvee dans data.yml (cle last-map) : exclue du tirage, meme apres un redemarrage. */
+    private String lastPlayed;
+
+    private java.io.File dataFile() {
+        return new java.io.File(getDataFolder(), "data.yml");
+    }
+
+    private void loadLastPlayed() {
+        java.io.File f = dataFile();
+        if (f.exists()) lastPlayed = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f).getString("last-map");
+    }
+
+    private void saveLastPlayed(String id) {
+        lastPlayed = id;
+        java.io.File f = dataFile();
+        org.bukkit.configuration.file.YamlConfiguration y = f.exists() ? org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(f) : new org.bukkit.configuration.file.YamlConfiguration();
+        y.set("last-map", id);
+        try {
+            getDataFolder().mkdirs();
+            y.save(f);
+        } catch (java.io.IOException e) {
+            getLogger().warning("Impossible d'ecrire data.yml : " + e.getMessage());
+        }
+    }
 
     // ------------------------------------------------------------------ cycle de vie
 
@@ -252,7 +276,9 @@ public final class EemiHungerGames extends JavaPlugin implements Listener {
             }
             Game g1 = new Game(1);
             games.put(1, g1);
-            if (!maps.isEmpty()) g1.setMap(pickMap(null), null);
+            loadLastPlayed();
+            g1.lastMap = lastPlayed;
+            if (!maps.isEmpty()) g1.setMap(pickMap(lastPlayed), null);
             if (!lootReady()) {
                 getLogger().warning("Tables de loot " + NS + " absentes : rechargement des datapacks.");
                 Bukkit.reloadData();
@@ -1015,6 +1041,12 @@ public final class EemiHungerGames extends JavaPlugin implements Listener {
                 updateSidebar(p);
                 return;
             }
+            // 1.5.4 : premier joueur dans une partie 1 vide en attente -> tirage de la map maintenant
+            // (jamais la derniere jouee) ; changer de map ne modifie aucun bloc (coffres poses au lancement)
+            if (n == 1 && state == State.WAITING && players.size() == 1 && maps.size() > 1) {
+                setMap(pickMap(lastMap), null);
+                p.sendMessage(PREFIX + "§7Map tirée : §6" + map.name);
+            }
             broadcast("§a" + p.getName() + " §7a rejoint les Hunger Games (§f" + players.size() + "§7).");
             p.teleport(lobby);
             later(() -> prepareLobbyPlayer(p));
@@ -1088,6 +1120,7 @@ public final class EemiHungerGames extends JavaPlugin implements Listener {
             borderEnd = -1;
             rushLevel = 0;
             lastMap = map.id;
+            if (n == 1) saveLastPlayed(map.id);
             originalWorld = world;
             WorldBorder border = world.getWorldBorder();
             border.setCenter(map.borderCenter[0], map.borderCenter[1]);
