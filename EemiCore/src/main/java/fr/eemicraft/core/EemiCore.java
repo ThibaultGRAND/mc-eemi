@@ -3127,12 +3127,13 @@ implements Listener {
         int[] cells = EemiCore.navCells("classement", "liste");
         String[] medals = {"&6&l", "&f&l", "&c&l"};
         List<TopEntry> list = full;
-        // podium sur la 1re ligne, centré
-        int[] order = {3, 2, 4, 1, 5, 0, 6, 7, 8, 9};
+        // 1.9.1 (#114) : pyramide, lue de haut en bas et de gauche a droite.
+        // Grille 4 x 7 : #1 au centre de la 1re ligne, #2-#3 sur la 2e, #4-#6 sur la 3e, #7-#10 sur la 4e.
+        int[] order = {3, 9, 11, 15, 17, 19, 21, 23, 25, 27};
         for (int i = 0; i < list.size() && i < 10; ++i) {
             PlayerData d = this.players.get(list.get(i).uuid());
-            if (d == null) continue;
-            int slot = cells[i < 7 ? order[i] : 7 + (i - 7) + 2];
+            if (d == null || order[i] >= cells.length) continue;
+            int slot = cells[order[i]];
             List<String> lore = this.levelLore(d);
             lore.add("");
             lore.add("&eClic : voir son profil");
