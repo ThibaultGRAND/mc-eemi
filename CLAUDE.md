@@ -1334,7 +1334,25 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 ## Tycoon Fête foraine (EemiFete)
 
 **État**
-- **EemiFete 0.1.0** : installé le 26/11 (redémarrage 16:49, sans erreur ni exception, `a_deposer_installes/`). Allée foraine posée au 1er démarrage (1 087 163 blocs en 1,6 s), puis les 10 parcs (108 288 blocs chacun). En BÊTA (`/droits jeu fete beta`, 16:49) : seuls les bêta-testeurs et les admins entrent. Rien n'a été vu en jeu.
+- **EemiFete 0.2.0** : installé le 26/11 (redémarrage 19:27, sans erreur ni exception, `a_deposer_installes/`, 0.1.0 en `.jar.old`). Toujours en BÊTA (`/droits jeu fete beta`) : seuls les bêta-testeurs et les admins entrent.
+- **0.1.0** (16:49) : allée foraine posée au 1er démarrage (1 087 163 blocs en 1,6 s), puis les 10 parcs (108 288 blocs chacun). Esteban l'a testé (3 premiers achats) : RAS, sauf les visiteurs tous en skin Alex.
+- **Nouveautés de la 0.2.0** (demandes d'Esteban, 26/11) :
+  - **Skins variés** : 2 visiteurs sur 3 prennent le skin d'un joueur déjà venu sur le serveur (`visitors.max-skins` 40, liste `visitors.skins` en plus), les autres un skin par défaut du jeu (profil sans textures, UUID au hasard).
+  - **3 attractions** : toilettes publiques (`Defs.TOILETTES`, cabine du milieu en porte de fer « OCCUPÉ »), crêpes (`Defs.CREPES`), mini-ferme (`Defs.FERME`, vache, moutons et chèvre sans IA). Il y a donc 34 achats ; économie `base-wait` 25, `growth` 1.155, soit environ 3 h 20 pour le 1er parc (aussi réglé dans le config du serveur).
+  - **5 objets perdus** (`Defs.SECRETS`, `PData.secrets`) : à la 1re découverte, annonce à tous, 25 pièces EEMICRAFT, jackpot (100 tours de l'attraction, au moins 2 min de revenu) et +10 % de tickets pour toujours. Livre « Objets perdus de la fête » en case 7 du kit, avec les indices.
+    - doigt de pied de Julien : lot rare de la pêche (`secrets.chance` 0,004 par tour) ;
+    - pot de Nutella de Julien : pot caché au pied de l'arche nord de la place d'entrée (ItemDisplay + Interaction, `fete_nutella`), qui ouvre la crêpe légendaire au Nutella ;
+    - toilettes de François : 5 coups sur la porte de fer en 15 s ;
+    - vache Fluffy de Clarisse : vache laineuse (variante COLD) qui sort 30 s toutes les 45 s avec 12 % de chance, si la ferme est achetée et le propriétaire connecté ;
+    - chèvre naine de Mathilde : chevreau perché sur le faîte du train fantôme (sinon sur le toit des toilettes) après une renaissance.
+    - Admin : `/fete admin secret <joueur> <id>`.
+  - **Pack séparé FetePack.zip**, namespace `fete:`. Généré par `EemiFete/outil-test/fr/eemicraft/fete/GenPack.java`, PNG écrit sans AWT, source `EemiFete/pack/FetePack.zip`.
+    - Publié sur https://eemicraft.strator.gg/pack/FetePack.zip, SHA-1 `154829bfa667d402ce693bdcf088c987bbfd2d6b`, vérifié en le retéléchargeant.
+    - Envoyé en entrant dans le monde `fete` (UUID fixe), retiré en sortant, comme RefugePack.
+    - Contenu : modèles 3D de `Models` (cheval aux 5 robes teintes, nacelle, auto-tamponneuse, wagon, pot de Nutella, doigt de pied), atlas 64 × 64, teinte « dye ».
+    - Modèle = ItemDisplay ; le client le tourne de 180° autour de Y juste après la transformation (vérifié au javap de `DisplayRenderer$ItemDisplayRenderer`), ce que compense la rotation de droite.
+    - Sans le pack (`pack.enabled: false` + `/fete admin reload`), les manèges reviennent en blocs. `TestShow` vérifie les deux cas : 105 888 coins, écart max 0,00003 bloc.
+  - Aperçus : `EemiFete/apercus/*_pack*`.
 - **Réglages du serveur** (faits le 26/11, actifs au redémarrage) :
   - `games.fete` d'EemiCore (« &dTycoon fête foraine », FIREWORK_ROCKET, join `fete`, join-aliases `foire`/`feteforaine`, monde `fete`, 1-20) ;
   - sous-menu `tycoon.yml` de la boussole ;
