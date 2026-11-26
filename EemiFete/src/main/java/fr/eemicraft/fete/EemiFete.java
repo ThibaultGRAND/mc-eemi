@@ -1488,8 +1488,8 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 d.nutella = true;
                 d.dirty = true;
                 p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1f, 0.8f);
-                U.msg(p, "&dTu ramasses un pot de Nutella… &7« Julien » est écrit au feutre sur le couvercle. Tes crêpes vont en profiter.");
-            } else if (cooldown(p, 4000)) U.msg(p, "&7Le pot est vide. Julien a dû passer par là.");
+                U.msg(p, "&dTu ramasses un pot de Nutella… &7« Julian » est écrit au feutre sur le couvercle. Tes crêpes vont en profiter.");
+            } else if (cooldown(p, 4000)) U.msg(p, "&7Le pot est vide. Julian a dû passer par là.");
             return true;
         }
         for (String tg : tags) {

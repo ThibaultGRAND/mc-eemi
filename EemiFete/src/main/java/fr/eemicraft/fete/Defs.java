@@ -152,10 +152,10 @@ public final class Defs {
     }
 
     public static final List<Secret> SECRETS = List.of(
-            new Secret("doigt_pied", "Le doigt de pied de Julien", "La pêche aux canards ramène parfois des choses… bizarres.",
-                    "Tu as pêché… le doigt de pied de Julien ?! Personne ne sait comment il est arrivé là."),
-            new Secret("nutella", "Le pot de Nutella de Julien", "Un pot traîne quelque part sur la place d'entrée. Ensuite, les crêpes !",
-                    "La crêpe au Nutella de Julien : il ne l'a jamais retrouvé, son pot."),
+            new Secret("doigt_pied", "Le doigt de pied de Julian", "La pêche aux canards ramène parfois des choses… bizarres.",
+                    "Tu as pêché… le doigt de pied de Julian ?! Personne ne sait comment il est arrivé là."),
+            new Secret("nutella", "Le pot de Nutella de Julian", "Un pot traîne quelque part sur la place d'entrée. Ensuite, les crêpes !",
+                    "La crêpe au Nutella de Julian : il ne l'a jamais retrouvé, son pot."),
             new Secret("francois", "Les toilettes de François", "Une cabine des toilettes est toujours occupée. Frappe… avec insistance.",
                     "« C'EST OCCUPÉ ! » François sort enfin. On ne demandera pas."),
             new Secret("fluffy", "La vache Fluffy de Clarisse", "Une vache très duveteuse s'échappe parfois de la mini-ferme.",

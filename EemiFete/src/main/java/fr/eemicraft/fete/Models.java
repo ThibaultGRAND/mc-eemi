@@ -98,7 +98,7 @@ public final class Models {
         w.add(b(1, 4, 0, 15, 5, 13, GOLD));                               // liseré
         MODELS.put("wagon", w);
 
-        // pot de Nutella de Julien
+        // pot de Nutella de Julian
         List<El> n = new ArrayList<>();
         n.add(b(4.5, 0, 4.5, 11.5, 8, 11.5, BROWN));
         n.add(b(4.4, 2, 4.4, 11.6, 6.5, 11.6, WHITE));
@@ -106,7 +106,7 @@ public final class Models {
         n.add(b(4, 8, 4, 12, 10, 12, WHITE));                             // couvercle
         MODELS.put("pot_nutella", n);
 
-        // doigt de pied de Julien
+        // doigt de pied de Julian
         List<El> d = new ArrayList<>();
         d.add(b(5.5, 0, 3, 10.5, 4.5, 12, SKIN));
         d.add(b(6, 0.5, 11.5, 10, 4, 13.5, SKIN));
