@@ -13,6 +13,9 @@ max-players: 16
 # Compte a rebours quand le minimum est atteint, raccourci quand la partie est pleine.
 countdown: 30
 full-countdown: 10
+# Objet "Pret" (colorant gris, case 4 du salon) : quand tous les inscrits de la partie sont prets et que le
+# compte a rebours tourne, le temps restant est ramene a ce nombre de secondes (0 = desactive).
+ready-skip-to: 5
 # Duree d'une partie (secondes) : a la fin du temps, les innocents gagnent.
 game-time: 270
 # Petites maps (cle size: small d'une map ; le Grand Hotel et le Chalet de montagne en sont) : avec au plus small-map-max-players inscrits,

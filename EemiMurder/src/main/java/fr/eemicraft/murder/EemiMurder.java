@@ -163,6 +163,9 @@ implements Listener {
     private static final String TEAM = "eemimurder";
     private static final long RECREATE_DELAY_MS = 10000L;
     private NamespacedKey toolKey;
+    /** 1.14.0 (#134) : objet « Pret » du salon d'attente (case READY_SLOT ; 8 = lit « Quitter le Murder »). */
+    private NamespacedKey readyKey;
+    private static final int READY_SLOT = 4;
     private final Map<String, GameMap> maps = new LinkedHashMap<String, GameMap>();
     private Location lobby;
     private final TreeMap<Integer, Game> games = new TreeMap();
@@ -178,6 +181,7 @@ implements Listener {
 
     public void onEnable() {
         this.toolKey = new NamespacedKey((Plugin)this, "tool");
+        this.readyKey = new NamespacedKey((Plugin)this, "ready");
         this.saveDefaultConfig();
         this.built.clear();
         for (MapDef d : MapDef.ALL) {
@@ -775,6 +779,11 @@ implements Listener {
             // maps construites : pots, pupitres, tonneaux, blocs musicaux, coffres... purement decoratifs
             e.setUseInteractedBlock(Event.Result.DENY);
         }
+        if (this.isReadyItem(it)) {
+            e.setCancelled(true);
+            g.toggleReady(p);
+            return;
+        }
         if (it != null && it.getType() == Material.RED_BED && this.isTool(it)) {
             e.setCancelled(true);
             g.leave(p, true);
@@ -1250,6 +1259,20 @@ implements Listener {
         return it;
     }
 
+    /** Objet « Pret » (1.14.0, #134) : gris = pas pret, vert = pret ; marque aussi comme outil du Murder. */
+    private ItemStack readyItem(boolean ready) {
+        ItemStack it = this.tool(ready ? Material.LIME_DYE : Material.GRAY_DYE, ready ? "Pr\u00eat ! (clic droit pour annuler)" : "Pr\u00eat ? (clic droit)", ready ? NamedTextColor.GREEN : NamedTextColor.GRAY);
+        ItemMeta meta = it.getItemMeta();
+        meta.lore(List.of(Component.text((String)(ready ? "Tu attends les autres joueurs." : "Quand tout le monde est pr\u00eat,"), (TextColor)NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false), Component.text((String)(ready ? "Clic droit pour annuler." : "le d\u00e9part est avanc\u00e9."), (TextColor)NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false)));
+        meta.getPersistentDataContainer().set(this.readyKey, PersistentDataType.BYTE, (byte)1);
+        it.setItemMeta(meta);
+        return it;
+    }
+
+    private boolean isReadyItem(ItemStack it) {
+        return it != null && it.hasItemMeta() && it.getItemMeta().getPersistentDataContainer().has(this.readyKey, PersistentDataType.BYTE);
+    }
+
     private boolean isTool(ItemStack it) {
         return it.hasItemMeta() && it.getItemMeta().getPersistentDataContainer().has(this.toolKey, PersistentDataType.BYTE);
     }
@@ -1318,6 +1341,8 @@ implements Listener {
         final Set<Scoreboard> boards = new HashSet<Scoreboard>();
         final Map<UUID, Scoreboard> sidebars = new HashMap<UUID, Scoreboard>();
         final Set<UUID> spectators = new HashSet<UUID>();
+        /** 1.14.0 (#134) : inscrits qui ont clique sur « Pret » pendant l'attente de cette partie. */
+        final Set<UUID> ready = new HashSet<UUID>();
         State state = State.WAITING;
         GameMap chosen;
         World world;
@@ -1397,6 +1422,7 @@ implements Listener {
                     if (this.players.size() >= EemiMurder.this.maxPlayers()) {
                         this.timer = Math.min(this.timer, EemiMurder.this.cfg("full-countdown", 10));
                     }
+                    this.checkReady();
                     this.resizeMapIfNeeded(false);
                     if (this.timer <= 0 && this.world == null) {
                         if (this.chosen == null && !this.preparing && System.currentTimeMillis() >= this.nextPrepare) {
@@ -1623,7 +1649,64 @@ implements Listener {
             }
             EemiMurder.this.resetPlayer(p, GameMode.ADVENTURE);
             p.getInventory().setItem(8, EemiMurder.this.tool(Material.RED_BED, "Quitter le Murder", NamedTextColor.RED));
+            this.giveReady(p);
             this.updateSidebar(p);
+        }
+
+        // ---------------------------------------------------------------- objet « Pret » (1.14.0, #134)
+
+        int readyCount() {
+            int c = 0;
+            for (UUID id : this.players) {
+                if (!this.ready.contains(id)) continue;
+                ++c;
+            }
+            return c;
+        }
+
+        void giveReady(Player p) {
+            ItemStack it = EemiMurder.this.readyItem(this.ready.contains(p.getUniqueId()));
+            for (int i = 0; i < p.getInventory().getSize(); ++i) {
+                if (!EemiMurder.this.isReadyItem(p.getInventory().getItem(i))) continue;
+                p.getInventory().setItem(i, it);
+                return;
+            }
+            p.getInventory().setItem(EemiMurder.READY_SLOT, it);
+        }
+
+        void toggleReady(Player p) {
+            UUID id = p.getUniqueId();
+            if (!this.players.contains(id)) {
+                return;
+            }
+            if (this.state != State.WAITING && this.state != State.STARTING) {
+                p.sendMessage(EemiMurder.PREFIX + "\u00a77Une partie est en cours : attends la suivante.");
+                return;
+            }
+            boolean now = !this.ready.remove(id);
+            if (now) {
+                this.ready.add(id);
+            }
+            this.giveReady(p);
+            p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 0.6f, now ? 1.6f : 0.9f);
+            this.broadcast("\u00a7f" + p.getName() + (now ? " \u00a7aest pr\u00eat" : " \u00a77n'est plus pr\u00eat") + " \u00a77(\u00a7f" + this.readyCount() + "\u00a77/\u00a7f" + this.players.size() + "\u00a77)");
+            this.checkReady();
+        }
+
+        /** Compte a rebours lance et tous les inscrits prets : temps restant ramene a ready-skip-to (0 = desactive). */
+        void checkReady() {
+            int skip = Math.max(0, EemiMurder.this.cfg("ready-skip-to", 5));
+            if (skip <= 0 || this.state != State.STARTING || this.players.isEmpty()) {
+                return;
+            }
+            int min = this.forced ? 2 : EemiMurder.this.cfg("min-players", 3);
+            if (this.players.size() < min || this.readyCount() < this.players.size()) {
+                return;
+            }
+            if (this.timer > skip) {
+                this.timer = skip;
+                this.broadcast("\u00a7aTout le monde est pr\u00eat : d\u00e9part dans \u00a7e" + skip + " s\u00a7a.");
+            }
         }
 
         void leave(Player p, boolean teleport) {
@@ -1631,6 +1714,7 @@ implements Listener {
             if (!this.players.remove(id)) {
                 return;
             }
+            this.ready.remove(id);
             EemiMurder.this.byPlayer.remove(id);
             if (this.state == State.PLAYING && this.alive.contains(id)) {
                 this.broadcast("\u00a77" + p.getName() + " a quitt\u00e9 la partie.");
@@ -1757,6 +1841,7 @@ implements Listener {
                 return;
             }
             Collections.shuffle(list);
+            this.ready.clear();
             this.inGame.clear();
             this.alive.clear();
             this.roles.clear();
@@ -1924,6 +2009,12 @@ implements Listener {
         void backToLobby() {
             this.removeTeam();
             this.clearSpawned();
+            // nouvelle attente : personne n'est pret ; ceux qui attendaient deja au salon recoivent un colorant gris
+            this.ready.clear();
+            for (Player w : EemiMurder.this.online(this.players)) {
+                if (this.inGame.contains(w.getUniqueId()) || EemiMurder.this.lobby == null || !w.getWorld().equals((Object)EemiMurder.this.lobby.getWorld())) continue;
+                this.giveReady(w);
+            }
             for (UUID id : this.inGame) {
                 Player p = Bukkit.getPlayer((UUID)id);
                 if (p == null || !this.players.contains(id)) continue;
