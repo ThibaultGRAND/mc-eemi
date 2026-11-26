@@ -13,7 +13,7 @@ import java.util.Set;
  * 2 chiffres significatifs. La simulation de {@code TestEcon} donne la durée d'un parc.
  */
 public final class Econ {
-    public double baseWait = 30, growth = 1.17, rebirthGain = 0.5, rebirthPrice = 0.25, speed = 0.85;
+    public double baseWait = 25, growth = 1.155, rebirthGain = 0.5, rebirthPrice = 0.25, speed = 0.85;
     private long[] prices;
 
     public Econ() {

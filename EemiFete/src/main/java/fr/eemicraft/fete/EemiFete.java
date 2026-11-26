@@ -160,7 +160,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
 
     void readConfig() {
         reloadConfig();
-        econ = new Econ(getConfig().getDouble("economy.base-wait", 30), getConfig().getDouble("economy.growth", 1.17),
+        econ = new Econ(getConfig().getDouble("economy.base-wait", 25), getConfig().getDouble("economy.growth", 1.155),
                 getConfig().getDouble("economy.rebirth-gain", 0.5), getConfig().getDouble("economy.rebirth-price", 0.25));
         if (geo == null) geo = new Geo(getConfig().getInt("parcels", 10));
     }
@@ -254,6 +254,39 @@ public final class EemiFete extends JavaPlugin implements Listener {
         l.removeIf(d -> d.earned <= 0);
         l.sort((a, b) -> Double.compare(b.earned, a.earned));
         top = l.size() > 10 ? new ArrayList<>(l.subList(0, 10)) : l;
+    }
+
+    /** Revenu par seconde d'un joueur, bonus des easter eggs compris. */
+    double rate(PData d) {
+        return econ.rate(d.bought, d.rebirths) * d.secretMult();
+    }
+
+    /** Pack de la fête (FetePack) actif : modèles 3D au lieu des assemblages de blocs. */
+    boolean packOn() {
+        return getConfig().getBoolean("pack.enabled", false) && getConfig().getString("pack.sha1", "").trim().matches("[0-9a-fA-F]{40}");
+    }
+
+    /** Identifiant fixe du pack de la fête (ajouté en entrant dans le monde, retiré en sortant, comme RefugePack). */
+    static final UUID PACK_UUID = UUID.fromString("3f1d0a52-6b7e-4c2a-9f3e-1fe7e0f2a001");
+    private final Set<UUID> packed = new HashSet<>();
+
+    void updatePack(Player p, long delay) {
+        Bukkit.getScheduler().runTaskLater(this, () -> {
+            if (!p.isOnline()) return;
+            boolean want = packOn() && inWorld(p);
+            boolean has = packed.contains(p.getUniqueId());
+            if (want && !has) {
+                String url = getConfig().getString("pack.url", "");
+                String sha1 = getConfig().getString("pack.sha1", "").trim().toLowerCase(java.util.Locale.ROOT);
+                byte[] hash = new byte[20];
+                for (int i = 0; i < 20; i++) hash[i] = (byte) Integer.parseInt(sha1.substring(2 * i, 2 * i + 2), 16);
+                p.addResourcePack(PACK_UUID, url, hash, null, false);
+                packed.add(p.getUniqueId());
+            } else if (!want && has) {
+                p.removeResourcePack(PACK_UUID);
+                packed.remove(p.getUniqueId());
+            }
+        }, delay);
     }
 
     /**
@@ -389,6 +422,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
                     placer.add(new Placer.Job(c, () -> {
                         streetVersion = streetSignature();
                         streetReady = true;
+                        spawnNutella();
                         builtSig.clear();
                         saveData();
                         for (int i = 0; i < geo.parcels; i++) redraw(i);
@@ -397,6 +431,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
             });
         } else {
             streetReady = true;
+            spawnNutella();
             int n = 0;
             for (int i = 0; i < geo.parcels; i++) {
                 if (!sig(i).equals(builtSig.get(i))) {
@@ -573,6 +608,11 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 collectorLabels.put(i, cl);
             }
         }
+        if (d.bought.contains("toilettes")) {
+            add(l, text(at(i, Defs.TOILETTES[0] - 0.4, y + 4.2, 15.5), "&b&lWC &7· &f0,50 ✪", 0.8f));
+            add(l, text(at(i, Defs.PORTE_FRANCOIS[0] - 0.4, y + 3.45, Defs.PORTE_FRANCOIS[1] + 0.5), "&c&lOCCUPÉ", 0.55f));
+        }
+        if (d.bought.contains("crepes")) add(l, text(at(i, Defs.CREPES[0] - 1.2, y + 5.6, 22.5), "&6&lCRÊPES", 0.9f));
         List<Integer> sl = slots(d);
         for (int k = 0; k < sl.size() && k < Defs.SLOTS.length; k++) {
             int idx = sl.get(k);
@@ -649,7 +689,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
         Set<String> b = new TreeSet<>(d.bought);
         try {
             shows.put(i, new Show(this, i, b));
-            if (getConfig().getBoolean("visitors.enabled", true)) crowds.put(i, new Crowd(this, i, b));
+            if (getConfig().getBoolean("visitors.enabled", true)) crowds.put(i, new Crowd(this, i, b, d.rebirths >= 1));
         } catch (RuntimeException ex) {
             getLogger().warning("Animation du parc " + i + " : " + ex);
             ex.printStackTrace();
@@ -662,6 +702,8 @@ public final class EemiFete extends JavaPlugin implements Listener {
         Crowd c = crowds.remove(i);
         if (c != null) c.stop();
         nextRide.remove(i);
+        Entity f = fluffy.remove(i);
+        if (f != null) f.remove();
     }
 
     void restartShow(int i) {
@@ -715,10 +757,152 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 if (now < t) continue;
                 next.put(a.purchase(), t + cyc);
                 double[] pp = Defs.POPUP.get(a.purchase());
-                if (pp != null) popup(at(i, pp[0], pp[1], pp[2]), "&e+" + U.eur(econ.value(d.bought, d.rebirths, a)), 30);
+                double val = econ.value(d.bought, d.rebirths, a) * d.secretMult();
+                if (pp != null) popup(at(i, pp[0], pp[1], pp[2]), "&e+" + U.eur(val), 30);
                 d.rides++;
+                legendary(i, d, a, val, pp);
             }
             if (d.bought.contains("feux") && seconds % 20 == i % 20) firework(i);
+        }
+    }
+
+    // =================================================================== easter eggs
+
+    /** Lots légendaires tirés à la fin d'un tour : doigt de pied (pêche), crêpe au Nutella (crêpes, pot trouvé). */
+    void legendary(int i, PData d, Defs.Attraction a, double val, double[] pp) {
+        double chance = getConfig().getDouble("secrets.chance", 0.004);
+        String id = switch (a.purchase()) {
+            case "peche" -> "doigt_pied";
+            case "crepes" -> d.nutella ? "nutella" : null;
+            default -> null;
+        };
+        if (id == null || rnd.nextDouble() >= chance) return;
+        Defs.Secret sc = Defs.secret(id);
+        if (pp != null) popup(at(i, pp[0], pp[1] + 1.2, pp[2]), "&d&l★ " + sc.name() + " ★", 60);
+        if (pp != null && packOn()) showItem(at(i, pp[0], pp[1] - 1.0, pp[2]), id.equals("nutella") ? "pot_nutella" : "doigt_pied", 80);
+        discover(d, id, val * getConfig().getDouble("secrets.jackpot-tours", 100));
+    }
+
+    /** Objet du pack qui tourne quelques secondes (doigt de pied, pot de Nutella). */
+    void showItem(Location l, String model, int ticks) {
+        org.bukkit.entity.ItemDisplay e = spawn(l, org.bukkit.entity.ItemDisplay.class, d -> {
+            d.setItemStack(Show.modelItem(model, -1));
+            d.setBrightness(new Display.Brightness(15, 15));
+            d.setBillboard(Display.Billboard.VERTICAL);
+            d.setTransformation(new Transformation(new Vector3f(), new AxisAngle4f(), new Vector3f(1.6f, 1.6f, 1.6f), new AxisAngle4f()));
+        });
+        if (e != null) Bukkit.getScheduler().runTaskLater(this, e::remove, ticks);
+    }
+
+    /**
+     * Découverte d'un easter egg : jackpot de tickets (au moins 2 min de revenu), annonce à tous, 25 pièces EEMICRAFT,
+     * et +10 % de tickets pour toujours la première fois.
+     */
+    void discover(PData d, String id, double jackpot) {
+        Defs.Secret sc = Defs.secret(id);
+        if (sc == null) return;
+        boolean first = d.secrets.add(id);
+        double gain = Math.max(jackpot, rate(d) * 120);
+        d.pending += gain;
+        d.earned += gain;
+        d.dirty = true;
+        Player p = Bukkit.getPlayer(d.uuid);
+        if (p != null) {
+            p.showTitle(U.title("&6&lLÉGENDAIRE !", "&d" + sc.name()));
+            p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
+            U.msg(p, "&d" + sc.line() + " &a+" + U.eur(gain) + " &7au guichet.");
+        }
+        if (!first) return;
+        for (Player o : Bukkit.getOnlinePlayers()) U.msg(o, "&f" + d.name + " &7a trouvé un objet perdu de la fête : &d&l" + sc.name() + " &7!");
+        int coins = getConfig().getInt("secrets.coins", 25);
+        if (coins > 0) eemi("eemi give " + d.name + " coins " + coins);
+        if (p != null) U.msg(p, "&aBonus pour toujours : &f+" + Math.round(Defs.SECRET_BONUS * 100) + " % &ade tickets (" + d.secrets.size() + "/" + Defs.SECRETS.size() + " objets perdus).");
+        d.save(getDataFolder(), getLogger());
+    }
+
+    /** Pot de Nutella caché sur la place d'entrée (le même pour tous), entité cliquable. */
+    void spawnNutella() {
+        if (world == null) return;
+        List<Entity> old = statics.remove(-1);
+        if (old != null) for (Entity e : old) if (e.isValid()) e.remove();
+        List<Entity> l = new ArrayList<>();
+        statics.put(-1, l);
+        double[] sp = Draw.spawn(geo);
+        // derrière la base ouest de l'arche nord de la place
+        Location at = new Location(world, sp[0] - 9.5, Geo.FLOOR + 1.25, -(Geo.EDGE + 13) + 0.5);
+        org.bukkit.entity.ItemDisplay pot = spawn(at, org.bukkit.entity.ItemDisplay.class, d -> {
+            d.setItemStack(packOn() ? Show.modelItem("pot_nutella", -1) : new ItemStack(Material.DECORATED_POT));
+            d.setTransformation(new Transformation(new Vector3f(), new AxisAngle4f(), new Vector3f(0.5f, 0.5f, 0.5f), new AxisAngle4f()));
+            d.setBrightness(new Display.Brightness(12, 15));
+        });
+        add(l, pot);
+        Interaction it = spawn(at.clone().add(0, -0.25, 0), Interaction.class, e -> {
+            e.setInteractionWidth(0.7f);
+            e.setInteractionHeight(0.7f);
+            e.setResponsive(true);
+            e.addScoreboardTag("fete_nutella");
+        });
+        add(l, it);
+    }
+
+    private final Map<UUID, long[]> knocks = new HashMap<>();
+
+    /** Frapper à la porte de la cabine du milieu : 5 coups en 15 s, François sort. */
+    void knock(Player p, PData o) {
+        long now = System.currentTimeMillis();
+        long[] k = knocks.computeIfAbsent(p.getUniqueId(), x -> new long[]{0, now});
+        if (now - k[1] > 15000) {
+            k[0] = 0;
+            k[1] = now;
+        }
+        k[0]++;
+        p.playSound(p.getLocation(), Sound.ENTITY_ZOMBIE_ATTACK_WOODEN_DOOR, 0.5f, 1.6f);
+        String[] rep = {"&7Toc toc…", "&7« C'est occupé ! »", "&7« C'EST OCCUPÉ ! »", "&7« Mais c'est pas vrai, j'arrive… »", ""};
+        int n = (int) Math.min(k[0], 5);
+        if (n < 5) {
+            p.sendActionBar(U.c(rep[n - 1]));
+            return;
+        }
+        knocks.remove(p.getUniqueId());
+        p.playSound(p.getLocation(), Sound.ITEM_BUCKET_EMPTY, 1f, 0.6f);
+        p.playSound(p.getLocation(), Sound.BLOCK_IRON_DOOR_OPEN, 1f, 1f);
+        Defs.Attraction wc = Defs.attraction("toilettes");
+        discover(o, "francois", econ.value(o.bought, o.rebirths, wc) * getConfig().getDouble("secrets.jackpot-tours", 100));
+    }
+
+    private final Map<Integer, Entity> fluffy = new HashMap<>();
+
+    /** Fluffy s'échappe parfois de la mini-ferme : 30 s sur l'allée centrale, à cliquer par le propriétaire. */
+    void fluffyTick() {
+        for (int i : new ArrayList<>(shows.keySet())) {
+            PData d = owner(i);
+            Entity f = fluffy.get(i);
+            if (f != null && (!f.isValid() || f.getTicksLived() > 20 * 30)) {
+                f.remove();
+                fluffy.remove(i);
+                continue;
+            }
+            if (f != null || d == null || !d.bought.contains("ferme") || Bukkit.getPlayer(d.uuid) == null) continue;
+            if (rnd.nextDouble() >= getConfig().getDouble("secrets.fluffy-chance", 0.12)) continue;
+            double v = 12 + rnd.nextDouble() * 30;
+            Location at = at(i, 24.0, Geo.FLOOR + 1, v);
+            org.bukkit.entity.Cow c = spawn(at, org.bukkit.entity.Cow.class, e -> {
+                e.setVariant(org.bukkit.entity.Cow.Variant.COLD);
+                e.customName(U.c("&f&lFluffy"));
+                e.setCustomNameVisible(true);
+                e.setGlowing(true);
+                e.setInvulnerable(true);
+                e.setSilent(false);
+                e.addScoreboardTag("fete_fluffy");
+                e.addScoreboardTag("fete_p" + i);
+            });
+            if (c != null) {
+                fluffy.put(i, c);
+                Player p = Bukkit.getPlayer(d.uuid);
+                if (p != null && inWorld(p) && p.getLocation().distanceSquared(at) < 80 * 80) {
+                    p.sendActionBar(U.c("&fMeuh ? &7Une vache très duveteuse s'est échappée de la mini-ferme…"));
+                }
+            }
         }
     }
 
@@ -748,7 +932,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
             if (d == null) continue;
             if (d.parcel >= 0) {
                 // propriétaire connecté (dans le monde ou ailleurs) : revenu plein
-                double r = econ.rate(d.bought, d.rebirths);
+                double r = rate(d);
                 d.pending += r;
                 d.earned += r;
                 d.dirty = true;
@@ -765,12 +949,22 @@ public final class EemiFete extends JavaPlugin implements Listener {
                     eemi("eemi reward " + p.getName() + " fete play");
                 }
                 if (d.parcel >= 0) {
-                    p.sendActionBar(U.c("&6" + U.eur(d.money) + " &8| &7guichet &a" + U.eur(d.pending) + " &8| &7" + U.eur(econ.rate(d.bought, d.rebirths)) + "/s"));
+                    p.sendActionBar(U.c("&6" + U.eur(d.money) + " &8| &7guichet &a" + U.eur(d.pending) + " &8| &7" + U.eur(rate(d)) + "/s"));
                 }
             }
         }
         if (seconds % 2 == 0) updateShows();
         ridePopups();
+        if (seconds % 45 == 0) fluffyTick();
+        else if (seconds % 5 == 0) {
+            for (int i : new ArrayList<>(fluffy.keySet())) {
+                Entity f = fluffy.get(i);
+                if (f == null || !f.isValid() || f.getTicksLived() > 20 * 30) {
+                    if (f != null) f.remove();
+                    fluffy.remove(i);
+                }
+            }
+        }
     }
 
     void milestones(Player p, PData d) {
@@ -919,6 +1113,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
     // =================================================================== entrée / sortie
 
     void enter(Player p) {
+        updatePack(p, getConfig().getLong("pack.delay-ticks", 20));
         if (!(p.isOp() && p.getGameMode() == GameMode.CREATIVE)) p.setGameMode(GameMode.ADVENTURE);
         p.setFoodLevel(20);
         PData d = data(p);
@@ -950,6 +1145,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
         ItemStack[] c = p.getInventory().getContents();
         for (int k = 0; k < c.length; k++) if (isKit(c[k])) p.getInventory().setItem(k, null);
         put(p, 8, kit(Material.NETHER_STAR, "&6&lMenu de la fête &7(clic droit)", "menu"));
+        put(p, 7, kit(Material.BOOK, "&d&lObjets perdus de la fête &7(clic droit)", "objets"));
     }
 
     private void put(Player p, int slot, ItemStack kit) {
@@ -1006,7 +1202,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
         d.dirty = true;
         if (el < 60) return;
         double cap = getConfig().getDouble("offline.max-hours", 6) * 3600;
-        double gain = econ.rate(d.bought, d.rebirths) * getConfig().getDouble("offline.factor", 0.4) * Math.min(el, cap);
+        double gain = rate(d) * getConfig().getDouble("offline.factor", 0.4) * Math.min(el, cap);
         if (gain < 1) return;
         d.pending += gain;
         d.earned += gain;
@@ -1025,16 +1221,35 @@ public final class EemiFete extends JavaPlugin implements Listener {
         else {
             lore.add("&7Tickets : &6" + U.eur(d.money));
             lore.add("&7Au guichet : &a" + U.eur(d.pending));
-            lore.add("&7Revenu : &f" + U.eur(econ.rate(d.bought, d.rebirths)) + "/s");
+            lore.add("&7Revenu : &f" + U.eur(rate(d)) + "/s");
             lore.add("&7Construit : &f" + n + "/" + Defs.PURCHASES.size());
             lore.add("&7Renaissances : &d" + d.rebirths + " &7(tickets ×" + fmtMult(1 + econ.rebirthGain * d.rebirths) + ")");
             lore.add("&7Tours de manège : &f" + U.fmt(d.rides));
+            lore.add("&7Objets perdus : &d" + d.secrets.size() + "/" + Defs.SECRETS.size() + " &7(tickets ×" + fmtMult(d.secretMult()) + ")");
         }
         g.set(10, U.item(Material.FIREWORK_ROCKET, "&a&lMon parc", lore, false), null);
         g.set(11, U.item(Material.OAK_DOOR, "&eAller à mon parc", List.of("&7Ou à la place d'entrée si tu n'en as pas."), false), c -> goHome(p));
+        g.set(12, U.item(Material.BOOK, "&d&lObjets perdus de la fête", List.of("&75 objets cachés dans la fête", "&7+10 % de tickets pour chacun trouvé"), false), c -> openSecrets(p));
         g.set(13, U.item(Material.SPYGLASS, "&bVisiter un parc", List.of("&7Va voir ce que font les autres"), false), c -> openVisit(p));
         g.set(15, U.item(Material.GOLD_INGOT, "&6Classement", List.of("&7Les parcs qui ont vendu le plus de tickets"), false), c -> openTop(p));
         g.set(16, U.item(Material.RED_BED, "&cRetour au lobby", List.of(), false), c -> goLobby(p));
+        p.openInventory(g.inv);
+    }
+
+    void openSecrets(Player p) {
+        PData d = data(p);
+        U.Gui g = new U.Gui(27, "&8Objets perdus de la fête");
+        Material[] icons = {Material.RABBIT_FOOT, Material.COCOA_BEANS, Material.IRON_DOOR, Material.WHITE_WOOL, Material.GOAT_HORN};
+        int[] sl = {11, 12, 13, 14, 15};
+        for (int k = 0; k < Defs.SECRETS.size(); k++) {
+            Defs.Secret sc = Defs.SECRETS.get(k);
+            if (d.secrets.contains(sc.id())) {
+                g.set(sl[k], U.item(icons[k], "&d&l" + sc.name(), List.of("&aTrouvé !", "&f" + sc.line(), "", "&7+10 % de tickets pour toujours"), true), null);
+            } else {
+                g.set(sl[k], U.item(Material.GRAY_DYE, "&5&l???", List.of("&7Objet perdu", "&8Indice : &7" + sc.hint()), false), null);
+            }
+        }
+        g.set(22, U.item(Material.ARROW, "&eRetour", List.of(), false), c -> openMain(p));
         p.openInventory(g.inv);
     }
 
@@ -1118,7 +1333,10 @@ public final class EemiFete extends JavaPlugin implements Listener {
     public void onWorldChange(PlayerChangedWorldEvent e) {
         Player p = e.getPlayer();
         if (world == null) return;
-        if (e.getFrom().equals(world)) sendStatusLater();
+        if (e.getFrom().equals(world)) {
+            sendStatusLater();
+            updatePack(p, 1L);
+        }
         if (inWorld(p)) enter(p);
     }
 
@@ -1141,6 +1359,8 @@ public final class EemiFete extends JavaPlugin implements Listener {
             d.save(getDataFolder(), getLogger());
         }
         msgCooldown.remove(p.getUniqueId());
+        packed.remove(p.getUniqueId());
+        knocks.remove(p.getUniqueId());
         sendStatusLater();
     }
 
@@ -1159,6 +1379,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
     public void onInteractEntity(PlayerInteractEntityEvent e) {
         if (world == null || !e.getRightClicked().getWorld().equals(world)) return;
         if (e.getRightClicked().getScoreboardTags().contains(TAG)) e.setCancelled(true);
+        if (e.getHand() == EquipmentSlot.HAND && clickEgg(e.getPlayer(), e.getRightClicked())) return;
         Integer i = interactions.get(e.getRightClicked().getUniqueId());
         if (i == null || e.getHand() != EquipmentSlot.HAND) return;
         PData o = owner(i);
@@ -1170,9 +1391,56 @@ public final class EemiFete extends JavaPlugin implements Listener {
         if (world == null || !e.getAttacked().getWorld().equals(world)) return;
         if (!e.getAttacked().getScoreboardTags().contains(TAG)) return;
         e.setCancelled(true);
+        if (clickEgg(e.getPlayer(), e.getAttacked())) return;
         Integer i = interactions.get(e.getAttacked().getUniqueId());
         PData o = i == null ? null : owner(i);
         if (o != null && o.uuid.equals(e.getPlayer().getUniqueId())) collect(e.getPlayer(), o);
+    }
+
+    /** Clic sur une entité d'easter egg. */
+    boolean clickEgg(Player p, Entity en) {
+        Set<String> tags = en.getScoreboardTags();
+        PData d = data(p);
+        if (tags.contains("fete_nutella")) {
+            if (d.parcel < 0) {
+                if (cooldown(p, 4000)) U.msg(p, "&7Un pot de pâte à tartiner… &8Réclame d'abord un parc.");
+            } else if (!d.nutella) {
+                d.nutella = true;
+                d.dirty = true;
+                p.playSound(p.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1f, 0.8f);
+                U.msg(p, "&dTu ramasses un pot de Nutella… &7« Julien » est écrit au feutre sur le couvercle. Tes crêpes vont en profiter.");
+            } else if (cooldown(p, 4000)) U.msg(p, "&7Le pot est vide. Julien a dû passer par là.");
+            return true;
+        }
+        for (String tg : tags) {
+            if (!tg.startsWith("fete_p")) continue;
+            int i;
+            try {
+                i = Integer.parseInt(tg.substring(6));
+            } catch (NumberFormatException ex) {
+                continue;
+            }
+            PData o = owner(i);
+            if (o == null || !o.uuid.equals(p.getUniqueId())) {
+                if (cooldown(p, 3000)) U.msg(p, "&7Ce n'est pas ton parc : demande à son forain de la trouver !");
+                return true;
+            }
+            if (tags.contains("fete_fluffy")) {
+                fluffy.remove(i);
+                en.getWorld().playSound(en.getLocation(), Sound.ENTITY_COW_AMBIENT, 1f, 1.3f);
+                en.remove();
+                discover(o, "fluffy", econ.value(o.bought, o.rebirths, Defs.attraction("ferme")) * getConfig().getDouble("secrets.jackpot-tours", 100));
+                return true;
+            }
+            if (tags.contains("fete_chevre")) {
+                en.getWorld().playSound(en.getLocation(), Sound.ENTITY_GOAT_SCREAMING_AMBIENT, 1f, 1.4f);
+                if (!o.secrets.contains("chevre")) {
+                    discover(o, "chevre", econ.value(o.bought, o.rebirths, Defs.attraction("ferme")) * getConfig().getDouble("secrets.jackpot-tours", 100));
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean builder(Player p) {
@@ -1186,8 +1454,25 @@ public final class EemiFete extends JavaPlugin implements Listener {
         ItemStack it = e.getItem();
         if (isKit(it) && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             e.setCancelled(true);
-            openMain(p);
+            String id = it.getItemMeta().getPersistentDataContainer().get(kitKey, PersistentDataType.STRING);
+            if ("objets".equals(id)) openSecrets(p);
+            else openMain(p);
             return;
+        }
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getHand() == EquipmentSlot.HAND && e.getClickedBlock() != null
+                && e.getClickedBlock().getType() == Material.IRON_DOOR) {
+            Block b = e.getClickedBlock();
+            int i = geo.parcelAt(b.getX(), b.getZ());
+            if (i >= 0) {
+                int[] uv = geo.local(i, b.getX(), b.getZ());
+                PData o = owner(i);
+                if (uv[0] == Defs.PORTE_FRANCOIS[0] && uv[1] == Defs.PORTE_FRANCOIS[1] && o != null && o.bought.contains("toilettes")) {
+                    e.setCancelled(true);
+                    if (o.uuid.equals(p.getUniqueId())) knock(p, o);
+                    else if (cooldown(p, 3000)) p.sendActionBar(U.c("&7« C'est occupé ! »"));
+                    return;
+                }
+            }
         }
         if (builder(p)) return;
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK && openable(e.getClickedBlock())) return;
@@ -1391,6 +1676,11 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 readConfig();
                 stopAllShows();
                 for (int i = 0; i < geo.parcels; i++) refreshParcel(i);
+                spawnNutella();
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (packed.remove(p.getUniqueId())) p.removeResourcePack(PACK_UUID);
+                    updatePack(p, 1L);
+                }
                 U.msg(s, "&aConfiguration rechargée. Le nombre de parcs change au redémarrage.");
             }
             case "info" -> {
@@ -1404,7 +1694,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
                             + ", pose en cours : " + (placer.busy() ? "oui" : "non") + ", états invalides " + (placer.invalidCount() + badStates.size()));
                 } else {
                     U.msg(s, "&f" + t.name + " &7: parc " + t.parcel + ", tickets " + U.eur(t.money) + ", guichet " + U.eur(t.pending) + ", achats " + t.bought.size()
-                            + "/" + Defs.PURCHASES.size() + ", renaissances " + t.rebirths + ", tours " + t.rides + ", revenu " + U.eur(econ.rate(t.bought, t.rebirths)) + "/s");
+                            + "/" + Defs.PURCHASES.size() + ", renaissances " + t.rebirths + ", tours " + t.rides + ", revenu " + U.eur(rate(t)) + "/s");
                 }
             }
             case "reset" -> {
@@ -1470,7 +1760,15 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 }
             }
             case "nom" -> rename(s, t, a, 3, true);
-            default -> U.msg(s, "&7/fete admin reload | info [joueur] | reset <joueur> | nom <joueur> <nom|reset> | give <joueur> <montant> | acheter <joueur> <n|tout> | build [maintenant]");
+            case "secret" -> {
+                if (t == null || a.length < 4 || Defs.secret(a[3]) == null) {
+                    U.msg(s, "&c/fete admin secret <joueur> <doigt_pied|nutella|francois|fluffy|chevre>");
+                    return true;
+                }
+                discover(t, a[3], 0);
+                U.msg(s, "&aTrouvé pour " + t.name + ".");
+            }
+            default -> U.msg(s, "&7/fete admin secret <joueur> <id> | reload | info [joueur] | reset <joueur> | nom <joueur> <nom|reset> | give <joueur> <montant> | acheter <joueur> <n|tout> | build [maintenant]");
         }
         return true;
     }
@@ -1487,7 +1785,9 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 if (d != null && d.name.toLowerCase().startsWith(a[1].toLowerCase())) r.add(d.name);
             }
         } else if (a.length == 2 && a[0].equalsIgnoreCase("admin")) {
-            for (String x : new String[]{"reload", "info", "reset", "give", "acheter", "build", "nom"}) if (x.startsWith(a[1].toLowerCase())) r.add(x);
+            for (String x : new String[]{"reload", "info", "reset", "give", "acheter", "build", "nom", "secret"}) if (x.startsWith(a[1].toLowerCase())) r.add(x);
+        } else if (a.length == 4 && a[0].equalsIgnoreCase("admin") && a[1].equalsIgnoreCase("secret")) {
+            for (Defs.Secret sc : Defs.SECRETS) r.add(sc.id());
         } else if (a.length == 3 && a[0].equalsIgnoreCase("admin")) {
             for (PData d : players.values()) if (d.name.toLowerCase().startsWith(a[2].toLowerCase())) r.add(d.name);
         }

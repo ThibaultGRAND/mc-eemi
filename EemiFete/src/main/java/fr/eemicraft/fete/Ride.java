@@ -23,7 +23,15 @@ public final class Ride {
      * état de bloc, lumineux (luminosité forcée au maximum en jeu).
      */
     public record Cube(double x, double y, double z, double sx, double sy, double sz, double angle, String state,
-                       boolean glow) {
+                       boolean glow, String model, int tint, int variant) {
+        Cube(double x, double y, double z, double sx, double sy, double sz, double angle, String state, boolean glow) {
+            this(x, y, z, sx, sy, sz, angle, state, glow, null, -1, 0);
+        }
+
+        /** Affiché selon le pack : variant 0 = toujours, 1 = sans le pack (blocs), 2 = avec le pack (modèle). */
+        public boolean shown(boolean pack) {
+            return variant == 0 || (variant == 1) != pack;
+        }
     }
 
     /** Position d'une pièce à l'instant t : angle autour de l'axe et décalage (repère du parc). */
@@ -42,6 +50,25 @@ public final class Ride {
         public final Axis axis;
         public final Motion motion;
         public final List<Cube> cubes = new ArrayList<>();
+        /** Variante des cubes ajoutés ensuite (voir {@link Cube#shown}). */
+        private int variant;
+
+        /** Les cubes suivants ne s'affichent que sans le pack (repli en blocs d'un modèle). */
+        public Part blocksOnly() {
+            variant = 1;
+            return this;
+        }
+
+        public Part always() {
+            variant = 0;
+            return this;
+        }
+
+        /** Modèle du pack (fete:&lt;id&gt;) centré en (x, y, z), échelle, cap, couleur teinte (-1 = aucune). */
+        public Part model(double x, double y, double z, double scale, double angle, String id, int tint) {
+            cubes.add(new Cube(x, y, z, scale, scale, scale, angle, null, false, id, tint, 2));
+            return this;
+        }
 
         public Part(String name, double pu, double py, double pv, Axis axis, Motion motion) {
             this.name = name;
@@ -53,12 +80,12 @@ public final class Ride {
         }
 
         public Part cube(double x, double y, double z, double sx, double sy, double sz, String state) {
-            cubes.add(new Cube(x, y, z, sx, sy, sz, 0, state, false));
+            cubes.add(new Cube(x, y, z, sx, sy, sz, 0, state, false, null, -1, variant));
             return this;
         }
 
         public Part cube(double x, double y, double z, double sx, double sy, double sz, double angle, String state) {
-            cubes.add(new Cube(x, y, z, sx, sy, sz, angle, state, false));
+            cubes.add(new Cube(x, y, z, sx, sy, sz, angle, state, false, null, -1, variant));
             return this;
         }
 
@@ -73,21 +100,21 @@ public final class Ride {
                 double len = Math.hypot(dx, dy);
                 // cube vertical tourné de a autour de V : sa direction devient (-sin a, cos a)
                 double ang = Math.toDegrees(Math.atan2(-dx, dy));
-                cubes.add(new Cube(cx, cy, cz, w, len, w, ang, state, false));
+                cubes.add(new Cube(cx, cy, cz, w, len, w, ang, state, false, null, -1, variant));
             } else if (axis == Axis.U) {
                 double len = Math.hypot(dz, dy);
                 double ang = Math.toDegrees(Math.atan2(dz, dy));
-                cubes.add(new Cube(cx, cy, cz, w, len, w, ang, state, false));
+                cubes.add(new Cube(cx, cy, cz, w, len, w, ang, state, false, null, -1, variant));
             } else {
                 double len = Math.hypot(dx, dz);
                 double ang = Math.toDegrees(Math.atan2(dz, dx));
-                cubes.add(new Cube(cx, cy, cz, len, w, w, ang, state, false));
+                cubes.add(new Cube(cx, cy, cz, len, w, w, ang, state, false, null, -1, variant));
             }
             return this;
         }
 
         public Part light(double x, double y, double z, double size, String state) {
-            cubes.add(new Cube(x, y, z, size, size, size, 0, state, true));
+            cubes.add(new Cube(x, y, z, size, size, size, 0, state, true, null, -1, variant));
             return this;
         }
     }
@@ -231,6 +258,7 @@ public final class Ride {
         for (Part p : parts) {
             Pose pose = p.motion.at(t);
             for (Cube c : p.cubes) {
+                if (c.model() != null || !c.shown(false)) continue;
                 int nx = Math.max(1, (int) Math.ceil(c.sx() / 0.34)), ny = Math.max(1, (int) Math.ceil(c.sy() / 0.34)),
                         nz = Math.max(1, (int) Math.ceil(c.sz() / 0.34));
                 for (int i = 0; i < nx; i++) {
@@ -255,12 +283,22 @@ public final class Ride {
     public record Box(double[][] corners, String state, boolean glow) {
     }
 
-    /** Les cubes à l'instant t, en boîtes tournées (aperçus fidèles au rendu des BlockDisplay). */
+    /** Les cubes à l'instant t, en boîtes tournées (aperçus fidèles au rendu des BlockDisplay), sans le pack. */
     public List<Box> boxes(double t) {
+        return boxes(t, false);
+    }
+
+    /** Idem, avec ou sans le pack : un modèle est rendu élément par élément (voir {@link Models}). */
+    public List<Box> boxes(double t, boolean pack) {
         List<Box> out = new ArrayList<>();
         for (Part p : parts) {
             Pose pose = p.motion.at(t);
             for (Cube c : p.cubes) {
+                if (!c.shown(pack)) continue;
+                if (c.model() != null) {
+                    modelBoxes(p, c, pose, out);
+                    continue;
+                }
                 double[][] k = new double[8][];
                 int i = 0;
                 for (int dx = -1; dx <= 1; dx += 2) {
@@ -276,6 +314,43 @@ public final class Ride {
             }
         }
         return out;
+    }
+
+    /** Couleur (0xRRGGBB) d'un élément d'un modèle pour les aperçus (teinte appliquée). */
+    public static String colorState(int rgb) {
+        return "#" + String.format("%06x", rgb & 0xFFFFFF);
+    }
+
+    private void modelBoxes(Part p, Cube c, Pose pose, List<Box> out) {
+        List<Models.El> els = Models.MODELS.get(c.model());
+        if (els == null) return;
+        for (Models.El e : els) {
+            double[][] k = new double[8][];
+            int i = 0;
+            for (int bx = 0; bx <= 1; bx++) {
+                for (int by = 0; by <= 1; by++) {
+                    for (int bz = 0; bz <= 1; bz++) {
+                        double mx = bx == 0 ? e.x1() : e.x2(), my = by == 0 ? e.y1() : e.y2(), mz = bz == 0 ? e.z1() : e.z2();
+                        if (e.axis() != 'n') {
+                            double a = Math.toRadians(e.angle()), co = Math.cos(a), si = Math.sin(a);
+                            double dx = mx - e.ox(), dy = my - e.oy(), dz = mz - e.oz();
+                            switch (e.axis()) {
+                                case 'x' -> { my = e.oy() + dy * co - dz * si; mz = e.oz() + dy * si + dz * co; }
+                                case 'y' -> { mx = e.ox() + dx * co + dz * si; mz = e.oz() - dx * si + dz * co; }
+                                default -> { mx = e.ox() + dx * co - dy * si; my = e.oy() + dx * si + dy * co; }
+                            }
+                        }
+                        // unités du modèle -> blocs, centre (8, 8, 8), échelle, cap propre puis pose
+                        double lx = (mx / 16 - 0.5) * c.sx(), ly = (my / 16 - 0.5) * c.sy(), lz = (mz / 16 - 0.5) * c.sz();
+                        double[] own = rot(p.axis, c.angle(), lx, ly, lz);
+                        double[] r = rot(p.axis, pose.angle(), c.x() + own[0], c.y() + own[1], c.z() + own[2]);
+                        k[i++] = new double[]{p.pu + pose.dx() + r[0], p.py + pose.dy() + r[1], p.pv + pose.dz() + r[2]};
+                    }
+                }
+            }
+            int col = e.tint() && c.tint() >= 0 ? c.tint() : e.color();
+            out.add(new Box(k, colorState(col), false));
+        }
     }
 
     /** Nombre total de cubes (= BlockDisplay en jeu). */

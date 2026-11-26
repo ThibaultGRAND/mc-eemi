@@ -30,7 +30,9 @@ final class Crowd {
     private final List<Walker> walkers = new ArrayList<>();
     private final Random rnd = new Random();
 
-    Crowd(EemiFete pl, int parcel, Set<String> b) {
+    private final List<org.bukkit.entity.Entity> animals = new ArrayList<>();
+
+    Crowd(EemiFete pl, int parcel, Set<String> b, boolean goat) {
         this.pl = pl;
         this.parcel = parcel;
         // carrefours (u, v) : entrée, bouts de la promenade, allée centrale, bouts des allées en travers
@@ -71,6 +73,36 @@ final class Crowd {
             });
             if (w.e != null) walkers.add(w);
         }
+        if (b.contains("ferme")) farm(goat, b.contains("fantome"));
+    }
+
+    /** Animaux de la mini-ferme (sans IA, dans l'enclos) et chèvre naine de Mathilde après une renaissance. */
+    private void farm(boolean goat, boolean fantome) {
+        int[] f = Defs.FERME;
+        double[][] spots = {{f[0] + 1.5, f[1] + 2.5}, {f[0] + 3.5, f[1] + 4.0}, {f[0] + 2.0, f[1] + 6.0}, {f[0] + 3.2, f[1] + 1.6}};
+        Class<?>[] kinds = {org.bukkit.entity.Cow.class, org.bukkit.entity.Sheep.class, org.bukkit.entity.Goat.class, org.bukkit.entity.Sheep.class};
+        for (int k = 0; k < spots.length; k++) {
+            @SuppressWarnings("unchecked") Class<org.bukkit.entity.LivingEntity> cls = (Class<org.bukkit.entity.LivingEntity>) kinds[k];
+            org.bukkit.entity.LivingEntity e = pl.spawn(loc(spots[k][0], spots[k][1], rnd.nextFloat() * 360f), cls, m -> {
+                m.setAI(false);
+                m.setInvulnerable(true);
+                m.setSilent(true);
+            });
+            if (e != null) animals.add(e);
+        }
+        if (!goat) return;
+        // perchée sur le faîte du train fantôme (sinon sur le toit des toilettes)
+        Location at = fantome ? new Location(pl.world, pl.geo.wxd(parcel, 41.5, 43.5), Geo.FLOOR + 15, pl.geo.wzd(parcel, 41.5, 43.5))
+                : new Location(pl.world, pl.geo.wxd(parcel, 28.5, 15.5), Geo.FLOOR + 4.5, pl.geo.wzd(parcel, 28.5, 15.5));
+        org.bukkit.entity.Goat g = pl.spawn(at, org.bukkit.entity.Goat.class, m -> {
+            m.setBaby();
+            m.setAgeLock(true);
+            m.setAI(false);
+            m.setInvulnerable(true);
+            m.addScoreboardTag("fete_chevre");
+            m.addScoreboardTag("fete_p" + parcel);
+        });
+        if (g != null) animals.add(g);
     }
 
     Location loc(double u, double v, float yaw) {
@@ -119,5 +151,7 @@ final class Crowd {
     void stop() {
         for (Walker w : walkers) if (w.e != null && w.e.isValid()) w.e.remove();
         walkers.clear();
+        for (org.bukkit.entity.Entity e : animals) if (e.isValid()) e.remove();
+        animals.clear();
     }
 }

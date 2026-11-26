@@ -6,6 +6,8 @@ maps/
 maps_refuge/
 *.zip
 !a_deposer/EemicraftPack.zip
+!a_deposer/FetePack.zip
+!EemiFete/pack/FetePack.zip
 !EemicraftPack/publie/*.zip
 .claude/settings.local.json
 __pycache__/

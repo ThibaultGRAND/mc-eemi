@@ -45,6 +45,8 @@ _ccache = {}
 
 
 def col(n):
+    if n.startswith('#'):
+        return int(n[1:3], 16), int(n[3:5], 16), int(n[5:7], 16)
     c = _ccache.get(n)
     if c is None:
         c = colors.color(n) or (90, 90, 90)
@@ -185,16 +187,26 @@ def main():
     nuit = '--nuit' in a
     px = int(a[a.index('--px') + 1]) if '--px' in a else 6
     vue = a[a.index('--vue') + 1] if '--vue' in a else 'no'
+    box = [float(v) for v in a[a.index('--zone') + 1].split(',')] if '--zone' in a else None
+
+    def zone(scene):
+        if box is None:
+            return scene
+        bl, bx = scene
+        x1, z1, x2, z2 = box
+        nb = {k: v for k, v in bl.items() if x1 <= k[0] <= x2 and z1 <= k[2] <= z2}
+        nx = [t for t in bx if all(x1 - 3 <= c[0] <= x2 + 3 and z1 - 3 <= c[2] <= z2 + 3 for c in t[2])]
+        return nb, nx
     if os.path.isdir(src):
         files = sorted(f for f in os.listdir(src) if f.startswith('parc_') and f.endswith('.txt'))
         frames = []
         for f in files:
-            im = render(transform(parse(os.path.join(src, f)), vue), px, nuit)
+            im = render(transform(zone(parse(os.path.join(src, f))), vue), px, nuit)
             frames.append(im.convert('P', palette=Image.ADAPTIVE, colors=255))
             print(f, im.size)
         frames[0].save(dst, save_all=True, append_images=frames[1:], duration=110, loop=0, optimize=False)
     else:
-        im = render(transform(parse(src), vue), px, nuit)
+        im = render(transform(zone(parse(src)), vue), px, nuit)
         im.save(dst)
         print(dst, im.size)
     colors.save()

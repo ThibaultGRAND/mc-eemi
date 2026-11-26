@@ -5,8 +5,15 @@ import java.util.List;
 import java.util.Set;
 import org.bukkit.Location;
 import org.bukkit.block.data.BlockData;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.DyedItemColor;
+import net.kyori.adventure.key.Key;
+import org.bukkit.Color;
+import org.bukkit.Material;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Display;
+import org.bukkit.entity.ItemDisplay;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Transformation;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -20,7 +27,7 @@ final class Show {
     /** Pas de mise à jour (ticks) : 10 = 0,5 s, interpolé par le client (voir CONCEPTION.md, budget réseau). */
     static final int STEP = 10;
 
-    private record Entry(BlockDisplay e, Ride.Part part, Ride.Cube cube, boolean fixed) {
+    private record Entry(Display e, Ride.Part part, Ride.Cube cube, boolean fixed) {
     }
 
     final EemiFete pl;
@@ -34,12 +41,26 @@ final class Show {
         this.parcel = parcel;
         this.bought = bought;
         this.north = pl.geo.north(parcel);
+        boolean pack = pl.packOn();
         double t = pl.serverTick / 20.0;
         for (Ride r : Draw.rides(bought)) {
             for (Ride.Part p : r.parts) {
                 Location at = new Location(pl.world, pl.geo.wxd(parcel, p.pu, p.pv), p.py, pl.geo.wzd(parcel, p.pu, p.pv));
                 Ride.Pose pose = p.motion.at(t);
                 for (Ride.Cube c : p.cubes) {
+                    if (!c.shown(pack)) continue;
+                    if (c.model() != null) {
+                        ItemDisplay e = pl.spawn(at, ItemDisplay.class, d -> {
+                            d.setItemStack(modelItem(c.model(), c.tint()));
+                            d.setItemDisplayTransform(ItemDisplay.ItemDisplayTransform.NONE);
+                            d.setViewRange(1.6f);
+                            d.setBrightness(new Display.Brightness(13, 15));
+                            d.setInterpolationDuration(0);
+                            d.setTransformation(transform(p, c, pose));
+                        });
+                        if (e != null) entries.add(new Entry(e, p, c, isFixed(p)));
+                        continue;
+                    }
                     BlockData bd = pl.blockData(c.state());
                     if (bd == null) continue;
                     BlockDisplay e = pl.spawn(at, BlockDisplay.class, d -> {
@@ -88,6 +109,14 @@ final class Show {
 
     // ------------------------------------------------------------------ calcul des transformations
 
+    /** Objet portant le modèle du pack fete:&lt;id&gt; (teinté si demandé). */
+    static ItemStack modelItem(String id, int tint) {
+        ItemStack it = new ItemStack(Material.PAPER);
+        it.setData(DataComponentTypes.ITEM_MODEL, Key.key("fete", id));
+        if (tint >= 0) it.setData(DataComponentTypes.DYED_COLOR, DyedItemColor.dyedItemColor(Color.fromRGB(tint & 0xFFFFFF)));
+        return it;
+    }
+
     static Quaternionf quat(Ride.Axis axis, double deg) {
         float a = (float) Math.toRadians(deg);
         return switch (axis) {
@@ -106,7 +135,10 @@ final class Show {
     static Transformation transform(Ride.Part p, Ride.Cube c, Ride.Pose pose, boolean north) {
         Quaternionf q = quat(p.axis, pose.angle() + c.angle());
         double[] r = Ride.rot(p.axis, pose.angle(), c.x(), c.y(), c.z());
-        Vector3f half = q.transform(new Vector3f((float) c.sx() / 2f, (float) c.sy() / 2f, (float) c.sz() / 2f));
+        // BlockDisplay : le bloc va de 0 à 1 (on recentre) ; ItemDisplay : le modèle est déjà centré, et le client le
+        // tourne de 180° autour de Y après la transformation (compensé par la rotation de droite)
+        boolean model = c.model() != null;
+        Vector3f half = model ? new Vector3f() : q.transform(new Vector3f((float) c.sx() / 2f, (float) c.sy() / 2f, (float) c.sz() / 2f));
         Vector3f tr = new Vector3f((float) (r[0] + pose.dx()) - half.x, (float) (r[1] + pose.dy()) - half.y,
                 (float) (r[2] + pose.dz()) - half.z);
         if (north) {
@@ -115,6 +147,7 @@ final class Show {
             tr = r180.transform(tr);
             q = r180.mul(q, new Quaternionf());
         }
-        return new Transformation(tr, q, new Vector3f((float) c.sx(), (float) c.sy(), (float) c.sz()), new Quaternionf());
+        Quaternionf right = model ? new Quaternionf().rotateY((float) Math.PI) : new Quaternionf();
+        return new Transformation(tr, q, new Vector3f((float) c.sx(), (float) c.sy(), (float) c.sz()), right);
     }
 }

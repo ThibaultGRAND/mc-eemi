@@ -412,6 +412,9 @@ public final class Draw {
                     s.set(p[0], Y0 + 1, p[1], "minecraft:red_concrete");
                 }
             }
+            case "toilettes" -> toilettes(s);
+            case "crepes" -> crepes(s);
+            case "ferme" -> ferme(s);
             case "carrousel" -> Rides.carrousel(s, Defs.CARROUSEL[0], Defs.CARROUSEL[1]);
             case "autos" -> Rides.autos(s, Defs.AUTOS[0], Defs.AUTOS[1], Defs.AUTOS[2], Defs.AUTOS[3]);
             case "chaises" -> Rides.chaises(s, Defs.CHAISES[0], Defs.CHAISES[1]);
@@ -424,6 +427,83 @@ public final class Draw {
                 for (Defs.Stand st : Defs.STANDS) if (st.purchase().equals(id)) Rides.stand(s, st.u(), st.v(), st.type());
             }
         }
+    }
+
+    /** Toilettes publiques : 3 cabines ouvertes vers l'allée centrale ; celle du milieu a une porte en fer (« OCCUPÉ »). */
+    static void toilettes(Sink s) {
+        int[] t = Defs.TOILETTES;
+        for (int u = t[0]; u <= t[2]; u++) {
+            for (int v = t[1]; v <= t[3]; v++) {
+                s.set(u, F, v, "minecraft:smooth_quartz");
+                boolean wall = u == t[2] || v == t[1] || v == t[3] || v == 14 || v == 16 || u == t[0];
+                for (int y = Y0; y <= Y0 + 2; y++) {
+                    if (wall) s.set(u, y, v, (v == 14 || v == 16) ? "minecraft:light_blue_terracotta" : "minecraft:white_terracotta");
+                    else s.set(u, y, v, AIR);
+                }
+                s.set(u, Y0 + 3, v, B.slab("minecraft:prismarine_brick_slab", "bottom"));
+            }
+        }
+        // portes côté allée (u = 27), cuvette (chaudron) au fond de chaque cabine
+        for (int v : new int[]{13, 15, 17}) {
+            String door = v == 15 ? "minecraft:iron_door" : "minecraft:spruce_door";
+            s.set(t[0], Y0, v, door + "[facing=east,half=lower,hinge=left,open=false,powered=false]");
+            s.set(t[0], Y0 + 1, v, door + "[facing=east,half=upper,hinge=left,open=false,powered=false]");
+            s.set(t[0] + 1, Y0, v, "minecraft:cauldron");
+            s.set(t[0], Y0 + 2, v, "minecraft:white_terracotta");
+        }
+        s.set(t[0] - 1, Y0 + 2, 15, "minecraft:redstone_lamp[lit=true]");
+        s.set(t[0] - 1, Y0 + 3, 13, "minecraft:sea_lantern");
+        s.set(t[0] - 1, Y0 + 3, 17, "minecraft:sea_lantern");
+    }
+
+    /** Kiosque à crêpes, comptoir sur l'allée centrale, toit rayé, enseigne lumineuse. */
+    static void crepes(Sink s) {
+        int[] c = Defs.CREPES;
+        for (int u = c[0]; u <= c[2]; u++) {
+            for (int v = c[1]; v <= c[3]; v++) {
+                s.set(u, F, v, "minecraft:spruce_planks");
+                boolean back = u == c[2], side = v == c[1] || v == c[3];
+                for (int y = Y0; y <= Y0 + 2; y++) {
+                    if (back || side) s.set(u, y, v, y == Y0 ? "minecraft:stripped_spruce_wood[axis=y]" : "minecraft:yellow_terracotta");
+                    else s.set(u, y, v, AIR);
+                }
+                s.set(u, Y0 + 3, v, (v % 2 == 0) ? "minecraft:orange_wool" : "minecraft:white_wool");
+            }
+            s.set(c[0] - 1, Y0 + 3, c[1] + (u - c[0]) * 2, "minecraft:orange_wool");
+        }
+        for (int v = c[1] + 1; v < c[3]; v++) {
+            s.set(c[0], Y0, v, "minecraft:spruce_planks");
+            s.set(c[0], Y0 + 1, v, B.slab("minecraft:spruce_slab", "bottom"));
+        }
+        s.set(c[0] + 1, Y0, c[1] + 2, "minecraft:smoker[facing=west,lit=true]");
+        s.set(c[0] + 1, Y0, c[1] + 3, "minecraft:smoker[facing=west,lit=true]");
+        for (int v = c[1]; v <= c[3]; v++) s.set(c[0] - 1, Y0 + 4, v, (v % 2 == 0) ? "minecraft:ochre_froglight" : "minecraft:pearlescent_froglight");
+    }
+
+    /** Mini-ferme : enclos de barrières, foin, abreuvoir, petit abri (les animaux sont posés par le plugin). */
+    static void ferme(Sink s) {
+        int[] f = Defs.FERME;
+        for (int u = f[0]; u <= f[2]; u++) {
+            for (int v = f[1]; v <= f[3]; v++) {
+                s.set(u, F, v, (u + v) % 5 == 0 ? "minecraft:coarse_dirt" : "minecraft:grass_block[snowy=false]");
+                boolean edge = u == f[0] || u == f[2] || v == f[1] || v == f[3];
+                if (edge) s.set(u, Y0, v, "minecraft:oak_fence");
+            }
+        }
+        s.set(f[0], Y0, f[1] + 4, "minecraft:oak_fence_gate[facing=east,open=false,in_wall=false,powered=false]");
+        s.set(f[0] + 1, Y0, f[3] - 1, "minecraft:hay_block[axis=x]");
+        s.set(f[0] + 2, Y0, f[3] - 1, "minecraft:hay_block[axis=x]");
+        s.set(f[0] + 1, Y0 + 1, f[3] - 1, "minecraft:hay_block[axis=z]");
+        s.set(f[2] - 1, Y0, f[1] + 1, "minecraft:water_cauldron[level=3]");
+        // abri au fond : toit en dalles sur 4 poteaux
+        for (int u = f[2] - 2; u <= f[2] - 1; u++) {
+            for (int v = f[3] - 3; v <= f[3] - 1; v++) s.set(u, Y0 + 3, v, B.slab("minecraft:spruce_slab", "bottom"));
+        }
+        for (int[] p : new int[][]{{f[2] - 2, f[3] - 3}, {f[2] - 1, f[3] - 3}, {f[2] - 2, f[3] - 1}, {f[2] - 1, f[3] - 1}}) {
+            for (int y = Y0; y <= Y0 + 2; y++) s.set(p[0], y, p[1], "minecraft:spruce_fence");
+        }
+        s.set(f[0], Y0 + 1, f[1], "minecraft:lantern[hanging=false]");
+        s.set(f[2], Y0 + 1, f[3], "minecraft:lantern[hanging=false]");
     }
 
     /** Les manèges (pièces mobiles) achetés dans un parc. */

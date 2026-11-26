@@ -28,10 +28,26 @@ visitors:
   max-skins: 40
   skins: []
 
+# Pack de la fete (FetePack : modeles 3D des chevaux, nacelles, voitures, wagons, objets perdus), SEPARE du pack
+# du serveur : envoye en entrant dans le monde de la fete, retire en sortant. false = assemblages de blocs.
+pack:
+  enabled: false
+  url: "https://eemicraft.strator.gg/pack/FetePack.zip"
+  sha1: ""
+  delay-ticks: 20
+
+# Objets perdus (easter eggs) : chance d'un lot legendaire par tour (peche, crepes), jackpot = N tours de l'attraction
+# (au moins 2 min de revenu), pieces EemiCore a la 1re decouverte, chance que Fluffy s'echappe (toutes les 45 s).
+secrets:
+  chance: 0.004
+  jackpot-tours: 100
+  coins: 25
+  fluffy-chance: 0.12
+
 economy:
-  # Premier achat = 30 s de revenu, puis x1,17 par achat (environ 3 h 20 pour finir le premier parc).
-  base-wait: 30
-  growth: 1.17
+  # Premier achat = 25 s de revenu, puis x1,155 par achat (environ 3 h 20 pour finir le premier parc, 34 achats).
+  base-wait: 25
+  growth: 1.155
   # Gain par renaissance (+50 % de tickets) et hausse des prix par renaissance (+25 %).
   rebirth-gain: 0.5
   rebirth-price: 0.25

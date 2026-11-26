@@ -21,6 +21,7 @@ import java.util.Set;
 public final class TestRender {
     public static void main(String[] args) throws Exception {
         File out = new File(args.length > 0 ? args[0] : "out");
+        boolean pack = args.length > 1 && args[1].equals("pack");
         out.mkdirs();
         Geo g = new Geo(10);
         RecordingSink s = new RecordingSink();
@@ -69,7 +70,7 @@ public final class TestRender {
             File ff = new File(out, String.format("parc_%02d.txt", f));
             dump(one, ff, new int[]{bx[0] - 2, bx[1] - 12, bx[2] + 2, bx[3] + 2});
             try (BufferedWriter w = new BufferedWriter(new FileWriter(ff, true))) {
-                for (Ride r : rides) writeBoxes(w, g, 0, r.boxes(t));
+                for (Ride r : rides) writeBoxes(w, g, 0, r.boxes(t, pack));
             }
             if (f == 0) {
                 SchemWriter.write(one, new File(out, "parc_complet.schem"));

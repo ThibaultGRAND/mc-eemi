@@ -27,6 +27,9 @@ final class PData {
     long rides;
     final Set<String> bought = new LinkedHashSet<>();
     final List<Integer> milestones = new ArrayList<>();
+    /** Easter eggs trouvés (Defs.SECRETS) ; pot de Nutella trouvé sur la place (ouvre la crêpe légendaire). */
+    final Set<String> secrets = new LinkedHashSet<>();
+    boolean nutella;
     long lastSeen, presence, rebirthAt;
     boolean broken, dirty;
 
@@ -65,6 +68,8 @@ final class PData {
         d.rides = Math.max(0, y.getLong("rides"));
         d.bought.addAll(y.getStringList("bought"));
         d.milestones.addAll(y.getIntegerList("milestones"));
+        d.secrets.addAll(y.getStringList("secrets"));
+        d.nutella = y.getBoolean("nutella");
         d.lastSeen = y.getLong("last-seen");
         d.presence = y.getLong("presence");
         d.rebirthAt = y.getLong("rebirth-at");
@@ -86,6 +91,8 @@ final class PData {
         y.set("rides", rides);
         y.set("bought", new ArrayList<>(bought));
         y.set("milestones", milestones);
+        y.set("secrets", new ArrayList<>(secrets));
+        y.set("nutella", nutella);
         y.set("last-seen", lastSeen);
         y.set("presence", presence);
         y.set("rebirth-at", rebirthAt);
@@ -105,7 +112,12 @@ final class PData {
         }
     }
 
-    /** Remet le parc à zéro (renaissance ou reset) : garde nom et stats à vie. */
+    /** Multiplicateur des easter eggs trouvés (+10 % chacun, pour toujours). */
+    double secretMult() {
+        return 1 + Defs.SECRET_BONUS * secrets.size();
+    }
+
+    /** Remet le parc à zéro (renaissance ou reset) : garde nom, easter eggs et stats à vie. */
     void resetRun() {
         bought.clear();
         for (Defs.Purchase p : Defs.PURCHASES) if (p.auto()) bought.add(p.id());

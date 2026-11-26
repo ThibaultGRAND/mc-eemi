@@ -29,6 +29,13 @@ public final class Defs {
     public static final int[] FANTOME = {37, 40, 46, 46};
     public static final double[] ROUE = {24.0, Geo.FLOOR + 14.0, 43.5, 11};
     public static final int[] TOUR = {44, 26};
+    /** Toilettes publiques : bloc u 27..29, v 12..18, 3 cabines ouvertes côté allée (u = 27) ; celle du milieu (v 15) est « OCCUPÉ ». */
+    public static final int[] TOILETTES = {27, 12, 29, 18};
+    public static final int[] PORTE_FRANCOIS = {27, 15};
+    /** Kiosque à crêpes : u 27..29, v 20..25, comptoir côté allée. */
+    public static final int[] CREPES = {27, 20, 29, 25};
+    /** Mini-ferme : enclos u 32..36, v 38..46. */
+    public static final int[] FERME = {32, 38, 36, 46};
 
     /** Stands forains (7 x 5), ouverts vers la promenade de devant (v 1..3). */
     public record Stand(String purchase, String type, int u, int v) {
@@ -50,10 +57,13 @@ public final class Defs {
             new Attraction("peche", "Pêche aux canards", 2, 4.0),
             new Attraction("barbe", "Barbe à papa", 5, 4.0),
             new Attraction("chamboule", "Chamboule-tout", 12, 4.5),
+            new Attraction("toilettes", "Toilettes publiques", 20, 6.0),
             new Attraction("tir", "Tir à la carabine", 30, 5.0),
+            new Attraction("crepes", "Crêpes", 50, 4.5),
             new Attraction("carrousel", "Carrousel", 75, 5.0),
             new Attraction("autos", "Auto-tamponneuses", 180, 4.0),
             new Attraction("chaises", "Chaises volantes", 450, 4.5),
+            new Attraction("ferme", "Mini-ferme", 900, 5.0),
             new Attraction("bateau", "Bateau pirate", 1100, 5.0),
             new Attraction("fantome", "Train fantôme", 2600, 4.0),
             new Attraction("roue", "Grande roue", 6500, 5.0),
@@ -79,7 +89,10 @@ public final class Defs {
             Map.entry("fantome", new double[]{41.5, Geo.FLOOR + 17.0, 40.0}),
             Map.entry("roue", new double[]{24.0, Geo.FLOOR + 27.5, 43.5}),
             Map.entry("tour", new double[]{45.0, Geo.FLOOR + 36.0, 27.0}),
-            Map.entry("montagnes", new double[]{46.5, Geo.FLOOR + 27.0, 30.0}));
+            Map.entry("montagnes", new double[]{46.5, Geo.FLOOR + 27.0, 30.0}),
+            Map.entry("toilettes", new double[]{28.5, Geo.FLOOR + 7.0, 15.5}),
+            Map.entry("crepes", new double[]{28.5, Geo.FLOOR + 7.0, 23.0}),
+            Map.entry("ferme", new double[]{34.5, Geo.FLOOR + 5.0, 42.0}));
 
     // ------------------------------------------------------------------ achats
 
@@ -95,10 +108,12 @@ public final class Defs {
             new Purchase("barbe", "Barbe à papa", "Le stand le plus sucré de la fête.", false),
             new Purchase("lampions", "Lampions", "Des lampions le long de la promenade.", false),
             new Purchase("chamboule", "Chamboule-tout", "Trois balles, dix boîtes.", false),
+            new Purchase("toilettes", "Toilettes publiques", "Payantes, évidemment. Une cabine est toujours occupée…", false),
             new Purchase("cloture", "Clôtures", "Le parc est fermé de tous les côtés.", false),
             new Purchase("musique", "Orgue de barbarie", "Amélioration : tickets ×1,5.", false),
             new Purchase("carrousel", "Carrousel", "Le grand classique, chevaux dorés.", false),
             new Purchase("tir", "Tir à la carabine", "Vise le centre de la cible.", false),
+            new Purchase("crepes", "Crêpes", "Sucre, confiture… et pâte à tartiner ?", false),
             new Purchase("allees", "Allées", "Des allées entre les attractions.", false),
             new Purchase("ballons", "Ballons", "Des grappes de ballons colorés.", false),
             new Purchase("autos", "Auto-tamponneuses", "Six voitures, zéro règle.", false),
@@ -106,6 +121,7 @@ public final class Defs {
             new Purchase("guirlandes", "Guirlandes", "Des guirlandes lumineuses partout.", false),
             new Purchase("mascotte", "Mascotte", "Amélioration : tickets ×1,5.", false),
             new Purchase("chaises", "Chaises volantes", "On s'envole en tournant.", false),
+            new Purchase("ferme", "Mini-ferme", "Vaches, moutons et chèvres à caresser.", false),
             new Purchase("fleurs", "Massifs de fleurs", "Un parc plus fleuri.", false),
             new Purchase("bancs", "Bancs et poubelles", "Pour souffler entre deux manèges.", false),
             new Purchase("bateau", "Bateau pirate", "À l'abordage, jusqu'à la verticale !", false),
@@ -128,6 +144,32 @@ public final class Defs {
 
     /** Un achat i s'affiche quand tous les achats &lt; i - WINDOW sont faits (comme le resto). */
     public static final int WINDOW = 2;
+
+    // ------------------------------------------------------------------ easter eggs (objets perdus de la fête)
+
+    /** Easter egg : id, nom, indice tant qu'il n'est pas trouvé, réplique à la découverte. */
+    public record Secret(String id, String name, String hint, String line) {
+    }
+
+    public static final List<Secret> SECRETS = List.of(
+            new Secret("doigt_pied", "Le doigt de pied de Julien", "La pêche aux canards ramène parfois des choses… bizarres.",
+                    "Tu as pêché… le doigt de pied de Julien ?! Personne ne sait comment il est arrivé là."),
+            new Secret("nutella", "Le pot de Nutella de Julien", "Un pot traîne quelque part sur la place d'entrée. Ensuite, les crêpes !",
+                    "La crêpe au Nutella de Julien : il ne l'a jamais retrouvé, son pot."),
+            new Secret("francois", "Les toilettes de François", "Une cabine des toilettes est toujours occupée. Frappe… avec insistance.",
+                    "« C'EST OCCUPÉ ! » François sort enfin. On ne demandera pas."),
+            new Secret("fluffy", "La vache Fluffy de Clarisse", "Une vache très duveteuse s'échappe parfois de la mini-ferme.",
+                    "Fluffy ! La vache de Clarisse, toute douce, toute ronde."),
+            new Secret("chevre", "La chèvre naine de Mathilde", "Après une renaissance, une petite chèvre grimpe là où on ne l'attend pas.",
+                    "La chèvre naine de Mathilde était perchée là-haut depuis le début."));
+
+    /** Bonus permanent de tickets par easter egg trouvé (+10 %). */
+    public static final double SECRET_BONUS = 0.10;
+
+    public static Secret secret(String id) {
+        for (Secret s : SECRETS) if (s.id().equals(id)) return s;
+        return null;
+    }
 
     public static Attraction attraction(String purchase) {
         for (Attraction a : ATTRACTIONS) if (a.purchase().equals(purchase)) return a;

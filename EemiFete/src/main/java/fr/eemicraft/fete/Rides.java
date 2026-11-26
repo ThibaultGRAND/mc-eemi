@@ -100,9 +100,12 @@ public final class Rides {
             double a = k * 45 + 22.5, rr = 4.0;
             Ride.Part h = r.part("cheval" + k, cu, py, cv, Ride.Axis.Y, Ride.spinBob(-14, 0.45, 3.0, k * 0.37));
             double x = rr * Math.cos(Math.toRadians(a)), z = rr * Math.sin(Math.toRadians(a));
-            double tx = -Math.sin(Math.toRadians(a)), tz = Math.cos(Math.toRadians(a)); // tangente
+            // le plateau tourne en sens inverse (période négative) : la tête regarde vers -tangente
+            double tx = Math.sin(Math.toRadians(a)), tz = -Math.cos(Math.toRadians(a));
             String coat = coats[k % 4], saddle = saddles[k % 4];
             h.cube(x, 3.0, z, 0.12, 5.6, 0.12, "minecraft:gold_block");                    // barre
+            h.model(x, 2.0, z, 1.3, a + 180, "cheval", COATS[k % COATS.length]);
+            h.blocksOnly();
             h.cube(x, 1.55, z, 0.5, 0.55, 1.25, a, coat);                                  // corps
             h.cube(x + tx * 0.75, 2.05, z + tz * 0.75, 0.38, 0.7, 0.4, a, coat);            // cou
             h.cube(x + tx * 0.95, 2.35, z + tz * 0.95, 0.34, 0.32, 0.55, a, coat);          // tête
@@ -113,9 +116,15 @@ public final class Rides {
                 double nx = Math.cos(Math.toRadians(a)) * side, nz = Math.sin(Math.toRadians(a)) * side;
                 h.cube(x + tx * f + nx, 1.0, z + tz * f + nz, 0.12, 0.6, 0.12, a, coat);
             }
+            h.always();
         }
         return r;
     }
+
+    /** Robes des chevaux (teinte du modèle) : blanc, alezan, noir, gris pommelé, isabelle. */
+    static final int[] COATS = {0xF4F1EA, 0x8B5A2B, 0x2E2B2B, 0xB9B9B9, 0xD9B77A};
+    /** Couleurs des nacelles, voitures et wagons (teinte du modèle). */
+    static final int[] PAINT = {0xD03A3A, 0xF2C230, 0x58B7E6, 0x7BD04A, 0xF08A2A, 0xF08CB4};
 
     // ------------------------------------------------------------------ grande roue
 
@@ -175,6 +184,8 @@ public final class Rides {
             double a0 = k * 360.0 / n;
             Ride.Part g = r.part("nacelle" + k, cu, cy, cv, Ride.Axis.V, Ride.orbit(Ride.Axis.V, R, 40, a0));
             String c = "minecraft:" + cols[k % cols.length] + "_concrete";
+            g.model(0, -1.95, 0, 1.7, 0, "nacelle", PAINT[k % PAINT.length]);
+            g.blocksOnly();
             g.cube(0, -0.35, 0, 0.12, 0.7, 0.12, "minecraft:iron_block");          // attache
             g.cube(0, -1.35, 0, 1.5, 0.15, 1.5, c);                                // toit
             g.cube(0, -2.1, 0, 1.3, 0.12, 1.3, "minecraft:white_concrete");        // plafond
@@ -355,12 +366,15 @@ public final class Rides {
             Ride.Part car = r.part("auto" + k, cu, F + 1.3, cv, Ride.Axis.Y,
                     Ride.bumper(ax, az, 0.37 + 0.06 * k, 0.53 - 0.05 * k, k * 1.3));
             String c = "minecraft:" + cols[k] + "_concrete";
+            car.model(0, 0.25, 0, 1.1, 0, "auto", PAINT[k % PAINT.length]);
+            car.blocksOnly();
             car.cube(0, 0, 0, 1.3, 0.55, 1.7, c);
             car.cube(0, 0.15, -0.55, 1.0, 0.35, 0.35, "minecraft:white_concrete");
             car.cube(0, 0.35, 0.2, 0.9, 0.12, 0.9, "minecraft:black_wool");
             car.cube(0, -0.25, 0, 1.45, 0.2, 1.85, "minecraft:black_concrete");
-            car.cube(0, 2.9, 0.6, 0.08, 5.0, 0.08, "minecraft:iron_block");
             car.light(0, 0.2, 0.86, 0.22, "minecraft:sea_lantern");
+            car.always();
+            car.cube(0, 2.9, 0.6, 0.08, 5.0, 0.08, "minecraft:iron_block");
         }
         return r;
     }
@@ -528,9 +542,12 @@ public final class Rides {
         String[] cols = {"minecraft:yellow_concrete", "minecraft:blue_concrete", "minecraft:yellow_concrete"};
         for (int w = 0; w < 3; w++) {
             double z = -w * 1.6;
+            train.model(0, 1.15, z, 1.2, 0, "wagon", w == 1 ? 0x2F6BD8 : 0xF2C230);
+            train.blocksOnly();
             train.cube(0, 0.85, z, 1.2, 0.6, 1.4, cols[w]);
             train.cube(0, 1.25, z - 0.55, 1.2, 0.35, 0.2, "minecraft:black_concrete");
             train.light(0.5, 1.2, z + 0.6, 0.2, "minecraft:sea_lantern");
+            train.always();
         }
         return r;
     }
