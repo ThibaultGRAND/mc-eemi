@@ -1,0 +1,359 @@
+{
+ "map": "squid_pont",
+ "dims": [
+  91,
+  68,
+  53
+ ],
+ "joueurs_prevus": 16,
+ "palette": {
+  "blocs_non_air": 59741,
+  "types": 28,
+  "types_>=0.1%": 17,
+  "top25": [
+   [
+    "blackstone",
+    35.8
+   ],
+   [
+    "deepslate_tiles",
+    22.95
+   ],
+   [
+    "polished_blackstone",
+    16.67
+   ],
+   [
+    "deepslate",
+    6.69
+   ],
+   [
+    "polished_blackstone_brick_stairs",
+    4.19
+   ],
+   [
+    "deepslate_bricks",
+    3.82
+   ],
+   [
+    "polished_blackstone_bricks",
+    3.14
+   ],
+   [
+    "basalt",
+    1.38
+   ],
+   [
+    "dark_oak_planks",
+    1.07
+   ],
+   [
+    "iron_bars",
+    0.9
+   ],
+   [
+    "polished_basalt",
+    0.72
+   ],
+   [
+    "stripped_dark_oak_log",
+    0.55
+   ],
+   [
+    "polished_blackstone_brick_slab",
+    0.52
+   ],
+   [
+    "iron_chain",
+    0.42
+   ],
+   [
+    "glass",
+    0.24
+   ],
+   [
+    "red_carpet",
+    0.21
+   ],
+   [
+    "black_stained_glass_pane",
+    0.16
+   ],
+   [
+    "gold_block",
+    0.09
+   ],
+   [
+    "soul_lantern",
+    0.08
+   ],
+   [
+    "chiseled_polished_blackstone",
+    0.08
+   ],
+   [
+    "red_nether_brick_stairs",
+    0.07
+   ],
+   [
+    "polished_andesite_slab",
+    0.06
+   ],
+   [
+    "black_concrete",
+    0.05
+   ],
+   [
+    "sea_lantern",
+    0.05
+   ],
+   [
+    "lantern",
+    0.03
+   ]
+  ],
+  "visibles": 53707,
+  "part_visible_par_categorie_%": {
+   "full": 92.6,
+   "det:escalier": 4.65,
+   "det:vitre/barreaux": 1.18,
+   "det:dalle": 0.65,
+   "det:chaine": 0.47,
+   "det:tapis": 0.23,
+   "det:eclairage": 0.21,
+   "det:porte": 0.01
+  },
+  "part_detail_visible_%": 7.4,
+  "part_detail_visible_sur_bati_%": 14.31,
+  "part_naturel_visible_%": 48.27,
+  "part_vegetation_visible_%": 0.0,
+  "top_visibles": [
+   [
+    "blackstone",
+    39.3
+   ],
+   [
+    "deepslate_tiles",
+    25.53
+   ],
+   [
+    "polished_blackstone",
+    11.45
+   ],
+   [
+    "deepslate",
+    7.44
+   ],
+   [
+    "polished_blackstone_brick_stairs",
+    4.58
+   ],
+   [
+    "deepslate_bricks",
+    4.24
+   ],
+   [
+    "basalt",
+    1.53
+   ],
+   [
+    "iron_bars",
+    1.0
+   ],
+   [
+    "dark_oak_planks",
+    0.98
+   ],
+   [
+    "polished_basalt",
+    0.8
+   ],
+   [
+    "stripped_dark_oak_log",
+    0.61
+   ],
+   [
+    "polished_blackstone_brick_slab",
+    0.58
+   ],
+   [
+    "iron_chain",
+    0.47
+   ],
+   [
+    "glass",
+    0.27
+   ],
+   [
+    "red_carpet",
+    0.23
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "blackstone",
+    6,
+    [
+     "blackstone",
+     "chiseled_polished_blackstone",
+     "polished_blackstone",
+     "polished_blackstone_brick_slab",
+     "polished_blackstone_brick_stairs",
+     "polished_blackstone_bricks"
+    ]
+   ],
+   [
+    "deepslate",
+    3,
+    [
+     "deepslate",
+     "deepslate_bricks",
+     "deepslate_tiles"
+    ]
+   ]
+  ],
+  "melange_local_%": 17.26,
+  "top5_cumul_%": 86.3
+ },
+ "murs": {
+  "cellules_de_facade": 21851,
+  "pan_coplanaire_mediane": 5,
+  "pan_coplanaire_p90": 5,
+  "pan_coplanaire_max": 11,
+  "pan_meme_bloc_mediane": 5,
+  "pan_meme_bloc_p90": 5,
+  "pan_meme_bloc_max": 11,
+  "segment_meme_materiau_moyen": 1.54,
+  "couches_de_profondeur_fenetre9_moy": 2.32,
+  "part_facade_1_seule_couche_%": 4.5,
+  "part_facade_3+_couches_%": 32.4,
+  "accents_verticaux_pour_100_cellules": 0.65
+ },
+ "relief": {
+  "colonnes_construites": 4823,
+  "histo_hauteur_surface_par_4": [
+   [
+    64,
+    4823
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   65,
+   67
+  ],
+  "pente_moy_blocs_par_bloc": 0.058,
+  "part_voisins_meme_hauteur_%": 94.2,
+  "part_marches_1_%": 5.8,
+  "part_ressauts_2-4_%": 0.0,
+  "part_ruptures_5+_%": 0.0,
+  "cases_debout": 7303,
+  "niveaux_de_jeu": [
+   [
+    2,
+    3,
+    56.9
+   ],
+   [
+    9,
+    9,
+    3.0
+   ],
+   [
+    16,
+    16,
+    3.0
+   ],
+   [
+    23,
+    23,
+    3.0
+   ],
+   [
+    30,
+    30,
+    3.0
+   ],
+   [
+    37,
+    37,
+    3.0
+   ],
+   [
+    44,
+    44,
+    10.3
+   ],
+   [
+    51,
+    51,
+    3.2
+   ],
+   [
+    57,
+    58,
+    8.6
+   ]
+  ],
+  "nb_niveaux_>=3%": 9,
+  "y_debout_p5_p50_p95": [
+   2,
+   2,
+   57
+  ],
+  "etages_par_colonne_moy": 1.73,
+  "part_colonnes_multi_niveaux_%": 27.2
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 4215,
+  "bbox_jouable_xz": [
+   87,
+   49
+  ],
+  "surface_jouable_par_joueur_m2": 263.4,
+  "part_cases_avec_couvert_adjacent_%": 34.5,
+  "distance_au_couvert_moy": 5.57,
+  "distance_au_couvert_mediane": 3,
+  "part_couvert_a_<=3_blocs_%": 50.9,
+  "ligne_de_vue_mediane": 22.6,
+  "ligne_de_vue_p90": 62.2,
+  "part_lignes_>=32_%": 38.2,
+  "part_rayons_sortant_de_la_map_%": 0.0
+ },
+ "symetrie_%": {
+  "miroir_x": 88.0,
+  "miroir_z": 93.1,
+  "rotation_180": 83.5,
+  "rotation_90": 12.9
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 67,
+  "hauteur_max": 67,
+  "colonnes_>=_mediane+12": 0,
+  "part_colonnes_hautes_%": 0.0
+ },
+ "toits": {
+  "colonnes_de_toit": 4215,
+  "categories_%": {
+   "full": 94.1,
+   "det:dalle": 5.2,
+   "det:eclairage": 0.7
+  },
+  "materiaux_top8": [
+   [
+    "deepslate_tiles",
+    94.1
+   ],
+   [
+    "polished_blackstone_brick_slab",
+    5.2
+   ],
+   [
+    "sea_lantern",
+    0.7
+   ]
+  ],
+  "part_debord_air_dessous_%": 63.0,
+  "hauteurs_distinctes": 2
+ },
+ "secondes": 1.2
+}

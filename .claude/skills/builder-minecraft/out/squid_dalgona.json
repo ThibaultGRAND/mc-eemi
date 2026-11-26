@@ -1,0 +1,439 @@
+{
+ "map": "squid_dalgona",
+ "dims": [
+  79,
+  38,
+  103
+ ],
+ "joueurs_prevus": 16,
+ "palette": {
+  "blocs_non_air": 66885,
+  "types": 57,
+  "types_>=0.1%": 40,
+  "top25": [
+   [
+    "dirt",
+    27.35
+   ],
+   [
+    "spruce_planks",
+    22.68
+   ],
+   [
+    "smooth_quartz",
+    5.93
+   ],
+   [
+    "sand",
+    5.85
+   ],
+   [
+    "light_blue_concrete",
+    4.23
+   ],
+   [
+    "gray_concrete",
+    4.04
+   ],
+   [
+    "honeycomb_block",
+    2.89
+   ],
+   [
+    "stripped_dark_oak_log",
+    2.68
+   ],
+   [
+    "dark_oak_fence",
+    1.95
+   ],
+   [
+    "cyan_terracotta",
+    1.95
+   ],
+   [
+    "smooth_sandstone",
+    1.68
+   ],
+   [
+    "light_blue_wool",
+    1.57
+   ],
+   [
+    "smooth_quartz_slab",
+    1.5
+   ],
+   [
+    "quartz_pillar",
+    1.38
+   ],
+   [
+    "white_wool",
+    1.21
+   ],
+   [
+    "smooth_stone",
+    1.15
+   ],
+   [
+    "polished_andesite",
+    1.14
+   ],
+   [
+    "white_concrete_powder",
+    1.13
+   ],
+   [
+    "light_gray_concrete",
+    1.1
+   ],
+   [
+    "sandstone",
+    1.03
+   ],
+   [
+    "smooth_quartz_stairs",
+    0.97
+   ],
+   [
+    "spruce_slab",
+    0.94
+   ],
+   [
+    "pink_concrete",
+    0.67
+   ],
+   [
+    "smooth_stone_slab",
+    0.62
+   ],
+   [
+    "snow_block",
+    0.43
+   ]
+  ],
+  "visibles": 38770,
+  "part_visible_par_categorie_%": {
+   "full": 87.5,
+   "det:dalle": 5.55,
+   "det:barriere": 3.61,
+   "det:escalier": 2.68,
+   "veg": 0.39,
+   "det:eclairage": 0.17,
+   "det:muret": 0.07,
+   "det:trappe": 0.03,
+   "det:panneau/tete/banniere/pot": 0.0,
+   "det:divers": 0.0
+  },
+  "part_detail_visible_%": 12.11,
+  "part_detail_visible_sur_bati_%": 16.17,
+  "part_naturel_visible_%": 24.73,
+  "part_vegetation_visible_%": 0.39,
+  "top_visibles": [
+   [
+    "dirt",
+    16.53
+   ],
+   [
+    "spruce_planks",
+    15.44
+   ],
+   [
+    "sand",
+    7.48
+   ],
+   [
+    "light_blue_concrete",
+    5.98
+   ],
+   [
+    "smooth_quartz",
+    5.24
+   ],
+   [
+    "gray_concrete",
+    5.16
+   ],
+   [
+    "honeycomb_block",
+    4.99
+   ],
+   [
+    "stripped_dark_oak_log",
+    4.63
+   ],
+   [
+    "dark_oak_fence",
+    3.37
+   ],
+   [
+    "cyan_terracotta",
+    2.48
+   ],
+   [
+    "quartz_pillar",
+    2.37
+   ],
+   [
+    "smooth_quartz_slab",
+    2.37
+   ],
+   [
+    "light_blue_wool",
+    2.36
+   ],
+   [
+    "smooth_sandstone",
+    2.09
+   ],
+   [
+    "light_gray_concrete",
+    1.9
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "concrete",
+    10,
+    [
+     "black_concrete",
+     "cyan_concrete",
+     "gray_concrete",
+     "light_blue_concrete",
+     "light_gray_concrete",
+     "lime_concrete",
+     "pink_concrete",
+     "purple_concrete",
+     "white_concrete",
+     "yellow_concrete"
+    ]
+   ],
+   [
+    "stone",
+    4,
+    [
+     "polished_andesite",
+     "smooth_stone",
+     "smooth_stone_slab",
+     "stone_stairs"
+    ]
+   ],
+   [
+    "quartz",
+    4,
+    [
+     "chiseled_quartz_block",
+     "smooth_quartz",
+     "smooth_quartz_slab",
+     "smooth_quartz_stairs"
+    ]
+   ],
+   [
+    "dark_oak",
+    3,
+    [
+     "dark_oak_fence",
+     "dark_oak_slab",
+     "stripped_dark_oak_log"
+    ]
+   ],
+   [
+    "terracotta",
+    3,
+    [
+     "cyan_terracotta",
+     "pink_terracotta",
+     "white_terracotta"
+    ]
+   ],
+   [
+    "wool",
+    3,
+    [
+     "green_wool",
+     "light_blue_wool",
+     "white_wool"
+    ]
+   ],
+   [
+    "cherry",
+    3,
+    [
+     "cherry_fence",
+     "cherry_planks",
+     "cherry_stairs"
+    ]
+   ]
+  ],
+  "melange_local_%": 4.31,
+  "top5_cumul_%": 66.0
+ },
+ "murs": {
+  "cellules_de_facade": 26832,
+  "pan_coplanaire_mediane": 3,
+  "pan_coplanaire_p90": 7,
+  "pan_coplanaire_max": 13,
+  "pan_meme_bloc_mediane": 3,
+  "pan_meme_bloc_p90": 7,
+  "pan_meme_bloc_max": 11,
+  "segment_meme_materiau_moyen": 1.61,
+  "couches_de_profondeur_fenetre9_moy": 2.54,
+  "part_facade_1_seule_couche_%": 4.8,
+  "part_facade_3+_couches_%": 41.2,
+  "accents_verticaux_pour_100_cellules": 0.22
+ },
+ "relief": {
+  "colonnes_construites": 7777,
+  "histo_hauteur_surface_par_4": [
+   [
+    0,
+    3628
+   ],
+   [
+    4,
+    722
+   ],
+   [
+    8,
+    517
+   ],
+   [
+    12,
+    37
+   ],
+   [
+    16,
+    832
+   ],
+   [
+    20,
+    286
+   ],
+   [
+    24,
+    1711
+   ],
+   [
+    28,
+    20
+   ],
+   [
+    36,
+    24
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   3,
+   26
+  ],
+  "pente_moy_blocs_par_bloc": 1.434,
+  "part_voisins_meme_hauteur_%": 66.1,
+  "part_marches_1_%": 18.2,
+  "part_ressauts_2-4_%": 7.2,
+  "part_ruptures_5+_%": 8.4,
+  "cases_debout": 8401,
+  "niveaux_de_jeu": [
+   [
+    4,
+    5,
+    64.5
+   ],
+   [
+    17,
+    17,
+    7.8
+   ],
+   [
+    25,
+    26,
+    12.2
+   ]
+  ],
+  "nb_niveaux_>=3%": 3,
+  "y_debout_p5_p50_p95": [
+   4,
+   4,
+   26
+  ],
+  "etages_par_colonne_moy": 1.16,
+  "part_colonnes_multi_niveaux_%": 16.0
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 7219,
+  "bbox_jouable_xz": [
+   79,
+   103
+  ],
+  "surface_jouable_par_joueur_m2": 451.2,
+  "part_cases_avec_couvert_adjacent_%": 26.5,
+  "distance_au_couvert_moy": 4.0,
+  "distance_au_couvert_mediane": 2,
+  "part_couvert_a_<=3_blocs_%": 72.4,
+  "ligne_de_vue_mediane": 11.3,
+  "ligne_de_vue_p90": 58,
+  "part_lignes_>=32_%": 25.5,
+  "part_rayons_sortant_de_la_map_%": 13.6
+ },
+ "symetrie_%": {
+  "miroir_x": 88.0,
+  "miroir_z": 75.4,
+  "rotation_180": 74.8,
+  "rotation_90": 24.8
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 4,
+  "hauteur_max": 37,
+  "colonnes_>=_mediane+12": 2873,
+  "part_colonnes_hautes_%": 36.94
+ },
+ "toits": {
+  "colonnes_de_toit": 1380,
+  "categories_%": {
+   "det:escalier": 40.9,
+   "det:barriere": 24.6,
+   "det:dalle": 22.7,
+   "full": 9.6,
+   "det:eclairage": 1.2,
+   "det:trappe": 0.9,
+   "det:panneau/tete/banniere/pot": 0.1,
+   "det:divers": 0.1
+  },
+  "materiaux_top8": [
+   [
+    "smooth_quartz_stairs",
+    22.6
+   ],
+   [
+    "dark_oak_fence",
+    20.0
+   ],
+   [
+    "stone_stairs",
+    15.1
+   ],
+   [
+    "smooth_stone_slab",
+    11.6
+   ],
+   [
+    "smooth_quartz_slab",
+    6.8
+   ],
+   [
+    "cherry_fence",
+    4.6
+   ],
+   [
+    "yellow_concrete",
+    4.2
+   ],
+   [
+    "bamboo_slab",
+    3.7
+   ]
+  ],
+  "part_debord_air_dessous_%": 69.1,
+  "hauteurs_distinctes": 17
+ },
+ "secondes": 1.2
+}

@@ -1,0 +1,335 @@
+{
+ "map": "swa_glacier",
+ "dims": [
+  93,
+  52,
+  113
+ ],
+ "joueurs_prevus": 12,
+ "palette": {
+  "blocs_non_air": 38951,
+  "types": 20,
+  "types_>=0.1%": 17,
+  "top25": [
+   [
+    "dirt",
+    28.67
+   ],
+   [
+    "stone",
+    28.23
+   ],
+   [
+    "spruce_leaves",
+    11.04
+   ],
+   [
+    "snow_block",
+    8.88
+   ],
+   [
+    "packed_ice",
+    8.13
+   ],
+   [
+    "andesite",
+    5.3
+   ],
+   [
+    "stone_bricks",
+    2.31
+   ],
+   [
+    "coal_ore",
+    1.7
+   ],
+   [
+    "spruce_planks",
+    1.53
+   ],
+   [
+    "cracked_stone_bricks",
+    0.94
+   ],
+   [
+    "spruce_log",
+    0.92
+   ],
+   [
+    "spruce_stairs",
+    0.65
+   ],
+   [
+    "snow",
+    0.51
+   ],
+   [
+    "cobblestone",
+    0.47
+   ],
+   [
+    "fern",
+    0.22
+   ],
+   [
+    "ice",
+    0.2
+   ],
+   [
+    "cobblestone_wall",
+    0.16
+   ],
+   [
+    "ladder",
+    0.07
+   ],
+   [
+    "glass_pane",
+    0.05
+   ],
+   [
+    "glowstone",
+    0.03
+   ]
+  ],
+  "visibles": 15462,
+  "part_visible_par_categorie_%": {
+   "full": 74.43,
+   "leaves": 21.41,
+   "det:escalier": 1.63,
+   "det:divers": 1.46,
+   "veg": 0.54,
+   "det:muret": 0.4,
+   "det:vitre/barreaux": 0.13
+  },
+  "part_detail_visible_%": 3.62,
+  "part_detail_visible_sur_bati_%": 21.29,
+  "part_naturel_visible_%": 61.04,
+  "part_vegetation_visible_%": 21.95,
+  "top_visibles": [
+   [
+    "spruce_leaves",
+    21.41
+   ],
+   [
+    "snow_block",
+    20.53
+   ],
+   [
+    "stone",
+    17.25
+   ],
+   [
+    "dirt",
+    13.27
+   ],
+   [
+    "stone_bricks",
+    5.68
+   ],
+   [
+    "packed_ice",
+    5.34
+   ],
+   [
+    "spruce_planks",
+    3.4
+   ],
+   [
+    "andesite",
+    3.3
+   ],
+   [
+    "cracked_stone_bricks",
+    2.37
+   ],
+   [
+    "spruce_stairs",
+    1.63
+   ],
+   [
+    "snow",
+    1.29
+   ],
+   [
+    "cobblestone",
+    1.15
+   ],
+   [
+    "coal_ore",
+    0.87
+   ],
+   [
+    "spruce_log",
+    0.72
+   ],
+   [
+    "fern",
+    0.54
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "stone",
+    6,
+    [
+     "andesite",
+     "cobblestone",
+     "cobblestone_wall",
+     "cracked_stone_bricks",
+     "stone",
+     "stone_bricks"
+    ]
+   ],
+   [
+    "spruce",
+    3,
+    [
+     "spruce_log",
+     "spruce_planks",
+     "spruce_stairs"
+    ]
+   ]
+  ],
+  "melange_local_%": 18.46,
+  "top5_cumul_%": 84.9
+ },
+ "murs": {
+  "cellules_de_facade": 1752,
+  "pan_coplanaire_mediane": 5,
+  "pan_coplanaire_p90": 9,
+  "pan_coplanaire_max": 11,
+  "pan_meme_bloc_mediane": 5,
+  "pan_meme_bloc_p90": 7,
+  "pan_meme_bloc_max": 9,
+  "segment_meme_materiau_moyen": 2.11,
+  "couches_de_profondeur_fenetre9_moy": 2.92,
+  "part_facade_1_seule_couche_%": 1.2,
+  "part_facade_3+_couches_%": 59.5,
+  "accents_verticaux_pour_100_cellules": 0.0
+ },
+ "relief": {
+  "colonnes_construites": 4687,
+  "histo_hauteur_surface_par_4": [
+   [
+    20,
+    1742
+   ],
+   [
+    24,
+    1416
+   ],
+   [
+    28,
+    1176
+   ],
+   [
+    32,
+    255
+   ],
+   [
+    36,
+    98
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   22,
+   33
+  ],
+  "pente_moy_blocs_par_bloc": 0.975,
+  "part_voisins_meme_hauteur_%": 55.4,
+  "part_marches_1_%": 17.5,
+  "part_ressauts_2-4_%": 24.2,
+  "part_ruptures_5+_%": 3.0,
+  "cases_debout": 4407,
+  "niveaux_de_jeu": [
+   [
+    23,
+    26,
+    88.3
+   ]
+  ],
+  "nb_niveaux_>=3%": 1,
+  "y_debout_p5_p50_p95": [
+   23,
+   24,
+   32
+  ],
+  "etages_par_colonne_moy": 1.08,
+  "part_colonnes_multi_niveaux_%": 8.3
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 4067,
+  "bbox_jouable_xz": [
+   91,
+   103
+  ],
+  "surface_jouable_par_joueur_m2": 338.9,
+  "part_cases_avec_couvert_adjacent_%": 20.3,
+  "distance_au_couvert_moy": 2.04,
+  "distance_au_couvert_mediane": 2,
+  "part_couvert_a_<=3_blocs_%": 88.9,
+  "ligne_de_vue_mediane": 18.4,
+  "ligne_de_vue_p90": 60.8,
+  "part_lignes_>=32_%": 28.4,
+  "part_rayons_sortant_de_la_map_%": 40.3
+ },
+ "symetrie_%": {
+  "miroir_x": 99.8,
+  "miroir_z": 56.1,
+  "rotation_180": 56.1,
+  "rotation_90": 10.6
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 24,
+  "hauteur_max": 37,
+  "colonnes_>=_mediane+12": 98,
+  "part_colonnes_hautes_%": 2.09
+ },
+ "toits": {
+  "colonnes_de_toit": 1226,
+  "categories_%": {
+   "leaves": 75.4,
+   "det:escalier": 15.2,
+   "full": 7.5,
+   "det:muret": 2.0
+  },
+  "materiaux_top8": [
+   [
+    "spruce_leaves",
+    75.4
+   ],
+   [
+    "spruce_stairs",
+    15.2
+   ],
+   [
+    "stone_bricks",
+    3.3
+   ],
+   [
+    "packed_ice",
+    2.1
+   ],
+   [
+    "cobblestone_wall",
+    2.0
+   ],
+   [
+    "spruce_planks",
+    1.8
+   ],
+   [
+    "cobblestone",
+    0.2
+   ],
+   [
+    "glowstone",
+    0.2
+   ]
+  ],
+  "part_debord_air_dessous_%": 28.4,
+  "hauteurs_distinctes": 11
+ },
+ "secondes": 1.3
+}

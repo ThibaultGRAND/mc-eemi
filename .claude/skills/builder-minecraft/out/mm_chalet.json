@@ -1,0 +1,417 @@
+{
+ "map": "mm_chalet",
+ "dims": [
+  71,
+  26,
+  59
+ ],
+ "joueurs_prevus": 5,
+ "palette": {
+  "blocs_non_air": 37933,
+  "types": 134,
+  "types_>=0.1%": 43,
+  "top25": [
+   [
+    "stone",
+    38.31
+   ],
+   [
+    "dirt",
+    19.92
+   ],
+   [
+    "spruce_planks",
+    5.59
+   ],
+   [
+    "snow",
+    5.58
+   ],
+   [
+    "snow_block",
+    5.3
+   ],
+   [
+    "spruce_leaves",
+    4.73
+   ],
+   [
+    "cobblestone",
+    1.66
+   ],
+   [
+    "stone_bricks",
+    1.63
+   ],
+   [
+    "stripped_spruce_log",
+    1.51
+   ],
+   [
+    "spruce_fence",
+    1.49
+   ],
+   [
+    "dark_oak_planks",
+    1.45
+   ],
+   [
+    "spruce_log",
+    1.19
+   ],
+   [
+    "spruce_stairs",
+    0.75
+   ],
+   [
+    "white_concrete_powder",
+    0.74
+   ],
+   [
+    "glass_pane",
+    0.67
+   ],
+   [
+    "mossy_cobblestone",
+    0.62
+   ],
+   [
+    "spruce_slab",
+    0.55
+   ],
+   [
+    "gravel",
+    0.54
+   ],
+   [
+    "calcite",
+    0.48
+   ],
+   [
+    "dark_oak_log",
+    0.46
+   ],
+   [
+    "dark_oak_stairs",
+    0.45
+   ],
+   [
+    "bricks",
+    0.45
+   ],
+   [
+    "stripped_dark_oak_log",
+    0.41
+   ],
+   [
+    "crimson_trapdoor",
+    0.38
+   ],
+   [
+    "coarse_dirt",
+    0.37
+   ]
+  ],
+  "visibles": 18517,
+  "part_visible_par_categorie_%": {
+   "full": 69.35,
+   "det:divers": 11.84,
+   "leaves": 7.54,
+   "det:barriere": 3.07,
+   "det:escalier": 2.74,
+   "det:vitre/barreaux": 1.33,
+   "det:dalle": 1.25,
+   "det:trappe": 1.13,
+   "det:tapis": 0.51,
+   "det:eclairage": 0.5,
+   "det:porte": 0.28,
+   "det:chaine": 0.23,
+   "det:muret": 0.08,
+   "det:panneau/tete/banniere/pot": 0.06,
+   "liquid": 0.05,
+   "det:bouton/plaque": 0.02,
+   "veg": 0.01
+  },
+  "part_detail_visible_%": 23.05,
+  "part_detail_visible_sur_bati_%": 44.26,
+  "part_naturel_visible_%": 40.31,
+  "part_vegetation_visible_%": 7.54,
+  "top_visibles": [
+   [
+    "stone",
+    24.43
+   ],
+   [
+    "snow",
+    11.31
+   ],
+   [
+    "snow_block",
+    9.96
+   ],
+   [
+    "spruce_planks",
+    8.85
+   ],
+   [
+    "spruce_leaves",
+    7.54
+   ],
+   [
+    "spruce_fence",
+    3.05
+   ],
+   [
+    "stripped_spruce_log",
+    2.85
+   ],
+   [
+    "dirt",
+    2.79
+   ],
+   [
+    "stone_bricks",
+    2.44
+   ],
+   [
+    "cobblestone",
+    2.24
+   ],
+   [
+    "spruce_log",
+    2.03
+   ],
+   [
+    "dark_oak_planks",
+    1.84
+   ],
+   [
+    "white_concrete_powder",
+    1.43
+   ],
+   [
+    "spruce_stairs",
+    1.37
+   ],
+   [
+    "glass_pane",
+    1.32
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "stone",
+    13,
+    [
+     "andesite",
+     "cobblestone",
+     "cobblestone_slab",
+     "cobblestone_stairs",
+     "cobblestone_wall",
+     "cracked_stone_bricks",
+     "mossy_cobblestone",
+     "mossy_stone_bricks",
+     "polished_andesite",
+     "smooth_stone",
+     "stone",
+     "stone_brick_stairs",
+     "stone_bricks"
+    ]
+   ],
+   [
+    "spruce",
+    9,
+    [
+     "spruce_door",
+     "spruce_fence",
+     "spruce_log",
+     "spruce_planks",
+     "spruce_slab",
+     "spruce_stairs",
+     "spruce_trapdoor",
+     "stripped_spruce_log",
+     "stripped_spruce_wood"
+    ]
+   ],
+   [
+    "dark_oak",
+    5,
+    [
+     "dark_oak_log",
+     "dark_oak_planks",
+     "dark_oak_stairs",
+     "dark_oak_trapdoor",
+     "stripped_dark_oak_log"
+    ]
+   ],
+   [
+    "deepslate",
+    3,
+    [
+     "cobbled_deepslate",
+     "deepslate_tiles",
+     "polished_deepslate"
+    ]
+   ]
+  ],
+  "melange_local_%": 12.1,
+  "top5_cumul_%": 74.7
+ },
+ "murs": {
+  "cellules_de_facade": 3596,
+  "pan_coplanaire_mediane": 4,
+  "pan_coplanaire_p90": 8,
+  "pan_coplanaire_max": 13,
+  "pan_meme_bloc_mediane": 4,
+  "pan_meme_bloc_p90": 7,
+  "pan_meme_bloc_max": 13,
+  "segment_meme_materiau_moyen": 1.63,
+  "couches_de_profondeur_fenetre9_moy": 2.88,
+  "part_facade_1_seule_couche_%": 6.5,
+  "part_facade_3+_couches_%": 62.6,
+  "accents_verticaux_pour_100_cellules": 0.78
+ },
+ "relief": {
+  "colonnes_construites": 4189,
+  "histo_hauteur_surface_par_4": [
+   [
+    0,
+    6
+   ],
+   [
+    4,
+    1778
+   ],
+   [
+    8,
+    840
+   ],
+   [
+    12,
+    778
+   ],
+   [
+    16,
+    571
+   ],
+   [
+    20,
+    210
+   ],
+   [
+    24,
+    6
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   5,
+   20
+  ],
+  "pente_moy_blocs_par_bloc": 0.891,
+  "part_voisins_meme_hauteur_%": 63.1,
+  "part_marches_1_%": 16.1,
+  "part_ressauts_2-4_%": 17.4,
+  "part_ruptures_5+_%": 3.4,
+  "cases_debout": 3951,
+  "niveaux_de_jeu": [
+   [
+    1,
+    1,
+    5.2
+   ],
+   [
+    6,
+    8,
+    79.7
+   ],
+   [
+    13,
+    13,
+    7.7
+   ]
+  ],
+  "nb_niveaux_>=3%": 3,
+  "y_debout_p5_p50_p95": [
+   1,
+   7,
+   13
+  ],
+  "etages_par_colonne_moy": 1.16,
+  "part_colonnes_multi_niveaux_%": 11.6
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 3412,
+  "bbox_jouable_xz": [
+   69,
+   58
+  ],
+  "surface_jouable_par_joueur_m2": 682.4,
+  "part_cases_avec_couvert_adjacent_%": 33.2,
+  "distance_au_couvert_moy": 1.8,
+  "distance_au_couvert_mediane": 2,
+  "part_couvert_a_<=3_blocs_%": 95.6,
+  "ligne_de_vue_mediane": 8.5,
+  "ligne_de_vue_p90": 28,
+  "part_lignes_>=32_%": 7.6,
+  "part_rayons_sortant_de_la_map_%": 29.5
+ },
+ "symetrie_%": {
+  "miroir_x": 75.7,
+  "miroir_z": 60.7,
+  "rotation_180": 58.2,
+  "rotation_90": 47.1
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 9,
+  "hauteur_max": 25,
+  "colonnes_>=_mediane+12": 78,
+  "part_colonnes_hautes_%": 1.86
+ },
+ "toits": {
+  "colonnes_de_toit": 1655,
+  "categories_%": {
+   "det:divers": 92.8,
+   "leaves": 5.1,
+   "full": 1.1,
+   "det:dalle": 0.7,
+   "det:barriere": 0.3
+  },
+  "materiaux_top8": [
+   [
+    "snow",
+    92.7
+   ],
+   [
+    "spruce_leaves",
+    5.1
+   ],
+   [
+    "dark_oak_log",
+    1.0
+   ],
+   [
+    "spruce_slab",
+    0.4
+   ],
+   [
+    "spruce_fence",
+    0.3
+   ],
+   [
+    "cobblestone_slab",
+    0.3
+   ],
+   [
+    "snow_block",
+    0.1
+   ],
+   [
+    "campfire",
+    0.1
+   ]
+  ],
+  "part_debord_air_dessous_%": 1.3,
+  "hauteurs_distinctes": 17
+ },
+ "secondes": 0.9
+}

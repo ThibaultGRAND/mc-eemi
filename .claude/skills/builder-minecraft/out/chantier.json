@@ -1,0 +1,424 @@
+{
+ "map": "chantier",
+ "dims": [
+  91,
+  23,
+  70
+ ],
+ "joueurs_prevus": 8,
+ "palette": {
+  "blocs_non_air": 18907,
+  "types": 76,
+  "types_>=0.1%": 53,
+  "top25": [
+   [
+    "dirt",
+    11.96
+   ],
+   [
+    "grass_block",
+    9.58
+   ],
+   [
+    "coarse_dirt",
+    8.36
+   ],
+   [
+    "iron_bars",
+    7.43
+   ],
+   [
+    "smooth_stone",
+    6.88
+   ],
+   [
+    "smooth_stone_slab",
+    5.21
+   ],
+   [
+    "blue_concrete",
+    4.83
+   ],
+   [
+    "red_concrete",
+    4.77
+   ],
+   [
+    "white_concrete",
+    3.22
+   ],
+   [
+    "stripped_birch_log",
+    2.88
+   ],
+   [
+    "stripped_spruce_log",
+    2.62
+   ],
+   [
+    "spruce_stairs",
+    2.5
+   ],
+   [
+    "gravel",
+    2.3
+   ],
+   [
+    "short_grass",
+    2.21
+   ],
+   [
+    "polished_andesite",
+    1.82
+   ],
+   [
+    "oak_leaves",
+    1.71
+   ],
+   [
+    "packed_mud",
+    1.6
+   ],
+   [
+    "white_terracotta",
+    1.44
+   ],
+   [
+    "birch_leaves",
+    1.24
+   ],
+   [
+    "light_gray_concrete",
+    1.21
+   ],
+   [
+    "podzol",
+    1.12
+   ],
+   [
+    "waxed_exposed_cut_copper_stairs",
+    1.07
+   ],
+   [
+    "mud",
+    0.85
+   ],
+   [
+    "dirt_path",
+    0.85
+   ],
+   [
+    "spruce_planks",
+    0.84
+   ]
+  ],
+  "visibles": 15854,
+  "part_visible_par_categorie_%": {
+   "full": 69.6,
+   "det:vitre/barreaux": 9.05,
+   "det:dalle": 7.07,
+   "det:escalier": 5.8,
+   "veg": 3.91,
+   "leaves": 3.02,
+   "det:eclairage": 0.63,
+   "det:trappe": 0.38,
+   "det:divers": 0.32,
+   "det:muret": 0.09,
+   "det:barriere": 0.07,
+   "det:chaine": 0.03,
+   "det:porte": 0.03,
+   "det:tapis": 0.01
+  },
+  "part_detail_visible_%": 23.47,
+  "part_detail_visible_sur_bati_%": 41.74,
+  "part_naturel_visible_%": 36.84,
+  "part_vegetation_visible_%": 6.93,
+  "top_visibles": [
+   [
+    "grass_block",
+    11.19
+   ],
+   [
+    "dirt",
+    9.85
+   ],
+   [
+    "coarse_dirt",
+    9.22
+   ],
+   [
+    "iron_bars",
+    8.86
+   ],
+   [
+    "smooth_stone",
+    7.1
+   ],
+   [
+    "smooth_stone_slab",
+    6.21
+   ],
+   [
+    "stripped_birch_log",
+    3.43
+   ],
+   [
+    "stripped_spruce_log",
+    3.12
+   ],
+   [
+    "spruce_stairs",
+    2.98
+   ],
+   [
+    "short_grass",
+    2.64
+   ],
+   [
+    "blue_concrete",
+    2.38
+   ],
+   [
+    "red_concrete",
+    2.37
+   ],
+   [
+    "gravel",
+    2.24
+   ],
+   [
+    "polished_andesite",
+    2.16
+   ],
+   [
+    "packed_mud",
+    1.87
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "stone",
+    8,
+    [
+     "andesite",
+     "andesite_wall",
+     "polished_andesite",
+     "polished_andesite_slab",
+     "polished_andesite_stairs",
+     "smooth_stone",
+     "smooth_stone_slab",
+     "stone_stairs"
+    ]
+   ],
+   [
+    "concrete",
+    5,
+    [
+     "blue_concrete",
+     "light_gray_concrete",
+     "red_concrete",
+     "white_concrete",
+     "yellow_concrete"
+    ]
+   ],
+   [
+    "terracotta",
+    5,
+    [
+     "blue_terracotta",
+     "green_terracotta",
+     "red_terracotta",
+     "white_terracotta",
+     "yellow_terracotta"
+    ]
+   ],
+   [
+    "spruce",
+    4,
+    [
+     "spruce_planks",
+     "spruce_slab",
+     "spruce_stairs",
+     "stripped_spruce_log"
+    ]
+   ],
+   [
+    "copper",
+    4,
+    [
+     "waxed_exposed_cut_copper",
+     "waxed_exposed_cut_copper_slab",
+     "waxed_exposed_cut_copper_stairs",
+     "waxed_weathered_cut_copper_stairs"
+    ]
+   ],
+   [
+    "birch",
+    3,
+    [
+     "birch_log",
+     "birch_planks",
+     "stripped_birch_log"
+    ]
+   ]
+  ],
+  "melange_local_%": 3.92,
+  "top5_cumul_%": 44.2
+ },
+ "murs": {
+  "cellules_de_facade": 5029,
+  "pan_coplanaire_mediane": 5,
+  "pan_coplanaire_p90": 6,
+  "pan_coplanaire_max": 7,
+  "pan_meme_bloc_mediane": 5,
+  "pan_meme_bloc_p90": 6,
+  "pan_meme_bloc_max": 7,
+  "segment_meme_materiau_moyen": 1.37,
+  "couches_de_profondeur_fenetre9_moy": 2.9,
+  "part_facade_1_seule_couche_%": 3.6,
+  "part_facade_3+_couches_%": 62.9,
+  "accents_verticaux_pour_100_cellules": 0.24
+ },
+ "relief": {
+  "colonnes_construites": 6153,
+  "histo_hauteur_surface_par_4": [
+   [
+    0,
+    3860
+   ],
+   [
+    4,
+    897
+   ],
+   [
+    8,
+    1308
+   ],
+   [
+    12,
+    11
+   ],
+   [
+    16,
+    46
+   ],
+   [
+    20,
+    31
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   1,
+   9
+  ],
+  "pente_moy_blocs_par_bloc": 1.091,
+  "part_voisins_meme_hauteur_%": 70.3,
+  "part_marches_1_%": 12.9,
+  "part_ressauts_2-4_%": 7.4,
+  "part_ruptures_5+_%": 9.3,
+  "cases_debout": 6555,
+  "niveaux_de_jeu": [
+   [
+    2,
+    5,
+    71.2
+   ],
+   [
+    7,
+    8,
+    11.6
+   ],
+   [
+    10,
+    10,
+    10.5
+   ]
+  ],
+  "nb_niveaux_>=3%": 3,
+  "y_debout_p5_p50_p95": [
+   2,
+   2,
+   10
+  ],
+  "etages_par_colonne_moy": 1.15,
+  "part_colonnes_multi_niveaux_%": 14.7
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 5690,
+  "bbox_jouable_xz": [
+   89,
+   69
+  ],
+  "surface_jouable_par_joueur_m2": 711.2,
+  "part_cases_avec_couvert_adjacent_%": 27.0,
+  "distance_au_couvert_moy": 3.76,
+  "distance_au_couvert_mediane": 2,
+  "part_couvert_a_<=3_blocs_%": 75.9,
+  "ligne_de_vue_mediane": 9,
+  "ligne_de_vue_p90": 48,
+  "part_lignes_>=32_%": 17.6,
+  "part_rayons_sortant_de_la_map_%": 32.4
+ },
+ "symetrie_%": {
+  "miroir_x": 69.9,
+  "miroir_z": 33.4,
+  "rotation_180": 33.3,
+  "rotation_90": 8.4
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 1,
+  "hauteur_max": 22,
+  "colonnes_>=_mediane+12": 85,
+  "part_colonnes_hautes_%": 1.38
+ },
+ "toits": {
+  "colonnes_de_toit": 998,
+  "categories_%": {
+   "det:dalle": 35.4,
+   "leaves": 23.5,
+   "full": 21.9,
+   "det:escalier": 15.6,
+   "det:vitre/barreaux": 2.6,
+   "det:eclairage": 0.6,
+   "det:barriere": 0.2,
+   "det:divers": 0.1
+  },
+  "materiaux_top8": [
+   [
+    "smooth_stone_slab",
+    29.5
+   ],
+   [
+    "oak_leaves",
+    14.0
+   ],
+   [
+    "birch_leaves",
+    9.5
+   ],
+   [
+    "waxed_weathered_cut_copper_stairs",
+    9.3
+   ],
+   [
+    "waxed_exposed_cut_copper_stairs",
+    6.3
+   ],
+   [
+    "red_concrete",
+    4.8
+   ],
+   [
+    "blue_concrete",
+    4.8
+   ],
+   [
+    "polished_andesite_slab",
+    3.2
+   ]
+  ],
+  "part_debord_air_dessous_%": 63.2,
+  "hauteurs_distinctes": 13
+ },
+ "secondes": 0.5
+}

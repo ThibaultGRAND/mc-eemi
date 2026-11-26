@@ -1,0 +1,410 @@
+{
+ "map": "swa_ruines",
+ "dims": [
+  67,
+  38,
+  84
+ ],
+ "joueurs_prevus": 24,
+ "palette": {
+  "blocs_non_air": 25200,
+  "types": 66,
+  "types_>=0.1%": 42,
+  "top25": [
+   [
+    "stone",
+    28.13
+   ],
+   [
+    "dirt",
+    15.16
+   ],
+   [
+    "andesite",
+    9.53
+   ],
+   [
+    "stone_bricks",
+    8.45
+   ],
+   [
+    "grass_block",
+    4.45
+   ],
+   [
+    "smooth_quartz",
+    4.29
+   ],
+   [
+    "stone_brick_stairs",
+    3.95
+   ],
+   [
+    "coarse_dirt",
+    2.33
+   ],
+   [
+    "calcite",
+    2.17
+   ],
+   [
+    "mossy_stone_bricks",
+    1.71
+   ],
+   [
+    "hanging_roots",
+    1.56
+   ],
+   [
+    "smooth_stone",
+    1.46
+   ],
+   [
+    "moss_carpet",
+    1.44
+   ],
+   [
+    "pointed_dripstone",
+    1.42
+   ],
+   [
+    "polished_andesite",
+    1.34
+   ],
+   [
+    "cracked_stone_bricks",
+    1.25
+   ],
+   [
+    "quartz_pillar",
+    1.05
+   ],
+   [
+    "chiseled_stone_bricks",
+    0.97
+   ],
+   [
+    "moss_block",
+    0.76
+   ],
+   [
+    "stone_brick_slab",
+    0.67
+   ],
+   [
+    "quartz_stairs",
+    0.63
+   ],
+   [
+    "diorite",
+    0.51
+   ],
+   [
+    "spruce_leaves",
+    0.51
+   ],
+   [
+    "stone_brick_wall",
+    0.48
+   ],
+   [
+    "bricks",
+    0.48
+   ]
+  ],
+  "visibles": 14713,
+  "part_visible_par_categorie_%": {
+   "full": 76.08,
+   "det:escalier": 8.26,
+   "veg": 4.78,
+   "det:divers": 2.64,
+   "det:tapis": 2.47,
+   "leaves": 2.07,
+   "det:dalle": 1.6,
+   "det:muret": 0.97,
+   "liquid": 0.77,
+   "det:eclairage": 0.16,
+   "det:bouton/plaque": 0.12,
+   "det:panneau/tete/banniere/pot": 0.08,
+   "det:chaine": 0.01
+  },
+  "part_detail_visible_%": 16.31,
+  "part_detail_visible_sur_bati_%": 36.24,
+  "part_naturel_visible_%": 47.39,
+  "part_vegetation_visible_%": 6.84,
+  "top_visibles": [
+   [
+    "stone",
+    22.46
+   ],
+   [
+    "stone_bricks",
+    11.46
+   ],
+   [
+    "dirt",
+    8.16
+   ],
+   [
+    "stone_brick_stairs",
+    6.61
+   ],
+   [
+    "grass_block",
+    6.52
+   ],
+   [
+    "andesite",
+    6.02
+   ],
+   [
+    "smooth_quartz",
+    2.74
+   ],
+   [
+    "hanging_roots",
+    2.68
+   ],
+   [
+    "moss_carpet",
+    2.47
+   ],
+   [
+    "mossy_stone_bricks",
+    2.45
+   ],
+   [
+    "pointed_dripstone",
+    2.41
+   ],
+   [
+    "smooth_stone",
+    2.07
+   ],
+   [
+    "polished_andesite",
+    1.88
+   ],
+   [
+    "quartz_pillar",
+    1.79
+   ],
+   [
+    "cracked_stone_bricks",
+    1.7
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "stone",
+    18,
+    [
+     "andesite",
+     "chiseled_stone_bricks",
+     "cobblestone_slab",
+     "cracked_stone_bricks",
+     "diorite",
+     "mossy_cobblestone_stairs",
+     "mossy_stone_brick_slab",
+     "mossy_stone_brick_wall",
+     "mossy_stone_bricks",
+     "polished_andesite",
+     "polished_diorite",
+     "smooth_stone",
+     "stone",
+     "stone_brick_slab",
+     "stone_brick_stairs",
+     "stone_brick_wall",
+     "stone_bricks",
+     "stone_button"
+    ]
+   ],
+   [
+    "quartz",
+    5,
+    [
+     "chiseled_quartz_block",
+     "quartz_slab",
+     "quartz_stairs",
+     "smooth_quartz",
+     "smooth_quartz_slab"
+    ]
+   ],
+   [
+    "terracotta",
+    4,
+    [
+     "blue_glazed_terracotta",
+     "blue_terracotta",
+     "red_glazed_terracotta",
+     "red_terracotta"
+    ]
+   ]
+  ],
+  "melange_local_%": 25.58,
+  "top5_cumul_%": 65.7
+ },
+ "murs": {
+  "cellules_de_facade": 3803,
+  "pan_coplanaire_mediane": 4,
+  "pan_coplanaire_p90": 4,
+  "pan_coplanaire_max": 11,
+  "pan_meme_bloc_mediane": 3,
+  "pan_meme_bloc_p90": 4,
+  "pan_meme_bloc_max": 11,
+  "segment_meme_materiau_moyen": 1.28,
+  "couches_de_profondeur_fenetre9_moy": 2.77,
+  "part_facade_1_seule_couche_%": 2.8,
+  "part_facade_3+_couches_%": 55.8,
+  "accents_verticaux_pour_100_cellules": 1.39
+ },
+ "relief": {
+  "colonnes_construites": 3196,
+  "histo_hauteur_surface_par_4": [
+   [
+    12,
+    168
+   ],
+   [
+    16,
+    1336
+   ],
+   [
+    20,
+    819
+   ],
+   [
+    24,
+    669
+   ],
+   [
+    28,
+    47
+   ],
+   [
+    32,
+    155
+   ],
+   [
+    36,
+    2
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   15,
+   31
+  ],
+  "pente_moy_blocs_par_bloc": 1.174,
+  "part_voisins_meme_hauteur_%": 49.9,
+  "part_marches_1_%": 29.5,
+  "part_ressauts_2-4_%": 13.6,
+  "part_ruptures_5+_%": 7.0,
+  "cases_debout": 3724,
+  "niveaux_de_jeu": [
+   [
+    14,
+    14,
+    12.4
+   ],
+   [
+    16,
+    24,
+    68.8
+   ],
+   [
+    26,
+    27,
+    9.6
+   ]
+  ],
+  "nb_niveaux_>=3%": 3,
+  "y_debout_p5_p50_p95": [
+   14,
+   19,
+   28
+  ],
+  "etages_par_colonne_moy": 1.25,
+  "part_colonnes_multi_niveaux_%": 24.7
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 2980,
+  "bbox_jouable_xz": [
+   67,
+   80
+  ],
+  "surface_jouable_par_joueur_m2": 124.2,
+  "part_cases_avec_couvert_adjacent_%": 31.8,
+  "distance_au_couvert_moy": 2.43,
+  "distance_au_couvert_mediane": 1,
+  "part_couvert_a_<=3_blocs_%": 82.3,
+  "ligne_de_vue_mediane": 12.7,
+  "ligne_de_vue_p90": 54,
+  "part_lignes_>=32_%": 24.0,
+  "part_rayons_sortant_de_la_map_%": 33.1
+ },
+ "symetrie_%": {
+  "miroir_x": 98.0,
+  "miroir_z": 30.8,
+  "rotation_180": 30.8,
+  "rotation_90": 6.0
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 20,
+  "hauteur_max": 37,
+  "colonnes_>=_mediane+12": 157,
+  "part_colonnes_hautes_%": 4.91
+ },
+ "toits": {
+  "colonnes_de_toit": 885,
+  "categories_%": {
+   "full": 47.5,
+   "det:escalier": 17.4,
+   "det:tapis": 11.9,
+   "det:muret": 6.6,
+   "leaves": 6.6,
+   "det:dalle": 5.1,
+   "liquid": 3.2,
+   "det:panneau/tete/banniere/pot": 0.9,
+   "det:divers": 0.5,
+   "det:bouton/plaque": 0.3,
+   "det:eclairage": 0.2
+  },
+  "materiaux_top8": [
+   [
+    "stone_bricks",
+    19.5
+   ],
+   [
+    "smooth_stone",
+    15.0
+   ],
+   [
+    "moss_carpet",
+    11.9
+   ],
+   [
+    "brick_stairs",
+    7.5
+   ],
+   [
+    "stone_brick_stairs",
+    7.2
+   ],
+   [
+    "stone_brick_wall",
+    5.6
+   ],
+   [
+    "mossy_stone_bricks",
+    4.6
+   ],
+   [
+    "azalea_leaves",
+    3.6
+   ]
+  ],
+  "part_debord_air_dessous_%": 15.3,
+  "hauteurs_distinctes": 17
+ },
+ "secondes": 0.5
+}

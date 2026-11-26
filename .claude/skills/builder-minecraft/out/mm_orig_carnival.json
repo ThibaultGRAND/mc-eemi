@@ -1,0 +1,397 @@
+{
+ "map": "mm_orig_carnival",
+ "dims": [
+  113,
+  31,
+  112
+ ],
+ "joueurs_prevus": 16,
+ "palette": {
+  "blocs_non_air": 47153,
+  "types": 64,
+  "types_>=0.1%": 34,
+  "top25": [
+   [
+    "dirt",
+    52.69
+   ],
+   [
+    "grass_block",
+    20.66
+   ],
+   [
+    "oak_leaves",
+    5.49
+   ],
+   [
+    "dark_oak_planks",
+    3.13
+   ],
+   [
+    "spruce_planks",
+    2.17
+   ],
+   [
+    "red_wool",
+    1.93
+   ],
+   [
+    "white_wool",
+    1.92
+   ],
+   [
+    "short_grass",
+    1.29
+   ],
+   [
+    "white_terracotta",
+    1.11
+   ],
+   [
+    "gravel",
+    1.05
+   ],
+   [
+    "quartz_block",
+    0.73
+   ],
+   [
+    "oak_fence",
+    0.65
+   ],
+   [
+    "dark_oak_stairs",
+    0.64
+   ],
+   [
+    "coarse_dirt",
+    0.55
+   ],
+   [
+    "glass_pane",
+    0.45
+   ],
+   [
+    "sand",
+    0.45
+   ],
+   [
+    "dark_oak_leaves",
+    0.45
+   ],
+   [
+    "black_wool",
+    0.39
+   ],
+   [
+    "spruce_stairs",
+    0.31
+   ],
+   [
+    "light_blue_wool",
+    0.3
+   ],
+   [
+    "iron_bars",
+    0.29
+   ],
+   [
+    "birch_planks",
+    0.27
+   ],
+   [
+    "tall_grass",
+    0.25
+   ],
+   [
+    "oak_planks",
+    0.24
+   ],
+   [
+    "mossy_cobblestone",
+    0.24
+   ]
+  ],
+  "visibles": 32784,
+  "part_visible_par_categorie_%": {
+   "full": 85.68,
+   "leaves": 7.38,
+   "veg": 2.55,
+   "det:escalier": 1.37,
+   "det:vitre/barreaux": 1.29,
+   "det:barriere": 0.93,
+   "det:dalle": 0.5,
+   "det:eclairage": 0.2,
+   "det:divers": 0.05,
+   "det:tapis": 0.02,
+   "det:bouton/plaque": 0.02,
+   "det:muret": 0.02,
+   "det:panneau/tete/banniere/pot": 0.01
+  },
+  "part_detail_visible_%": 4.4,
+  "part_detail_visible_sur_bati_%": 21.87,
+  "part_naturel_visible_%": 69.96,
+  "part_vegetation_visible_%": 9.93,
+  "top_visibles": [
+   [
+    "dirt",
+    38.66
+   ],
+   [
+    "grass_block",
+    28.45
+   ],
+   [
+    "oak_leaves",
+    6.73
+   ],
+   [
+    "red_wool",
+    2.78
+   ],
+   [
+    "white_wool",
+    2.76
+   ],
+   [
+    "spruce_planks",
+    2.14
+   ],
+   [
+    "dark_oak_planks",
+    2.14
+   ],
+   [
+    "short_grass",
+    1.86
+   ],
+   [
+    "white_terracotta",
+    1.6
+   ],
+   [
+    "gravel",
+    1.47
+   ],
+   [
+    "dark_oak_stairs",
+    0.93
+   ],
+   [
+    "oak_fence",
+    0.92
+   ],
+   [
+    "quartz_block",
+    0.84
+   ],
+   [
+    "coarse_dirt",
+    0.76
+   ],
+   [
+    "glass_pane",
+    0.65
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "wool",
+    11,
+    [
+     "black_wool",
+     "blue_wool",
+     "cyan_wool",
+     "light_blue_wool",
+     "lime_wool",
+     "magenta_wool",
+     "orange_wool",
+     "purple_wool",
+     "red_wool",
+     "white_wool",
+     "yellow_wool"
+    ]
+   ],
+   [
+    "oak",
+    4,
+    [
+     "oak_fence",
+     "oak_log",
+     "oak_planks",
+     "oak_slab"
+    ]
+   ],
+   [
+    "dark_oak",
+    4,
+    [
+     "dark_oak_log",
+     "dark_oak_planks",
+     "dark_oak_slab",
+     "dark_oak_stairs"
+    ]
+   ]
+  ],
+  "melange_local_%": 5.21,
+  "top5_cumul_%": 84.1
+ },
+ "murs": {
+  "cellules_de_facade": 4263,
+  "pan_coplanaire_mediane": 4,
+  "pan_coplanaire_p90": 16,
+  "pan_coplanaire_max": 19,
+  "pan_meme_bloc_mediane": 4,
+  "pan_meme_bloc_p90": 16,
+  "pan_meme_bloc_max": 19,
+  "segment_meme_materiau_moyen": 1.52,
+  "couches_de_profondeur_fenetre9_moy": 3.27,
+  "part_facade_1_seule_couche_%": 11.6,
+  "part_facade_3+_couches_%": 58.6,
+  "accents_verticaux_pour_100_cellules": 0.0
+ },
+ "relief": {
+  "colonnes_construites": 12254,
+  "histo_hauteur_surface_par_4": [
+   [
+    0,
+    9474
+   ],
+   [
+    4,
+    1004
+   ],
+   [
+    8,
+    851
+   ],
+   [
+    12,
+    417
+   ],
+   [
+    16,
+    315
+   ],
+   [
+    20,
+    99
+   ],
+   [
+    24,
+    53
+   ],
+   [
+    28,
+    41
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   2,
+   14
+  ],
+  "pente_moy_blocs_par_bloc": 0.564,
+  "part_voisins_meme_hauteur_%": 82.6,
+  "part_marches_1_%": 8.7,
+  "part_ressauts_2-4_%": 4.7,
+  "part_ruptures_5+_%": 4.0,
+  "cases_debout": 13441,
+  "niveaux_de_jeu": [
+   [
+    3,
+    3,
+    81.2
+   ],
+   [
+    8,
+    8,
+    3.6
+   ]
+  ],
+  "nb_niveaux_>=3%": 2,
+  "y_debout_p5_p50_p95": [
+   3,
+   3,
+   15
+  ],
+  "etages_par_colonne_moy": 1.13,
+  "part_colonnes_multi_niveaux_%": 11.8
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 11843,
+  "bbox_jouable_xz": [
+   113,
+   112
+  ],
+  "surface_jouable_par_joueur_m2": 740.2,
+  "part_cases_avec_couvert_adjacent_%": 16.1,
+  "distance_au_couvert_moy": 3.45,
+  "distance_au_couvert_mediane": 3,
+  "part_couvert_a_<=3_blocs_%": 59.1,
+  "ligne_de_vue_mediane": 18,
+  "ligne_de_vue_p90": 66.5,
+  "part_lignes_>=32_%": 34.4,
+  "part_rayons_sortant_de_la_map_%": 22.1
+ },
+ "symetrie_%": {
+  "miroir_x": 82.9,
+  "miroir_z": 70.5,
+  "rotation_180": 70.4,
+  "rotation_90": 69.5
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 2,
+  "hauteur_max": 30,
+  "colonnes_>=_mediane+12": 705,
+  "part_colonnes_hautes_%": 5.75
+ },
+ "toits": {
+  "colonnes_de_toit": 1947,
+  "categories_%": {
+   "full": 55.6,
+   "leaves": 26.6,
+   "det:escalier": 12.4,
+   "det:dalle": 3.1,
+   "det:eclairage": 1.8,
+   "det:barriere": 0.4,
+   "det:panneau/tete/banniere/pot": 0.1
+  },
+  "materiaux_top8": [
+   [
+    "oak_leaves",
+    26.6
+   ],
+   [
+    "white_wool",
+    18.6
+   ],
+   [
+    "red_wool",
+    17.7
+   ],
+   [
+    "dark_oak_stairs",
+    12.4
+   ],
+   [
+    "white_terracotta",
+    9.6
+   ],
+   [
+    "light_blue_wool",
+    5.6
+   ],
+   [
+    "quartz_block",
+    2.6
+   ],
+   [
+    "oak_slab",
+    2.3
+   ]
+  ],
+  "part_debord_air_dessous_%": 39.2,
+  "hauteurs_distinctes": 25
+ },
+ "secondes": 1.1
+}

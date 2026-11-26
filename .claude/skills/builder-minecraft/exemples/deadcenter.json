@@ -1,0 +1,543 @@
+{
+ "map": "Dead Center ch.2 rues (L4D 1.12)",
+ "dims": [
+  183,
+  50,
+  143
+ ],
+ "joueurs_prevus": 8,
+ "palette": {
+  "blocs_non_air": 256514,
+  "types": 213,
+  "types_>=0.1%": 50,
+  "top25": [
+   [
+    "dirt",
+    22.44
+   ],
+   [
+    "stone#3",
+    11.68
+   ],
+   [
+    "bedrock",
+    10.2
+   ],
+   [
+    "wool#15",
+    5.75
+   ],
+   [
+    "quartz_block",
+    5.24
+   ],
+   [
+    "stained_hardened_clay#9",
+    4.69
+   ],
+   [
+    "stone#6",
+    3.6
+   ],
+   [
+    "stained_hardened_clay",
+    3.32
+   ],
+   [
+    "stone",
+    2.93
+   ],
+   [
+    "water",
+    2.91
+   ],
+   [
+    "leaves",
+    2.89
+   ],
+   [
+    "stone#4",
+    2.72
+   ],
+   [
+    "stone_slab",
+    2.53
+   ],
+   [
+    "stained_hardened_clay#4",
+    1.59
+   ],
+   [
+    "double_stone_slab#8",
+    1.52
+   ],
+   [
+    "sandstone#1",
+    1.37
+   ],
+   [
+    "grass",
+    1.31
+   ],
+   [
+    "iron_bars",
+    0.93
+   ],
+   [
+    "stone#2",
+    0.88
+   ],
+   [
+    "sandstone#2",
+    0.77
+   ],
+   [
+    "stained_hardened_clay#8",
+    0.63
+   ],
+   [
+    "cobblestone",
+    0.53
+   ],
+   [
+    "brick_block",
+    0.51
+   ],
+   [
+    "stained_hardened_clay#7",
+    0.5
+   ],
+   [
+    "sandstone",
+    0.5
+   ]
+  ],
+  "visibles": 124278,
+  "part_visible_par_categorie_%": {
+   "full": 80.8,
+   "det:dalle": 5.79,
+   "leaves": 4.41,
+   "liquid": 2.44,
+   "det:vitre/barreaux": 2.44,
+   "veg": 0.88,
+   "det:escalier": 0.78,
+   "det:tapis": 0.76,
+   "det:barriere": 0.52,
+   "det:bouton/plaque": 0.35,
+   "det:divers": 0.29,
+   "det:trappe": 0.19,
+   "det:panneau/tete/banniere/pot": 0.18,
+   "det:muret": 0.13,
+   "det:porte": 0.03,
+   "det:eclairage": 0.02
+  },
+  "part_detail_visible_%": 11.47,
+  "part_detail_visible_sur_bati_%": 21.13,
+  "part_naturel_visible_%": 37.99,
+  "part_vegetation_visible_%": 5.29,
+  "top_visibles": [
+   [
+    "bedrock",
+    21.06
+   ],
+   [
+    "quartz_block",
+    9.24
+   ],
+   [
+    "wool#15",
+    5.99
+   ],
+   [
+    "stained_hardened_clay",
+    5.67
+   ],
+   [
+    "stained_hardened_clay#9",
+    5.43
+   ],
+   [
+    "stone_slab",
+    5.06
+   ],
+   [
+    "stone#3",
+    4.97
+   ],
+   [
+    "leaves",
+    3.68
+   ],
+   [
+    "water",
+    2.44
+   ],
+   [
+    "grass",
+    2.36
+   ],
+   [
+    "stone#4",
+    2.2
+   ],
+   [
+    "dirt",
+    2.09
+   ],
+   [
+    "stone#6",
+    1.93
+   ],
+   [
+    "iron_bars",
+    1.9
+   ],
+   [
+    "double_stone_slab#8",
+    1.63
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "stone",
+    22,
+    [
+     "cobblestone",
+     "cobblestone_wall",
+     "double_stone_slab",
+     "double_stone_slab#3",
+     "double_stone_slab#4",
+     "double_stone_slab#5",
+     "double_stone_slab#8",
+     "stone",
+     "stone#1",
+     "stone#2",
+     "stone#3",
+     "stone#4",
+     "stone#5",
+     "stone#6",
+     "stone_brick_stairs",
+     "stone_button",
+     "stone_pressure_plate",
+     "stone_slab",
+     "stone_stairs",
+     "stonebrick",
+     "stonebrick#1",
+     "stonebrick#2"
+    ]
+   ],
+   [
+    "terracotta",
+    14,
+    [
+     "stained_hardened_clay",
+     "stained_hardened_clay#1",
+     "stained_hardened_clay#11",
+     "stained_hardened_clay#12",
+     "stained_hardened_clay#13",
+     "stained_hardened_clay#14",
+     "stained_hardened_clay#15",
+     "stained_hardened_clay#2",
+     "stained_hardened_clay#3",
+     "stained_hardened_clay#4",
+     "stained_hardened_clay#5",
+     "stained_hardened_clay#7",
+     "stained_hardened_clay#8",
+     "stained_hardened_clay#9"
+    ]
+   ],
+   [
+    "wool",
+    12,
+    [
+     "wool",
+     "wool#11",
+     "wool#12",
+     "wool#13",
+     "wool#14",
+     "wool#15",
+     "wool#3",
+     "wool#4",
+     "wool#6",
+     "wool#7",
+     "wool#8",
+     "wool#9"
+    ]
+   ],
+   [
+    "carpet",
+    10,
+    [
+     "carpet",
+     "carpet#12",
+     "carpet#13",
+     "carpet#15",
+     "carpet#3",
+     "carpet#4",
+     "carpet#6",
+     "carpet#7",
+     "carpet#8",
+     "carpet#9"
+    ]
+   ],
+   [
+    "mod",
+    8,
+    [
+     "left2mine:hordespawn",
+     "left2mine:itemspawn",
+     "left2mine:light1",
+     "left2mine:light5",
+     "left2mine:light6",
+     "left2mine:trafficcone1",
+     "left2mine:trafficcone3",
+     "left2mine:zombiespawn"
+    ]
+   ],
+   [
+    "stained_glass_pane",
+    8,
+    [
+     "stained_glass_pane",
+     "stained_glass_pane#11",
+     "stained_glass_pane#12",
+     "stained_glass_pane#13",
+     "stained_glass_pane#15",
+     "stained_glass_pane#7",
+     "stained_glass_pane#8",
+     "stained_glass_pane#9"
+    ]
+   ],
+   [
+    "plank",
+    5,
+    [
+     "planks",
+     "planks#1",
+     "planks#2",
+     "planks#3",
+     "planks#5"
+    ]
+   ],
+   [
+    "sandstone",
+    4,
+    [
+     "sandstone",
+     "sandstone#1",
+     "sandstone#2",
+     "sandstone_stairs"
+    ]
+   ],
+   [
+    "wooden",
+    4,
+    [
+     "double_wooden_slab",
+     "wooden_button",
+     "wooden_pressure_plate",
+     "wooden_slab"
+    ]
+   ],
+   [
+    "iron",
+    3,
+    [
+     "iron_block",
+     "iron_door",
+     "iron_trapdoor"
+    ]
+   ]
+  ],
+  "melange_local_%": 12.78,
+  "top5_cumul_%": 55.3
+ },
+ "murs": {
+  "cellules_de_facade": 43677,
+  "pan_coplanaire_mediane": 6,
+  "pan_coplanaire_p90": 19,
+  "pan_coplanaire_max": 46,
+  "pan_meme_bloc_mediane": 5,
+  "pan_meme_bloc_p90": 18,
+  "pan_meme_bloc_max": 46,
+  "segment_meme_materiau_moyen": 3.51,
+  "couches_de_profondeur_fenetre9_moy": 2.04,
+  "part_facade_1_seule_couche_%": 36.7,
+  "part_facade_3+_couches_%": 29.7,
+  "accents_verticaux_pour_100_cellules": 1.22
+ },
+ "relief": {
+  "colonnes_construites": 26169,
+  "histo_hauteur_surface_par_4": [
+   [
+    0,
+    8294
+   ],
+   [
+    4,
+    4549
+   ],
+   [
+    8,
+    2103
+   ],
+   [
+    12,
+    1748
+   ],
+   [
+    16,
+    1284
+   ],
+   [
+    20,
+    2486
+   ],
+   [
+    24,
+    1863
+   ],
+   [
+    28,
+    1215
+   ],
+   [
+    32,
+    452
+   ],
+   [
+    36,
+    320
+   ],
+   [
+    40,
+    89
+   ],
+   [
+    44,
+    491
+   ],
+   [
+    48,
+    1275
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   3,
+   45
+  ],
+  "pente_moy_blocs_par_bloc": 1.211,
+  "part_voisins_meme_hauteur_%": 76.3,
+  "part_marches_1_%": 12.4,
+  "part_ressauts_2-4_%": 4.1,
+  "part_ruptures_5+_%": 7.3,
+  "cases_debout": 25702,
+  "niveaux_de_jeu": [
+   [
+    3,
+    7,
+    66.9
+   ],
+   [
+    10,
+    10,
+    3.1
+   ],
+   [
+    21,
+    21,
+    3.6
+   ]
+  ],
+  "nb_niveaux_>=3%": 3,
+  "y_debout_p5_p50_p95": [
+   4,
+   5,
+   34
+  ],
+  "etages_par_colonne_moy": 1.24,
+  "part_colonnes_multi_niveaux_%": 17.4
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 20772,
+  "bbox_jouable_xz": [
+   183,
+   143
+  ],
+  "surface_jouable_par_joueur_m2": 2596.5,
+  "part_cases_avec_couvert_adjacent_%": 26.5,
+  "distance_au_couvert_moy": 3.22,
+  "distance_au_couvert_mediane": 2,
+  "part_couvert_a_<=3_blocs_%": 73.3,
+  "ligne_de_vue_mediane": 12,
+  "ligne_de_vue_p90": 50,
+  "part_lignes_>=32_%": 19.9,
+  "part_rayons_sortant_de_la_map_%": 14.1
+ },
+ "symetrie_%": {
+  "miroir_x": 31.6,
+  "miroir_z": 30.9,
+  "rotation_180": 30.7,
+  "rotation_90": 21.7
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 9,
+  "hauteur_max": 49,
+  "colonnes_>=_mediane+12": 7165,
+  "part_colonnes_hautes_%": 27.38
+ },
+ "toits": {
+  "colonnes_de_toit": 7665,
+  "categories_%": {
+   "full": 58.4,
+   "det:dalle": 19.5,
+   "leaves": 13.7,
+   "det:tapis": 3.7,
+   "det:vitre/barreaux": 2.8,
+   "det:divers": 0.7,
+   "det:barriere": 0.4,
+   "det:panneau/tete/banniere/pot": 0.4,
+   "det:bouton/plaque": 0.2,
+   "det:trappe": 0.2,
+   "det:escalier": 0.1,
+   "det:muret": 0.0
+  },
+  "materiaux_top8": [
+   [
+    "stone_slab",
+    17.4
+   ],
+   [
+    "quartz_block",
+    13.5
+   ],
+   [
+    "stained_hardened_clay",
+    8.9
+   ],
+   [
+    "leaves",
+    8.9
+   ],
+   [
+    "double_stone_slab#8",
+    6.8
+   ],
+   [
+    "wool#7",
+    6.6
+   ],
+   [
+    "sandstone#2",
+    6.2
+   ],
+   [
+    "leaves#3",
+    4.9
+   ]
+  ],
+  "part_debord_air_dessous_%": 48.6,
+  "hauteurs_distinctes": 43
+ },
+ "secondes": 9.2
+}

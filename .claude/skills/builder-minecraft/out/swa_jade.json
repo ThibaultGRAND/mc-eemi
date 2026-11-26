@@ -1,0 +1,352 @@
+{
+ "map": "swa_jade",
+ "dims": [
+  93,
+  52,
+  113
+ ],
+ "joueurs_prevus": 12,
+ "palette": {
+  "blocs_non_air": 37561,
+  "types": 25,
+  "types_>=0.1%": 20,
+  "top25": [
+   [
+    "dirt",
+    29.99
+   ],
+   [
+    "stone",
+    29.74
+   ],
+   [
+    "grass_block",
+    9.27
+   ],
+   [
+    "mossy_cobblestone",
+    9.03
+   ],
+   [
+    "jungle_leaves",
+    7.34
+   ],
+   [
+    "mossy_stone_bricks",
+    4.56
+   ],
+   [
+    "prismarine_bricks",
+    2.56
+   ],
+   [
+    "prismarine",
+    2.47
+   ],
+   [
+    "dark_prismarine",
+    2.36
+   ],
+   [
+    "jungle_log",
+    0.71
+   ],
+   [
+    "short_grass",
+    0.35
+   ],
+   [
+    "red_terracotta",
+    0.35
+   ],
+   [
+    "water",
+    0.19
+   ],
+   [
+    "dandelion",
+    0.15
+   ],
+   [
+    "stone_brick_slab",
+    0.13
+   ],
+   [
+    "poppy",
+    0.12
+   ],
+   [
+    "oxeye_daisy",
+    0.11
+   ],
+   [
+    "azure_bluet",
+    0.11
+   ],
+   [
+    "mossy_cobblestone_wall",
+    0.1
+   ],
+   [
+    "fern",
+    0.1
+   ],
+   [
+    "allium",
+    0.09
+   ],
+   [
+    "ladder",
+    0.07
+   ],
+   [
+    "sea_lantern",
+    0.06
+   ],
+   [
+    "lily_pad",
+    0.03
+   ],
+   [
+    "gold_block",
+    0.02
+   ]
+  ],
+  "visibles": 14333,
+  "part_visible_par_categorie_%": {
+   "full": 81.91,
+   "leaves": 13.93,
+   "veg": 2.75,
+   "liquid": 0.5,
+   "det:dalle": 0.35,
+   "det:muret": 0.27,
+   "det:eclairage": 0.16,
+   "det:divers": 0.14
+  },
+  "part_detail_visible_%": 0.91,
+  "part_detail_visible_sur_bati_%": 3.38,
+  "part_naturel_visible_%": 55.75,
+  "part_vegetation_visible_%": 16.67,
+  "top_visibles": [
+   [
+    "grass_block",
+    23.62
+   ],
+   [
+    "stone",
+    18.43
+   ],
+   [
+    "jungle_leaves",
+    13.93
+   ],
+   [
+    "dirt",
+    13.69
+   ],
+   [
+    "mossy_cobblestone",
+    6.24
+   ],
+   [
+    "dark_prismarine",
+    6.11
+   ],
+   [
+    "prismarine_bricks",
+    5.37
+   ],
+   [
+    "prismarine",
+    3.0
+   ],
+   [
+    "mossy_stone_bricks",
+    2.98
+   ],
+   [
+    "jungle_log",
+    1.55
+   ],
+   [
+    "short_grass",
+    0.92
+   ],
+   [
+    "red_terracotta",
+    0.87
+   ],
+   [
+    "water",
+    0.5
+   ],
+   [
+    "dandelion",
+    0.39
+   ],
+   [
+    "stone_brick_slab",
+    0.35
+   ]
+  ],
+  "familles_multi_variantes": [
+   [
+    "stone",
+    5,
+    [
+     "mossy_cobblestone",
+     "mossy_cobblestone_wall",
+     "mossy_stone_bricks",
+     "stone",
+     "stone_brick_slab"
+    ]
+   ]
+  ],
+  "melange_local_%": 28.25,
+  "top5_cumul_%": 85.4
+ },
+ "murs": {
+  "cellules_de_facade": 2142,
+  "pan_coplanaire_mediane": 5,
+  "pan_coplanaire_p90": 7,
+  "pan_coplanaire_max": 7,
+  "pan_meme_bloc_mediane": 5,
+  "pan_meme_bloc_p90": 7,
+  "pan_meme_bloc_max": 7,
+  "segment_meme_materiau_moyen": 1.24,
+  "couches_de_profondeur_fenetre9_moy": 2.94,
+  "part_facade_1_seule_couche_%": 0.0,
+  "part_facade_3+_couches_%": 58.0,
+  "accents_verticaux_pour_100_cellules": 0.37
+ },
+ "relief": {
+  "colonnes_construites": 4613,
+  "histo_hauteur_surface_par_4": [
+   [
+    20,
+    1992
+   ],
+   [
+    24,
+    1162
+   ],
+   [
+    28,
+    353
+   ],
+   [
+    32,
+    866
+   ],
+   [
+    36,
+    238
+   ],
+   [
+    40,
+    2
+   ]
+  ],
+  "denivele_surface_p5_p95": [
+   22,
+   36
+  ],
+  "pente_moy_blocs_par_bloc": 0.865,
+  "part_voisins_meme_hauteur_%": 74.6,
+  "part_marches_1_%": 14.3,
+  "part_ressauts_2-4_%": 3.5,
+  "part_ruptures_5+_%": 7.5,
+  "cases_debout": 4887,
+  "niveaux_de_jeu": [
+   [
+    23,
+    26,
+    84.4
+   ],
+   [
+    30,
+    30,
+    5.7
+   ],
+   [
+    34,
+    34,
+    4.3
+   ],
+   [
+    38,
+    38,
+    3.1
+   ]
+  ],
+  "nb_niveaux_>=3%": 4,
+  "y_debout_p5_p50_p95": [
+   23,
+   25,
+   34
+  ],
+  "etages_par_colonne_moy": 1.15,
+  "part_colonnes_multi_niveaux_%": 8.5
+ },
+ "densite": {
+  "emprise_jouable_colonnes": 4245,
+  "bbox_jouable_xz": [
+   93,
+   103
+  ],
+  "surface_jouable_par_joueur_m2": 353.8,
+  "part_cases_avec_couvert_adjacent_%": 15.5,
+  "distance_au_couvert_moy": 2.34,
+  "distance_au_couvert_mediane": 2,
+  "part_couvert_a_<=3_blocs_%": 81.6,
+  "ligne_de_vue_mediane": 25,
+  "ligne_de_vue_p90": 75,
+  "part_lignes_>=32_%": 39.3,
+  "part_rayons_sortant_de_la_map_%": 55.9
+ },
+ "symetrie_%": {
+  "miroir_x": 99.9,
+  "miroir_z": 65.3,
+  "rotation_180": 65.3,
+  "rotation_90": 12.0
+ },
+ "reperes": {
+  "hauteur_surface_mediane": 24,
+  "hauteur_max": 40,
+  "colonnes_>=_mediane+12": 240,
+  "part_colonnes_hautes_%": 5.2
+ },
+ "toits": {
+  "colonnes_de_toit": 1194,
+  "categories_%": {
+   "leaves": 71.0,
+   "full": 26.8,
+   "det:dalle": 2.2
+  },
+  "materiaux_top8": [
+   [
+    "jungle_leaves",
+    71.0
+   ],
+   [
+    "dark_prismarine",
+    25.1
+   ],
+   [
+    "stone_brick_slab",
+    2.2
+   ],
+   [
+    "red_terracotta",
+    1.5
+   ],
+   [
+    "gold_block",
+    0.2
+   ]
+  ],
+  "part_debord_air_dessous_%": 43.7,
+  "hauteurs_distinctes": 12
+ },
+ "secondes": 2.1
+}
