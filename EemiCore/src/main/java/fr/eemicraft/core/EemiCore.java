@@ -2797,7 +2797,7 @@ implements Listener {
         }
         // 1.9.4 : la case « quetes » de l'accueil de la boutique devient « Saison » (les quetes restent dans le profil)
         List<String> saison = this.saisonIds(d);
-        lines.add(new NavUi.Ligne("s_quetes", saison.isEmpty() ? "SAISON : RIEN" : "✦ SAISON : " + saison.size(), NavUi.colorOf(saison.isEmpty() ? "&7" : "&6")));
+        lines.add(new NavUi.Ligne("s_quetes", saison.isEmpty() ? "SAISON : RIEN" : "SAISON : " + saison.size(), NavUi.colorOf(saison.isEmpty() ? "&7" : "&6")));
         lines.add(new NavUi.Ligne("bas", "GAGNE DES PIÈCES EN JOUANT"));
         Inventory inv = this.navInv(h, "boutique", ov, lines);
         this.navHead(h, inv, "boutique", List.of("&7Cadre &6doré &7: un cosmétique de la", "&7catégorie est équipé.", "", "&7Pièces : parties, victoires, kills,", "&7quêtes du jour et connexion quotidienne."));
@@ -2924,7 +2924,7 @@ implements Listener {
             acts.add("cos:" + id + ":" + page);
         }
         String seasonName = saisonPage ? this.cosmetic(visible.get(0)).getString("season", "") : "";
-        List<NavUi.Ligne> lines = List.of(new NavUi.Ligne("haut", saisonPage ? "✦ " + seasonName.toUpperCase() : EemiCore.strip(CATEGORY_NAMES[ci])),
+        List<NavUi.Ligne> lines = List.of(new NavUi.Ligne("haut", saisonPage ? seasonName.toUpperCase().replace("Ë", "E").replace("Ï", "I").replace("Ü", "U") : EemiCore.strip(CATEGORY_NAMES[ci])),
                 new NavUi.Ligne("page", (page + 1) + "/" + pages), new NavUi.Ligne("solde", EemiCore.num(d.coins) + " ⛃", NavUi.colorOf("&6")));
         Inventory inv = this.navInv(h, "boutique_cat", ov, lines);
         this.navHead(h, inv, "boutique_cat", List.of("&7Cadre &6doré &7: équipé", "&7Cadre &avert &7: acheté", "&7Cadre &crouge &7: pas assez de pièces", "&7Sans cadre : à acheter", "",
