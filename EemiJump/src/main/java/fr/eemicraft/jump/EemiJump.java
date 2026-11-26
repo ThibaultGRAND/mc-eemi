@@ -216,6 +216,15 @@ public final class EemiJump extends JavaPlugin implements Listener {
         boolean noFall;
         long nfStart = -1;
         boolean hide;
+        /**
+         * Chrono du niveau en cours (classement par niveau, carte #117) : lvStart = depart (-1 = pas encore parti),
+         * lvWait = le chrono partira quand le joueur quittera la plateforme (apres un retour, une chute, une reprise),
+         * lvValid = faux apres un saut de niveau (/jump niveau, menu, /jump set) jusqu'a la prochaine plateforme validee.
+         */
+        long lvStart = -1;
+        boolean lvWait = true, lvValid = true;
+        /** Barre d'action du temps du niveau gardee jusqu'a cette heure (le chrono du sans chute ne l'ecrase pas). */
+        long abUntil;
         Scoreboard board;
         final List<String> lines = new ArrayList<>();
 
@@ -290,6 +299,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
     /** Classement par parcours. */
     final Map<String, Map<UUID, Entry>> board = new HashMap<>();
     NamespacedKey itemKey;
+    LevelTimes levelTimes;
 
     static Component c(String s) {
         return L.deserialize(s).decoration(TextDecoration.ITALIC, false);
@@ -310,12 +320,22 @@ public final class EemiJump extends JavaPlugin implements Listener {
         return (h > 0 ? h + ":" : "") + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
     }
 
+    /** Temps d'un niveau : mm:ss.cc (centiemes). */
+    static String timeCs(long ms) {
+        if (ms <= 0) {
+            return "-";
+        }
+        long cs = (ms / 10) % 100;
+        return time(ms) + "." + (cs < 10 ? "0" : "") + cs;
+    }
+
     // ================================================================ cycle de vie
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         itemKey = new NamespacedKey(this, "item");
+        levelTimes = new LevelTimes(getDataFolder(), getLogger());
         loadCourses();
         loadBoard();
         getServer().getPluginManager().registerEvents(this, this);
@@ -330,6 +350,13 @@ public final class EemiJump extends JavaPlugin implements Listener {
                 }
             }
         }, 6000L, 6000L);
+        // temps par niveau : fichiers modifies reecrits toutes les 30 s, hors du fil principal
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
+            List<Object[]> snap = levelTimes.snapshot();
+            if (!snap.isEmpty()) {
+                Bukkit.getScheduler().runTaskAsynchronously(this, () -> levelTimes.write(snap));
+            }
+        }, 600L, 600L);
     }
 
     @Override
@@ -341,6 +368,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
             }
         }
         sessions.clear();
+        if (levelTimes != null) {
+            levelTimes.write(levelTimes.snapshot());
+        }
     }
 
     @Override
@@ -1179,6 +1209,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
         Session s = new Session(p.getUniqueId(), c);
         s.noFall = noFall;
         s.cur = noFall ? 0 : level < 0 ? pr.current : Math.min(level, pr.max);
+        // reprise au niveau en cours (ou depart) : chronometre ; niveau choisi ailleurs ou mis par /jump set : non
+        s.lvValid = noFall || s.cur == 0 || s.cur == pr.current && !ltSkip(p.getUniqueId(), c, s.cur);
         s.enterAt = System.currentTimeMillis();
         s.levelStart = s.enterAt;
         s.lastTp = s.enterAt;
@@ -1363,6 +1395,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
         Course c = s.course;
         Progress pr = progress(s.id, c);
         Menu m = new Menu(c);
+        LevelTimes.Board lb = ltEnabled() ? ltBoard(c, false) : null;
         int groups = (c.last() + 9) / 10;
         for (int g = 0; g < groups && g < 45; g++) {
             int first = g * 10 + 1;
@@ -1372,9 +1405,27 @@ public final class EemiJump extends JavaPlugin implements Listener {
             boolean done = pr.max >= lastL;
             Material mat = here ? Material.EMERALD : done ? Material.LIME_CONCRETE : open ? Material.YELLOW_CONCRETE : Material.GRAY_CONCRETE;
             String name = (open ? (done ? "&a" : "&e") : "&8") + "Niveaux " + first + " a " + lastL;
-            ItemStack it = open
-                    ? item(mat, name, null, here ? "&7Tu es ici (niveau " + (s.cur + 1) + ")" : done ? "&7Termines" : "&7En cours", "&fClic : aller au niveau " + first)
-                    : item(mat, name, null, "&cBloques", "&7Finis le niveau " + (first - 1) + " pour les debloquer");
+            List<String> lore = new ArrayList<>();
+            if (open) {
+                lore.add(here ? "&7Tu es ici (niveau " + (s.cur + 1) + ")" : done ? "&7Termines" : "&7En cours");
+                lore.add("&fClic : aller au niveau " + first);
+            } else {
+                lore.add("&cBloques");
+                lore.add("&7Finis le niveau " + (first - 1) + " pour les debloquer");
+            }
+            if (lb != null) {
+                // temps par niveau : record, detenteur et meilleur temps du joueur (carte #117)
+                lore.add("&8 ");
+                lore.add("&6Records des niveaux &8(record | toi)");
+                for (int lv = first; lv <= lastL; lv++) {
+                    int rec = lb.record[lv];
+                    int mine = lb.mine(p.getUniqueId(), lv);
+                    boolean mineIsRec = rec > 0 && p.getUniqueId().equals(lb.holder[lv]);
+                    lore.add("&7" + lv + ". " + (rec > 0 ? "&b" + timeCs(rec) + " &f" + lb.name(lb.holder[lv]) : "&8aucun temps")
+                            + (mineIsRec ? " &6(toi)" : mine > 0 ? " &8| &a" + timeCs(mine) : ""));
+                }
+            }
+            ItemStack it = item(mat, name, null, lore.toArray(new String[0]));
             it.setAmount(Math.max(1, Math.min(64, g + 1)));
             m.inv.setItem(g, it);
         }
@@ -1670,6 +1721,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
         if (c.noFall && to instanceof Player) {
             to.sendMessage(c("&8Classement sans chute : &7/jump top " + c.id + " sanschute"));
         }
+        if (ltEnabled() && to instanceof Player) {
+            to.sendMessage(c("&8Temps par niveau : &7/jump top " + c.id + " niveau <n>"));
+        }
     }
 
     void showTopNoFall(CommandSender to, Course c) {
@@ -1692,6 +1746,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
     void goTo(Player p, Session s, int n, boolean announce) {
         Progress pr = progress(s.id, s.course);
         n = Math.max(0, Math.min(n, pr.max));
+        // saut vers un autre niveau (menu, /jump niveau) : ce niveau ne sera pas chronometre
+        s.lvValid = n == 0 || n == s.cur && s.lvValid;
+        lvReset(s);
         s.cur = n;
         s.levelStart = System.currentTimeMillis();
         s.lastTp = s.levelStart;
@@ -1730,6 +1787,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
         s.nfStart = -1;
         s.levelStart = now;
         s.lastTp = now;
+        lvReset(s);
+        s.lvValid = true;
         p.setFallDistance(0);
         p.setFireTicks(0);
         p.teleport(c.loc(0));
@@ -1752,6 +1811,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
         }
         s.falls++;
         s.lastTp = System.currentTimeMillis();
+        lvReset(s);
         p.setFallDistance(0);
         p.setFireTicks(0);
         p.teleport(s.course.loc(s.cur));
@@ -1765,6 +1825,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
         Course c = s.course;
         long now = System.currentTimeMillis();
         long levelMs = now - s.levelStart;
+        String lt = levelTime(p, s, n, now);
+        s.abUntil = now + 2500;
         if (s.nfStart < 0) {
             // plateforme 1 atteinte sans etre sorti de l'emprise de la 0 (plateformes qui se touchent) : chrono depuis le depart
             s.nfStart = s.levelStart;
@@ -1781,7 +1843,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
         if (n < c.last()) {
             storeNoFall(s.id, p.getName(), c, nf);
             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 0.8f, record ? 1.6f : 1.2f);
-            p.sendActionBar(c("&4Sans chute &8| &aNiveau " + n + " réussi &7(" + time(levelMs) + ")" + (record ? " &e- record !" : "")));
+            p.sendActionBar(c("&4Sans chute &8| &aNiveau " + n + " réussi" + (lt.isEmpty() ? " &7(" + time(levelMs) + ")" : lt) + (record ? " &e- meilleur niveau !" : "")));
             if (n % 10 == 0) {
                 p.showTitle(Title.title(c("&4" + n + "&7/" + c.last()), c(record ? "&eMeilleur niveau sans chute !" : "&7Sans chute, continue !"),
                         Title.Times.times(Duration.ofMillis(150), Duration.ofMillis(1500), Duration.ofMillis(400))));
@@ -1803,6 +1865,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
         }
         storeNoFall(s.id, p.getName(), c, nf);
         p.showTitle(Title.title(c("&4&lSANS FAUTE !"), c("&e" + c.last() + " niveaux sans tomber"), Title.Times.times(Duration.ofMillis(200), Duration.ofSeconds(5), Duration.ofMillis(800))));
+        if (!lt.isEmpty()) {
+            p.sendActionBar(c("&4Sans chute &8| &aNiveau " + n + " réussi" + lt));
+        }
         p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
         p.playSound(p.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 1f, 1f);
         p.getWorld().spawnParticle(Particle.TOTEM_OF_UNDYING, p.getLocation().add(0, 1, 0), 120, 0.6, 1, 0.6, 0.5);
@@ -1894,6 +1959,149 @@ public final class EemiJump extends JavaPlugin implements Listener {
         }
     }
 
+    // ================================================================ temps par niveau (carte #117)
+
+    boolean ltEnabled() {
+        return getConfig().getBoolean("level-times.enabled", true);
+    }
+
+    static String ltKey(Course c, boolean noFall) {
+        return noFall ? nfKey(c) : c.id;
+    }
+
+    LevelTimes.Board ltBoard(Course c, boolean noFall) {
+        return levelTimes.board(ltKey(c, noFall), c.last());
+    }
+
+    /** Niveau a partir duquel un nouveau record du niveau est annonce a tout le serveur (0 = jamais). */
+    int announceFrom(Course c) {
+        String b = "level-times.announce-from-level.";
+        return getConfig().getInt(b + c.id, getConfig().getInt(b + "default", 50));
+    }
+
+    /** Le chrono du niveau repartira quand le joueur quittera sa plateforme (retour, chute, reprise). */
+    static void lvReset(Session s) {
+        s.lvStart = -1;
+        s.lvWait = true;
+    }
+
+    /** Marqueur pose par /jump set : le premier niveau rejoue apres la reprise n'est pas chronometre. */
+    boolean ltSkip(UUID id, Course c, int cur) {
+        return data(id).getInt("courses." + c.id + ".lt-skip", -1) == cur;
+    }
+
+    /**
+     * Plateforme n validee : enregistre le temps du niveau n (depuis la validation de la plateforme n-1, ou depuis le
+     * depart de cette plateforme apres un retour / une chute / une reprise) et relance le chrono pour le niveau suivant.
+     * Renvoie le texte a ajouter a la barre d'action ("" si le niveau n'etait pas chronometre).
+     */
+    String levelTime(Player p, Session s, int n, long now) {
+        // pas encore parti de la plateforme (plateformes qui se touchent) : chrono depuis l'arrivee sur la plateforme
+        long start = s.lvStart >= 0 ? s.lvStart : s.lvWait ? s.lastTp : -1;
+        boolean valid = s.lvValid && start >= 0;
+        s.lvStart = now;
+        s.lvWait = false;
+        s.lvValid = true;
+        if (!valid || !ltEnabled()) {
+            return "";
+        }
+        long ms = now - start;
+        if (ms < getConfig().getInt("level-times.min-ms", 300) || ms > Integer.MAX_VALUE) {
+            return "";
+        }
+        Course c = s.course;
+        LevelTimes.Result r = levelTimes.submit(ltKey(c, s.noFall), c.last(), s.id, p.getName(), n, (int) ms);
+        StringBuilder sb = new StringBuilder(" &7(&b" + timeCs(ms) + "&7)");
+        if (r.levelRecord && r.previousRecord <= 0) {
+            sb.append(" &6Premier temps du niveau !");
+        } else if (r.levelRecord) {
+            sb.append(" &6&lRecord du niveau !");
+            int from = announceFrom(c);
+            if (from > 0 && n >= from) {
+                boolean other = r.previousHolder != null && !r.previousHolder.equals(s.id);
+                Bukkit.broadcast(c(P + "&f" + p.getName() + " &7bat le record du &aniveau " + n + " &7de &f" + c.name
+                        + (s.noFall ? " &4(sans chute)" : "") + " &7: &b" + timeCs(ms)
+                        + " &8(avant : " + timeCs(r.previousRecord) + (other ? " par " + ltBoard(c, s.noFall).name(r.previousHolder) : "") + ")"));
+            }
+            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.7f, 1.5f);
+        } else if (r.personal && r.previousMine > 0) {
+            sb.append(" &eRecord perso !");
+        }
+        return sb.toString();
+    }
+
+    /** /jump top <parcours> niveau <n> [sanschute] : top 10 du niveau. */
+    void showTopLevel(CommandSender to, Course c, int n, boolean nf) {
+        LevelTimes.Board b = ltBoard(c, nf);
+        List<UUID> l = b.top(n);
+        msg(to, "&6Meilleurs temps &f" + c.name + " &7- niveau &a" + n + "&7/" + c.last() + (nf ? " &4(sans chute)" : ""));
+        if (l.isEmpty()) {
+            msg(to, "&7Personne n'a encore de temps sur ce niveau.");
+        }
+        for (int i = 0; i < Math.min(10, l.size()); i++) {
+            UUID id = l.get(i);
+            to.sendMessage(c("&e" + (i + 1) + ". &f" + b.name(id) + " &7- &b" + timeCs(b.mine(id, n))));
+        }
+        if (to instanceof Player pl) {
+            int mine = b.mine(pl.getUniqueId(), n);
+            int rank = l.indexOf(pl.getUniqueId()) + 1;
+            if (mine <= 0) {
+                to.sendMessage(c("&7Tu n'as pas encore de temps sur ce niveau."));
+            } else if (rank > 10) {
+                to.sendMessage(c("&7Toi : &a" + timeCs(mine) + " &7(" + rank + "e)"));
+            }
+        }
+    }
+
+    /**
+     * Classement d'un niveau si les arguments de /jump top contiennent « niveau <n> » ; renvoie faux sinon.
+     * Formes : top niveau <n> [sanschute] (parcours en cours ou par defaut), top <parcours> niveau <n> [sanschute].
+     */
+    boolean topLevel(CommandSender to, Session s, String[] args) {
+        int at = -1;
+        for (int i = 1; i < args.length; i++) {
+            String a = args[i].toLowerCase();
+            if (a.equals("niveau") || a.equals("level") || a.equals("niv")) {
+                at = i;
+                break;
+            }
+        }
+        if (at < 0) {
+            return false;
+        }
+        Course c = course(at > 1 ? args[1] : s != null ? s.course.id : null);
+        if (c == null) {
+            msg(to, "&cParcours inconnu.");
+            return true;
+        }
+        if (at + 1 >= args.length) {
+            msg(to, "&7/jump top " + c.id + " niveau <1-" + c.last() + "> [sanschute]");
+            return true;
+        }
+        int n;
+        try {
+            n = Integer.parseInt(args[at + 1]);
+        } catch (NumberFormatException e) {
+            msg(to, "&cNuméro de niveau invalide.");
+            return true;
+        }
+        if (n < 1 || n > c.last()) {
+            msg(to, "&c" + c.name + " &ca des niveaux de 1 à " + c.last() + ".");
+            return true;
+        }
+        boolean nf = args.length > at + 2 && isNoFallArg(args[at + 2]);
+        if (nf && !c.noFall) {
+            msg(to, "&c" + c.name + " &cn'a pas de mode sans chute.");
+            return true;
+        }
+        if (!ltEnabled()) {
+            msg(to, "&7Les temps par niveau sont désactivés.");
+            return true;
+        }
+        showTopLevel(to, c, n, nf);
+        return true;
+    }
+
     void reach(Player p, Session s, int n) {
         if (s.noFall) {
             reachNoFall(p, s, n);
@@ -1902,9 +2110,11 @@ public final class EemiJump extends JavaPlugin implements Listener {
         Course c = s.course;
         long now = System.currentTimeMillis();
         long levelMs = now - s.levelStart;
+        String lt = levelTime(p, s, n, now);
         s.cur = n;
         s.levelStart = now;
         Progress pr = progress(s.id, c);
+        data(s.id).set("courses." + c.id + ".lt-skip", null);
         boolean record = n > pr.max;
         if (record) {
             pr.max = n;
@@ -1933,6 +2143,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
         store(s.id, p.getName(), c, pr);
         if (finish) {
             p.showTitle(Title.title(c("&6&lBRAVO !"), c("&eLes " + c.last() + " niveaux sont finis"), Title.Times.times(Duration.ofMillis(200), Duration.ofSeconds(4), Duration.ofMillis(800))));
+            if (!lt.isEmpty()) {
+                p.sendActionBar(c("&aNiveau " + n + " réussi" + lt));
+            }
             p.playSound(p.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
             p.getWorld().spawnParticle(Particle.TOTEM_OF_UNDYING, p.getLocation().add(0, 1, 0), 80, 0.6, 1, 0.6, 0.4);
             if ((c.bigBonus && c.bonus == null) || pr.finished == 1) {
@@ -1959,7 +2172,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
             grantFinishBonus(p, s.id, c);
         } else {
             p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 0.8f, record ? 1.6f : 1.2f);
-            p.sendActionBar(c("&aNiveau " + n + " reussi &7(" + time(levelMs) + ")" + (record ? " &e- nouveau record !" : "")));
+            p.sendActionBar(c("&aNiveau " + n + " réussi" + (lt.isEmpty() ? " &7(" + time(levelMs) + ")" : lt) + (record ? " &e- nouveau niveau atteint !" : "")));
             if (n % 10 == 0) {
                 p.showTitle(Title.title(c("&a" + n + "&7/" + c.last()), c(record ? "&eNouveau record !" : "&7Continue !"), Title.Times.times(Duration.ofMillis(150), Duration.ofMillis(1500), Duration.ofMillis(400))));
             }
@@ -2004,6 +2217,11 @@ public final class EemiJump extends JavaPlugin implements Listener {
         // sans chute : le chrono part quand on quitte l'emprise de la plateforme de depart
         if (s.noFall && s.cur == 0 && s.nfStart < 0 && !c.area(0, to)) {
             s.nfStart = now;
+        }
+        // chrono du niveau apres un retour / une chute / une reprise : il part quand on quitte la plateforme
+        if (s.lvWait && !c.area(s.cur, to)) {
+            s.lvStart = now;
+            s.lvWait = false;
         }
         int n = s.cur + 1;
         if (n <= c.last() && p.isOnGround() && c.on(n, to)) {
@@ -2072,6 +2290,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
                     return;
                 }
                 s.lastTp = now;
+                lvReset(s);
                 p.setFallDistance(0);
                 p.setFireTicks(0);
                 p.teleport(s.course.loc(s.cur));
@@ -2172,6 +2391,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
         Session s = sessions.get(e.getPlayer().getUniqueId());
         if (s != null) {
             s.lastTp = System.currentTimeMillis();
+            lvReset(s);
             e.setRespawnLocation(s.course.loc(s.noFall ? 0 : s.cur));
             if (s.noFall) {
                 // une mort en sans chute = une chute : nouvel essai depuis le niveau 1
@@ -2193,7 +2413,14 @@ public final class EemiJump extends JavaPlugin implements Listener {
     public void onGameMode(org.bukkit.event.player.PlayerGameModeChangeEvent e) {
         Player p = e.getPlayer();
         Session s = sessions.get(p.getUniqueId());
-        if (s == null || !s.noFall || e.getNewGameMode() == p.getGameMode()) {
+        if (s == null || e.getNewGameMode() == p.getGameMode()) {
+            return;
+        }
+        if (!s.noFall) {
+            // creatif / spectateur pour voler : le niveau en cours n'est plus chronometre
+            if (e.getNewGameMode() == GameMode.CREATIVE || e.getNewGameMode() == GameMode.SPECTATOR) {
+                s.lvValid = false;
+            }
             return;
         }
         Bukkit.getScheduler().runTaskLater(this, () -> {
@@ -2275,7 +2502,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
             Player p = Bukkit.getPlayer(s.id);
             if (p != null) {
                 updateBoard(p, s);
-                if (s.noFall && s.cur < s.course.last()) {
+                if (s.noFall && s.cur < s.course.last() && System.currentTimeMillis() >= s.abUntil) {
                     p.sendActionBar(c("&4Sans chute &8| &fNiveau &a" + (s.cur + 1) + "&7/" + s.course.last() + " &8| &b"
                             + (s.nfStart >= 0 ? time(System.currentTimeMillis() - s.nfStart) : "00:00")));
                 }
@@ -2344,6 +2571,89 @@ public final class EemiJump extends JavaPlugin implements Listener {
 
     // ================================================================ commandes
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+        List<String> opts = new ArrayList<>();
+        String last = args.length == 0 ? "" : args[args.length - 1].toLowerCase();
+        if (args.length <= 1) {
+            opts.addAll(List.of("parcours", "sanschute", "niveau", "top", "stats", "regarder", "leave"));
+            opts.addAll(courses.keySet());
+            if (sender.hasPermission("eemijump.admin")) {
+                opts.addAll(List.of("reload", "info", "set"));
+            }
+        } else {
+            String sub = args[0].toLowerCase();
+            switch (sub) {
+                case "top", "classement" -> {
+                    int at = -1;
+                    for (int i = 1; i < args.length - 1; i++) {
+                        String a = args[i].toLowerCase();
+                        if (a.equals("niveau") || a.equals("level") || a.equals("niv")) {
+                            at = i;
+                            break;
+                        }
+                    }
+                    if (args.length == 2) {
+                        opts.addAll(courses.keySet());
+                        opts.add("niveau");
+                        opts.add("sanschute");
+                    } else if (at < 0) {
+                        if (args.length == 3 && courses.containsKey(args[1].toLowerCase())) {
+                            opts.add("niveau");
+                            if (courses.get(args[1].toLowerCase()).noFall) {
+                                opts.add("sanschute");
+                            }
+                        }
+                    } else if (args.length - 1 == at + 1) {
+                        Course c = at > 1 ? courses.get(args[1].toLowerCase()) : null;
+                        if (c == null && sender instanceof Player pl && sessions.get(pl.getUniqueId()) != null) {
+                            c = sessions.get(pl.getUniqueId()).course;
+                        }
+                        if (c == null) {
+                            c = defaultCourse();
+                        }
+                        if (c != null) {
+                            for (int i = 1; i <= c.last(); i++) {
+                                opts.add(String.valueOf(i));
+                            }
+                        }
+                    } else if (args.length - 1 == at + 2) {
+                        opts.add("sanschute");
+                    }
+                }
+                case "sanschute", "nofall", "hardcore", "hc" -> {
+                    if (args.length == 2) {
+                        for (Course c : courses.values()) {
+                            if (c.noFall) {
+                                opts.add(c.id);
+                            }
+                        }
+                    }
+                }
+                case "regarder", "spectate", "watch", "spec", "stats" -> {
+                    if (args.length == 2) {
+                        return null;
+                    }
+                }
+                case "set" -> {
+                    if (!sender.hasPermission("eemijump.admin")) {
+                        return opts;
+                    }
+                    if (args.length == 2) {
+                        return null;
+                    }
+                    if (args.length == 4) {
+                        opts.addAll(courses.keySet());
+                    }
+                }
+                default -> {
+                }
+            }
+        }
+        opts.removeIf(o -> !o.toLowerCase().startsWith(last));
+        return opts;
+    }
+
     Course course(String id) {
         return id == null ? defaultCourse() : courses.get(id.toLowerCase());
     }
@@ -2378,6 +2688,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
                     }
                 }
                 reloadConfig();
+                levelTimes.write(levelTimes.snapshot());
+                levelTimes.clear();
                 cache.clear();
                 loadCourses();
                 loadBoard();
@@ -2422,6 +2734,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
                 Progress pr = progress(op.getUniqueId(), c);
                 pr.max = n;
                 pr.current = n;
+                // le niveau rejoue apres cette mise a niveau ne compte pas dans les temps par niveau
+                data(op.getUniqueId()).set("courses." + c.id + ".lt-skip", n);
                 store(op.getUniqueId(), op.getName() == null ? args[1] : op.getName(), c, pr);
                 if (online == null) {
                     cache.remove(op.getUniqueId());
@@ -2434,6 +2748,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
         }
         if (!(sender instanceof Player p)) {
             if (sub.equals("top")) {
+                if (topLevel(sender, null, args)) {
+                    return true;
+                }
                 Course c = course(args.length > 1 ? args[1] : null);
                 if (c != null) {
                     if (args.length > 2 && isNoFallArg(args[2]) && c.noFall) {
@@ -2444,7 +2761,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
                 }
                 return true;
             }
-            msg(sender, "&7/jump reload | info | set <joueur> <niveau> | top");
+            msg(sender, "&7/jump reload | info | set <joueur> <niveau> | top [parcours] [niveau <n>] [sanschute]");
             return true;
         }
         Session s = sessions.get(p.getUniqueId());
@@ -2523,6 +2840,9 @@ public final class EemiJump extends JavaPlugin implements Listener {
                 }
             }
             case "top", "classement" -> {
+                if (topLevel(p, s, args)) {
+                    return true;
+                }
                 boolean nf = args.length > 1 && isNoFallArg(args[args.length - 1]);
                 String cid = args.length > 1 && !isNoFallArg(args[1]) ? args[1] : (s != null ? s.course.id : null);
                 if (nf && (cid == null || course(cid) == null || !course(cid).noFall) && firstNoFall() != null) {
@@ -2570,7 +2890,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
                     }
                     return true;
                 }
-                msg(p, "&7/jump &f(choix du parcours ou menu) &7| /jump <" + String.join("|", courses.keySet()) + "> | /jump sanschute [parcours] | /jump niveau <n> | /jump top [parcours] [sanschute] | /jump stats [joueur] | /jump leave");
+                msg(p, "&7/jump &f(choix du parcours ou menu) &7| /jump <" + String.join("|", courses.keySet()) + "> | /jump sanschute [parcours] | /jump niveau <n> | /jump top [parcours] [sanschute] | /jump top [parcours] niveau <n> [sanschute] | /jump stats [joueur] | /jump leave");
             }
         }
         return true;

@@ -949,7 +949,8 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Jump solo (EemiJump)
 
-- **État** : 1.5.1 installée. Pas testés en jeu : slime du niveau 32, Balade, niveau 74 refait, mode sans chute, `/jump regarder`.
+- **État** : 1.5.1 installée ; 1.6.0 compilée (26/11, `a_deposer/EemiJump-1.6.0.jar`), PAS installée. Pas testés en jeu : slime du niveau 32, Balade, niveau 74 refait, mode sans chute, `/jump regarder`, et tout le classement par niveau de la 1.6.0.
+- **Classement par niveau (1.6.0, carte #117)** : temps par niveau, en normal et en sans chute (classements séparés). Le chrono part à la validation de la plateforme précédente, ou en quittant la plateforme après un retour, une chute ou une reprise ; une chute le relance. Pas chronométré : niveau rejoint par `/jump niveau`, le menu ou après `/jump set` (marqueur `lt-skip`), ni en créatif/spectateur ; temps < `min-ms` (300) ignorés. Barre d'action « Niveau n réussi (mm:ss.cc) » + « Record du niveau ! » / « Record perso ! » ; annonce à tous seulement si un record existant est battu à partir de `level-times.announce-from-level` (default 50, balade 30, 0 = jamais). `/jump top <parcours> niveau <n> [sanschute]` (top 10), records dans le lore des groupes du menu des niveaux, tab-complétion de `/jump`. Données `plugins/EemiJump/levels/<id>[-sanschute].txt` (`uuid<TAB>pseudo<TAB>niveau=ms,…`), écrites toutes les 30 s hors fil principal, à l'arrêt et au reload.
 - **Fonctionnement** :
   - Source `EemiJump/`, `/jump` alias `/parkour`, id EemiCore `jump` (join `jump join`). `/jump` ouvre le choix des parcours (menu 10/12/14/16, sans chute en 22) ; `/jump top|stats|niveau <n>|leave|sanschute` (alias nofall, hc) `|regarder <joueur>` (alias spectate/watch/spec), admin `reload|info|set <joueur> <n>`.
   - Parcours (fichiers `src/main/resources/courses/<id>.yml`, mondes chargés par le plugin via WorldCreator, pas de `mv import`) :

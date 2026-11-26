@@ -41,3 +41,16 @@ hub:
   pitch: 0
 max-players: 50
 eemicore-id: jump
+
+# Temps par niveau (carte #117) : meilleur temps de chaque joueur sur chaque niveau, par parcours et pour le sans chute.
+# Un niveau est chronometre depuis la validation de la plateforme precedente (ou depuis le depart de cette plateforme
+# apres un retour, une chute ou une reprise). Pas chronometre : le niveau rejoint par /jump niveau, le menu ou /jump set.
+# /jump top <parcours> niveau <n> [sanschute] ; records affiches dans le menu des niveaux. Fichiers : levels/<parcours>.txt
+level-times:
+  enabled: true
+  # temps plus court ignore (glissement sur des plateformes collees), en millisecondes
+  min-ms: 300
+  # nouveau record d'un niveau annonce a tout le serveur a partir de ce niveau (0 = jamais) ; un parcours peut avoir le sien
+  announce-from-level:
+    default: 50
+    balade: 30

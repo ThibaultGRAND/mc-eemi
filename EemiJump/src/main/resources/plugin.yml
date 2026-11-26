@@ -8,7 +8,7 @@ description: Jump solo - plusieurs parcours (facile, moyen, difficile), progress
 commands:
   jump:
     description: Jump solo
-    usage: /jump [parcours|<id du parcours>|sanschute [parcours]|leave|niveau <n>|top [parcours] [sanschute]|stats [joueur]]
+    usage: /jump [parcours|<id du parcours>|sanschute [parcours]|leave|niveau <n>|top [parcours] [niveau <n>] [sanschute]|stats [joueur]]
     aliases: [parkour]
 
 permissions:
