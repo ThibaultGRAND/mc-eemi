@@ -52,6 +52,25 @@ public abstract class HsMap {
     /** Hauteur du sol naturel en (x, z) pour les mesures, MIN_VALUE si inconnue (sol = measureFloorY). */
     public int groundY(int x, int z) { return Integer.MIN_VALUE; }
 
+    /**
+     * Bloc du sol de reference en (x, z) pour la regle anti-perchoir (1.6.0, carte #135) : un cacheur a l'air libre
+     * dont les pieds sont plus de max-roof-height blocs au-dessus de ce sol est sur un toit ou un perchoir.
+     * MIN_VALUE = hors de la map (regle non appliquee). Par defaut : sol plat measureFloorY dans la zone de jeu.
+     */
+    public int roofGround(int x, int z) {
+        int[] pb = playBox();
+        if (x < pb[0] || x > pb[3] || z < pb[2] || z > pb[5]) return Integer.MIN_VALUE;
+        return measureFloorY();
+    }
+
+    /**
+     * Case en hauteur a l'air libre prevue par la map (passerelle, pont de bateau, escalier exterieur...) : jamais
+     * consideree comme un perchoir. Par defaut aucune.
+     */
+    public boolean perchAllowed(int x, int y, int z) {
+        return false;
+    }
+
     public final synchronized void build(Sink sink) {
         this.s = sink;
         try {

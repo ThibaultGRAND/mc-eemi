@@ -66,6 +66,18 @@ radar-warm: 35.0
 forced-sound-min: 45
 forced-sound-max: 60
 
+# Toits et perchoirs (1.6.0, carte #135) : un cacheur ne peut pas se cacher sur les toits ni en hauteur a coups de sauts.
+# Perchoir = le cacheur est a l'air libre (aucun bloc au-dessus de sa tete sur roof-cover-scan blocs ; feuilles et
+# barrieres ne comptent pas) ET ses pieds sont a plus de max-roof-height blocs au-dessus du sol de la map a cet endroit
+# (village : herbe y 64 ; port : quai, terrasse haute ou vase, ponts des bateaux ; supermarche : tout est couvert, donc
+# gondoles et mezzanine restent permises). Etages, combles, mezzanines, escaliers et la galerie du phare restent permis.
+# Sur un perchoir : impossible de devenir solide ; au bout de roof-return-delay secondes, retour au dernier point
+# valide ou il etait au sol (sans degats). Ne concerne que les cacheurs. roof-block: false = regle coupee.
+roof-block: true
+max-roof-height: 3
+roof-return-delay: 2.0
+roof-cover-scan: 24
+
 # Provocation (taunt) : son + particules, +1 point et le temps restant baisse de taunt-time-bonus secondes.
 taunt-cooldown: 15
 taunt-time-bonus: 5

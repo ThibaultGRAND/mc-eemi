@@ -49,6 +49,50 @@ public final class PortMap extends HsMap {
 
     public PortMap() {
         super("port", "Port de p\u00eache", 1);
+        nz = new Noise(0x5047L);
+        computeTerrain();
+        perchTop = top;
+        perchZone = zone;
+        top = null;
+        zone = null;
+        nz = null;
+    }
+
+    /**
+     * Sols surelevés prevus par la map pour la regle anti-perchoir (local x1, z1, x2, z2, bloc du sol) : ponts des trois
+     * bateaux pontes du bassin (pont en y MY + 5, passerelles comprises, cf. boats()) et estacade de la passe (y QY).
+     */
+    private static final int[][] PERCH_GROUND = {
+            {22, 49, 38, 57, MY + 5},   // chalutier bleu (30, 54) + passerelle x 29..31
+            {51, 49, 63, 55, MY + 5},   // sardinier vert (57, 53) + passerelle x 56..58
+            {20, 66, 30, 70, MY + 5},   // caseyeur orange (25, 68)
+            {10, 84, 17, 85, QY},       // estacade de la passe
+    };
+
+    /** Galerie exterieure du phare (sol y 84, on s'y tient en y 85) : on y monte par l'echelle, c'est un poste prevu. */
+    @Override
+    public boolean perchAllowed(int x, int y, int z) {
+        int dx = x - X0 - 80, dz = z - Z0 - 80;
+        return y == 85 && dx * dx + dz * dz <= 5.5 * 5.5;
+    }
+
+    /** Terrain calcule une fois a la creation (lecture seule, sans verrou) pour la regle anti-perchoir (1.6.0). */
+    private final int[][] perchTop, perchZone;
+
+    /**
+     * Sol de reference pour la regle anti-perchoir (1.6.0) : quai, terrasse haute ou vase du bassin sous le joueur.
+     * Falaise : niveau de la zone voisine (terrasse au nord, quai ailleurs), jamais le haut du rocher.
+     */
+    @Override
+    public int roofGround(int x, int z) {
+        int lx = x - X0, lz = z - Z0;
+        if (lx < LX1 || lx > LX2 || lz < LZ1 || lz > LZ2) return Integer.MIN_VALUE;
+        for (int[] g : PERCH_GROUND)
+            if (lx >= g[0] && lx <= g[2] && lz >= g[1] && lz <= g[3]) return g[4];
+        int zn = perchZone[lx - LX1][lz - LZ1], h = perchTop[lx - LX1][lz - LZ1];
+        if (zn == CLIFF) return Math.min(h, lz <= 24 ? UY : QY);
+        if (zn == SEAZ) return Math.min(h, SEA);
+        return h;
     }
 
     @Override
@@ -254,7 +298,8 @@ public final class PortMap extends HsMap {
         return clamp((int) Math.round(f), 51, 66);
     }
 
-    private void terrain() {
+    /** Hauteurs et zones du terrain (local), sans rien poser : sert a la construction et a la regle anti-perchoir. */
+    private void computeTerrain() {
         int nx = LX2 - LX1 + 1, nzz = LZ2 - LZ1 + 1;
         top = new int[nx][nzz];
         zone = new int[nx][nzz];
@@ -273,6 +318,10 @@ public final class PortMap extends HsMap {
                 zone[lx - LX1][lz - LZ1] = zn;
                 top[lx - LX1][lz - LZ1] = h;
             }
+    }
+
+    private void terrain() {
+        computeTerrain();
         for (int lx = LX1; lx <= LX2; lx++)
             for (int lz = LZ1; lz <= LZ2; lz++) {
                 int zn = zoneAt(lx, lz), h = topAt(lx, lz);

@@ -134,6 +134,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.attribute.Attribute;
@@ -675,6 +676,33 @@ implements Listener {
 
     private int cfg(String key, int def) {
         return this.getConfig().getInt(key, def);
+    }
+
+    /**
+     * Le cacheur (pose au sol en l) est-il sur un perchoir interdit de la map de la partie (1.6.0, carte #135) ?
+     * Village : sol plat (bloc y 64) dans x/z -44..44. Maps construites : HsMap.roofGround / perchAllowed.
+     */
+    boolean perched(Game g, Location l) {
+        HsMap m = this.builtMaps.get(g.mapId);
+        Perch.Ground ground = m != null ? m::roofGround : (x, z) -> Math.abs(x) <= 44 && Math.abs(z) <= 44 ? MapBuilder.GROUND : Integer.MIN_VALUE;
+        int x = l.getBlockX(), z = l.getBlockZ();
+        World w = l.getWorld();
+        return Perch.forbidden((cx, cy, cz) -> this.roofCover(w, cx, cy, cz), m, x, l.getY(), z, Perch.groundNear(ground, x, z),
+                this.cfgD("max-roof-height", 3.0), Math.max(1, this.cfg("roof-cover-scan", 24)));
+    }
+
+    /**
+     * Bloc qui abrite un cacheur (toit, plafond, plancher d'etage) : tout bloc qui arrete le joueur, sauf feuilles,
+     * barrieres (plafond invisible des maps) et bloc de lumiere. Les blocs des cacheurs solides sont ignores (leur case
+     * d'origine est toujours vide ou remplacable).
+     */
+    private boolean roofCover(World w, int x, int y, int z) {
+        if (y >= w.getMaxHeight()) return false;
+        Block b = w.getBlockAt(x, y, z);
+        if (!this.placed.isEmpty() && this.placed.containsKey(b)) return false;
+        Material m = b.getType();
+        if (m.isAir() || m == Material.BARRIER || m == Material.LIGHT || Tag.LEAVES.isTagged(m)) return false;
+        return !b.isPassable();
     }
 
     private double cfgD(String key, double def) {
@@ -2280,7 +2308,8 @@ implements Listener {
                         ++d.still;
                     }
                     this.follow(h, d);
-                    if (d.still >= solidTicks && !d.blocked) {
+                    if (this.checkPerch(h, d, l)) continue;
+                    if (d.still >= solidTicks && !d.blocked && !d.perched) {
                         this.solidify(h, d);
                     }
                 }
@@ -2295,8 +2324,52 @@ implements Listener {
             }
         }
 
+        /**
+         * Regle anti-perchoir (1.6.0, carte #135) pour un cacheur non solide. Pose au sol : perchoir interdit (voir
+         * {@link Perch}) ou non ; au sol hors perchoir, la position devient son dernier point valide. Sur un perchoir
+         * plus de roof-return-delay secondes : ramene a ce point (sans degats). Vrai si le cacheur vient d'etre ramene.
+         */
+        private boolean checkPerch(Player h, Disguise d, Location l) {
+            if (!EemiHideSeek.this.getConfig().getBoolean("roof-block", true) || this.roles.get(h.getUniqueId()) != Role.HIDER) {
+                d.perched = false;
+                d.perchTicks = 0;
+                return false;
+            }
+            if (((Entity)h).isOnGround()) {
+                d.perched = EemiHideSeek.this.perched(this, l);
+                if (!d.perched) {
+                    d.safe = l.clone();
+                }
+            }
+            if (!d.perched) {
+                d.perchTicks = 0;
+                return false;
+            }
+            if (++d.perchTicks < (int)Math.round(EemiHideSeek.this.cfgD("roof-return-delay", 2.0) * 20.0)) {
+                return false;
+            }
+            Location back = d.safe;
+            if (back == null || !this.world.equals((Object)back.getWorld()) || EemiHideSeek.this.placed.containsKey(back.getBlock()) || EemiHideSeek.this.placed.containsKey(back.getBlock().getRelative(BlockFace.UP))) {
+                back = this.point("hider-spawn");
+            }
+            back = back.clone();
+            back.setYaw(l.getYaw());
+            back.setPitch(l.getPitch());
+            h.setVelocity(new Vector());
+            h.teleport(back);
+            h.setFallDistance(0.0f);
+            d.anchor = back.clone();
+            d.still = 0;
+            d.perched = false;
+            d.perchTicks = 0;
+            this.follow(h, d);
+            h.sendMessage("§8[§dCache-cache§8] §7§cPas de cachette sur les toits ni en hauteur ! §7Te revoilà en bas.");
+            h.playSound(h.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.5f, 1.4f);
+            return true;
+        }
+
         private void actionBar(Player h, Disguise d, int solidTicks) {
-            Object c = d.solid ? ((TextComponent)Component.text((String)"SOLIDE", (TextColor)NamedTextColor.GREEN).decorate(TextDecoration.BOLD)).append((Component)Component.text((String)(" - ne bouge pas (" + EemiHideSeek.this.blockName(this, d.data) + ")"), (TextColor)NamedTextColor.GRAY)) : (d.blocked ? Component.text((String)"Impossible de devenir solide ici", (TextColor)NamedTextColor.RED) : (d.still > 0 ? Component.text((String)String.format("Solide dans %.1f s", (double)Math.max(0, solidTicks - d.still) / 20.0), (TextColor)NamedTextColor.YELLOW) : Component.text((String)("En mouvement - " + EemiHideSeek.this.blockName(this, d.data)), (TextColor)NamedTextColor.GRAY)));
+            Object c = !d.solid && d.perched ? Component.text((String)"Trop haut : pas de cachette sur les toits, redescends !", (TextColor)NamedTextColor.RED) : d.solid ? ((TextComponent)Component.text((String)"SOLIDE", (TextColor)NamedTextColor.GREEN).decorate(TextDecoration.BOLD)).append((Component)Component.text((String)(" - ne bouge pas (" + EemiHideSeek.this.blockName(this, d.data) + ")"), (TextColor)NamedTextColor.GRAY)) : (d.blocked ? Component.text((String)"Impossible de devenir solide ici", (TextColor)NamedTextColor.RED) : (d.still > 0 ? Component.text((String)String.format("Solide dans %.1f s", (double)Math.max(0, solidTicks - d.still) / 20.0), (TextColor)NamedTextColor.YELLOW) : Component.text((String)("En mouvement - " + EemiHideSeek.this.blockName(this, d.data)), (TextColor)NamedTextColor.GRAY)));
             h.sendActionBar((Component)c);
         }
 
@@ -3616,6 +3689,10 @@ implements Listener {
         int still;
         boolean solid;
         boolean blocked;
+        // 1.6.0 (#135) : sur un toit / perchoir interdit, ticks passes dessus, dernier point valide au sol.
+        boolean perched;
+        int perchTicks;
+        Location safe;
         Block block;
         long lastChange;
         long lastTaunt;
