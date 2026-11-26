@@ -1016,7 +1016,8 @@ public final class EemiJump extends JavaPlugin implements Listener {
 
     /** Temps « jusqu'a la fin » d'un joueur qui a fini : temps de jeu a la 1re fin, sinon (fini avant la 1.4.0) temps de jeu total. */
     static long finishTime(Entry e) {
-        return e.finishMs >= 0 ? e.finishMs : e.played > 0 ? e.played : -1;
+        // 1.6.3 (#149) : plus jamais le temps de jeu total (il grossissait a chaque partie) : -1 si pas de 1re fin datee
+        return e.finishMs;
     }
 
     List<Entry> top(Course c) {
@@ -1712,7 +1713,7 @@ public final class EemiJump extends JavaPlugin implements Listener {
                 // 1.6.1 (#149) : avec un chrono, on n'affiche plus le temps de jeu cumule (il s'additionnait)
                 if (ft >= 0 && e.best < 0) {
                     // temps de jeu a la 1re fin ; pour ceux qui ont fini avant la 1.4.0, temps de jeu total sur le parcours
-                    sb.append(e.finishMs >= 0 ? " &7- fini en &f" : " &7- &f").append(time(ft)).append(e.finishMs >= 0 ? " &7de jeu" : " &7de jeu au total");
+                    sb.append(" &7- 1re fin en &f").append(time(ft)).append(" &7de jeu");
                 }
             } else {
                 sb.append("niveau &a").append(e.max).append("&7/").append(c.last());
