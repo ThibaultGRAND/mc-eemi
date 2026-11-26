@@ -18,7 +18,7 @@ import java.util.Set;
  * Les manèges posent leur socle ici ; leurs pièces mobiles sont des BlockDisplay en jeu ({@link Ride}).
  */
 public final class Draw {
-    public static final int VERSION = 1;
+    public static final int VERSION = 2; // à monter à chaque changement de l'allée ou de la place (sinon elle n'est pas reposée)
     static final int F = Geo.FLOOR;
     static final int Y0 = F + 1;
     static final String AIR = B.AIR;
