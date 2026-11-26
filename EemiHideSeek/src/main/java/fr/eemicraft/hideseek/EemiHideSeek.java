@@ -267,6 +267,8 @@ implements Listener {
     private static final Map<String, int[]> RETIRED_MAPS = Map.of("eemi", new int[]{340, 58, -48, 459, 112, 47});
     // Map imposee par /hideseek map <id> pour la prochaine partie.
     private String forcedNext;
+    // 1.6.1 : derniere map jouee (map.yml, cle last-map), exclue du tirage suivant meme apres un redemarrage.
+    private String lastPlayed;
     // Maps presentes dans le modele des copies (cliche pris au debut de la copie du modele).
     private Set<String> modelMaps = new HashSet<String>();
 
@@ -529,23 +531,41 @@ implements Listener {
             if ((cfg.isEmpty() || cfg.contains(id)) && this.mapReady(id) && (inWorld == null || inWorld.contains(id))) res.add(id);
         }
         if (res.isEmpty()) {
-            res.add(VILLAGE);
+            // Aucune map prete (construction en cours) : valeur d'attente au hasard, retiree a la fin de la construction.
+            for (String id : this.allMapIds()) {
+                if (cfg.isEmpty() || cfg.contains(id)) res.add(id);
+            }
+            if (res.isEmpty()) res.add(VILLAGE);
         }
         return res;
     }
 
-    /** Tire la prochaine map (jamais deux fois de suite), ou celle imposee par /hideseek map. */
-    String pickMap(String current, Set<String> inWorld) {
+    /**
+     * Tire une map au hasard parmi les maps pretes (1.6.1) : jamais la derniere jouee (last-map de map.yml), ni
+     * {@code exclude} (map qui vient d'etre jouee dans cette partie), sauf s'il ne reste plus qu'une map possible.
+     * La map imposee par /hideseek map passe avant.
+     */
+    String pickMap(String exclude, Set<String> inWorld) {
         if (this.forcedNext != null && this.mapReady(this.forcedNext) && (inWorld == null || inWorld.contains(this.forcedNext))) {
             String f = this.forcedNext;
             this.forcedNext = null;
             return f;
         }
         List<String> l = this.playableMaps(inWorld);
-        if (l.size() > 1 && current != null) {
-            l.remove(current);
+        if (l.size() > 1 && this.lastPlayed != null) {
+            l.remove(this.lastPlayed);
+        }
+        if (l.size() > 1 && exclude != null) {
+            l.remove(exclude);
         }
         return l.get(this.random.nextInt(l.size()));
+    }
+
+    /** Note la map qui demarre comme derniere jouee (map.yml, cle last-map). */
+    void markPlayed(String id) {
+        this.lastPlayed = id;
+        this.mapState.set("last-map", (Object)id);
+        this.saveMapState();
     }
 
     Set<String> readyMaps() {
@@ -622,6 +642,7 @@ implements Listener {
         this.removeDisplays(world);
         WorldClone.cleanup((Plugin)this, world, this.base, this.maxInstances());
         this.mapState = YamlConfiguration.loadConfiguration((File)new File(this.getDataFolder(), "map.yml"));
+        this.lastPlayed = this.mapState.getString("last-map", null);
         // 1.5.0 : ancienne map encore notee (EEMI) -> la map qui couvre sa boite est reconstruite, ce qui la vide.
         for (Map.Entry<String, int[]> rm : RETIRED_MAPS.entrySet()) {
             if (!this.mapState.isSet("maps." + rm.getKey())) continue;
@@ -1043,6 +1064,11 @@ implements Listener {
         if (g == null) {
             p.sendMessage("\u00a78[\u00a7dCache-cache\u00a78] \u00a77\u00a7cToutes les parties sont pleines, r\u00e9essaie dans un instant.");
             return;
+        }
+        // 1.6.1 : premier joueur dans une partie vide en attente = nouvelle map tiree au hasard (pas pendant une
+        // construction ni une copie ; une map imposee par un admin est gardee).
+        if (g.players.isEmpty() && g.state == State.WAITING && g.world != null && !g.mapLocked) {
+            g.mapId = this.pickMap(null, g.available);
         }
         g.players.add(p.getUniqueId());
         if (g.state == State.PREPARING) {
@@ -1782,6 +1808,7 @@ implements Listener {
         }
         if (g != null && g.world != null && (g.state == State.WAITING || g.state == State.STARTING) && (g.available == null || g.available.contains(id))) {
             g.mapId = id;
+            g.mapLocked = true;
             for (Player p : this.online(g.players)) {
                 g.toWaiting(p);
             }
@@ -1918,6 +1945,8 @@ implements Listener {
         // Map de la partie (tiree a chaque partie) et maps presentes dans son monde (null = partie 1 : toutes).
         String mapId = VILLAGE;
         Set<String> available;
+        // Map imposee par /hideseek map : pas de nouveau tirage a l'arrivee du premier joueur (jusqu'au lancement).
+        boolean mapLocked;
 
         Game(int index) {
             this.index = index;
@@ -2172,8 +2201,10 @@ implements Listener {
                 this.world.removePluginChunkTickets((Plugin)EemiHideSeek.this);
             }
             this.state = State.WAITING;
-            if (!EemiHideSeek.this.mapReady(this.mapId)) {
-                this.mapId = EemiHideSeek.this.pickMap(null, null);
+            // 1.6.1 : partie vide = nouveau tirage parmi toutes les maps pretes (avant, la map tiree avant la
+            // construction, souvent le village seul pret, etait gardee).
+            if (!EemiHideSeek.this.mapReady(this.mapId) || this.players.isEmpty() && !this.mapLocked) {
+                this.mapId = EemiHideSeek.this.pickMap(null, this.available);
             }
             if (who != null) {
                 who.sendMessage("\u00a78[\u00a7dCache-cache\u00a78] \u00a77\u00a7aConstruction terminee. \u00a77Le mod\u00e8le des autres parties va \u00eatre refait.");
@@ -3155,7 +3186,9 @@ implements Listener {
                 return;
             }
             Collections.shuffle(list, EemiHideSeek.this.random);
-            int seekers = Math.max(1, list.size() / Math.max(1, EemiHideSeek.this.cfg("players-per-seeker", 5)));
+            this.mapLocked = false;
+            EemiHideSeek.this.markPlayed(this.mapId);
+            int seekers =Math.max(1, list.size() / Math.max(1, EemiHideSeek.this.cfg("players-per-seeker", 5)));
             seekers = Math.min(seekers, list.size() - 1);
             this.roles.clear();
             this.releaseAllCells();
