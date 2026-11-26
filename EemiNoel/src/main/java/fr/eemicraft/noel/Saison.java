@@ -62,7 +62,9 @@ final class Saison {
             ConfigurationSection orig = disk == null ? null : disk.getConfigurationSection(id);
             String text = orig != null ? orig.getString("text", s.getString("text", "")) : s.getString("text", "");
             if (on) {
-                set(s, "available-from", null);
+                // 26/11 : une date passee, PAS null : sans la cle, EemiCore relit la valeur par defaut de son jar
+                // (getConfig() a les defauts du jar), donc « 2026-12-01 » et rien n'etait en vente avant decembre.
+                set(s, "available-from", "2000-01-01");
                 set(s, "available-until", until);
                 if ("title".equals(s.getString("type")) && !text.isEmpty()) set(s, "text", text);
             } else {
