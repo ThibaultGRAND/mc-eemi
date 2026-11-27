@@ -29,6 +29,8 @@ import org.bukkit.util.BoundingBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -40,10 +42,10 @@ import java.util.UUID;
 /**
  * Punition d'une île : sauvegarde complète (blocs + contenus en structures NBT par tuiles de 32,
  * entités en snapshots), pluie de TNT qui casse vraiment l'île (sans rien faire tomber), puis remise
- * à l'identique. Tout est écrit sur disque avant de casser quoi que ce soit : un redémarrage pendant
- * la pluie relance la restauration au démarrage.
+ * à l'identique (deux passes de pose pour les blocs accrochés aux bords des tuiles). Tout est écrit sur
+ * disque avant de casser quoi que ce soit : un redémarrage pendant la pluie relance la restauration.
  *
- * Phases (state.yml) : SAUVEGARDE (rien n'est encore touché) -> PLUIE (entités retirées) -> RESTAURATION -> FINI.
+ * Phases (state.yml) : SAUVEGARDE (rien n'est encore cassé) -> PLUIE (entités retirées) -> RESTAURATION -> FINI.
  */
 final class Punition {
 
@@ -55,7 +57,7 @@ final class Punition {
     final String nom; // pseudo du propriétaire (affichage)
     final String worldName;
     final int minX, maxX, minZ, maxZ; // max exclusifs
-    int minY, maxY;                   // inclusifs
+    int minY, maxY;                   // inclusifs (blocs sauvegardés)
     final int cx, cz;
     String phase = "SAUVEGARDE";
     boolean depuisArchive; // restauration manuelle d'une archive : pas de pluie
@@ -91,8 +93,9 @@ final class Punition {
         return x >= minX && x < maxX && z >= minZ && z < maxZ;
     }
 
-    BoundingBox box() {
-        return new BoundingBox(minX, minY, minZ, maxX, maxY + 1, maxZ);
+    /** Boîte des entités : toute la hauteur du monde (perroquets, abeilles au-dessus de l'île comprises). */
+    BoundingBox boxEntites(World w) {
+        return new BoundingBox(minX, w.getMinHeight(), minZ, maxX, w.getMaxHeight(), maxZ);
     }
 
     // ================================================================== persistance
@@ -120,18 +123,23 @@ final class Punition {
             dir.mkdirs();
             File tmp = new File(dir, "state.yml.tmp");
             y.save(tmp);
-            File f = new File(dir, "state.yml");
-            if (f.exists() && !f.delete()) pl.getLogger().warning("Impossible de remplacer " + f);
-            if (!tmp.renameTo(f)) pl.getLogger().warning("Impossible d'ecrire " + f);
+            Files.move(tmp.toPath(), new File(dir, "state.yml").toPath(),
+                    StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
         } catch (IOException ex) {
             pl.getLogger().severe("Ecriture de " + dir + "/state.yml impossible : " + ex);
         }
     }
 
-    static Punition load(EemiAntiTnt pl, File dir) {
+    /** Monde de la punition décrite dans ce dossier (sans la charger), ou null. */
+    static YamlConfiguration lireEtat(File dir) {
         File f = new File(dir, "state.yml");
-        if (!f.isFile()) return null;
-        YamlConfiguration y = YamlConfiguration.loadConfiguration(f);
+        if (!f.isFile()) f = new File(dir, "state.yml.tmp");
+        return f.isFile() ? YamlConfiguration.loadConfiguration(f) : null;
+    }
+
+    static Punition load(EemiAntiTnt pl, File dir) {
+        YamlConfiguration y = lireEtat(dir);
+        if (y == null) return null;
         World w = Bukkit.getWorld(y.getString("monde", ""));
         if (w == null) return null;
         Punition p = new Punition(pl, dir, y.getString("id", dir.getName()), y.getString("nom", "?"), w,
@@ -171,38 +179,48 @@ final class Punition {
         save();
         verrouillerPresents();
         chargerChunks(w);
-        attendreEntites(w, 0, () -> sauverBlocs(w));
+        attendreEntites(w, 0, ok -> {
+            if (!ok) {
+                annuler("entites de l'ile pas chargees apres 10 s");
+                return;
+            }
+            sauverBlocs(w);
+        });
+    }
+
+    /** Abandon pendant la SAUVEGARDE : rien n'a été cassé ni retiré. */
+    private void annuler(String raison) {
+        if (tache != null) tache.cancel();
+        pl.getLogger().severe("[" + nom + "] punition ANNULEE : " + raison);
+        pl.annoncerAdmins("§cPunition de l'île de " + nom + " annulée (" + raison + ") : rien n'a été touché.");
+        deverrouiller();
+        libererChunks();
+        pl.terminer(this, false);
     }
 
     private void chargerChunks(World w) {
         for (int x = minX >> 4; x <= (maxX - 1) >> 4; x++)
             for (int z = minZ >> 4; z <= (maxZ - 1) >> 4; z++) {
                 Chunk c = w.getChunkAt(x, z);
-                c.addPluginChunkTicket(pl);
+                pl.prendreTicket(c);
                 chunks.add(c);
             }
     }
 
     void libererChunks() {
-        for (Chunk c : chunks) {
-            try {
-                c.removePluginChunkTicket(pl);
-            } catch (Throwable ignored) {
-            }
-        }
+        for (Chunk c : chunks) pl.rendreTicket(c);
         chunks.clear();
     }
 
     /** Attend que les entités de tous les chunks soient chargées (10 s max). */
-    private void attendreEntites(World w, int essais, Runnable suite) {
+    private void attendreEntites(World w, int essais, java.util.function.Consumer<Boolean> suite) {
         boolean tous = true;
         for (Chunk c : chunks) if (!c.isEntitiesLoaded()) {
             tous = false;
             break;
         }
         if (tous || essais >= 200) {
-            if (!tous) pl.getLogger().warning("[" + nom + "] entites pas toutes chargees apres 10 s, on continue.");
-            suite.run();
+            suite.accept(tous);
             return;
         }
         Bukkit.getScheduler().runTaskLater(pl, () -> attendreEntites(w, essais + 1, suite), 1L);
@@ -234,12 +252,7 @@ final class Punition {
                     sm.saveStructure(tuileFile(i[0]), s);
                 }
             } catch (Throwable ex) {
-                tache.cancel();
-                pl.getLogger().severe("[" + nom + "] sauvegarde des blocs impossible, punition ANNULEE : " + ex);
-                pl.annoncerAdmins("§cSauvegarde de l'île de " + nom + " impossible : punition annulée (rien n'a été touché).");
-                deverrouiller();
-                libererChunks();
-                pl.terminer(this, false);
+                annuler("sauvegarde des blocs impossible : " + ex);
                 return;
             }
             if (i[0] >= tuiles.size()) {
@@ -253,7 +266,7 @@ final class Punition {
     /** Copie toutes les entités (sauf joueurs) puis les retire : elles ne peuvent ni tomber ni mourir. */
     private void sauverEntites(World w) {
         List<Entity> liste = new ArrayList<>();
-        for (Entity e : w.getNearbyEntities(box())) {
+        for (Entity e : w.getNearbyEntities(boxEntites(w))) {
             if (e instanceof Player || pl.estNotreTnt(e)) continue;
             liste.add(e);
         }
@@ -261,6 +274,7 @@ final class Punition {
         for (int k = 0; k < liste.size(); k++) index.put(liste.get(k), k);
         List<Map<String, Object>> out = new ArrayList<>();
         List<Entity> aRetirer = new ArrayList<>();
+        List<Entity> figees = new ArrayList<>();
         for (Entity e : liste) {
             EntitySnapshot snap;
             try {
@@ -279,11 +293,8 @@ final class Punition {
             Entity v = e.getVehicle();
             m.put("vehicule", v != null && index.containsKey(v) ? index.get(v) : -1);
             if (snap == null) {
-                // impossible à copier : on la laisse en place, figée et invulnérable
                 m.put("nbt", "");
-                e.setGravity(false);
-                e.setInvulnerable(true);
-                e.getPersistentDataContainer().set(pl.keyFige, PersistentDataType.BYTE, (byte) 1);
+                figees.add(e);
             } else {
                 m.put("nbt", snap.getAsString());
                 aRetirer.add(e);
@@ -295,13 +306,14 @@ final class Punition {
         try {
             y.save(new File(dir, "entites.yml"));
         } catch (IOException ex) {
-            pl.getLogger().severe("[" + nom + "] entites.yml impossible, punition ANNULEE : " + ex);
-            pl.annoncerAdmins("§cSauvegarde des entités de " + nom + " impossible : punition annulée.");
-            for (Entity e : liste) defiger(e);
-            deverrouiller();
-            libererChunks();
-            pl.terminer(this, false);
+            annuler("entites.yml impossible : " + ex);
             return;
+        }
+        // impossibles à copier : laissées en place, figées et invulnérables
+        for (Entity e : figees) {
+            e.setGravity(false);
+            e.setInvulnerable(true);
+            e.getPersistentDataContainer().set(pl.keyFige, PersistentDataType.BYTE, (byte) 1);
         }
         for (Entity e : aRetirer) e.eject();
         for (Entity e : aRetirer) e.remove();
@@ -376,14 +388,13 @@ final class Punition {
         w.playSound(l, Sound.ENTITY_GENERIC_EXPLODE, 3f, 0.9f + rnd.nextFloat() * 0.2f);
     }
 
-    /** Restauration manuelle d'une archive (/antitnt restaurer) : joueurs présents mis à l'abri pendant la pose. */
+    /** Restauration manuelle d'une archive (/antitnt restaurer). */
     void restaurerArchive() {
         depuisArchive = true;
-        verrouillerPresents();
         restaurer();
     }
 
-    /** Remet les blocs puis les entités, rend les joueurs. Utilisé aussi au démarrage après un arrêt. */
+    /** Remet les blocs (deux passes) puis les entités, rend les joueurs. Utilisé aussi au démarrage après un arrêt. */
     void restaurer() {
         World w = world();
         if (w == null) {
@@ -393,92 +404,112 @@ final class Punition {
         if (tache != null) tache.cancel();
         phase = "RESTAURATION";
         save();
+        verrouillerPresents();
         if (chunks.isEmpty()) chargerChunks(w);
-        attendreEntites(w, 0, () -> {
+        attendreEntites(w, 0, ok -> {
+            if (!ok) pl.getLogger().warning("[" + nom + "] entites pas toutes chargees, restauration quand meme.");
             // tout retirer (sauf entités figées) : après un plantage, le monde sur disque peut encore
             // contenir les entités d'origine, qui feraient doublon avec les copies
             nettoyer(w, true);
             StructureManager sm = Bukkit.getStructureManager();
             int parTick = Math.max(1, pl.getConfig().getInt("tuiles-par-tick", 6));
             Random r = new Random();
+            int total = tuiles.size() * 2; // 2e passe : blocs accrochés aux bords d'une tuile posée avant leur support
             final int[] i = {0};
             final int[] erreurs = {0};
             tache = Bukkit.getScheduler().runTaskTimer(pl, () -> {
-                for (int n = 0; n < parTick && i[0] < tuiles.size(); n++, i[0]++) {
-                    int[] t = tuiles.get(i[0]);
+                for (int n = 0; n < parTick && i[0] < total; n++, i[0]++) {
+                    int k = i[0] % tuiles.size();
+                    int[] t = tuiles.get(k);
                     try {
-                        Structure s = sm.loadStructure(tuileFile(i[0]));
+                        Structure s = sm.loadStructure(tuileFile(k));
                         s.place(new Location(w, t[0], t[1], t[2]), false, StructureRotation.NONE, Mirror.NONE, 0, 1f, r);
                     } catch (Throwable ex) {
-                        erreurs[0]++;
-                        pl.getLogger().severe("[" + nom + "] tuile " + i[0] + " non restauree : " + ex);
+                        if (i[0] >= tuiles.size()) {
+                            erreurs[0]++;
+                            pl.getLogger().severe("[" + nom + "] tuile " + k + " non restauree : " + ex);
+                        }
                     }
                 }
-                if (i[0] >= tuiles.size()) {
+                if (i[0] >= total) {
                     tache.cancel();
                     nettoyer(w, false);
-                    int ent = respawnEntites(w);
-                    for (Entity e : w.getNearbyEntities(box())) defiger(e);
+                    int[] ent = respawnEntites(w);
+                    for (Entity e : w.getNearbyEntities(boxEntites(w))) defiger(e);
                     deverrouiller();
                     libererChunks();
                     phase = "FINI";
                     save();
-                    String bilan = "Île de " + nom + " restaurée : " + tuiles.size() + " tuiles, " + ent + " entités"
+                    String bilan = "Île de " + nom + " restaurée : " + tuiles.size() + " tuiles, " + ent[0] + " entités"
+                            + (ent[1] > 0 ? ", §c" + ent[1] + " entités non recréées (entites-echec.yml)§7" : "")
                             + (erreurs[0] > 0 ? ", §c" + erreurs[0] + " tuiles en erreur" : "") + "§7.";
-                    pl.getLogger().info(bilan.replaceAll("§.", ""));
                     pl.annoncerAdmins(bilan);
                     for (UUID u : pl.membresEnLigne(id)) {
                         Player p = Bukkit.getPlayer(u);
                         if (p != null) p.sendMessage(EemiAntiTnt.PREFIXE + "§aTon île a été remise à l'identique.");
                     }
-                    pl.terminer(this, erreurs[0] == 0);
+                    pl.terminer(this, erreurs[0] == 0 && ent[1] == 0);
                 }
             }, 1L, 1L);
         });
     }
 
-    /** Retire objets au sol, blocs qui tombent, TNT ; avec tout=true, retire aussi les autres entités (archive). */
+    /** Retire objets au sol, blocs qui tombent, TNT ; avec tout=true, retire aussi les autres entités (sauf figées). */
     private void nettoyer(World w, boolean tout) {
-        for (Entity e : w.getNearbyEntities(box())) {
-            if (e instanceof Player) continue;
-            if (e instanceof Item || e instanceof FallingBlock || e instanceof TNTPrimed || tout) {
-                if (!tout || !e.getPersistentDataContainer().has(pl.keyFige)) e.remove();
-            }
+        for (Entity e : w.getNearbyEntities(boxEntites(w))) {
+            if (e instanceof Player || e.getPersistentDataContainer().has(pl.keyFige)) continue;
+            if (tout || e instanceof Item || e instanceof FallingBlock || e instanceof TNTPrimed) e.remove();
         }
     }
 
-    private int respawnEntites(World w) {
+    /** @return {recréées, échecs} */
+    private int[] respawnEntites(World w) {
         File f = new File(dir, "entites.yml");
-        if (!f.isFile()) return 0;
+        if (!f.isFile()) return new int[]{0, 0};
         YamlConfiguration y = YamlConfiguration.loadConfiguration(f);
         List<Map<?, ?>> liste = y.getMapList("entites");
         Entity[] cree = new Entity[liste.size()];
         int n = 0;
+        List<Map<?, ?>> echecs = new ArrayList<>();
         pl.respawnEnCours = true;
         try {
-        for (int k = 0; k < liste.size(); k++) {
-            Map<?, ?> m = liste.get(k);
-            String nbt = String.valueOf(m.get("nbt"));
-            if (nbt.isEmpty() || nbt.equals("null")) continue;
-            try {
-                EntitySnapshot s = Bukkit.getEntityFactory().createEntitySnapshot(nbt);
-                Location l = new Location(w, num(m.get("x")), num(m.get("y")), num(m.get("z")),
-                        (float) num(m.get("yaw")), (float) num(m.get("pitch")));
-                cree[k] = s.createEntity(l);
-                n++;
-            } catch (Throwable ex) {
-                pl.getLogger().warning("[" + nom + "] entite " + m.get("type") + " non recreee : " + ex);
+            // 1) entités sans véhicule, 2) passagers (sauf si le véhicule les a déjà recréés avec lui)
+            for (int passe = 0; passe < 2; passe++) {
+                for (int k = 0; k < liste.size(); k++) {
+                    Map<?, ?> m = liste.get(k);
+                    Object v = m.get("vehicule");
+                    int vi = v instanceof Number num ? num.intValue() : -1;
+                    if ((passe == 0) != (vi < 0)) continue;
+                    String nbt = String.valueOf(m.get("nbt"));
+                    if (nbt.isEmpty() || nbt.equals("null")) continue;
+                    if (passe == 1 && vi < cree.length && cree[vi] != null && !cree[vi].getPassengers().isEmpty()) continue;
+                    try {
+                        EntitySnapshot s = Bukkit.getEntityFactory().createEntitySnapshot(nbt);
+                        Location l = new Location(w, num(m.get("x")), num(m.get("y")), num(m.get("z")),
+                                (float) num(m.get("yaw")), (float) num(m.get("pitch")));
+                        Entity e = s.createEntity(l);
+                        if (e == null || !e.isValid()) throw new IllegalStateException("apparition refusee");
+                        cree[k] = e;
+                        n++;
+                        if (passe == 1 && vi < cree.length && cree[vi] != null) cree[vi].addPassenger(e);
+                    } catch (Throwable ex) {
+                        echecs.add(m);
+                        pl.getLogger().warning("[" + nom + "] entite " + m.get("type") + " non recreee : " + ex);
+                    }
+                }
             }
-        }
         } finally {
             pl.respawnEnCours = false;
         }
-        for (int k = 0; k < liste.size(); k++) {
-            Object v = liste.get(k).get("vehicule");
-            int vi = v instanceof Number num ? num.intValue() : -1;
-            if (vi >= 0 && vi < cree.length && cree[k] != null && cree[vi] != null) cree[vi].addPassenger(cree[k]);
+        if (!echecs.isEmpty()) {
+            YamlConfiguration e = new YamlConfiguration();
+            e.set("entites", echecs);
+            try {
+                e.save(new File(dir, "entites-echec.yml"));
+            } catch (IOException ignored) {
+            }
         }
-        return n;
+        return new int[]{n, echecs.size()};
     }
 
     private static double num(Object o) {
@@ -495,9 +526,12 @@ final class Punition {
 
     /** Passe le joueur en spectateur tant que l'île est punie (il ne tombe pas, ne touche à rien). */
     void bloquer(Player p) {
+        bloquer(p, p.getGameMode() == GameMode.SPECTATOR ? GameMode.SURVIVAL : p.getGameMode());
+    }
+
+    void bloquer(Player p, GameMode avant) {
         if (!bloques.containsKey(p.getUniqueId())) {
-            GameMode g = p.getGameMode() == GameMode.SPECTATOR ? GameMode.SURVIVAL : p.getGameMode();
-            bloques.put(p.getUniqueId(), g);
+            bloques.put(p.getUniqueId(), avant);
             save();
             p.sendMessage(EemiAntiTnt.PREFIXE + "Cette île est en cours de punition : tu passes spectateur quelques instants.");
         }
@@ -510,8 +544,11 @@ final class Punition {
         for (Map.Entry<UUID, GameMode> e : bloques.entrySet()) {
             Player p = Bukkit.getPlayer(e.getKey());
             if (p != null && p.isOnline()) {
+                if (w != null && p.getWorld() == w) {
+                    Location sur = EemiAntiTnt.caseSure(w, cx, cz);
+                    if (sur != null) p.teleport(sur);
+                }
                 p.setGameMode(e.getValue());
-                if (w != null && p.getWorld() == w) p.teleport(pointSur(w));
             } else {
                 pl.retourEnAttente(e.getKey(), e.getValue(), worldName, cx, cz);
             }
@@ -526,9 +563,5 @@ final class Punition {
             p.setGameMode(g);
             save();
         }
-    }
-
-    Location pointSur(World w) {
-        return new Location(w, cx + 0.5, w.getHighestBlockYAt(cx, cz, HeightMap.MOTION_BLOCKING) + 1, cz + 0.5);
     }
 }

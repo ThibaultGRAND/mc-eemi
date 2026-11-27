@@ -1285,6 +1285,19 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
   - Rien à déclarer dans DeluxeHub, TAB, AuraSkills ni MV-Inventories.
 - **À vérifier en jeu** : logs de branchement, reset depuis le skyblock ET depuis le lobby (`/skygarde liste` : « restauration auto : non, reset d'ile »), palier 1000 payé une seule fois, vitesses et drops du MultiTool (obsidienne seulement au niveau diamant), mise en sommeil, bundle et stagiaires AxMinions non couverts.
 
+## EemiAntiTnt (machines volantes à TNT sur les îles)
+
+- **État** : 1.0.0 compilée le 27/11 (`a_deposer/EemiAntiTnt-1.0.0.jar`), PAS installée, rien testé en jeu. Demande d'Esteban après la destruction de l'île de Thomasuuu. Relue par un agent indépendant (18 points, les graves corrigés) ; restent à vérifier en jeu : tableaux 2×2/4×4 recréés au bon endroit, passagers (cheval monté, bateau) pas en double.
+- **Fonctionnement** :
+  - Source `EemiAntiTnt/` (BentoBox par réflexion, `Iles.java`, comme EemiIles). Mondes `mondes` : oneblock_world, bskyblock_world. Inactif tant que BentoBox n'est pas branché (rien n'est retiré).
+  - Détection : un piston dont les blocs déplacés contiennent un piston/piston collant/observeur ET de la TNT (machine volante qui transporte de la TNT), ou une TNT allumée sans joueur à moins de 8 blocs d'une machine à slime/miel en mouvement (duplicateur embarqué). La machine est FIGÉE (pistons annulés dans `rayon-gel` 10), titre « Machine à TNT ! / Démonte-la : 10 s » aux membres de l'île, alerte aux admins (`eemiantitnt.admin`), compteur `recidives.yml`.
+  - Après `delai-secondes` (10) : si la machine (blocs reliés à ceux de l'événement, 10 blocs max) contient encore de la TNT, elle est retirée (sans drop) et l'île du propriétaire est punie ; sinon rien.
+  - Filet : aucun bloc poussé par piston ne peut sortir de la zone protégée de son île ; hors île, aucun assemblage slime/miel/piston ne bouge.
+  - Punition (`Punition.java`) : joueurs présents en spectateur ; chunks chargés ; blocs sauvés en structures NBT (tuiles 32³, `punitions/<id>/tuiles/*.nbt`, contenus des coffres compris) ; entités copiées (`Entity#createSnapshot`, `entites.yml`, toute la hauteur) puis retirées ; pluie de TNT `pluie-secondes` (30) qui casse vraiment l'île (sphère `pluie-rayon` 3, `setType AIR` sans physique ni drop) ; puis 2 passes de pose des tuiles, entités recréées (passagers remontés), joueurs rendus sur une case sûre dans leur mode. Pendant toute la punition, dans la zone : pas d'eau qui coule, de sable qui tombe, d'objet au sol, de hopper/dropper. Dossier archivé dans `archives/` (gardé `garder-jours` 7).
+  - Reprise : `state.yml` (phases SAUVEGARDE → PLUIE → RESTAURATION → FINI) ; au démarrage, PLUIE/RESTAURATION = restauration automatique, SAUVEGARDE = annulée (rien n'était cassé). Un joueur qui se connecte sur une île en attente passe spectateur ; mode de jeu rendu à la reconnexion (`retours.yml`). Une punition illisible n'est jamais effacée (nouvel essai chaque minute, nouvelle punition de la même île refusée).
+  - `/antitnt` (op) : `statut`, `punir <joueur> confirmer` (test : sauvegarde, pluie, restauration), `restaurer <joueur> confirmer` (remet la dernière archive ; tout ce qui a changé depuis est perdu), `reprendre`, `annuler` (dégèle les machines), `reload`.
+- **À vérifier en jeu (avant d'y compter)** : `/antitnt punir BanTeEs confirmer` sur l'île d'Esteban (0 0) avec coffres pleins, villageois, animaux, cadres, tableaux, torches murales, eau ; puis une vraie machine volante à TNT sur une île de test.
+
 ## EemiTresor (coffre au trésor du lobby)
 
 - **État** : 1.1.0 installée (les notes décrivent la 1.0.0 ; contenu de la 1.1.0 non noté). Pose testée à la console ; ouverture et récompense pas encore vues.

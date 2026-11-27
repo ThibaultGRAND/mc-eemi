@@ -39,6 +39,8 @@ final class Iles {
     private Method iId, iOwner, iMembers, iCenter, iRange, iMinX, iMaxX, iMinZ, iMaxZ;
     boolean ok;
     String erreur = "pas encore essaye";
+    /** Vrai si le dernier at() a échoué par erreur (et non parce qu'il n'y a pas d'île) : ne rien retirer alors. */
+    boolean derniereErreur;
 
     Iles(EemiAntiTnt pl) {
         this.pl = pl;
@@ -84,6 +86,7 @@ final class Iles {
 
     /** Île dont la zone protégée contient ce point, ou null. */
     Ile at(Location l) {
+        derniereErreur = !ok;
         if (!ok || l == null || l.getWorld() == null) return null;
         try {
             Object o = imAt.invoke(bbIslands.invoke(bentoBox), l);
@@ -91,6 +94,8 @@ final class Iles {
             Ile i = wrap(op.get(), l.getWorld());
             return i != null && i.contains(l) ? i : null;
         } catch (Throwable t) {
+            derniereErreur = true;
+            pl.getLogger().warning("BentoBox getIslandAt : " + t);
             return null;
         }
     }
