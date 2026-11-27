@@ -915,7 +915,12 @@ public final class EemiFete extends JavaPlugin implements Listener {
             double v = 12 + rnd.nextDouble() * 30;
             Location at = at(i, 24.0, Geo.FLOOR + 1, v);
             org.bukkit.entity.Cow c = spawn(at, org.bukkit.entity.Cow.class, e -> {
-                e.setVariant(org.bukkit.entity.Cow.Variant.COLD);
+                // 0.4.2 (#162) : AbstractCow.setVariant(Cow.Variant) n'existe pas dans le Paper du serveur
+                // (NoSuchMethodError : Fluffy n'est JAMAIS apparue depuis la 0.2.0) ; sans variante si absente
+                try {
+                    e.setVariant(org.bukkit.entity.Cow.Variant.COLD);
+                } catch (LinkageError ignored) {
+                }
                 e.customName(U.c("&f&lFluffy"));
                 e.setCustomNameVisible(true);
                 e.setGlowing(true);
