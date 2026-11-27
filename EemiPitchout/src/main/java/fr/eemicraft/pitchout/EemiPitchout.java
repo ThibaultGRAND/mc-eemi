@@ -160,8 +160,9 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
     /** #86 : centre surélevé interdit (arbre de la Jungle, butte du Glace) : rayon et hauteur au-dessus du sol. */
     private int[] middleZone(String arenaId) {
         int defR = 0, defH = 0;
-        if ("jungle".equals(arenaId)) { defR = 9; defH = 2; }
-        else if ("glace".equals(arenaId)) { defR = 5; defH = 3; }
+        // #158 : rayons agrandis pour couvrir tout l'arbre (branches jusqu'à 11 blocs) et toute la butte
+        if ("jungle".equals(arenaId)) { defR = 14; defH = 2; }
+        else if ("glace".equals(arenaId)) { defR = 7; defH = 3; }
         return new int[] {getConfig().getInt("middle-forbidden." + arenaId + ".radius", defR),
                 getConfig().getInt("middle-forbidden." + arenaId + ".min-height", defH)};
     }
@@ -825,9 +826,30 @@ public final class EemiPitchout extends JavaPlugin implements Listener {
         }
 
         /** Toutes les 5 ticks : un joueur du monde qui tombe hors partie revient à sa place. */
+        /** #158 : temps passe dans le centre interdit (contrôles de safety, toutes les 5 ticks). */
+        final java.util.Map<UUID, Integer> middleChecks = new java.util.HashMap<>();
+
         void safety() {
             for (Player p : world.getPlayers()) {
-                if (alive.contains(p.getUniqueId()) && state == State.PLAYING) continue;
+                if (alive.contains(p.getUniqueId()) && state == State.PLAYING) {
+                    // #158 : un joueur immobile ne déclenche pas PlayerMoveEvent : on l'éjecte ici aussi
+                    if (p.getGameMode() != GameMode.CREATIVE && inMiddle(this, p.getLocation())) {
+                        int n = middleChecks.merge(p.getUniqueId(), 1, Integer::sum);
+                        Location l = p.getLocation();
+                        double len = Math.hypot(l.getX(), l.getZ());
+                        double ox = len < 0.3 ? 1 : l.getX() / len, oz = len < 0.3 ? 0 : l.getZ() / len;
+                        p.setVelocity(new Vector(ox * 1.1, 0.35, oz * 1.1));
+                        p.sendActionBar(Component.text("Le centre de l'arène est interdit.", NamedTextColor.RED));
+                        if (n >= 8) { // 2 s sans réussir à sortir : remis sur une case de réapparition
+                            middleChecks.remove(p.getUniqueId());
+                            p.setFallDistance(0);
+                            p.teleport(respawnSpot(p));
+                        }
+                    } else {
+                        middleChecks.remove(p.getUniqueId());
+                    }
+                    continue;
+                }
                 if (p.getGameMode() == GameMode.CREATIVE) continue;
                 double y = p.getLocation().getY();
                 boolean lost = p.getGameMode() == GameMode.SPECTATOR ? y < floorY - 40 : y < voidY;

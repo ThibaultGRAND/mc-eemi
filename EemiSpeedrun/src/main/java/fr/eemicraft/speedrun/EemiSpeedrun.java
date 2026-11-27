@@ -519,7 +519,15 @@ public final class EemiSpeedrun extends JavaPlugin implements Listener {
         return n;
     }
 
+    /** Anti-rebond : un clic sur un bloc envoie deux evenements (bloc puis objet) au meme tick. */
+    private static final java.util.Map<java.util.UUID, Long> READY_CLICK = new java.util.HashMap<>();
+
     private void toggleReady(Player p) {
+        long clickAt = System.currentTimeMillis();
+        Long lastClick = READY_CLICK.put(p.getUniqueId(), clickAt);
+        if (lastClick != null && clickAt - lastClick < 350L) {
+            return;
+        }
         Mode mode = queueOf(p.getUniqueId());
         if (mode == null) {
             removeReadyItem(p);

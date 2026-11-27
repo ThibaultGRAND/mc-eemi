@@ -6,7 +6,7 @@
 
     <groupId>fr.eemicraft</groupId>
     <artifactId>EemiSheepWars</artifactId>
-    <version>4.7.1</version>
+    <version>4.7.2</version>
     <packaging>jar</packaging>
 
     <properties>

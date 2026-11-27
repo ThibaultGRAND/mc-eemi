@@ -482,7 +482,9 @@ public final class EemiBridge extends JavaPlugin implements Listener {
     private double spawnProtection() {
         double v = getConfig().getDouble("spawn-protection", -1);
         if (v >= 0) return v;
-        return Math.max(4, Math.ceil(islandRadius(Math.PI) - Math.abs(SPAWN_OFFSET)));
+        // 1.6.0 (Esteban, 27/11) : seulement autour du point de départ, pour qu'on puisse de nouveau monter un pont
+        // jusqu'au but adverse (l'ancienne zone allait jusqu'au bord de l'île et couvrait l'avant du but)
+        return 3;
     }
 
     /** La colonne (x, z) est-elle dans la zone de départ d'une des deux équipes ? Même géométrie dans toutes les copies. */
@@ -607,6 +609,19 @@ public final class EemiBridge extends JavaPlugin implements Listener {
         final Map<UUID, Scoreboard> boards = new HashMap<>();
         /** Blocs posés par les joueurs pendant la partie : les seuls qu'on peut casser, retirés à la fin. */
         final Set<Long> placed = new HashSet<>();
+        /** 1.6.0 : équipe qui a posé chaque bloc (limite des murailles devant son propre but). */
+        final Map<Long, Side> placedBy = new HashMap<>();
+
+        /** Blocs posés par l'équipe s autour de son propre but (zone de défense). */
+        int defenseBlocks(Side s) {
+            int n = 0;
+            for (var en : placedBy.entrySet()) {
+                if (en.getValue() != s) continue;
+                long k = en.getKey();
+                if (inDefense(s, kx(k), kz(k))) n++;
+            }
+            return n;
+        }
         /** Blocs du milieu (pont, mur) cassés pendant la partie, avec leur état d'origine : remis à la fin. */
         final Map<Long, BlockData> broken = new HashMap<>();
         /** Spectateurs (non inscrits) de la partie en cours. */
@@ -1207,6 +1222,7 @@ public final class EemiBridge extends JavaPlugin implements Listener {
                 if (!b.getType().isAir()) b.setType(Material.AIR, false);
             }
             placed.clear();
+            placedBy.clear();
             // puis le pont et le mur cassés reprennent leur état d'origine (après les blocs posés à leur place)
             for (Map.Entry<Long, BlockData> e : broken.entrySet()) {
                 long k = e.getKey();
@@ -1228,6 +1244,7 @@ public final class EemiBridge extends JavaPlugin implements Listener {
             building = true;
             clearEntities();
             placed.clear();
+            placedBy.clear();
             broken.clear(); // la map entière est refaite
             apply(mapOps(), 0, sender, after);
         }
@@ -1278,7 +1295,8 @@ public final class EemiBridge extends JavaPlugin implements Listener {
             for (Side s : Side.values())
                 if (Math.abs(x - goalX(s)) <= 2 && Math.abs(z) <= 2 && y >= cy - 4) return false;
             Side enemy = teams.get(p.getUniqueId()).other();
-            return Math.hypot(x - goalX(enemy), z) > cfg("enemy-goal-radius", 5);
+            // 1.6.0 : enemy-goal-radius vaut 0 par défaut (on peut poser jusqu'au bord du but adverse)
+            return Math.hypot(x - goalX(enemy), z) > cfg("enemy-goal-radius", 0);
         }
 
         /** Regarder la partie en cours en spectateur, au-dessus du milieu du pont. */
@@ -1556,7 +1574,22 @@ public final class EemiBridge extends JavaPlugin implements Listener {
                         ? "Zone de départ protégée : tu ne peux pas construire ici !" : "Tu ne peux pas construire ici !", NamedTextColor.RED));
             return;
         }
-        g.placed.add(key(b.getX(), b.getY(), b.getZ()));
+        // 1.6.0 (Esteban, 27/11) : pas de muraille géante devant son propre but
+        Side own = g.teams.get(e.getPlayer().getUniqueId());
+        int max = cfg("defense-max-blocks", 24);
+        if (own != null && max >= 0 && inDefense(own, b.getX(), b.getZ()) && g.defenseBlocks(own) >= max) {
+            e.setCancelled(true);
+            e.getPlayer().sendActionBar(Component.text("Pas de muraille : " + max + " blocs maximum devant ton but !", NamedTextColor.RED));
+            return;
+        }
+        long pk = key(b.getX(), b.getY(), b.getZ());
+        g.placed.add(pk);
+        if (own != null) g.placedBy.put(pk, own);
+    }
+
+    /** Zone de défense d'une équipe : à moins de defense-radius blocs (horizontal) de son propre but. */
+    boolean inDefense(Side s, int x, int z) {
+        return Math.hypot(x - goalX(s), z) <= cfg("defense-radius", 10);
     }
 
     /**
@@ -1574,6 +1607,7 @@ public final class EemiBridge extends JavaPlugin implements Listener {
             e.setCancelled(true);
             return;
         }
+        g.placedBy.remove(k);
         if (!g.placed.remove(k)) {
             // bloc de la map : seul le milieu (pont + mur dessous, hors îles) se casse, et il est noté pour être remis
             BlockData orig = breakableMiddle() ? middle.get(k) : null;

@@ -77,6 +77,6 @@ bonus-weights:
 # Centre surélevé interdit (#86) : on ne peut ni monter ni perler au-dessus de min-height blocs du sol
 # dans ce rayon autour du centre de l'arène (arbre de la Jungle, butte du Glace). radius 0 = autorisé.
 middle-forbidden:
-  jungle: {radius: 9, min-height: 2}
-  glace: {radius: 5, min-height: 3}
+  jungle: {radius: 14, min-height: 2}
+  glace: {radius: 7, min-height: 3}
   desert: {radius: 0, min-height: 0}

@@ -40,10 +40,14 @@ build-half-width: 20
 breakable-middle: true
 # Rayon (horizontal) autour du but adverse ou l'on ne peut pas poser de blocs.
 # Le trou des deux buts et la colonne au-dessus sont toujours interdits.
-enemy-goal-radius: 5
+enemy-goal-radius: 0
+# Pas de muraille devant son propre but : au plus defense-max-blocks blocs poses par une equipe
+# a moins de defense-radius blocs de son but (-1 = sans limite).
+defense-radius: 10
+defense-max-blocks: 24
 # Rayon (horizontal, en blocs) de la zone de depart protegee autour du point d'apparition de chaque
 # equipe (avant de l'ile de depart et cage comprises), pour les deux equipes : aucune pose de bloc.
-# -1 = automatique, jusqu'au bord avant de l'ile cote pont (8 avec la map de base).
+# -1 = automatique : 3 blocs autour du point de depart (on peut construire jusqu au but adverse).
 spawn-protection: -1
 
 # --- Partie ---

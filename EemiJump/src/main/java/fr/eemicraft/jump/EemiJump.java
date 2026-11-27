@@ -1147,6 +1147,36 @@ public final class EemiJump extends JavaPlugin implements Listener {
                 + coins + " pieces, " + xp + " xp, " + cos + ".");
     }
 
+    /**
+     * #159 (Esteban, 27/11) : chaque nouvelle fin d'un parcours deja paye rapporte la moitie de la fois d'avant
+     * (base / 2, puis / 4, / 8...), pieces et xp. Compteur a part (key) : ceux qui avaient deja fini plusieurs
+     * fois avant la 1.6.4 repartent de la moitie. Plus rien quand les deux montants tombent a 0.
+     */
+    void payReplay(Player p, UUID id, String key, int baseCoins, int baseXp, String label) {
+        if (!p.isOnline() || broken.contains(id) || Bukkit.getPluginManager().getPlugin("EemiCore") == null) {
+            return;
+        }
+        YamlConfiguration yd = data(id);
+        int k = yd.getInt(key, 0) + 1;
+        int coins = k >= 31 ? 0 : Math.max(0, baseCoins) >> k;
+        int xp = k >= 31 ? 0 : Math.max(0, baseXp) >> k;
+        if (coins <= 0 && xp <= 0) {
+            msg(p, "&7Plus de récompense pour une nouvelle fin de &f" + label + "&7.");
+            return;
+        }
+        yd.set(key, k);
+        writeFile(id, p.getName());
+        if (coins > 0) {
+            eemi("eemi give " + p.getName() + " coins " + coins);
+        }
+        if (xp > 0) {
+            eemi("eemi give " + p.getName() + " xp " + xp);
+        }
+        msg(p, "&6+" + coins + " pièces &7et &b+" + xp + " xp &7pour cette nouvelle fin de &f" + label
+                + " &8(la moitié de la fois d'avant)");
+        getLogger().info("Nouvelle fin (" + key + " = " + k + ") de " + p.getName() + " : " + coins + " pieces, " + xp + " xp.");
+    }
+
     /** Recompense : section rewards du fichier du parcours, sinon rewards du config. */
     int rw(Course c, String key, int def) {
         if (c.rewards != null && c.rewards.contains(key)) {
@@ -1881,6 +1911,12 @@ public final class EemiJump extends JavaPlugin implements Listener {
             msg(p, "&4&lSans chute réussi &7(" + nf.finished + "e fois)" + (run >= 0 ? " en &b" + time(run) : "") + (best ? " &e- nouveau record !" : "")
                     + (nf.bestMs >= 0 && !best ? " &7(record : &b" + time(nf.bestMs) + "&7)" : ""));
         }
+        if (!first && c.noFallBonus != null && c.noFallBonus.getBoolean("enabled", true)
+                && data(s.id).getInt("courses." + c.id + ".nofall.bonus", 0) > 0) {
+            // #159 : nouvelle fin sans chute = la moitie de la fois d'avant
+            payReplay(p, s.id, "courses." + c.id + ".nofall.replays",
+                    c.noFallBonus.getInt("coins", 0), c.noFallBonus.getInt("xp", 0), c.name + " - Sans chute");
+        }
         grantNoFallBonus(p, s.id, c);
         updateBoard(p, s);
     }
@@ -2171,7 +2207,16 @@ public final class EemiJump extends JavaPlugin implements Listener {
             }
             YamlConfiguration yd = data(s.id);
             String paidKey = "courses." + c.id + ".finish-paid";
-            if (!yd.getBoolean(paidKey, false) && Bukkit.getPluginManager().getPlugin("EemiCore") != null) {
+            boolean alreadyPaid = yd.getBoolean(paidKey, false);
+            if (alreadyPaid) {
+                // #159 : nouvelle fin = la moitie de la recompense de la fois d'avant (fin + bonus du parcours)
+                ConfigurationSection fb = c.bigBonus ? (c.bonus != null ? c.bonus : getConfig().getConfigurationSection("rewards.finish-bonus")) : null;
+                boolean fbOn = fb != null && fb.getBoolean("enabled", true);
+                payReplay(p, s.id, "courses." + c.id + ".replays",
+                        rw(c, "finish-coins", 200) + (fbOn ? fb.getInt("coins", 0) : 0),
+                        rw(c, "finish-xp", 0) + (fbOn ? fb.getInt("xp", 0) : 0), c.name);
+            }
+            if (!alreadyPaid && Bukkit.getPluginManager().getPlugin("EemiCore") != null) {
                 yd.set(paidKey, true);
                 store(s.id, p.getName(), c, pr);
                 eemi("eemi reward " + p.getName() + " " + getConfig().getString("eemicore-id", "jump") + " win");

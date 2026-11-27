@@ -674,6 +674,7 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 
 ## The Bridge (EemiBridge)
 
+- **1.6.0 compilée le 27/11, PAS installée** (`a_deposer/`, demande d'Esteban : « on réactive le build » pour monter un pont jusqu'au portail adverse) : zone de départ protégée réduite à 3 blocs autour du point de départ (`spawn-protection: -1` = 3 ; avant, jusqu'au bord de l'île, ce qui couvrait l'avant du but adverse) et `enemy-goal-radius` 0 (fait aussi dans le config du serveur le 27/11) ; le trou du but reste interdit. Nouvelle règle anti-muraille : une équipe ne peut pas avoir plus de `defense-max-blocks` (24) blocs posés à moins de `defense-radius` (10) blocs de SON but (message « Pas de muraille »), clés ajoutées au config du serveur.
 - **État** : 1.5.2 installée (22/11) ; pas jouée.
 - **Fonctionnement** :
   - Source `EemiBridge/`, monde `thebridge` créé par le plugin (vide, map construite au démarrage), `/bridge` (alias `/tbridge`), admin `start|stop|build|reload`. Salle d'attente 0.5 141 0.5.
@@ -702,6 +703,7 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 
 ## Sheep Wars (EemiSheepWars)
 
+- **4.7.2 compilée le 27/11, PAS installée** (`a_deposer/`) : bouton Prêt, anti-rebond de 350 ms dans `toggleReady` (carte #157 « on clique une fois, ça met prêt puis plus prêt » : un clic sur un bloc envoie deux événements, bloc puis objet).
 - **4.7.0 installée** le 26/11 (`a_deposer_installes/EemiSheepWars-4.7.0.jar`, carte #134), redémarrage 10:23 sans erreur : objet « Prêt » (colorant gris, case 4 de la salle d'attente, PDC `eemisheepwars:ready`, seul objet protégé contre les clics d'inventaire), tous prêts pendant le décompte → `ready-skip-to` (5). Les 9 `.swm` de `src/main/resources/maps/` sont indispensables au build (jar de 80 Ko sans map sinon).
 - **Avant** : 4.6.0 (17/11, en `.jar.old`) ; Esteban a vu les nouvelles maps : « parfait comme ça ». Non vérifié : camping dans les souterrains, éclairage des nouvelles maps.
 - **Fonctionnement** :
@@ -778,6 +780,7 @@ Le dépôt est partagé sur GitHub ; chacun a son Claude. Le serveur MineStrator
 
 ## Pitchout (EemiPitchout)
 
+- **2.2.4 compilée le 27/11, PAS installée** (`a_deposer/`, carte #158 « ça éjecte pas au milieu ») : (1) un joueur immobile dans le centre interdit ne déclenchait pas `PlayerMoveEvent` et y restait : `safety()` (toutes les 5 ticks) le pousse vers l'extérieur et le remet sur une case de réapparition après 2 s ; (2) l'arbre de la Jungle déborde jusqu'à 11 blocs du centre et la butte du Glace jusqu'à 5,5 (mesuré dans les `.pom`) : rayons par défaut 14 (Jungle) et 7 (Glace). Le config du serveur n'a pas de section `middle-forbidden` : les défauts du code s'appliquent.
 - **État** : 2.2.2 installée (22/11) ; rien vu en jeu depuis.
 - **Fonctionnement** :
   - Source `EemiPitchout/`, monde `pitchout` créé par le plugin, `/pitchout` (alias `/pitch`) `join|leave|spectate`, admin `start|stop|build|reload|map [id]`. Salle d'attente y 140 (arrivée 0.5 141 4.5).
@@ -907,6 +910,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Speedrun d'objets (EemiSpeedrun)
 
+- **1.2.1 compilée le 27/11, PAS installée** (`a_deposer/`) : bouton Prêt, anti-rebond de 350 ms dans `toggleReady` (carte #157 « on clique une fois, ça met prêt puis plus prêt » : un clic sur un bloc envoie deux événements, bloc puis objet).
 - **1.2.0 installée** le 26/11 (`a_deposer_installes/EemiSpeedrun-1.2.0.jar`, carte #134), redémarrage 10:23 sans erreur : objet « Prêt » donné au lobby aux joueurs en file (case 3, sinon 5 ou 1 ; PDC `eemispeedrun:pret`), synchronisé chaque seconde comme le lit « Quitter la file », retiré avant la téléportation ; toute la file du mode en décompte prête → `ready-skip-to` (5). Non vérifié : interaction avec LobbyGuard d'EemiCore au lobby.
 - **Avant** : 1.1.0 (en `.jar.old`, retour au salon d'attente). Joué au moins en solo/2 joueurs le 30/10 ; suivi de groupe (1.0.3) et papier Rejouer pas encore testés.
 - **Fonctionnement** :
@@ -964,6 +968,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Jump solo (EemiJump)
 
+- **1.6.4 compilée le 27/11, PAS installée** (`a_deposer/`, carte #159) : refinir un parcours déjà payé rapporte la moitié de la fois d'avant (base / 2, / 4, / 8…, pièces et xp) ; base = `finish-coins` + bonus de fin du parcours, et pour le sans chute = bonus `no-fall` (2000 / 2000 sur Masters → 1000 / 1000, puis 500…). Compteurs à part `courses.<id>.replays` et `courses.<id>.nofall.replays` (les fins d'avant la 1.6.4 ne comptent pas). Total borné à 2 fois la 1re récompense, même en rejouant le dernier niveau depuis le menu.
 - **1.6.3 installée** (26/11, redémarrage 12:29 sans erreur, `a_deposer_installes/`, #149 encore vu par Dylan) : le classement n'affiche PLUS JAMAIS le temps de jeu total (il grossissait à chaque partie pour ceux qui avaient fini sans chrono, ex. Dylan sur Masters : 4 fins, aucun chrono, fins commencées avant 12:07 ou reprises en cours de route) ; à la place : chrono complet, sinon « 1re fin en X de jeu » (figé) si connu, sinon « fini » seul. Tri inchangé (chrono puis 1re fin).
 - **Avant** : 1.6.2 (en `.jar.old` ; 26/11, redémarrage 12:07 sans erreur, `a_deposer_installes/`) : plus d'annonce à tout le serveur des records par niveau (spam, Esteban) : `announce-from-level` à 0 (jar ET config du serveur, déjà actif par `/jump reload`) ; à la place, annonce quand un chrono complet bat le meilleur chrono de TOUS les joueurs du parcours (« ★ X bat le record de … »).
 - **1.6.1 installée** (26/11, redémarrage 11:46 sans erreur, `a_deposer_installes/`, #149 « les temps s'additionnent ») : tout passage complet depuis le début (niveau 0 → 1 sans changer de niveau par le menu ou `/jump niveau`) est chronométré, plus besoin de « Recommencer depuis le début » ; le classement montre le MEILLEUR chrono et n'affiche plus le temps de jeu cumulé quand un chrono existe (avant, ceux sans chrono voyaient leur temps de jeu total grandir à chaque nouvelle partie).
@@ -1010,6 +1015,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 ## Murder Mystery (EemiMurder)
 
 **État**
+- 1.14.2 compilée le 27/11, PAS installée (`a_deposer/`) : bouton Prêt, anti-rebond de 350 ms dans `toggleReady` (carte #157 « on clique une fois, ça met prêt puis plus prêt » : un clic sur un bloc envoie deux événements, bloc puis objet).
 - 1.14.0 installée le 26/11 (`a_deposer_installes/EemiMurder-1.14.0.jar`, carte #134), redémarrage 10:23 sans erreur : objet « Prêt » (colorant gris → vert au clic droit, case 4 du salon, PDC `eemimurder:ready`, non déplaçable) ; tous les inscrits prêts pendant le décompte (au moins le minimum) → temps ramené à `ready-skip-to` (5 ; 0 = coupé ; absent du config serveur = défaut du code). État par partie, effacé au lancement, au départ d'un joueur et au retour au salon. Pas testé en jeu ; le saut à 5 s peut tomber avant que la copie de map soit prête (le code attend alors « Préparation de la map »).
 - Avant (1.13.0, en `.jar.old`). Rotation de 6 maps construites par le plugin : 4 grandes (`bibliotheque`, `fete`, `musee`, `paquebot`) et 2 petites (`hotel`, `chalet`). Aucune de ces maps n'a encore été jouée d'après les notes (dernier fait : reconstruites sans état invalide le 17/11).
 - Deux sources du Murder ont existé : celle de Thibault et `EemiMurder/`, décompilée par Esteban depuis le jar 1.6.0 du serveur le 16/11 (jar d'origine dans `EemiMurder/_origine/`). Toutes les versions depuis la 1.7.0 partent de `EemiMurder/` : ne rien sortir depuis une autre source.
@@ -1642,6 +1648,7 @@ Communs : choix de Thibault (29/10) d'après les TNT Games d'Hypixel, modèle Pi
 
 ## Spleef (EemiSpleef)
 
+- **1.3.1 compilée le 27/11, PAS installée** (`a_deposer/`) : anti-rebond de 350 ms dans `toggleReady` (carte #157 « on clique une fois, ça met prêt puis plus prêt » : un clic sur un bloc envoie deux événements, bloc puis objet). Même correctif dans Murder 1.14.2, Sheep Wars 4.7.2, Speedrun 1.2.1.
 - **1.3.0 installée** le 26/11 (`a_deposer_installes/EemiSpleef-1.3.0.jar`, carte #134), redémarrage 10:23 sans erreur : objet « Prêt » (colorant gris, case 4 du chalet, tag PDC `eemispleef:item = ready`, retiré par `clearGameItems`), tous prêts pendant le décompte → `ready-skip-to` (5). Pas testé en jeu.
 - **Avant** : 1.2.0 (en `.jar.old`). Pas encore joué. (Spleef avait d'abord été reporté à Noël, 06/11.)
 - **Fonctionnement** : source `EemiSpleef/`, monde `spleef` créé par le plugin, 3 arènes côte à côte (x 0/400/800, `max-instances` 3) préparées au démarrage ; 2-16 joueurs ; `/spleef join|leave|spectate`, admin `start|stop|build|reload|parties`.
