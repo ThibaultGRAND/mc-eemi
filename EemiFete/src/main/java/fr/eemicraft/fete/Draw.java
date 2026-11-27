@@ -18,7 +18,7 @@ import java.util.Set;
  * Les manèges posent leur socle ici ; leurs pièces mobiles sont des BlockDisplay en jeu ({@link Ride}).
  */
 public final class Draw {
-    public static final int VERSION = 2; // à monter à chaque changement de l'allée ou de la place (sinon elle n'est pas reposée)
+    public static final int VERSION = 3; // à monter à chaque changement de l'allée ou de la place (sinon elle n'est pas reposée)
     static final int F = Geo.FLOOR;
     static final int Y0 = F + 1;
     static final String AIR = B.AIR;
@@ -504,8 +504,7 @@ public final class Draw {
             s.set(c[0], Y0, v, "minecraft:spruce_planks");
             s.set(c[0], Y0 + 1, v, B.slab("minecraft:spruce_slab", "bottom"));
         }
-        s.set(c[0] + 1, Y0, c[1] + 2, "minecraft:smoker[facing=west,lit=true]");
-        s.set(c[0] + 1, Y0, c[1] + 3, "minecraft:smoker[facing=west,lit=true]");
+        // 0.4.0 : crêpières, assiettes et confiture en modèles du pack (Rides.crepesProps)
         for (int v = c[1]; v <= c[3]; v++) s.set(c[0] - 1, Y0 + 4, v, (v % 2 == 0) ? "minecraft:ochre_froglight" : "minecraft:pearlescent_froglight");
     }
 
@@ -546,6 +545,13 @@ public final class Draw {
         if (b.contains("roue")) l.add(Rides.roue(null, Defs.ROUE[0], Defs.ROUE[1], Defs.ROUE[2], Defs.ROUE[3]));
         if (b.contains("tour")) l.add(Rides.tour(null, Defs.TOUR[0], Defs.TOUR[1]));
         if (b.contains("montagnes")) l.add(Rides.montagnes(null));
+        // 0.4.0 : décor des stands en modèles du pack
+        for (Defs.Stand st : Defs.STANDS) {
+            if (!b.contains(st.purchase())) continue;
+            Ride r = Rides.standProps(st.u(), st.v(), st.type());
+            if (r != null) l.add(r);
+        }
+        if (b.contains("crepes")) l.add(Rides.crepesProps(Defs.CREPES));
         return l;
     }
 

@@ -645,35 +645,100 @@ public final class Rides {
         for (int u = u0 + 1; u <= u0 + 5; u++) set(s, u, F + 6, v0, (u % 2 == 0) ? "minecraft:pearlescent_froglight" : "minecraft:ochre_froglight");
         set(s, u0, F + 5, v0 - 1, "minecraft:lantern[hanging=false]");
         set(s, u0 + 6, F + 5, v0 - 1, "minecraft:lantern[hanging=false]");
+        // 0.4.0 : le décor de chaque stand (bassin, canards, lots, cibles...) est en modèles du pack : standProps.
+        // Plus d'eau en blocs (elle coulait dans les cases vides du stand de pêche).
+        if (!java.util.Set.of("peche", "barbe", "chamboule", "tir").contains(type)) {
+            set(s, u0 + 3, F + 2, v0 + 3, "minecraft:smoker[facing=north]");
+            set(s, u0 + 2, F + 2, v0 + 3, "minecraft:barrel[facing=up]");
+        }
+    }
+
+    static final int[] TOYS = {0xC98A4B, 0xF2A7C8, 0x6FB7F0, 0xF5D21E, 0x8BD46A, 0xB98AE0};
+    static final int[] CANS = {0xC8323A, 0x2F6BD8, 0x3FA34D, 0xF2C230, 0xE8772E, 0x8A4FC8};
+
+    /**
+     * Décor du stand en modèles du pack (Ride fixe, pivot au coin u0, v0 du stand, au ras du plancher) : bassin et
+     * canards qui tournent, machine à barbe à papa, pyramides de conserves, carabines et cibles, lots en peluche.
+     * Repli sans le pack : quelques blocs.
+     */
+    public static Ride standProps(int u0, int v0, String type) {
+        Ride r = new Ride("stand_" + type);
+        Ride.Part k = r.part("decor", u0, F + 1, v0, Ride.Axis.Y, Ride.fixed());
         switch (type) {
             case "peche" -> {
-                for (int u = u0 + 2; u <= u0 + 4; u++) {
-                    set(s, u, F + 1, v0 + 2, "minecraft:water");
-                    set(s, u, F + 1, v0 + 3, "minecraft:water");
+                k.model(3.5, 1.0, 3.0, 2.0, 0, "bassin", -1);
+                // étagère des lots contre le mur du fond, au-dessus du bassin
+                k.cube(3.5, 2.25, 3.8, 4.6, 0.1, 0.36, "minecraft:spruce_planks");
+                for (int i = 0; i < 5; i++) k.model(1.6 + 0.95 * i, 2.7, 3.8, 0.8, 180, "peluche", TOYS[i % TOYS.length]);
+                Ride.Part d = r.part("canards", u0 + 3.5, F + 1, v0 + 3.0, Ride.Axis.Y, Ride.spinBob(16, 0.03, 2.2, 0));
+                for (int i = 0; i < 5; i++) {
+                    double a = Math.toRadians(i * 72);
+                    d.model(0.62 * Math.cos(a), 0.92, 0.62 * Math.sin(a), 0.75, -i * 72, "canard", -1);
                 }
-                set(s, u0 + 2, F + 2, v0 + 2, "minecraft:yellow_carpet");
-                set(s, u0 + 4, F + 2, v0 + 3, "minecraft:yellow_carpet");
-                set(s, u0 + 1, F + 3, v0 + 3, "minecraft:yellow_wool");
-                set(s, u0 + 5, F + 3, v0 + 3, "minecraft:pink_wool");
+                k.blocksOnly();
+                k.cube(3.5, 0.3, 3.0, 3.0, 0.6, 2.0, "minecraft:light_blue_concrete");
+                d.blocksOnly();
+                for (int i = 0; i < 5; i++) {
+                    double a = Math.toRadians(i * 72);
+                    d.cube(0.62 * Math.cos(a), 0.72, 0.62 * Math.sin(a), 0.25, 0.25, 0.3, "minecraft:yellow_wool");
+                }
             }
             case "barbe" -> {
-                set(s, u0 + 2, F + 3, v0 + 3, "minecraft:pink_wool");
-                set(s, u0 + 3, F + 3, v0 + 3, "minecraft:white_wool");
-                set(s, u0 + 4, F + 3, v0 + 3, "minecraft:pink_wool");
-                set(s, u0 + 3, F + 2, v0 + 3, "minecraft:cauldron");
+                k.model(3.5, 0.75, 3.0, 1.5, 0, "barbe_machine", -1);
+                double[] xs = {1.6, 2.4, 4.6, 5.4};
+                int[] cols = {0xFFA8D2, 0xA8D8FF, 0xFFF3F8, 0xFFA8D2};
+                for (int i = 0; i < 4; i++) k.model(xs[i], 1.9, 1.5, 0.8, 0, "barbe_papa", cols[i]);
+                k.blocksOnly();
+                k.cube(3.5, 0.6, 3.0, 1.0, 1.2, 1.0, "minecraft:pink_wool");
             }
             case "chamboule" -> {
-                for (int u = u0 + 2; u <= u0 + 4; u++) set(s, u, F + 2, v0 + 3, "minecraft:copper_block");
-                set(s, u0 + 3, F + 3, v0 + 3, "minecraft:copper_block");
+                k.cube(3.5, 0.5, 3.4, 4.4, 1.0, 0.8, "minecraft:stripped_spruce_wood");
+                int n = 0;
+                for (double cx : new double[]{2.4, 4.6}) {
+                    for (int row = 0; row < 3; row++) {
+                        for (int c = 0; c <= 2 - row; c++) {
+                            double x = cx + (c - (2 - row) / 2.0) * 0.33;
+                            k.model(x, 1.225 + row * 0.45, 3.4, 0.8, 0, "conserve", CANS[n++ % CANS.length]);
+                        }
+                    }
+                }
+                k.model(1.8, 1.9, 1.5, 0.8, 0, "panier_balles", -1);
+                k.model(5.2, 1.9, 1.5, 0.8, 0, "panier_balles", -1);
+                k.blocksOnly();
+                k.cube(3.5, 1.4, 3.4, 1.2, 0.8, 0.4, "minecraft:copper_block");
             }
             case "tir" -> {
-                for (int u = u0 + 1; u <= u0 + 5; u++) set(s, u, F + 3, v0 + 3, u % 2 == 0 ? "minecraft:target" : "minecraft:white_concrete");
-                set(s, u0 + 3, F + 4, v0 + 3, "minecraft:red_concrete");
+                for (int i = 0; i < 5; i++) k.model(1.5 + i, 2.3, 3.9, 0.9, 0, "cible", -1);
+                k.cube(3.5, 3.25, 3.8, 4.6, 0.1, 0.36, "minecraft:spruce_planks");
+                for (int i = 0; i < 5; i++) k.model(1.6 + 0.95 * i, 3.625, 3.8, 0.65, 180, "peluche", TOYS[(i + 2) % TOYS.length]);
+                k.model(2.0, 2.0, 1.5, 1.0, 8, "carabine", -1);
+                k.model(4.4, 2.0, 1.55, 1.0, -6, "carabine", -1);
+                k.blocksOnly();
+                for (int i = 0; i < 5; i++) k.cube(1.5 + i, 2.3, 3.9, 0.7, 0.7, 0.12, "minecraft:target");
             }
             default -> {
-                set(s, u0 + 3, F + 2, v0 + 3, "minecraft:smoker[facing=north]");
-                set(s, u0 + 2, F + 2, v0 + 3, "minecraft:barrel[facing=up]");
+                return null;
             }
         }
+        return r;
+    }
+
+    /**
+     * Décor du kiosque à crêpes (Defs.CREPES) : plan de travail au fond avec deux crêpières, assiettes de crêpes et
+     * pot de confiture sur le comptoir. Pivot au coin (c[0], c[1]).
+     */
+    public static Ride crepesProps(int[] c) {
+        Ride r = new Ride("stand_crepes");
+        Ride.Part k = r.part("decor", c[0], F + 1, c[1], Ride.Axis.Y, Ride.fixed());
+        k.cube(1.5, 0.5, 3.0, 0.9, 1.0, 3.6, "minecraft:spruce_planks");
+        k.model(1.5, 1.5, 2.0, 1.0, 90, "crepiere", -1);
+        k.model(1.5, 1.5, 4.0, 1.0, 90, "crepiere", -1);
+        k.model(0.5, 1.9, 2.0, 0.8, 90, "crepes_assiette", -1);
+        k.model(0.5, 1.75, 3.2, 0.7, 90, "pot_confiture", -1);
+        k.model(0.5, 1.9, 4.3, 0.8, 90, "crepes_assiette", -1);
+        k.blocksOnly();
+        k.cube(1.5, 1.1, 2.0, 0.8, 0.2, 0.8, "minecraft:black_concrete");
+        k.cube(1.5, 1.1, 4.0, 0.8, 0.2, 0.8, "minecraft:black_concrete");
+        return r;
     }
 }
