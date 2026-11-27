@@ -1,0 +1,21 @@
+# EemiAntiTnt : machines volantes a TNT sur les iles
+
+# Mondes surveilles (iles BentoBox)
+mondes:
+  - oneblock_world
+  - bskyblock_world
+
+# Secondes laissees pour demonter une machine figee
+delai-secondes: 10
+# Autour d'une machine detectee, tous les pistons sont figes dans ce rayon
+rayon-gel: 10
+
+# Pluie de TNT (casse vraiment l'ile, sans rien faire tomber ; tout est remis ensuite)
+pluie-secondes: 30
+pluie-intervalle-ticks: 4
+pluie-rayon: 3.0
+
+# Sauvegarde / restauration : tuiles de 32x32x32 posees par tick
+tuiles-par-tick: 6
+# Archives des iles punies gardees (jours)
+garder-jours: 7

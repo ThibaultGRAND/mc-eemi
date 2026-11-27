@@ -1,0 +1,17 @@
+name: EemiAntiTnt
+version: ${project.version}
+main: fr.eemicraft.antitnt.EemiAntiTnt
+api-version: '1.21'
+softdepend: [BentoBox]
+description: Machines volantes a TNT figees, punies par une pluie de TNT puis ile remise a l'identique
+
+commands:
+  antitnt:
+    description: Administration d'EemiAntiTnt
+    usage: '/antitnt <statut|punir|restaurer|annuler|reload>'
+    permission: eemiantitnt.admin
+
+permissions:
+  eemiantitnt.admin:
+    description: Commande /antitnt et alertes des machines a TNT
+    default: op
