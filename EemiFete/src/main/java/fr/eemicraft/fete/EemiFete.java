@@ -905,7 +905,7 @@ public final class EemiFete extends JavaPlugin implements Listener {
         for (int i : new ArrayList<>(shows.keySet())) {
             PData d = owner(i);
             Entity f = fluffy.get(i);
-            if (f != null && (!f.isValid() || f.getTicksLived() > 20 * 30)) {
+            if (f != null && (!f.isValid() || f.getTicksLived() > 20 * fluffySeconds())) {
                 f.remove();
                 fluffy.remove(i);
                 continue;
@@ -927,11 +927,29 @@ public final class EemiFete extends JavaPlugin implements Listener {
             if (c != null) {
                 fluffy.put(i, c);
                 Player p = Bukkit.getPlayer(d.uuid);
-                if (p != null && inWorld(p) && p.getLocation().distanceSquared(at) < 80 * 80) {
-                    p.sendActionBar(U.c("&fMeuh ? &7Une vache très duveteuse s'est échappée de la mini-ferme…"));
+                // 0.4.1 (#162) : dans le chat + son ; la barre d'action est réécrite chaque seconde par le revenu
+                if (p != null && inWorld(p)) {
+                    U.msg(p, "&fMeuh ? &7Une vache très duveteuse s'est échappée de ta mini-ferme ! Elle traîne dans l'allée de ton parc pendant "
+                            + fluffySeconds() + " s…");
+                    p.playSound(p.getLocation(), Sound.ENTITY_COW_AMBIENT, 1f, 1.3f);
                 }
             }
         }
+    }
+
+    int fluffySeconds() {
+        return Math.max(10, getConfig().getInt("secrets.fluffy-seconds", 60));
+    }
+
+    /**
+     * 0.4.1 (#163) : la chèvre naine est perchée sur un toit, hors de portée de la main. Un clic en la regardant
+     * (jusqu'à 48 blocs, sans mur entre les deux) compte comme un clic dessus.
+     */
+    boolean clickGoatFar(Player p) {
+        Location eye = p.getEyeLocation();
+        org.bukkit.util.RayTraceResult r = world.rayTrace(eye, eye.getDirection(), 48, org.bukkit.FluidCollisionMode.NEVER, true, 0.6,
+                en -> en.getScoreboardTags().contains("fete_chevre"));
+        return r != null && r.getHitEntity() != null && clickEgg(p, r.getHitEntity());
     }
 
     void firework(int i) {
@@ -983,11 +1001,11 @@ public final class EemiFete extends JavaPlugin implements Listener {
         }
         if (seconds % 2 == 0) updateShows();
         ridePopups();
-        if (seconds % 45 == 0) fluffyTick();
+        if (seconds % Math.max(5, getConfig().getInt("secrets.fluffy-every", 20)) == 0) fluffyTick();
         else if (seconds % 5 == 0) {
             for (int i : new ArrayList<>(fluffy.keySet())) {
                 Entity f = fluffy.get(i);
-                if (f == null || !f.isValid() || f.getTicksLived() > 20 * 30) {
+                if (f == null || !f.isValid() || f.getTicksLived() > 20 * fluffySeconds()) {
                     if (f != null) f.remove();
                     fluffy.remove(i);
                 }
@@ -1531,6 +1549,10 @@ public final class EemiFete extends JavaPlugin implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         if (world == null || !inWorld(p)) return;
+        if (e.getHand() == EquipmentSlot.HAND && e.getAction() != Action.PHYSICAL && clickGoatFar(p)) {
+            e.setCancelled(true);
+            return;
+        }
         ItemStack it = e.getItem();
         if (isKit(it) && (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             e.setCancelled(true);

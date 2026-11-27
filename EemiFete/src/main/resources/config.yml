@@ -44,12 +44,15 @@ pack:
   delay-ticks: 20
 
 # Objets perdus (easter eggs) : chance d'un lot legendaire par tour (peche, crepes), jackpot = N tours de l'attraction
-# (au moins 2 min de revenu), pieces EemiCore a la 1re decouverte, chance que Fluffy s'echappe (toutes les 45 s).
+# (au moins 2 min de revenu), pieces EemiCore a la 1re decouverte, chance que Fluffy s'echappe.
 secrets:
   chance: 0.004
   jackpot-tours: 100
   coins: 25
-  fluffy-chance: 0.12
+  fluffy-chance: 0.25
+  # Fluffy : tirage toutes les fluffy-every s, reste fluffy-seconds s dans l'allee (0.4.1).
+  fluffy-every: 20
+  fluffy-seconds: 60
 
 economy:
   # Premier achat = 25 s de revenu, puis x1,155 par achat (environ 3 h 20 pour finir le premier parc, 34 achats).
