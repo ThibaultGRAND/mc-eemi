@@ -877,6 +877,11 @@ public final class EemiFete extends JavaPlugin implements Listener {
 
     /** Frapper à la porte de la cabine du milieu : 5 coups en 15 s, François sort. */
     void knock(Player p, PData o) {
+        // 0.4.4 : le jackpot de François ne se gagne qu'une fois (avant, 5 coups = jackpot à chaque fois, exploité)
+        if (o.secrets.contains("francois")) {
+            if (cooldown(p, 3000)) p.sendActionBar(U.c("&7« C'est libre maintenant… mais n'y entre pas. »"));
+            return;
+        }
         long now = System.currentTimeMillis();
         long[] k = knocks.computeIfAbsent(p.getUniqueId(), x -> new long[]{0, now});
         if (now - k[1] > 15000) {
@@ -910,7 +915,8 @@ public final class EemiFete extends JavaPlugin implements Listener {
                 fluffy.remove(i);
                 continue;
             }
-            if (f != null || d == null || !d.bought.contains("ferme") || Bukkit.getPlayer(d.uuid) == null) continue;
+            // 0.4.4 : une fois trouvée, Fluffy ne s'échappe plus (sinon jackpot à répétition)
+            if (f != null || d == null || !d.bought.contains("ferme") || d.secrets.contains("fluffy") || Bukkit.getPlayer(d.uuid) == null) continue;
             if (rnd.nextDouble() >= getConfig().getDouble("secrets.fluffy-chance", 0.12)) continue;
             double v = 12 + rnd.nextDouble() * 30;
             Location at = at(i, 24.0, Geo.FLOOR + 1, v);
@@ -1806,16 +1812,30 @@ public final class EemiFete extends JavaPlugin implements Listener {
             }
             case "reset" -> {
                 if (t == null) {
-                    U.msg(s, "&c/fete admin reset <joueur>");
+                    U.msg(s, "&c/fete admin reset <joueur> [garder]");
                     return true;
                 }
                 int i = t.parcel;
+                // 0.4.4 : « reset <joueur> garder » = tout à zéro (argent, achats, renaissances, objets perdus) mais même parc
+                boolean keep = a.length >= 4 && a[3].equalsIgnoreCase("garder") && i >= 0 && i < owners.length;
                 if (i >= 0) stopShow(i);
                 PData fresh = new PData(t.uuid);
                 fresh.name = t.name;
+                if (keep) {
+                    fresh.parcel = i;
+                    fresh.resetRun();
+                    fresh.lastSeen = System.currentTimeMillis();
+                }
                 fresh.dirty = true;
                 players.put(t.uuid, fresh);
                 fresh.save(getDataFolder(), getLogger());
+                if (keep) {
+                    saveData();
+                    redraw(i);
+                    refreshParcel(i);
+                    U.msg(s, "&a" + t.name + " remis à zéro, il garde le parc " + i + ".");
+                    return true;
+                }
                 if (i >= 0 && i < owners.length) {
                     owners[i] = null;
                     saveData();
